@@ -12,7 +12,7 @@ export default function UserWatch({ onClick }: { onClick: () => void }) {
   useEffect(() => {
     const guest = searchParams.get("to");
     setTo(guest ?? "Guest");
-  }, []);
+  }, [searchParams]);
 
   return (
     <div className="space-y-36 py-14 text-center">
