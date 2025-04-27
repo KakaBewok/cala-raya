@@ -1,5 +1,4 @@
 import data from "../../../data/config.json";
-import "aos/dist/aos.css";
 import LoveItem from "./love-item";
 
 export default function LoveStory() {

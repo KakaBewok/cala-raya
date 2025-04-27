@@ -25,7 +25,6 @@ const LoveItem: React.FC<LoveItemProps> = ({
             style={{ maxHeight: "100px" }}
             src={imageUrl}
             alt="Love Story Image"
-            loading="eager"
           />
         </div>
         <div className="flex justify-center">

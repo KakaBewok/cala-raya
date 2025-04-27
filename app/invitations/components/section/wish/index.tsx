@@ -19,14 +19,13 @@ const WishItem = forwardRef<HTMLDivElement, WishItemProps>(
           alt="profile"
           width={24}
           height={24}
-          src={`/storage/images/face.png`}
+          src={`/images/face.png`}
           style={{
             backgroundColor: color,
             minWidth: 24,
             minHeight: 24,
           }}
           className="rounded-sm"
-          loading="eager"
         />
       </div>
       <div>

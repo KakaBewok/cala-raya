@@ -6,11 +6,10 @@ export default function TitleInfo() {
     <div className="mb-14 space-y-2" data-aos="fade-right">
       <div className="flex items-center gap-1">
         <Image
-          src={`/storage/images/favicon.ico`}
+          src={`/images/favicon.ico`}
           alt="Netflix Logo (N)"
           width={18}
           height={18}
-          loading="eager"
         />
         <span className="mt-0.5 text-xs tracking-widest text-[#A3A1A1]">
           DOCUMENTER
@@ -30,22 +29,10 @@ export default function TitleInfo() {
         </span>
         <span className="mr-2 text-white">1h 26m</span>
         <span>
-          <Image
-            src={`/storage/images/4k-icon.png`}
-            width={16}
-            height={16}
-            alt="4k"
-            loading="eager"
-          />
+          <Image src={`/images/4k-icon.png`} width={16} height={16} alt="4k" />
         </span>
         <span>
-          <Image
-            src={`/storage/images/hd-icon.png`}
-            width={16}
-            height={16}
-            alt="hd"
-            loading="eager"
-          />
+          <Image src={`/images/hd-icon.png`} width={16} height={16} alt="hd" />
         </span>
       </div>
       <div className="w-fit rounded bg-[#E50913] px-2 py-1 text-xs font-bold text-white">

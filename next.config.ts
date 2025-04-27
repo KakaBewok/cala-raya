@@ -3,8 +3,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ["slametandfatma.wedding"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "slametandfatma.wedding",
+      },
+    ],
   },
 };
-
 export default nextConfig;

@@ -15,8 +15,7 @@ export default function Bridegroom() {
             className="w-full rounded-sm"
             // height={164}
             width={300}
-            height={200}
-            loading="eager"
+            height={170}
           />
           <div>
             <h4 className="text-md mt-2 font-medium text-white">
@@ -35,8 +34,7 @@ export default function Bridegroom() {
             className="w-full rounded-sm"
             // height={164}
             width={300}
-            height={200}
-            loading="eager"
+            height={170}
           />
           <div>
             <h4 className="text-md mt-2 font-medium text-white">

@@ -54,11 +54,10 @@ export default function Thumbnail() {
       <div className="bg-gradient-to-b from-transparent via-black to-black pt-2 pb-8">
         <div className="mb-10 space-y-2 px-5">
           <Image
-            src={`/storage/images/NIKAHFIX.webp`}
+            src={`/images/NIKAHFIX.webp`}
             alt="NIKAHFIX"
             width={56}
             height={15}
-            loading="eager"
           />
           <div>
             <h1 className="text-3xl leading-none font-bold">

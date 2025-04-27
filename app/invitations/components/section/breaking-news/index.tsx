@@ -8,11 +8,10 @@ export default function BreakingNews() {
       <Image
         className="w-full rounded-sm"
         // height={300}
-        width={300} // ← WAJIB ADA width
-        height={200} // ← WAJIB ADA height
+        width={300}
+        height={300}
         src={data.breaking_news_img}
         alt="Breaking News"
-        loading="eager"
       />
       <div className="mt-3 rounded-sm border-neutral-950 bg-neutral-900 p-3 text-sm leading-[1.15rem] text-slate-100 italic">
         <div

@@ -13,6 +13,7 @@ import LoveStory from "../love-story";
 import OurGallery from "../our-gallery";
 import TitleInfo from "../title-info";
 import WishSection from "../wish";
+import "aos/dist/aos.css";
 
 export default function DetailInfo() {
   useEffect(() => {
