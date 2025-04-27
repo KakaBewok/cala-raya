@@ -2,17 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 export default function UserWatch({ onClick }: { onClick: () => void }) {
   //get params from url
   const [to, setTo] = useState<string>("Guest");
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (window) {
-      const url = new URL(window.location.href);
-      const to = url.searchParams.get("to");
-      setTo(to ?? "Guest");
-    }
+    const guest = searchParams.get("to");
+    setTo(guest ?? "Guest");
   }, []);
 
   return (
@@ -35,7 +34,9 @@ export default function UserWatch({ onClick }: { onClick: () => void }) {
             alt="Nikah Fix"
           />
           <p className="mt-2 text-xl transition-transform duration-400 group-hover:translate-y-10 group-hover:scale-125">
-            {to}
+            Yth. <span className="font-bold text-red-500 uppercase">{to}</span>
+            <br />
+            di Tempat
           </p>
         </div>
       </div>
