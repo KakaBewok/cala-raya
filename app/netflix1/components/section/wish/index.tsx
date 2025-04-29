@@ -94,7 +94,8 @@ export default function WishSection() {
   const fetchData = async () => {
     const { data, error } = await supabase
       .from(process.env.NEXT_PUBLIC_APP_TABLE_NAME!) // Replace 'your_table' with the actual table name
-      .select("name, message, color");
+      .select("name, message, color")
+      .eq("invitation_id", "c3ddb484-0ce6-4a76-8a1c-ad39f2dd6bce");
 
     if (error) console.error("Error fetching data: ", error);
     else setData(data);
