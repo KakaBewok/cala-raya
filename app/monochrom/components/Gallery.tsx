@@ -1,7 +1,7 @@
 import Image from "next/image";
 export default function Gallery() {
   return (
-    <section className="py-16 text-center">
+    <section id="gallery" className="py-16 text-center">
       <h2 className="text-3xl mb-4">Galeri</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
         <Image

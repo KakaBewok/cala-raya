@@ -1,6 +1,6 @@
 export default function RSVPForm() {
   return (
-    <section className="py-16 bg-gray-100 text-center">
+    <section id="rsvp-form" className="py-16 bg-gray-100 text-center">
       <h2 className="text-3xl mb-4">Konfirmasi Kehadiran</h2>
       <form
         action="https://formsubmit.co/your-email@example.com"
