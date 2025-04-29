@@ -1,9 +1,9 @@
 "use client";
 
-import supabase from "../../../data/supabaseClient";
 import badwords from "indonesian-badwords";
-import { forwardRef, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { forwardRef, useEffect, useRef, useState } from "react";
+import supabase from "../../../data/supabaseClient";
 
 interface WishItemProps {
   name: string;
@@ -74,7 +74,12 @@ export default function WishSection() {
     const { error } = await supabase
       .from(process.env.NEXT_PUBLIC_APP_TABLE_NAME!) // Replace with your actual table name
       .insert([
-        { name, message: newmessage, color: randomColor }, // Assuming your table has a "name" column
+        {
+          name,
+          message: newmessage,
+          color: randomColor,
+          invitation_id: "c3ddb484-0ce6-4a76-8a1c-ad39f2dd6bce",
+        }, // Assuming your table has a "name" column
       ]);
 
     setLoading(false);
