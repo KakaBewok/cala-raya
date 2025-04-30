@@ -6,6 +6,7 @@ export default function Hero() {
 
   return (
     <div
+      data-aos="fade-up"
       id="hero"
       className="min-h-screen flex items-center justify-center bg-black text-white text-center p-8"
     >
