@@ -1,6 +1,6 @@
 "use client";
 
-import data from "../data/config.json";
+// import data from "../data/config.json";
 import { useEffect, useState } from "react";
 
 export default function SongButton() {
@@ -24,9 +24,9 @@ export default function SongButton() {
 
   return (
     <div className="fixed right-5 bottom-5">
-      {isPlaying && data.audio_url && (
+      {/* {isPlaying && data.audio_url && (
         <audio autoPlay loop src={data.audio_url} className="hidden" />
-      )}
+      )} */}
       {/* {isPlaying && data.audio_url && <audio autoPlay loop src={`${BASE_URL}/storage/music/lagunya.mp3`} className="hidden" />} */}
 
       <button
