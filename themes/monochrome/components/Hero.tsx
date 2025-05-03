@@ -1,6 +1,6 @@
 'use client";';
 
-import data from "../data/config.json";
+// import data from "../data/config.json";
 import { useSearchParams } from "next/navigation";
 //
 import { Geist } from "next/font/google";
@@ -32,7 +32,7 @@ export default function Hero() {
           loop
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={data.url_video} type="video/mp4" />
+          {/* <source src={data.url_video} type="video/mp4" /> */}
           Your browser does not support the video tag.
         </video>
 
