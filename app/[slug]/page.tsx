@@ -1,23 +1,43 @@
+"use client";
+
 import MonochromePage from "@/themes/monochrome/MonochromePage";
 import NetflixPage from "@/themes/netflix/NetflixPage";
+import data from "../../data/data";
+import { ThemeName } from "@/types/theme-name";
+import { useParams, useSearchParams } from "next/navigation";
+import { ThemeProps } from "@/types/theme-props";
+import { useEffect, useState } from "react";
+import { useInvitation } from "@/context/InvitationDataContext";
 
-const themeMap = {
+const themeMap: Record<ThemeName, React.ComponentType<ThemeProps>> = {
   monochrome: MonochromePage,
-  Netflix: NetflixPage,
+  netflix: NetflixPage,
 };
 
-export default async function Page({ params, searchParams }) {
-  const { slug } = params;
-  const { to } = searchParams;
+export default function Page() {
+  const { setInvitationData } = useInvitation();
+  const searchParams = useSearchParams();
+  const params = useParams();
 
-  // Misal ambil data dari JSON statis atau DB
-  const invitationData = await getInvitationBySlug(slug);
+  const [to, setTo] = useState<string>("");
+  const slug = params.slug;
 
-  const ThemeComponent = themeMap[invitationData.theme];
+  useEffect(() => {
+    setTo(searchParams.get("to") ?? "Guest");
+  }, [searchParams]);
 
-  if (!ThemeComponent) {
-    return <div>Theme not found</div>;
-  }
+  if (!slug) return <div>Slug not found!</div>;
 
-  return <ThemeComponent data={invitationData} guest={to} />;
+  console.log("ini slug: ", slug);
+
+  const invitationData = data.find((item) => item.slug === slug);
+
+  if (!invitationData) return <div>Invitation data not found!</div>;
+
+  const ThemeComponent =
+    themeMap[invitationData.theme as ThemeName] ?? themeMap.netflix;
+
+  setInvitationData(invitationData);
+
+  return <ThemeComponent guest={to} />;
 }

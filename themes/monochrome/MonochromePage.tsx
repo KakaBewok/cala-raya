@@ -19,7 +19,7 @@ export default function Monochrom() {
 
   return (
     <div className="font-serif bg-white text-black">
-      <Hero />
+      {/* <Hero /> */}
       <Schedule />
       <Gallery />
       <RSVPForm />

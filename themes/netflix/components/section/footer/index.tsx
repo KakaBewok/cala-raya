@@ -14,9 +14,9 @@ export default function Footer() {
             className="text-blue-500"
             target="_blank"
             rel="noreferrer"
-            href="https://www.instagram.com/_kkbwk/"
+            href="https://www.instagram.com/calarayaproject/"
           >
-            @_kkbwk
+            @calarayaproject
           </a>
         </p>
       </div>

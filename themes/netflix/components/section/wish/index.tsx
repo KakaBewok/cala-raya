@@ -3,7 +3,7 @@
 import badwords from "indonesian-badwords";
 import Image from "next/image";
 import { forwardRef, useEffect, useRef, useState } from "react";
-import supabase from "../../../data/supabaseClient";
+import db from "@/configs/db-config";
 
 interface WishItemProps {
   name: string;
@@ -19,7 +19,7 @@ const WishItem = forwardRef<HTMLDivElement, WishItemProps>(
           alt="profile"
           width={24}
           height={24}
-          src={`/images/face.png`}
+          src={`/assets/images/face.png`}
           style={{
             backgroundColor: color,
             minWidth: 24,
@@ -71,7 +71,7 @@ export default function WishSection() {
     // random color based data length
     const randomColor = colorList[data.length % colorList.length];
     const newmessage = badwords.censor(message);
-    const { error } = await supabase
+    const { error } = await db
       .from(process.env.NEXT_PUBLIC_APP_TABLE_NAME!) // Replace with your actual table name
       .insert([
         {
@@ -97,7 +97,7 @@ export default function WishSection() {
   };
 
   const fetchData = async () => {
-    const { data, error } = await supabase
+    const { data, error } = await db
       .from(process.env.NEXT_PUBLIC_APP_TABLE_NAME!) // Replace 'your_table' with the actual table name
       .select("name, message, color")
       .eq("invitation_id", "c3ddb484-0ce6-4a76-8a1c-ad39f2dd6bce");

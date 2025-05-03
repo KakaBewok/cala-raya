@@ -1,10 +1,14 @@
 "use client";
 
-import data from "../../../data/config.json";
+import { useInvitation } from "@/context/InvitationDataContext";
+import DataTypes from "@/types/data-types";
 import { Copy, CopyCheck } from "lucide-react";
 import { useState } from "react";
 
 const Gift = () => {
+  const { invitationData } = useInvitation();
+  const data = invitationData as DataTypes;
+
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [addressCopied, setAddressCopied] = useState<boolean>(false);
 
@@ -35,16 +39,16 @@ const Gift = () => {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {data.gift_info.map((gift, idx) => (
+        {data.giftInfo.map((gift, idx) => (
           <div
             key={idx}
             className="relative w-full rounded-sm border border-neutral-950 bg-neutral-900 p-3 text-center transition-shadow hover:shadow-lg"
           >
             <h3 className="text-md font-semibold text-red-500">
-              {gift.provider}
+              {gift.providerName}
             </h3>
             <p className="mt-2 text-sm tracking-wider">{gift.accountNumber}</p>
-            <p className="text-xs text-gray-300 italic">{gift.accountName}</p>
+            <p className="text-xs text-gray-300 italic">{gift.accountHolder}</p>
 
             <button
               onClick={() => handleCopy(gift.accountNumber, idx)}
@@ -64,11 +68,11 @@ const Gift = () => {
       <div className="relative w-full rounded-sm border border-neutral-950 bg-neutral-900 p-3 text-center transition-shadow hover:shadow-lg">
         <h3 className="text-md font-semibold text-red-500">Hadiah fisik</h3>
         <p className="mt-2 text-xs tracking-wider">
-          {data.gift_info[0].address}
+          {data.giftInfo[0].address}
         </p>
 
         <button
-          onClick={() => handleCopy(data.gift_info[0].address)}
+          onClick={() => handleCopy(data.giftInfo[0].address)}
           className="cursor pointer absolute top-2 right-2"
           aria-label="Copy"
         >

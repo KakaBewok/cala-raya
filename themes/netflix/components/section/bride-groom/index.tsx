@@ -1,7 +1,11 @@
-import data from "../../../data/config.json";
+import { useInvitation } from "@/context/InvitationDataContext";
+import DataTypes from "@/types/data-types";
 import Image from "next/image";
 
 export default function Bridegroom() {
+  const { invitationData } = useInvitation();
+  const data = invitationData as DataTypes;
+
   return (
     <div className="mb-14" data-aos="zoom-in">
       <h2 className="mb-4 text-lg leading-5 font-bold text-white">
@@ -11,38 +15,36 @@ export default function Bridegroom() {
         <div>
           <Image
             alt="Bride"
-            src={data.pegantin.wanita.foto}
+            src={data.brideAndGroom.bride.photo}
             className="w-full rounded-sm"
-            // height={164}
             width={300}
             height={170}
           />
           <div>
             <h4 className="text-md mt-2 font-medium text-white">
-              {data.pegantin.wanita.nama}
+              {data.brideAndGroom.bride.fullName}
             </h4>
             <p className="text-xs leading-4 text-[#A3A1A1]">
-              Putri dari {data.pegantin.wanita.bapak} &amp; Ibu{" "}
-              {data.pegantin.wanita.ibu}
+              Putri dari {data.brideAndGroom.bride.father} &amp; Ibu{" "}
+              {data.brideAndGroom.bride.mother}
             </p>
           </div>
         </div>
         <div>
           <Image
             alt="Groom"
-            src={data.pegantin.pria.foto}
+            src={data.brideAndGroom.groom.photo}
             className="w-full rounded-sm"
-            // height={164}
             width={300}
             height={170}
           />
           <div>
             <h4 className="text-md mt-2 font-medium text-white">
-              {data.pegantin.pria.nama}
+              {data.brideAndGroom.groom.fullName}
             </h4>
             <p className="text-xs leading-4 text-[#A3A1A1]">
-              Putra dari {data.pegantin.pria.bapak} &amp; Ibu{" "}
-              {data.pegantin.pria.ibu}
+              Putri dari {data.brideAndGroom.groom.father} &amp; Ibu{" "}
+              {data.brideAndGroom.groom.mother}
             </p>
           </div>
         </div>

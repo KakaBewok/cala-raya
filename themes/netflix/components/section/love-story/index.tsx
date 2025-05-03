@@ -1,7 +1,11 @@
-import data from "../../../data/config.json";
+import { useInvitation } from "@/context/InvitationDataContext";
+import DataTypes from "@/types/data-types";
 import LoveItem from "./love-item";
 
 export default function LoveStory() {
+  const { invitationData } = useInvitation();
+  const data = invitationData as DataTypes;
+
   return (
     <div className="mb-14">
       <h2
@@ -11,10 +15,10 @@ export default function LoveStory() {
         Our Love Story
       </h2>
       <div className="space-y-4">
-        {data.love_story.map((item, index) => (
+        {data.loveStory.map((item, index) => (
           <LoveItem
             key={index}
-            imageUrl={item.image_url}
+            imageUrl={item.imageUrl}
             title={item.title}
             duration="26m 10s"
             description={item.description}

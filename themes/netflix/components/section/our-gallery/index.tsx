@@ -1,7 +1,11 @@
-import data from "../../../data/config.json";
+import { useInvitation } from "@/context/InvitationDataContext";
+import DataTypes from "@/types/data-types";
 import { GalleryItem } from "./gallery-item";
 
 export default function OurGallery() {
+  const { invitationData } = useInvitation();
+  const data = invitationData as DataTypes;
+
   return (
     <div className="mb-14">
       <h2
