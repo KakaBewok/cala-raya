@@ -3,8 +3,8 @@
 import React, { useEffect } from "react";
 import DetailInfo from "../detail-info";
 import Image from "next/image";
-import DataTypes from "@/types/data-types";
 import { useInvitation } from "@/context/InvitationDataContext";
+import { formatDate } from "@/utils/format-date";
 
 const TagItem = ({ title }: { title: string }) => {
   return (
@@ -15,8 +15,7 @@ const TagItem = ({ title }: { title: string }) => {
 };
 
 export default function Thumbnail() {
-  const { invitationData } = useInvitation();
-  const data = invitationData as DataTypes;
+  const { invitationData: data } = useInvitation();
 
   const [isOpenDetail, setIsOpenDetail] = React.useState<boolean>(false);
 
@@ -51,10 +50,17 @@ export default function Thumbnail() {
   return (
     <div
       style={{
-        backgroundImage: `url(${data.thumbnailImageUrl})`,
+        backgroundImage: `url(${
+          data?.images?.find((image) => image.type === "thumbnail")?.url
+        })`,
       }}
       className="mb-10 flex min-h-screen flex-col justify-end bg-cover bg-center bg-no-repeat"
     >
+      <audio
+        autoPlay
+        src="/assets/music/opening-netflix.mp3"
+        className="hidden"
+      />
       <div className="bg-gradient-to-b from-transparent via-black to-black pt-2 pb-8">
         <div className="mb-10 space-y-2 px-5">
           <Image
@@ -65,8 +71,7 @@ export default function Thumbnail() {
           />
           <div>
             <h1 className="text-3xl leading-none font-bold">
-              {data.brideAndGroom.bride.nickname} &{" "}
-              {data.brideAndGroom.groom.nickname}: <br />
+              {data?.host_one_nickname} & {data?.host_two_nickname}: <br />
               Sebelum Hari H
             </h1>
           </div>
@@ -75,7 +80,7 @@ export default function Thumbnail() {
               <span className="rounded-md bg-[#E50913] px-2 py-1 text-xs text-white">
                 Coming Soon
               </span>
-              <p className="text-sm">{data.weddingDate}</p>
+              <p className="text-sm">{formatDate(data?.event_date || null)}</p>
             </div>
           </div>
           <div>

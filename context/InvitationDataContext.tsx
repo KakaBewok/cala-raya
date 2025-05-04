@@ -1,11 +1,11 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import DataTtypes from "@/types/data-types";
+import InvitationData from "@/types/invitation-data";
 
 interface InvitationContextType {
-  invitationData: DataTtypes | null;
-  setInvitationData: (data: DataTtypes | null) => void;
+  invitationData: InvitationData | null;
+  setInvitationData: (data: InvitationData | null) => void;
 }
 
 interface InvitationProviderProps {
@@ -19,7 +19,9 @@ const InvitationContext = createContext<InvitationContextType | undefined>(
 export const InvitationProvider: React.FC<InvitationProviderProps> = ({
   children,
 }) => {
-  const [invitationData, setInvitationData] = useState<DataTtypes | null>(null);
+  const [invitationData, setInvitationData] = useState<InvitationData | null>(
+    null
+  );
 
   return (
     <InvitationContext.Provider value={{ invitationData, setInvitationData }}>
