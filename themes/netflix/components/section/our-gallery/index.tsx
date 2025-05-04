@@ -1,10 +1,8 @@
 import { useInvitation } from "@/context/InvitationDataContext";
-import DataTypes from "@/types/data-types";
 import { GalleryItem } from "./gallery-item";
 
 export default function OurGallery() {
-  const { invitationData } = useInvitation();
-  const data = invitationData as DataTypes;
+  const { invitationData: data } = useInvitation();
 
   return (
     <div className="mb-14">
@@ -15,9 +13,11 @@ export default function OurGallery() {
         Our Gallery
       </h2>
       <div className="grid grid-cols-3 gap-3">
-        {data.gallery.map((item, index) => (
-          <GalleryItem key={index} src={item} />
-        ))}
+        {data?.images
+          ?.filter((image) => image.type == "gallery")
+          .map((item, index) => (
+            <GalleryItem key={index} src={item.url} />
+          ))}
       </div>
     </div>
   );

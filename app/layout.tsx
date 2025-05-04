@@ -3,6 +3,7 @@ import "./globals.css";
 import { Suspense } from "react";
 import { InvitationProvider } from "@/context/InvitationDataContext";
 import { geistMono, geistSans } from "@/fonts/fonts";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Cala Raya",
@@ -20,6 +21,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <InvitationProvider>
+          <Toaster position="top-right" />
           <Suspense>{children}</Suspense>
         </InvitationProvider>
       </body>

@@ -1,10 +1,9 @@
 import Image from "next/image";
 import { useInvitation } from "@/context/InvitationDataContext";
-import DataTypes from "@/types/data-types";
+import { formatDate } from "@/utils/format-date";
 
 export default function TitleInfo() {
-  const { invitationData } = useInvitation();
-  const data = invitationData as DataTypes;
+  const { invitationData: data } = useInvitation();
 
   return (
     <div className="mb-14 space-y-2" data-aos="fade-right">
@@ -20,8 +19,8 @@ export default function TitleInfo() {
         </span>
       </div>
       <h2 className="text-lg leading-5 font-bold text-white">
-        {data.brideAndGroom.bride.nickname} &amp;{" "}
-        {data.brideAndGroom.groom.nickname}: Sebelum Hari H
+        {data?.host_one_nickname} &amp; {data?.host_two_nickname}: Sebelum Hari
+        H
       </h2>
       <div className="flex items-center gap-1">
         <span className="mr-2 text-green-500">100% match</span>
@@ -29,7 +28,7 @@ export default function TitleInfo() {
           SU
         </span>
         <span className="mr-2 text-white">
-          {data.weddingDate.split("-")[0]}
+          {data?.event_date.split("-")[0]}
         </span>
         <span className="mr-2 text-white">1h 26m</span>
         <span>
@@ -50,11 +49,11 @@ export default function TitleInfo() {
         </span>
       </div>
       <div className="w-fit rounded bg-[#E50913] px-2 py-1 text-xs font-bold text-white">
-        Coming soon on Saturday, {data.weddingDate}
+        Coming soon on Saturday, {formatDate(data?.event_date || null)}
       </div>
       <div className="pt-2">
         <p className="mb-2 text-sm leading-[1.15rem] text-white">
-          {data.introduction}
+          {data?.greetings}
         </p>
         <p className="text-[11px] leading-[1rem] text-[#A3A1A1]">
           &quot;Segala sesuatu Kami ciptakan berpasang-pasangan agar kamu

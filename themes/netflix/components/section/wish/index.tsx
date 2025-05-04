@@ -4,15 +4,16 @@ import badwords from "indonesian-badwords";
 import Image from "next/image";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import db from "@/configs/db-config";
+import { useInvitation } from "@/context/InvitationDataContext";
 
 interface WishItemProps {
-  name: string;
+  guest_name: string;
   message: string;
-  color: string;
+  icon_color: string;
 }
 
 const WishItem = forwardRef<HTMLDivElement, WishItemProps>(
-  ({ name, message, color }, ref) => (
+  ({ guest_name, message, icon_color }, ref) => (
     <div ref={ref} className="flex gap-2">
       <div>
         <Image
@@ -21,7 +22,7 @@ const WishItem = forwardRef<HTMLDivElement, WishItemProps>(
           height={24}
           src={`/assets/images/face.png`}
           style={{
-            backgroundColor: color,
+            backgroundColor: icon_color,
             minWidth: 24,
             minHeight: 24,
           }}
@@ -29,7 +30,7 @@ const WishItem = forwardRef<HTMLDivElement, WishItemProps>(
         />
       </div>
       <div>
-        <p className="text-md -mt-1 text-white">{name}</p>
+        <p className="text-md -mt-1 text-white">{guest_name}</p>
         <p className="text-xs text-[#A3A1A1]">{message}</p>
       </div>
     </div>
@@ -39,6 +40,8 @@ const WishItem = forwardRef<HTMLDivElement, WishItemProps>(
 const colorList = ["red", "#ffdb58", "#6bc76b", "#48cae4"];
 
 export default function WishSection() {
+  const { invitationData } = useInvitation();
+
   const lastChildRef = useRef<HTMLDivElement>(null);
 
   const [data, setData] = useState<WishItemProps[]>([]);
@@ -72,14 +75,14 @@ export default function WishSection() {
     const randomColor = colorList[data.length % colorList.length];
     const newmessage = badwords.censor(message);
     const { error } = await db
-      .from(process.env.NEXT_PUBLIC_APP_TABLE_NAME!) // Replace with your actual table name
+      .from("rsvps") // Replace with your actual table name
       .insert([
         {
-          name,
+          guest_name: name,
           message: newmessage,
-          color: randomColor,
-          invitation_id: "c3ddb484-0ce6-4a76-8a1c-ad39f2dd6bce",
-        }, // Assuming your table has a "name" column
+          icon_color: randomColor,
+          invitation_id: invitationData?.id,
+        },
       ]);
 
     setLoading(false);
@@ -98,9 +101,9 @@ export default function WishSection() {
 
   const fetchData = async () => {
     const { data, error } = await db
-      .from(process.env.NEXT_PUBLIC_APP_TABLE_NAME!) // Replace 'your_table' with the actual table name
-      .select("name, message, color")
-      .eq("invitation_id", "c3ddb484-0ce6-4a76-8a1c-ad39f2dd6bce");
+      .from("rsvps")
+      .select("guest_name, message, icon_color")
+      .eq("invitation_id", invitationData?.id);
 
     if (error) console.error("Error fetching data: ", error);
     else setData(data);
@@ -125,9 +128,9 @@ export default function WishSection() {
       <div className="wish-container max-h-[25rem] space-y-4 overflow-auto rounded-sm border border-neutral-950 bg-neutral-900 p-3">
         {data.map((item, index) => (
           <WishItem
-            name={item.name}
+            guest_name={item.guest_name}
             message={item.message}
-            color={item.color}
+            icon_color={item.icon_color}
             key={index}
             ref={index === data.length - 1 ? lastChildRef : null}
           />

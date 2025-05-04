@@ -1,12 +1,10 @@
 "use client";
 
 import { useInvitation } from "@/context/InvitationDataContext";
-import DataTypes from "@/types/data-types";
 import { useEffect, useState } from "react";
 
 export default function SongButton() {
-  const { invitationData } = useInvitation();
-  const data = invitationData as DataTypes;
+  const { invitationData: data } = useInvitation();
 
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
 
@@ -28,8 +26,8 @@ export default function SongButton() {
 
   return (
     <div className="fixed right-5 bottom-5">
-      {isPlaying && data.audioUrl && (
-        <audio autoPlay loop src={data.audioUrl} className="hidden" />
+      {isPlaying && data?.music?.url && (
+        <audio autoPlay loop src={data?.music?.url} className="hidden" />
       )}
       {/* {isPlaying && data.audio_url && <audio autoPlay loop src={`/images/assets/music/lagunya.mp3`} className="hidden" />} */}
 
