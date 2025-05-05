@@ -26,8 +26,7 @@ export default function UserWatch({ onClick }: { onClick: () => void }) {
             alt="Nikah Fix"
           />
           <p className="mt-2 text-xl transition-transform duration-400 group-hover:translate-y-10 group-hover:scale-125">
-            Dear{" "}
-            <span className="font-bold text-red-500 uppercase">{guest}</span>
+            Dear <span className="font-bold text-red-500">{guest}</span>
           </p>
         </div>
       </div>
