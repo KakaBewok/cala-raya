@@ -1,14 +1,11 @@
 "use client";
 
+import { useInvitation } from "@/context/InvitationDataContext";
 import Image from "next/image";
 
-export default function UserWatch({
-  onClick,
-  guest,
-}: {
-  onClick: () => void;
-  guest?: string;
-}) {
+export default function UserWatch({ onClick }: { onClick: () => void }) {
+  const { guest } = useInvitation();
+
   return (
     <div className="space-y-36 py-14 text-center">
       <Image
@@ -29,10 +26,8 @@ export default function UserWatch({
             alt="Nikah Fix"
           />
           <p className="mt-2 text-xl transition-transform duration-400 group-hover:translate-y-10 group-hover:scale-125">
-            Yth.{" "}
+            Dear{" "}
             <span className="font-bold text-red-500 uppercase">{guest}</span>
-            <br />
-            di Tempat
           </p>
         </div>
       </div>
