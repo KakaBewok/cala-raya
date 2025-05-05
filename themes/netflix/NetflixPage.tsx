@@ -4,7 +4,7 @@ import { useState } from "react";
 import Thumbnail from "./components/section/thumbnail";
 import UserWatch from "./components/section/user-watch";
 
-export default function Netflix({ guest }: { guest?: string }) {
+export default function Netflix() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
   return (
@@ -17,7 +17,6 @@ export default function Netflix({ guest }: { guest?: string }) {
             onClick={() => {
               setIsLogin(true);
             }}
-            guest={guest}
           />
         )}
       </div>
