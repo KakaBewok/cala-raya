@@ -17,7 +17,7 @@ export default function BreakingNews() {
       />
       <div className="mt-3 rounded-sm border-neutral-950 bg-neutral-900 p-3 text-sm leading-[1.15rem] text-slate-100 italic">
         <div
-          className="space-y-2"
+          className="space-y-2 italic"
           dangerouslySetInnerHTML={{
             __html: data?.message || "",
           }}
