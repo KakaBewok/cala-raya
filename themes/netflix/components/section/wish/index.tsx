@@ -1,10 +1,10 @@
 "use client";
 
+import db from "@/configs/db-config";
+import { useInvitation } from "@/context/InvitationDataContext";
 import badwords from "indonesian-badwords";
 import Image from "next/image";
 import { forwardRef, useEffect, useRef, useState } from "react";
-import db from "@/configs/db-config";
-import { useInvitation } from "@/context/InvitationDataContext";
 
 interface WishItemProps {
   guest_name: string;
@@ -37,15 +37,24 @@ const WishItem = forwardRef<HTMLDivElement, WishItemProps>(
   )
 );
 
-const colorList = ["red", "#ffdb58", "#6bc76b", "#48cae4"];
+const colorList = [
+  "red",
+  "#ffdb58",
+  "#6bc76b",
+  "#48cae4",
+  "#f4a261",
+  "#2a9d8f",
+  "#e76f51",
+  "#8ecae6",
+  "#b5838d",
+];
 
 export default function WishSection() {
-  const { invitationData } = useInvitation();
+  const { invitationData, guest } = useInvitation();
 
   const lastChildRef = useRef<HTMLDivElement>(null);
 
   const [data, setData] = useState<WishItemProps[]>([]);
-  const [name, setName] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -53,18 +62,8 @@ export default function WishSection() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (name.length < 3) {
-      setError("Nama minimal 3 karakter!");
-      return;
-    }
-
     if (message.length < 5) {
       setError("Pesan minimal 5 karakter!");
-      return;
-    }
-
-    if (badwords.flag(name)) {
-      setError("Maaf banget 😢 gaboleh ngirim kata kasar ya!");
       return;
     }
 
@@ -74,27 +73,22 @@ export default function WishSection() {
     // random color based data length
     const randomColor = colorList[data.length % colorList.length];
     const newmessage = badwords.censor(message);
-    const { error } = await db
-      .from("rsvps") // Replace with your actual table name
-      .insert([
-        {
-          guest_name: name,
-          message: newmessage,
-          icon_color: randomColor,
-          invitation_id: invitationData?.id,
-        },
-      ]);
+    const { error } = await db.from("rsvps").insert([
+      {
+        guest_name: guest,
+        message: newmessage,
+        icon_color: randomColor,
+        invitation_id: invitationData?.id,
+      },
+    ]);
 
     setLoading(false);
 
     if (error) {
       setError(error.message);
     } else {
-      //scroll to .wish-container last child
-
       fetchData();
       setTimeout(scrollToLastChild, 500);
-      setName("");
       setMessage("");
     }
   };
@@ -145,20 +139,10 @@ export default function WishSection() {
         )}
 
         <div className="space-y-1">
-          <label className="text-sm">Nama kamu</label>
-          <input
-            required
-            minLength={3}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="mt-1 w-full rounded-sm bg-slate-100 px-2 py-1 text-black focus:outline-none"
-          />
-        </div>
-        <div className="space-y-1">
           <label className="text-sm">Pesan buat kita ✌️</label>
           <textarea
             required
-            minLength={10}
+            minLength={5}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="mt-1 w-full rounded-sm bg-slate-100 px-2 py-1 text-black focus:outline-none"

@@ -1,33 +1,31 @@
 "use client";
 
+import Loading from "@/components/Loading";
+import db from "@/configs/db-config";
+import { useInvitation } from "@/context/InvitationDataContext";
 import MonochromePage from "@/themes/monochrome/MonochromePage";
 import NetflixPage from "@/themes/netflix/NetflixPage";
 import { ThemeName } from "@/types/theme-name";
 import { useParams, useSearchParams } from "next/navigation";
-import { ThemeProps } from "@/types/theme-props";
 import { useEffect, useState } from "react";
-import { useInvitation } from "@/context/InvitationDataContext";
-import db from "@/configs/db-config";
 import toast from "react-hot-toast";
-import Loading from "@/components/Loading";
 
-const themeMap: Record<ThemeName, React.ComponentType<ThemeProps>> = {
+const themeMap: Record<ThemeName, React.ComponentType> = {
   monochrome: MonochromePage,
   netflix: NetflixPage,
 };
 
 export default function InvitationPage() {
-  const { invitationData, setInvitationData } = useInvitation();
+  const { invitationData, setInvitationData, setGuest } = useInvitation();
   const params = useParams();
   const queryParams = useSearchParams();
 
   const slug = params.slug as string;
-  const [guestName, setGuestName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setGuestName(queryParams.get("to") ?? "Guest");
-  }, [queryParams]);
+    setGuest(queryParams.get("to") ?? "Guest");
+  }, [queryParams, setGuest]);
 
   useEffect(() => {
     const fetchInvitationData = async () => {
@@ -88,5 +86,5 @@ export default function InvitationPage() {
   const themeName = invitationData.theme?.name as ThemeName;
   const ThemeComponent = themeMap[themeName] ?? themeMap.netflix;
 
-  return <ThemeComponent guest={guestName} />;
+  return <ThemeComponent />;
 }
