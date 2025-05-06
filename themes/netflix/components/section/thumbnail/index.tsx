@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
-import DetailInfo from "../detail-info";
-import Image from "next/image";
 import { useInvitation } from "@/context/InvitationDataContext";
 import { formatDate } from "@/utils/format-date";
+import Image from "next/image";
+import React, { useEffect } from "react";
+import DetailInfo from "../detail-info";
 
 const TagItem = ({ title }: { title: string }) => {
   return (
@@ -62,7 +62,7 @@ export default function Thumbnail() {
         className="hidden"
       />
       <div className="bg-gradient-to-b from-transparent via-black to-black pt-2 pb-8">
-        <div className="mb-10 space-y-2 px-5">
+        <div className="mb-3 space-y-2 px-5">
           <Image
             src={`/assets/images/NIKAHFIX.webp`}
             alt="NIKAHFIX"

@@ -1,6 +1,8 @@
 "use client";
 
+import { useInvitation } from "@/context/InvitationDataContext";
 import AOS from "aos";
+import "aos/dist/aos.css";
 import { useEffect } from "react";
 import SongButton from "../../ui/song-button";
 import BreakingNews from "../breaking-news";
@@ -12,8 +14,6 @@ import LoveStory from "../love-story";
 import OurGallery from "../our-gallery";
 import TitleInfo from "../title-info";
 import WishSection from "../wish";
-import "aos/dist/aos.css";
-import { useInvitation } from "@/context/InvitationDataContext";
 
 export default function DetailInfo() {
   const { invitationData: data } = useInvitation();
@@ -29,7 +29,13 @@ export default function DetailInfo() {
 
   return (
     <div className="space-y-5 pt-4 pb-10">
-      <video className="w-full rounded-xs" autoPlay muted>
+      <video
+        className="w-full rounded-xs"
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+      >
         <source src={data?.videos?.[0].url} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
