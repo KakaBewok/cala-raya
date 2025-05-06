@@ -6,7 +6,16 @@ const Location = () => {
   return (
     <>
       <div className="pb-4 text-center" data-aos="fade-right">
-        <div className="mb-2">
+        <h2
+          className="mb-4 text-lg leading-5 font-bold text-white"
+          data-aos="zoom-in"
+        >
+          Location
+        </h2>
+        <p className="text-center text-xs text-slate-200 mb-3">
+          {data?.location}
+        </p>
+        <div>
           <iframe
             src={data?.location_url}
             style={{
@@ -19,15 +28,6 @@ const Location = () => {
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
-        <p className="text-center text-xs text-slate-200">{data?.location}</p>
-        <a
-          className="text-center text-xs text-blue-500 underline"
-          href={data?.location_url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Lihat lokasi
-        </a>
       </div>
     </>
   );
