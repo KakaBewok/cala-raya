@@ -7,7 +7,19 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Cala Raya Project",
-  description: "Modern digital invitations made simple and stylish.",
+  description: "Digital invitation service for your special moments.",
+  openGraph: {
+    title: "Cala Raya Project",
+    description: "Digital invitation service for your special moments.",
+    url: "https://calaraya.vercel.app/",
+    images: [
+      {
+        url: "https://calaraya.vercel.app/og-image.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
