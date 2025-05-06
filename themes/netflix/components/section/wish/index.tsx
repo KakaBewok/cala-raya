@@ -56,6 +56,7 @@ export default function WishSection() {
 
   const [data, setData] = useState<WishItemProps[]>([]);
   const [message, setMessage] = useState<string>("");
+  const [attending, setAttending] = useState<string>("0");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -78,6 +79,8 @@ export default function WishSection() {
         guest_name: guest,
         message: newmessage,
         icon_color: randomColor,
+        attendance_status: attending === "1" || attending === "2",
+        total_guest: attending,
         invitation_id: invitationData?.id,
       },
     ]);
@@ -148,6 +151,44 @@ export default function WishSection() {
             className="mt-1 w-full rounded-sm bg-slate-100 px-2 py-1 text-black focus:outline-none"
             rows={4}
           ></textarea>
+        </div>
+        <div className="flex flex-col justify-center items-start gap-1">
+          <label className="text-sm mb-2">Konfirmasi kehadiran </label>
+          <label className="cursor-pointer text-sm">
+            <input
+              type="radio"
+              name="guest_amount"
+              value="1"
+              checked={attending === "1"}
+              className="mr-3 "
+              onChange={(e) => setAttending(e.target.value)}
+            />
+            1 Orang
+          </label>
+
+          <label className="cursor-pointer text-sm">
+            <input
+              type="radio"
+              name="guest_amount"
+              value="2"
+              checked={attending === "2"}
+              className="mr-3 "
+              onChange={(e) => setAttending(e.target.value)}
+            />
+            2 Orang
+          </label>
+
+          <label className="cursor-pointer text-sm">
+            <input
+              type="radio"
+              name="guest_amount"
+              value="0"
+              checked={attending === "0"}
+              className="mr-3"
+              onChange={(e) => setAttending(e.target.value)}
+            />
+            Maaf, Saya tidak bisa hadir :(
+          </label>
         </div>
         <button
           type="submit"
