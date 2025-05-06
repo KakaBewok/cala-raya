@@ -142,7 +142,7 @@ export default function WishSection() {
         )}
 
         <div className="space-y-1">
-          <label className="text-sm">Pesan buat kita ✌️</label>
+          <label className="text-sm font-semibold">Pesan buat kita ✌️</label>
           <textarea
             required
             minLength={5}
@@ -153,7 +153,9 @@ export default function WishSection() {
           ></textarea>
         </div>
         <div className="flex flex-col justify-center items-start gap-1">
-          <label className="text-sm mb-2">Konfirmasi kehadiran </label>
+          <label className="text-sm mb-2 font-semibold">
+            Konfirmasi kehadiran{" "}
+          </label>
           <label className="cursor-pointer text-sm">
             <input
               type="radio"
