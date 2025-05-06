@@ -199,7 +199,7 @@ export default function WishSection() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-4 w-full rounded-sm bg-red-500 py-2 text-sm font-semibold text-white hover:bg-red-600 focus:outline-none disabled:cursor-not-allowed disabled:bg-red-300"
+          className="mt-4 w-full rounded-sm bg-red-600 py-2 text-sm font-semibold text-white hover:bg-red-700 focus:outline-none disabled:cursor-not-allowed disabled:bg-red-300 cursor-pointer"
         >
           Kirim
         </button>
