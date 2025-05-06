@@ -18,19 +18,19 @@ const WishItem = forwardRef<HTMLDivElement, WishItemProps>(
       <div>
         <Image
           alt="profile"
-          width={24}
-          height={24}
+          width={25}
+          height={25}
           src={`/assets/images/face.png`}
           style={{
             backgroundColor: icon_color,
-            minWidth: 24,
-            minHeight: 24,
+            minWidth: 25,
+            minHeight: 25,
           }}
           className="rounded-sm"
         />
       </div>
       <div>
-        <p className="text-md -mt-1 text-white">{guest_name}</p>
+        <p className="text-sm -mt-1 text-white">{guest_name}</p>
         <p className="text-xs text-[#A3A1A1]">{message}</p>
       </div>
     </div>
