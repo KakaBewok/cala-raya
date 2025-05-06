@@ -118,9 +118,12 @@ export default function WishSection() {
 
   return (
     <div aos-data="zoom-in">
-      <h2 className="mb-5 text-lg leading-5 font-bold text-white">
+      <h2 className="mb-2 text-lg leading-5 font-bold text-white">
         Best Wishes for the Couple ❤️
       </h2>
+      <p className="mb-5 text-xs text-neutral-500">
+        {data.length > 0 ? `${data.length} Message(s)` : ""}
+      </p>
       {/* comments list */}
       <div className="wish-container max-h-[25rem] space-y-4 overflow-auto rounded-sm border border-neutral-950 bg-neutral-900 p-3">
         {data.map((item, index) => (
@@ -150,6 +153,7 @@ export default function WishSection() {
             onChange={(e) => setMessage(e.target.value)}
             className="mt-1 w-full rounded-sm bg-slate-100 px-2 py-1 text-black focus:outline-none"
             rows={4}
+            placeholder="Selamat ya! Semoga bahagia selalu! 😊"
           ></textarea>
         </div>
         <div className="flex flex-col justify-center items-start gap-1">
