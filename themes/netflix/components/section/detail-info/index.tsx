@@ -44,7 +44,6 @@ export default function DetailInfo() {
       </video>
       <div className="space-y-3 px-4">
         <TitleInfo />
-        <QRCodeGuest />
         <BreakingNews />
         <Bridegroom />
         <LoveStory />
@@ -54,6 +53,7 @@ export default function DetailInfo() {
         <Gift />
         <WishSection />
       </div>
+      <QRCodeGuest />
       <Footer />
       <AutoScrollToggle />
       <SongButton />
