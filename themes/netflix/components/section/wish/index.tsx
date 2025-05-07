@@ -76,7 +76,7 @@ export default function WishSection() {
     const newmessage = badwords.censor(message);
     const { error } = await db.from("rsvps").insert([
       {
-        guest_name: guest,
+        guest_name: guest?.name,
         message: newmessage,
         icon_color: randomColor,
         attendance_status: attending === "1" || attending === "2",

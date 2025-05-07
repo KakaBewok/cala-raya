@@ -86,7 +86,7 @@ interface GiftInfo {
   gift_delivery_address: string;
 }
 
-interface Guest {
+export interface Guest {
   id: number;
   invitation_id: number;
   name: string;
