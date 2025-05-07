@@ -28,7 +28,7 @@ export default function QRCodeGuest() {
     fetchGuestData();
   }, []);
 
-  const AppUrl = process.env.NEXT_PUBLIC_APP_URL_LOCAL!;
+  const AppUrl = process.env.NEXT_PUBLIC_APP_URL_PROD!;
   const url = `${AppUrl}/dashboard/check-in?id=${guestId}`;
 
   console.log(url);
