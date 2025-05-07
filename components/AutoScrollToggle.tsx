@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUp, ChevronsDown, Pause } from "lucide-react";
 
 export default function AutoScrollToggle() {
-  const scrollAnimationId = useRef<number | null>(null);
   const [isAutoScroll, setIsAutoScroll] = useState<boolean>(false);
   const [showInstruction, setShowInstruction] = useState<boolean>(true);
 
@@ -27,54 +26,19 @@ export default function AutoScrollToggle() {
           return;
         }
 
-        window.scrollBy(0, 1.5); // Lebih kecil = lebih halus
+        window.scrollBy(0, 1.5);
       }, 16); // ~60fps
     }
 
     return () => {
       clearInterval(intervalId);
     };
-
-    // const autoScroll = () => {
-    //   const scrollHeight = document.documentElement.scrollHeight;
-    //   const scrollPosition = window.innerHeight + window.scrollY;
-
-    //   if (scrollHeight <= scrollPosition) {
-    //     setIsAutoScroll(false);
-    //     return;
-    //   }
-
-    //   window.scrollBy(0, 20);
-    //   //   scrollAnimationId.current = requestAnimationFrame(autoScroll);
-    //   scrollAnimationId.current = requestAnimationFrame(autoScroll);
-    // };
-
-    // if (isAutoScroll) {
-    //   autoScroll();
-    // }
-
-    // return () => {
-    //   if (scrollAnimationId.current) {
-    //     cancelAnimationFrame(scrollAnimationId.current);
-    //   }
-    // };
   }, [isAutoScroll]);
-
-  const toggleAutoScroll = () => {
-    if (isAutoScroll) {
-      if (scrollAnimationId.current) {
-        cancelAnimationFrame(scrollAnimationId.current);
-      }
-      setIsAutoScroll(false);
-    } else {
-      setIsAutoScroll(true);
-    }
-  };
 
   return (
     <>
       <button
-        onClick={toggleAutoScroll}
+        onClick={() => setIsAutoScroll((prev) => !prev)}
         className={`fixed top-3 right-3 z-50 bg-red-600 text-white p-1 cursor-pointer rounded-full shadow opacity-55 hover:opacity-100 transition ${
           !isAutoScroll ? "animate-bounce" : ""
         }`}
