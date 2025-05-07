@@ -21,22 +21,20 @@ export default function InvitationPage() {
   const queryParams = useSearchParams();
 
   const slug = params.slug as string;
+  const invId = queryParams.get("inv_id");
+  const guestId = queryParams.get("guest_id");
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setGuest(queryParams.get("to") ?? "Guest");
-  }, [queryParams, setGuest]);
-
-  useEffect(() => {
     const fetchInvitationData = async () => {
-      if (!slug) {
-        toast.error("Slug is missing.");
+      if (!slug || !invId) {
+        toast.error("Missing slug or invitation ID.");
         setLoading(false);
         return;
       }
 
       try {
-        const { data, error: fetchError } = await db
+        const { data, error } = await db
           .from("invitations")
           .select(
             `
@@ -53,38 +51,47 @@ export default function InvitationPage() {
           `
           )
           .eq("slug", slug)
+          .eq("id", invId)
           .single();
 
-        if (fetchError) {
-          console.error("Error fetching invitation: ", fetchError);
-          toast.error("Invitation data not found or an error occurred.");
-        } else if (!data) {
-          toast.error("No invitation data found.");
+        if (error) {
+          toast.error("Invitation not found.");
         } else {
           setInvitationData(data);
         }
       } catch (err) {
-        console.error("Error: ", err);
-        toast.error("An unexpected error occurred.");
+        console.error("Unexpected error: ", err);
+        toast.error("Unexpected error occurred.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchInvitationData();
-  }, [slug, setInvitationData]);
+  }, [slug, invId, setInvitationData]);
 
-  if (!slug) return <div>Slug not found!</div>;
+  // Get guest data from list after invitation loaded
+  useEffect(() => {
+    if (!invitationData || !guestId) return;
+
+    const guestData = invitationData.guests?.find(
+      (item) => item.id.toString() === guestId.toString()
+    );
+    setGuest(guestData || null);
+  }, [invitationData, guestId, setGuest]);
+
+  const themeName = invitationData?.theme?.name as ThemeName;
+  const ThemeComponent = themeMap[themeName] ?? themeMap.netflix;
+
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-screen w-full">
         <Loading />
       </div>
     );
-  if (!invitationData) return <div>No invitation data available.</div>;
 
-  const themeName = invitationData.theme?.name as ThemeName;
-  const ThemeComponent = themeMap[themeName] ?? themeMap.netflix;
+  if (!invitationData) return <div>No invitation data available.</div>;
+  if (!slug) return <div>Slug not found!</div>;
 
   return <ThemeComponent />;
 }

@@ -1,41 +1,31 @@
 "use client";
 
-// import db from "@/configs/db-config";
 import { useInvitation } from "@/context/InvitationDataContext";
-import { QRCodeCanvas } from "qrcode.react";
-import { useEffect } from "react";
+import { useQRCode } from "next-qrcode";
 
 export default function QRCodeGuest() {
-  const { guest, invitationData } = useInvitation();
-  console.log(guest);
-  console.log(invitationData?.id);
-
-  const guestId = invitationData?.guests?.find(
-    (guestItem) => guestItem.name == guest
-  )?.id;
-  console.log("guest id: ", guestId);
-
-  useEffect(() => {
-    const fetchGuestData = async () => {
-      //   const { data, error } = await db
-      //     .from("rsvps")
-      //     .select("guest_name, message, icon_color")
-      //     .eq("invitation_id", invitationData?.id);
-      //   if (error) console.error("Error fetching data: ", error);
-      //   else setData(data);
-    };
-
-    fetchGuestData();
-  }, []);
+  const { Canvas } = useQRCode();
+  const { guest } = useInvitation();
 
   const AppUrl = process.env.NEXT_PUBLIC_APP_URL_PROD!;
-  const url = `${AppUrl}/dashboard/check-in?id=${guestId}`;
-
+  const url = `${AppUrl}/dashboard/check-in?id=${guest?.id}`;
   console.log(url);
 
   return (
     <div className="flex flex-col items-center space-y-2">
-      <QRCodeCanvas value={url} size={160} level="H" />
+      <Canvas
+        text={url}
+        options={{
+          errorCorrectionLevel: "M",
+          margin: 3,
+          scale: 4,
+          width: 200,
+          color: {
+            dark: "#000",
+            light: "#fff",
+          },
+        }}
+      />
       <p className="text-xs text-center text-gray-500">Scan untuk check-in</p>
     </div>
   );
