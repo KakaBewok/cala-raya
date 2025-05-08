@@ -6,6 +6,7 @@ import { useInvitation } from "@/context/InvitationDataContext";
 import MonochromePage from "@/themes/monochrome/MonochromePage";
 import NetflixPage from "@/themes/netflix/NetflixPage";
 import { ThemeName } from "@/types/theme-name";
+import { decode } from "@/utils/hash";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -21,14 +22,15 @@ export default function InvitationPage() {
   const queryParams = useSearchParams();
 
   const slug = params.slug as string;
-  const invId = queryParams.get("inv_id");
-  const guestId = queryParams.get("guest_id");
+  const token = decode(queryParams.get("id") || "");
+  const invId = token[0];
+  const guestId = token[1];
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchInvitationData = async () => {
       if (!slug || !invId) {
-        toast.error("Missing slug or invitation ID.");
+        toast.error("Missing slug or invitation id.");
         setLoading(false);
         return;
       }

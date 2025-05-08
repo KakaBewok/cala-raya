@@ -1,13 +1,13 @@
 "use client";
 
-import { useInvitation } from "@/context/InvitationDataContext";
-import { useQRCode } from "next-qrcode";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useInvitation } from "@/context/InvitationDataContext";
+import { useQRCode } from "next-qrcode";
 
 export default function QRCodeGuest() {
   const { Canvas } = useQRCode();
