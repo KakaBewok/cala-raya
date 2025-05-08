@@ -1,5 +1,7 @@
 "use client";
 
+import AutoScrollToggle from "@/components/AutoScrollToggle";
+import QRCodeGuest from "@/components/QRCodeGuest";
 import { useInvitation } from "@/context/InvitationDataContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -7,6 +9,7 @@ import { useEffect } from "react";
 import SongButton from "../../ui/song-button";
 import BreakingNews from "../breaking-news";
 import Bridegroom from "../bride-groom";
+import Countdown from "../countdown";
 import Footer from "../footer";
 import Gift from "../gift";
 import Location from "../location";
@@ -14,9 +17,6 @@ import LoveStory from "../love-story";
 import OurGallery from "../our-gallery";
 import TitleInfo from "../title-info";
 import WishSection from "../wish";
-import Countdown from "../countdown";
-import AutoScrollToggle from "@/components/AutoScrollToggle";
-import QRCodeGuest from "@/components/QRCodeGuest";
 
 export default function DetailInfo() {
   const { invitationData: data } = useInvitation();
@@ -54,8 +54,8 @@ export default function DetailInfo() {
         <WishSection />
       </div>
       <QRCodeGuest />
-      <Footer />
       <AutoScrollToggle />
+      <Footer />
       <SongButton />
     </div>
   );

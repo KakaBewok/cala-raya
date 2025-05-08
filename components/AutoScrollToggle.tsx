@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { ArrowUp, ChevronsDown, Pause } from "lucide-react";
+import { useEffect, useState } from "react";
 
-export default function AutoScrollToggle() {
+export default function AutoScrollToggle({ bgColor }: { bgColor?: string }) {
   const [isAutoScroll, setIsAutoScroll] = useState<boolean>(false);
   const [showInstruction, setShowInstruction] = useState<boolean>(true);
 
@@ -39,7 +39,9 @@ export default function AutoScrollToggle() {
     <>
       <button
         onClick={() => setIsAutoScroll((prev) => !prev)}
-        className={`fixed top-3 right-3 z-50 bg-red-600 text-white p-1 cursor-pointer rounded-full shadow opacity-55 hover:opacity-100 transition ${
+        className={`fixed top-3 right-3 z-50 ${
+          bgColor ?? "bg-red-600"
+        } text-white p-1 cursor-pointer rounded-full shadow opacity-55 hover:opacity-100 transition ${
           !isAutoScroll ? "animate-bounce" : ""
         }`}
       >
@@ -47,7 +49,9 @@ export default function AutoScrollToggle() {
       </button>
       {showInstruction && (
         <div
-          className="flex gap-2 items-center justify-center fixed top-9 right-2 z-50 text-white bg-red-500 rounded-sm p-2 text-xs opacity-75"
+          className={`flex gap-2 items-center justify-center fixed top-9 right-2 z-50 text-white ${
+            bgColor ?? "bg-red-500"
+          } rounded-sm p-2 text-xs opacity-75`}
           data-aos="fade-left"
         >
           <p>Aktifkan Auto Scroll </p>
