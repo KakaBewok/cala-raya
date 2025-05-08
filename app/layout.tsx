@@ -1,9 +1,8 @@
-import { InvitationProvider } from "@/context/InvitationDataContext";
 import { geistMono, geistSans } from "@/fonts/fonts";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Toaster } from "react-hot-toast";
 import "./globals.css";
+import { Providers } from "./Providers";
 
 export const metadata: Metadata = {
   title: "Cala Raya Project",
@@ -32,10 +31,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <InvitationProvider>
-          <Toaster position="top-right" />
+        <Providers>
           <Suspense>{children}</Suspense>
-        </InvitationProvider>
+        </Providers>
       </body>
     </html>
   );

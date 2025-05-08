@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "slametandfatma.wedding",
       },
+      {
+        protocol: "https",
+        hostname: "calaraya.vercel.app",
+      },
     ],
   },
 };

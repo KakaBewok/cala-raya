@@ -5,11 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function RegisterForm() {
   const router = useRouter();
   const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,10 +25,12 @@ export default function RegisterForm() {
     setLoading(false);
 
     if (res.ok) {
-      alert("Registrasi berhasil, silakan login!");
+      toast("Registration successful, please log in!");
       router.push("/login");
     } else {
-      alert("Gagal registrasi. Pastikan email belum terdaftar.");
+      toast(
+        "Registration failed. Make sure the email is not already registered."
+      );
     }
   };
 
@@ -37,7 +40,7 @@ export default function RegisterForm() {
         <Label htmlFor="name">Name</Label>
         <Input
           id="name"
-          placeholder="Your full name"
+          placeholder="Zayn Malik"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
           required
@@ -48,7 +51,7 @@ export default function RegisterForm() {
         <Input
           id="email"
           type="email"
-          placeholder="you@example.com"
+          placeholder="zayn.malik@gmail.com"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
           required

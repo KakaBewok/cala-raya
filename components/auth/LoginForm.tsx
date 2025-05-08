@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+// import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn } from "next-auth/react";
@@ -10,7 +10,7 @@ import { useState } from "react";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
+  // const [remember, setRemember] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ export default function LoginForm() {
         <Input
           id="email"
           type="email"
-          placeholder="you@example.com"
+          placeholder="zayn.malik@gmail.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -47,12 +47,12 @@ export default function LoginForm() {
         />
       </div>
       <div className="flex items-center space-x-2">
-        <Checkbox
+        {/* <Checkbox
           id="remember"
           checked={remember}
           onCheckedChange={(val) => setRemember(Boolean(val))}
         />
-        <Label htmlFor="remember">Remember me</Label>
+        <Label htmlFor="remember">Remember me</Label> */}
       </div>
       <Button type="submit" className="w-full">
         Login
