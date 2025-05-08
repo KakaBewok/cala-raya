@@ -1,7 +1,7 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import { Button } from "@/components/ui/button"; // Sesuaikan dengan UI library kamu, bisa juga pakai <button>
+import { Button } from "@/components/ui/button";
 
 const LogoutButton = () => {
   return (
