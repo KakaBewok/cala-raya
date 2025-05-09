@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import { ArrowUp, QrCode } from "lucide-react";
 import { useQRCode } from "next-qrcode";
 import { useEffect, useState } from "react";

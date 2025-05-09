@@ -1,12 +1,10 @@
 "use client";
 
-// import { useGlobalContext } from "@/hooks/useGlobalContext";
 import { useState } from "react";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownUser from "./DropdownUser";
 
 const Header = () => {
-  //   const { sidebarOpen, setSidebarOpen } = useGlobalContext();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   return (
     <header className="sticky top-0 z-40 flex w-full bg-slate-100 drop-shadow-sm dark:bg-slate-700 dark:drop-shadow-none">

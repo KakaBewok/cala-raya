@@ -1,4 +1,4 @@
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 
 const Location = () => {
   const { invitationData: data } = useInvitation();

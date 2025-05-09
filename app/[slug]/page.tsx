@@ -2,7 +2,7 @@
 
 import Loading from "@/components/Loading";
 import db from "@/configs/db-config";
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import MonochromePage from "@/themes/monochrome/MonochromePage";
 import NetflixPage from "@/themes/netflix/NetflixPage";
 import { ThemeName } from "@/types/theme-name";

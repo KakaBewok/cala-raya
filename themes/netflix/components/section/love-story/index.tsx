@@ -1,4 +1,4 @@
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import LoveItem from "./love-item";
 
 export default function LoveStory() {

@@ -1,33 +1,29 @@
 "use client";
 
-// import { useGlobalContext } from "@/hooks/useGlobalContext";
-import { useState } from "react";
-import UserImage from "@/public/assets/images/user.png";
 import { TooltipHover } from "@/components/Tooltip";
-import ClickOutside from "./ClickOutside";
+import { useInvitation } from "@/hooks/use-invitation";
+import UserImage from "@/public/assets/images/user.png";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import ClickOutside from "./ClickOutside";
 
 const DropdownUser = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  //   const { setLoading } = useGlobalContext();
+  const { setLoading } = useInvitation();
+  const router = useRouter();
 
-  console.log(session);
-  console.log(status);
+  const handleProfileMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setLoading(true);
 
-  //   const handleProfileMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //     e.preventDefault();
-  //     setLoading(true);
-  //     router.get(
-  //       route("profile.edit"),
-  //       {},
-  //       {
-  //         onFinish: () => setLoading(false),
-  //       }
-  //     );
-  //   };
+    setTimeout(() => {
+      router.push("/profile/edit");
+      setLoading(false);
+    }, 500);
+  };
 
   return (
     <div>
@@ -57,7 +53,7 @@ const DropdownUser = () => {
           >
             <li className="px-6 py-4 border-b border-stroke dark:border-strokedark">
               <button
-                // onClick={handleProfileMenu}
+                onClick={handleProfileMenu}
                 className="flex items-center gap-3 text-sm font-medium duration-300 ease-in-out text-slate-900 hover:text-slate-400 dark:text-slate-300 dark:hover:text-slate-400 lg:text-base"
               >
                 <svg

@@ -9,9 +9,6 @@ const Loading = () => {
           Loading...
         </span>
       </div>
-      <div className="text-white text-sm font-medium mt-4">
-        Undangan sedang disiapkan...
-      </div>
     </div>
   );
 };

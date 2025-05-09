@@ -1,6 +1,6 @@
 "use client";
 
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import { useEffect, useState } from "react";
 
 export default function SongButton() {

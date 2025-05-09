@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import { formatDate } from "@/utils/format-date";
+import Image from "next/image";
 
 export default function TitleInfo() {
   const { invitationData: data } = useInvitation();

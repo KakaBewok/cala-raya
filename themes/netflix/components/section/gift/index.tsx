@@ -1,6 +1,6 @@
 "use client";
 
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import { Copy, CopyCheck } from "lucide-react";
 import { useState } from "react";
 
