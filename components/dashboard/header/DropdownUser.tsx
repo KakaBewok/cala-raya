@@ -20,7 +20,7 @@ const DropdownUser = () => {
     setLoading(true);
 
     setTimeout(() => {
-      router.push("/profile/edit");
+      router.push("/dashboard/profile-edit");
       setLoading(false);
     }, 500);
   };
