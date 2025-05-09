@@ -1,10 +1,10 @@
 "use client";
 
 import Header from "@/components/dashboard/header/index";
+import Sidebar from "@/components/dashboard/sidebar/index";
 import Loading from "@/components/Loading";
 import { useInvitation } from "@/hooks/use-invitation";
 import React, { ReactNode } from "react";
-// import Sidebar from "@/components/dashboard/sidebar/index";
 
 const AuthenticatedLayout: React.FC<{ children: ReactNode }> = ({
   children,
@@ -18,7 +18,7 @@ const AuthenticatedLayout: React.FC<{ children: ReactNode }> = ({
     >
       {loading && <Loading />}
       <div className="flex h-screen overflow-hidden">
-        {/* <Sidebar /> */}
+        <Sidebar />
 
         <div className="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
           <Header />
