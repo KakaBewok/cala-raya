@@ -2,7 +2,7 @@
 
 import AutoScrollToggle from "@/components/AutoScrollToggle";
 import QRCodeGuest from "@/components/QRCodeGuest";
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";

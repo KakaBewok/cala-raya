@@ -1,7 +1,7 @@
 "use client";
 
-import { useInvitation } from "@/context/InvitationDataContext";
-import { useState, useEffect } from "react";
+import { useInvitation } from "@/hooks/use-invitation";
+import { useEffect, useState } from "react";
 
 interface TimeLeft {
   days: number;

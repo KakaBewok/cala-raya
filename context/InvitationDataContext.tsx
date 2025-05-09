@@ -1,22 +1,24 @@
 "use client";
 
 import InvitationData, { Guest } from "@/types/invitation-data";
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 
-interface InvitationContextType {
+export interface InvitationContextType {
   invitationData: InvitationData | null;
   setInvitationData: (data: InvitationData | null) => void;
   guest: Guest | null;
   setGuest: (data: Guest | null) => void;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 }
 
 interface InvitationProviderProps {
   children: ReactNode;
 }
 
-const InvitationContext = createContext<InvitationContextType | undefined>(
-  undefined
-);
+export const InvitationContext = createContext<
+  InvitationContextType | undefined
+>(undefined);
 
 export const InvitationProvider: React.FC<InvitationProviderProps> = ({
   children,
@@ -25,20 +27,20 @@ export const InvitationProvider: React.FC<InvitationProviderProps> = ({
     null
   );
   const [guest, setGuest] = useState<Guest | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <InvitationContext.Provider
-      value={{ invitationData, setInvitationData, guest, setGuest }}
+      value={{
+        invitationData,
+        setInvitationData,
+        guest,
+        setGuest,
+        loading,
+        setLoading,
+      }}
     >
       {children}
     </InvitationContext.Provider>
   );
-};
-
-export const useInvitation = (): InvitationContextType => {
-  const context = useContext(InvitationContext);
-  if (!context) {
-    throw new Error("useInvitation must be used within an InvitationProvider");
-  }
-  return context;
 };

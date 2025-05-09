@@ -1,7 +1,7 @@
 "use client";
 
 import db from "@/configs/db-config";
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import badwords from "indonesian-badwords";
 import Image from "next/image";
 import { forwardRef, useEffect, useRef, useState } from "react";

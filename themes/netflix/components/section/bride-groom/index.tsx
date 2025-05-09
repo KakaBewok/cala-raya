@@ -1,4 +1,4 @@
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import Image from "next/image";
 

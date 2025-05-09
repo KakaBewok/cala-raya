@@ -1,6 +1,6 @@
 "use client";
 
-import { useInvitation } from "@/context/InvitationDataContext";
+import { useInvitation } from "@/hooks/use-invitation";
 import Image from "next/image";
 
 export default function UserWatch({ onClick }: { onClick: () => void }) {
