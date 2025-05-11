@@ -35,6 +35,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Registration Failed" }, { status: 500 });
   }
 
+  console.log(data);
+
   logger.info(data, "User created");
 
   return NextResponse.json({ success: true });
