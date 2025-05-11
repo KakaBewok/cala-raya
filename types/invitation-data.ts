@@ -30,6 +30,7 @@ interface InvitationData {
   stories?: Story[];
   rsvps?: RSVP[];
   // etc.
+  web_url: string;
   phone_number: string;
   slug: string;
   is_active: boolean;
