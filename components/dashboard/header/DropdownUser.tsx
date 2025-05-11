@@ -3,17 +3,32 @@
 import { TooltipHover } from "@/components/Tooltip";
 import { useInvitation } from "@/hooks/use-invitation";
 import UserImage from "@/public/assets/images/user.png";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClickOutside from "./ClickOutside";
+import { User } from "@/types/invitation-data";
 
 const DropdownUser = () => {
-  const { data: session } = useSession();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { setLoading } = useInvitation();
   const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const response = await fetch("/api/user");
+      const data = await response.json();
+
+      if (data.success) {
+        setUser(data.user);
+      } else {
+        console.error("Error fetching user data: ", data.error);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   const handleProfileMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -32,10 +47,10 @@ const DropdownUser = () => {
         >
           <span className="hidden text-right lg:block">
             <span className="block text-sm font-bold text-slate-800 dark:text-slate-50">
-              {session?.user.name}
+              {user?.name}
             </span>
             <span className="block text-sm text-slate-500 dark:text-slate-400">
-              {session?.user.email}
+              {user?.email}
             </span>
           </span>
 

@@ -2,6 +2,7 @@ import db from "@/configs/db-config";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/configs/auth";
 import bcrypt from "bcryptjs";
+import logger from "@/lib/logger";
 
 export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
@@ -34,12 +35,15 @@ export async function PATCH(req: Request) {
 
   const newHashed = await bcrypt.hash(password, 10);
 
-  const { error } = await db
+  const { data, error } = await db
     .from("users")
     .update({ password: newHashed })
     .eq("id", session.user.id);
 
+  logger.info(data, "Password user updated");
+
   if (error) {
+    logger.error({ error_message: error.message });
     return Response.json(
       { field: "password", message: "Failed to update password" },
       { status: 500 }

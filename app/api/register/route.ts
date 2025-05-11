@@ -1,6 +1,7 @@
 import db from "@/configs/db-config";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
+import logger from "@/lib/logger";
 
 export async function POST(req: Request) {
   const { email, password, name } = await req.json();
@@ -20,7 +21,7 @@ export async function POST(req: Request) {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const { error } = await db.from("users").insert([
+  const { data, error } = await db.from("users").insert([
     {
       email,
       password: hashedPassword,
@@ -30,8 +31,11 @@ export async function POST(req: Request) {
   ]);
 
   if (error) {
+    logger.error({ error_message: error.message });
     return NextResponse.json({ error: "Registration Failed" }, { status: 500 });
   }
+
+  logger.info(data, "User created");
 
   return NextResponse.json({ success: true });
 }

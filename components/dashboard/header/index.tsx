@@ -6,6 +6,7 @@ import DropdownUser from "./DropdownUser";
 
 const Header = () => {
   const { sidebarOpen, setSidebarOpen } = useInvitation();
+
   return (
     <header className="sticky top-0 z-40 flex w-full bg-slate-100 drop-shadow-sm dark:bg-neutral-950 dark:drop-shadow-neutral-700">
       <div className="flex items-center justify-between flex-grow px-4 py-4 shadow-2 md:px-6 2xl:px-11">
