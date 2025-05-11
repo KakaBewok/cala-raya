@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
   if (existingUser) {
     return NextResponse.json(
-      { error: "Email sudah terdaftar" },
+      { error: "Email is already registered" },
       { status: 400 }
     );
   }
@@ -25,11 +25,12 @@ export async function POST(req: Request) {
       email,
       password: hashedPassword,
       name,
+      role: "BASIC",
     },
   ]);
 
   if (error) {
-    return NextResponse.json({ error: "Gagal registrasi" }, { status: 500 });
+    return NextResponse.json({ error: "Registration Failed" }, { status: 500 });
   }
 
   return NextResponse.json({ success: true });

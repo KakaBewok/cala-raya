@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const LoginPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-background border border-red-500 px-4 md:px-0">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-background px-4 md:px-0">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader>
           <CardTitle className="text-center text-2xl">Welcome Back</CardTitle>

@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/configs/auth";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session)
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -16,11 +16,11 @@ export async function POST(req: Request) {
     .eq("id", session.user.id);
 
   if (error) {
-    return NextResponse.json(
-      { error: "Gagal update profile" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to update" }, { status: 500 });
   }
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json(
+    { message: "Profile updated successfully" },
+    { status: 200 }
+  );
 }
