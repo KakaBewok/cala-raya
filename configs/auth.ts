@@ -12,6 +12,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        console.log(credentials);
         if (!credentials?.email || !credentials?.password) return null;
 
         const { data: user } = await db

@@ -24,7 +24,7 @@ export default function NavLink({
     setLoading(true);
 
     try {
-      await router.push(url);
+      router.push(url);
     } finally {
       setLoading(false);
     }
@@ -35,8 +35,8 @@ export default function NavLink({
       href={url}
       onClick={handleClick}
       {...props}
-      className={`group relative flex items-center gap-3 rounded-sm py-2 px-4 font-medium text-slate-300 duration-200 ease-in-out hover:bg-slate-700 ${
-        active ? "bg-slate-700 dark:bg-slate-700" : ""
+      className={`group relative flex items-center gap-3 rounded-sm py-2 px-4 font-medium text-slate-300 duration-200 ease-in-out hover:bg-neutral-700 ${
+        active ? "bg-neutral-700 dark:bg-neutral-700" : ""
       } ${className}`}
     >
       {children}

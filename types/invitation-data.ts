@@ -37,7 +37,7 @@ interface InvitationData {
   expired_at: string | null;
 }
 
-interface User {
+export interface User {
   id: number;
   name: string;
   email: string;

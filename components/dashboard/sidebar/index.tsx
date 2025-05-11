@@ -12,8 +12,13 @@ const Sidebar = () => {
   const { sidebarOpen, setSidebarOpen } = useInvitation();
   const trigger = useRef<HTMLButtonElement>(null);
   const sidebar = useRef<HTMLElement>(null);
+  const [mounted, setMounted] = useState(false);
 
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const stored = localStorage.getItem("sidebar-expanded");
@@ -55,10 +60,12 @@ const Sidebar = () => {
     }
   }, [sidebarExpanded]);
 
+  if (!mounted) return null;
+
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-slate-900 duration-300 ease-linear lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-neutral-800 duration-300 ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -66,19 +73,9 @@ const Sidebar = () => {
       <div className="flex items-center justify-between gap-2 px-6 py-6 lg:py-7">
         <div className="w-full">
           <Link href="/dashboard" className="flex items-center gap-1">
-            <svg
-              id="shopping-cart-alt"
-              className="fill-current w-9 h-9"
-              viewBox="0 0 23 23"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill="#7DD3FC"
-                d="M21.5,15a3,3,0,0,0-1.9-2.78l1.87-7a1,1,0,0,0-.18-.87A1,1,0,0,0,20.5,4H6.8L6.47,2.74A1,1,0,0,0,5.5,2h-2V4H4.73l2.48,9.26a1,1,0,0,0,1,.74H18.5a1,1,0,0,1,0,2H5.5a1,1,0,0,0,0,2H6.68a3,3,0,1,0,5.64,0h2.36a3,3,0,1,0,5.82,1,2.94,2.94,0,0,0-.4-1.47A3,3,0,0,0,21.5,15Zm-3.91-3H9L7.34,6H19.2ZM9.5,20a1,1,0,1,1,1-1A1,1,0,0,1,9.5,20Zm8,0a1,1,0,1,1,1-1A1,1,0,0,1,17.5,20Z"
-              ></path>
-            </svg>
-            <h1 className="text-2xl font-extrabold text-sky-300">Cala Raya</h1>
+            <h1 className="text-2xl font-extrabold text-slate-50">
+              Cala Raya 💌
+            </h1>
           </Link>
         </div>
 
@@ -123,7 +120,7 @@ const Sidebar = () => {
                     <React.Fragment>
                       <button
                         className={
-                          "group w-full relative flex items-center gap-3 rounded-sm py-2 px-4 font-medium text-slate-300 duration-200 ease-in-out hover:bg-slate-700"
+                          "group w-full relative flex items-center gap-3 rounded-sm py-2 px-4 font-medium text-slate-300 duration-200 ease-in-out hover:bg-neutral-700"
                         }
                         onClick={(e) => {
                           e.preventDefault();
@@ -213,7 +210,7 @@ const Sidebar = () => {
               </SidebarLinkGroup>
               {/* <!-- Menu Item Dashboard --> */}
 
-              {/* <!-- Menu Item Category --> */}
+              {/* <!-- Generate Messages --> */}
               <li>
                 <NavLink
                   url="dashboard"
@@ -234,36 +231,10 @@ const Sidebar = () => {
                       d="M3.71,16.29a1,1,0,0,0-.33-.21,1,1,0,0,0-.76,0,1,1,0,0,0-.33.21,1,1,0,0,0-.21.33,1,1,0,0,0,.21,1.09,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1,1,0,0,0,.21-1.09A1,1,0,0,0,3.71,16.29ZM7,8H21a1,1,0,0,0,0-2H7A1,1,0,0,0,7,8ZM3.71,11.29a1,1,0,0,0-1.09-.21,1.15,1.15,0,0,0-.33.21,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1,1,0,0,0,3.71,11.29ZM21,11H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2ZM3.71,6.29a1,1,0,0,0-.33-.21,1,1,0,0,0-1.09.21,1.15,1.15,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21,1,1,0,0,0,1.09-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1.15,1.15,0,0,0,3.71,6.29ZM21,16H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z"
                     ></path>
                   </svg>
-                  Category
+                  Generate Messages
                 </NavLink>
               </li>
-              {/* <!-- Menu Item Category --> */}
-
-              {/* <!-- Menu Item Product --> */}
-              <li>
-                <NavLink
-                  url="dashboard"
-                  href="dashboard"
-                  active={pathname === "/dashboard"}
-                >
-                  <svg
-                    className="-mt-1 fill-current"
-                    width="19"
-                    height="19"
-                    viewBox="0 0 22 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    id="box"
-                  >
-                    <path
-                      fill="#FAFAFF"
-                      d="M20.49,7.52a.19.19,0,0,1,0-.08.17.17,0,0,1,0-.07l0-.09-.06-.15,0,0h0l0,0,0,0a.48.48,0,0,0-.09-.11l-.09-.08h0l-.05,0,0,0L16.26,4.45h0l-3.72-2.3A.85.85,0,0,0,12.25,2h-.08a.82.82,0,0,0-.27,0h-.1a1.13,1.13,0,0,0-.33.13L4,6.78l-.09.07-.09.08L3.72,7l-.05.06,0,0-.06.15,0,.09v.06a.69.69,0,0,0,0,.2v8.73a1,1,0,0,0,.47.85l7.5,4.64h0l0,0,.15.06.08,0a.86.86,0,0,0,.52,0l.08,0,.15-.06,0,0h0L20,17.21a1,1,0,0,0,.47-.85V7.63S20.49,7.56,20.49,7.52ZM12,4.17l1.78,1.1L8.19,8.73,6.4,7.63Zm-1,15L5.5,15.81V9.42l5.5,3.4Zm1-8.11L10.09,9.91l5.59-3.47L17.6,7.63Zm6.5,4.72L13,19.2V12.82l5.5-3.4Z"
-                    ></path>
-                  </svg>
-                  Product
-                </NavLink>
-              </li>
-              {/* <!-- Menu Item Product --> */}
+              {/* <!-- Generate Messages --> */}
             </ul>
           </div>
         </nav>
