@@ -6,16 +6,10 @@ import { formatDate } from "@/utils/format-date";
 import { InvitationColumn } from "@/types/invitation-column";
 import { useMemo } from "react";
 
-// export interface InvitationColumn {
-//     id: number;
-//     event_title: string;
-//     event_date: string;
-//     theme: string;
-//     status: string;
-//   }
-
 const InvitationPage = () => {
   const { invitationAdminData: invitations } = useInvitationAdmin();
+
+  // console.log("invitations: ", invitations.);
 
   const formattedInvitations = useMemo<InvitationColumn[]>(() => {
     return invitations.map((item) => ({

@@ -1,6 +1,17 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 const GeneralLoading = () => {
+  const [isClient, setIsClient] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
   return (
-    <div className="fixed inset-0 bg-neutral-300 z-30 opacity-50 flex justify-center items-center ">
+    <div className="fixed inset-0 bg-transparent z-30 opacity-100 flex justify-center items-center ">
       <div
         className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
         role="status"

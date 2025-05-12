@@ -1,10 +1,10 @@
-import { AlertModal } from "@/Components/AlertModal";
+import { AlertModal } from "@/components/dashboard/AlertModal";
 import { Button } from "@/components/ui/button";
-import { DataTable } from "@/Components/ui/data-table";
-import { Heading } from "@/components/dashboard/Heading";
+import { DataTable } from "@/components/dashboard/DataTable";
+import Heading from "@/components/dashboard/Heading";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { columns } from "./columns";
 import { InvitationColumn } from "@/types/invitation-column";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
@@ -14,9 +14,11 @@ interface InvitationClientProps {
 }
 
 export const InvitationClient: React.FC<InvitationClientProps> = ({ data }) => {
-  const { loading, setLoading } = useInvitationAdmin();
-  const [ids, setIds] = useState<string[]>([""]);
+  const { loading } = useInvitationAdmin();
+  const [ids, setIds] = useState<number[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  console.log("ids: ", ids);
 
   // const handleDeleteIds = () => {
   //     setLoading(true);
@@ -38,11 +40,6 @@ export const InvitationClient: React.FC<InvitationClientProps> = ({ data }) => {
   //     );
   // };
 
-  const openDeleteModal = (ids: string[]) => {
-    setIds(ids);
-    setModalOpen(true);
-  };
-
   //   const handleCreateCategory = () => {
   //     setLoading(true);
   //     router.get(
@@ -54,6 +51,11 @@ export const InvitationClient: React.FC<InvitationClientProps> = ({ data }) => {
   //     );
   //   };
 
+  const openDeleteModal = (ids: number[]) => {
+    setIds(ids);
+    setModalOpen(true);
+  };
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -62,7 +64,7 @@ export const InvitationClient: React.FC<InvitationClientProps> = ({ data }) => {
           description="Manage your invitations"
         />
         <Button
-          //   onClick={handleCreateCategory}
+          onClick={() => alert("This feature is not available yet.")}
           variant="outline"
           className="dark:bg-slate-200"
         >
@@ -72,7 +74,7 @@ export const InvitationClient: React.FC<InvitationClientProps> = ({ data }) => {
       <AlertModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        // onConfirm={handleDeleteIds}
+        onConfirm={() => alert("This feature is not available yet.")}
         loading={loading}
         description="All data under this invitation will also be deleted."
       />
