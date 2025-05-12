@@ -1,11 +1,11 @@
 "use client";
 
-import { useInvitation } from "@/hooks/use-invitation";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownUser from "./DropdownUser";
+import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 
 const Header = () => {
-  const { sidebarOpen, setSidebarOpen } = useInvitation();
+  const { sidebarOpen, setSidebarOpen } = useInvitationAdmin();
 
   return (
     <header className="sticky top-0 z-40 flex w-full bg-slate-100 drop-shadow-sm dark:bg-neutral-950 dark:drop-shadow-neutral-700">

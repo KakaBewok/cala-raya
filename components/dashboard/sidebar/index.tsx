@@ -1,15 +1,15 @@
 "use client";
 
-import { useInvitation } from "@/hooks/use-invitation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import NavLink from "./NavLink";
 import SidebarLinkGroup from "./SidebarLinkGroup";
+import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 
 const Sidebar = () => {
   const pathname = usePathname();
-  const { sidebarOpen, setSidebarOpen } = useInvitation();
+  const { sidebarOpen, setSidebarOpen } = useInvitationAdmin();
   const trigger = useRef<HTMLButtonElement>(null);
   const sidebar = useRef<HTMLElement>(null);
   const [mounted, setMounted] = useState(false);

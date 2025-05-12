@@ -1,7 +1,6 @@
 "use client";
 
 import { TooltipHover } from "@/components/Tooltip";
-import { useInvitation } from "@/hooks/use-invitation";
 import UserImage from "@/public/assets/images/user.png";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
@@ -9,10 +8,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ClickOutside from "./ClickOutside";
 import { User } from "@/types/invitation-data";
+import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { setLoading } = useInvitation();
+  const { setLoading } = useInvitationAdmin();
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
