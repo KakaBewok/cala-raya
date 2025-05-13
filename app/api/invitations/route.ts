@@ -1,8 +1,8 @@
-import db from "@/configs/db-config";
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/configs/auth";
-import { NextResponse } from "next/server";
+import db from "@/configs/db-config";
 import logger from "@/lib/logger";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   const session = await getServerSession(authOptions);

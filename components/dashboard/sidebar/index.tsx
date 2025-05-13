@@ -1,11 +1,11 @@
 "use client";
 
+import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import NavLink from "./NavLink";
 import SidebarLinkGroup from "./SidebarLinkGroup";
-import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -213,28 +213,58 @@ const Sidebar = () => {
               {/* <!-- Invitations --> */}
               <li>
                 <NavLink
-                  url="dashboard/my-invitations"
-                  href="dashboard/my-invitations"
-                  active={pathname === "/dashboard/my-invitations"}
+                  url="/dashboard/my-invitations"
+                  active={pathname.startsWith("/dashboard/my-invitations")}
                 >
                   <svg
-                    className="-mt-1 fill-current"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 22 22"
-                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    id="list-ul"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-mails-icon lucide-mails"
                   >
-                    <path
-                      fill="#FAFAFF"
-                      d="M3.71,16.29a1,1,0,0,0-.33-.21,1,1,0,0,0-.76,0,1,1,0,0,0-.33.21,1,1,0,0,0-.21.33,1,1,0,0,0,.21,1.09,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1,1,0,0,0,.21-1.09A1,1,0,0,0,3.71,16.29ZM7,8H21a1,1,0,0,0,0-2H7A1,1,0,0,0,7,8ZM3.71,11.29a1,1,0,0,0-1.09-.21,1.15,1.15,0,0,0-.33.21,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1,1,0,0,0,3.71,11.29ZM21,11H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2ZM3.71,6.29a1,1,0,0,0-.33-.21,1,1,0,0,0-1.09.21,1.15,1.15,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21,1,1,0,0,0,1.09-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1.15,1.15,0,0,0,3.71,6.29ZM21,16H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z"
-                    ></path>
+                    <rect width="16" height="13" x="6" y="4" rx="2" />
+                    <path d="m22 7-7.1 3.78c-.57.3-1.23.3-1.8 0L6 7" />
+                    <path d="M2 8v11c0 1.1.9 2 2 2h14" />
                   </svg>
                   My Invitations
                 </NavLink>
               </li>
               {/* <!-- Invitations --> */}
+
+              {/* <!-- Share Invitations --> */}
+              <li>
+                <NavLink
+                  url="/dashboard/share-invitations"
+                  active={pathname.startsWith("/dashboard/share-invitations")}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-share2-icon lucide-share-2"
+                  >
+                    <circle cx="18" cy="5" r="3" />
+                    <circle cx="6" cy="12" r="3" />
+                    <circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+                    <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+                  </svg>
+                  Share Invitations
+                </NavLink>
+              </li>
+              {/* <!-- Share Invitations --> */}
             </ul>
           </div>
         </nav>

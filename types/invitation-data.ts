@@ -20,7 +20,7 @@ interface InvitationData {
   message: string;
   // relationships
   user?: User;
-  theme?: Theme;
+  themes?: Theme;
   music?: Music;
   videos?: Video[];
   images?: Image[];

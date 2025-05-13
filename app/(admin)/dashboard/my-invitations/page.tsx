@@ -1,22 +1,20 @@
 "use client";
 
-import { InvitationClient } from "./components/client";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
-import { formatDate } from "@/utils/format-date";
 import { InvitationColumn } from "@/types/invitation-column";
+import { formatDate } from "@/utils/format-date";
 import { useMemo } from "react";
+import { InvitationClient } from "./components/client";
 
 const InvitationPage = () => {
   const { invitationAdminData: invitations } = useInvitationAdmin();
-
-  // console.log("invitations: ", invitations.);
 
   const formattedInvitations = useMemo<InvitationColumn[]>(() => {
     return invitations.map((item) => ({
       id: item.id,
       event_title: item.event_title,
       event_date: formatDate(item.event_date) ?? "-",
-      theme: item.theme?.name ?? "-",
+      theme: item.themes?.name ?? "-",
       status: item.activated_at ? "Active" : "Inactive",
     }));
   }, [invitations]);
