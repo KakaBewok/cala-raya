@@ -2,21 +2,21 @@
 
 import Header from "@/components/dashboard/header/index";
 import Sidebar from "@/components/dashboard/sidebar/index";
-import Loading from "@/components/Loading";
-import { useInvitation } from "@/hooks/use-invitation";
+import GeneralLoading from "@/components/GeneralLoading";
+import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import React, { ReactNode } from "react";
 
 const AuthenticatedLayout: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const { loading } = useInvitation();
+  const { loading } = useInvitationAdmin();
 
   return (
     <div
       className="text-slate-800 bg-gradient-to-tl from-blue-200 via-purple-100 to-green-100
          dark:text-slate-100 dark:bg-gradient-to-br dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-800"
     >
-      {loading && <Loading />}
+      {loading && <GeneralLoading />}
       <div className="flex h-screen overflow-hidden">
         <Sidebar />
 

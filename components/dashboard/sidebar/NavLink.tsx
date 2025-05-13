@@ -1,4 +1,4 @@
-import { useInvitation } from "@/hooks/use-invitation";
+import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -17,7 +17,7 @@ export default function NavLink({
   ...props
 }: NavLinkProps) {
   const router = useRouter();
-  const { setLoading } = useInvitation();
+  const { setLoading } = useInvitationAdmin();
 
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
