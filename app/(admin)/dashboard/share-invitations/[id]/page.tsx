@@ -4,7 +4,7 @@ import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
-import { InvitationClient } from "./components/client";
+import { GuestClient } from "./components/client";
 
 const ShareInvitationPage = () => {
   const params = useParams();
@@ -28,7 +28,7 @@ const ShareInvitationPage = () => {
   return (
     <>
       <div className="p-2 pt-6 space-y-7">
-        <InvitationClient
+        <GuestClient
           guestData={formattedGuests}
           selectedInvitation={selectedInvitation}
         />

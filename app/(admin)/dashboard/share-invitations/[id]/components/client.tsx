@@ -16,7 +16,7 @@ interface GuestClientProps {
   guestData: GuestColumn[];
   selectedInvitation?: InvitationData;
 }
-export const InvitationClient: React.FC<GuestClientProps> = ({
+export const GuestClient: React.FC<GuestClientProps> = ({
   guestData,
   selectedInvitation,
 }) => {
@@ -76,7 +76,7 @@ export const InvitationClient: React.FC<GuestClientProps> = ({
                 : ""
             }`}
           />
-          {invitations.length > 1 && <ChangeInvitationButton />}
+          {invitations.length > 0 && <ChangeInvitationButton />}
         </div>
         <Button
           onClick={() => alert("This feature is not available yet.")}
