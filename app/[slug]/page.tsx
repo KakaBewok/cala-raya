@@ -82,7 +82,7 @@ export default function InvitationPage() {
     setGuest(guestData || null);
   }, [invitationData, guestId, setGuest]);
 
-  const themeName = invitationData?.theme?.name as ThemeName;
+  const themeName = invitationData?.themes?.name as ThemeName;
   const ThemeComponent = themeMap[themeName] ?? themeMap.netflix;
 
   if (loading)
