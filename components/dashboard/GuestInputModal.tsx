@@ -79,6 +79,7 @@ export const GuestInputModal: React.FC<GuestInputModalProps> = ({
     >
       <div className="space-y-4">
         <div>
+          <InputError message={errorMessage} className="mb-2" />
           <div className="flex gap-2">
             <Input
               placeholder="Enter guest name"
@@ -91,18 +92,15 @@ export const GuestInputModal: React.FC<GuestInputModalProps> = ({
               <Plus className="h-4 w-4" />
             </Button>
           </div>
+
           {guestList.length > 0 && (
-            <Button
-              size="sm"
-              variant="destructive"
+            <span
               onClick={() => setGuestList([])}
-              className="text-xs my-2"
+              className="text-red-600 underline text-xs cursor-pointer mt-2 font-normal"
             >
               Clear All
-            </Button>
+            </span>
           )}
-
-          <InputError message={errorMessage} />
         </div>
 
         <div className="flex flex-wrap gap-2">

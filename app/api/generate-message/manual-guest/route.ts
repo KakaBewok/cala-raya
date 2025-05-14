@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   const body: RequestBody = await req.json();
 
   if (!Array.isArray(body.guests) || !body.invitationId) {
-    return NextResponse.json({ error: "Invalid data format" }, { status: 400 });
+    return NextResponse.json({ error: "Invalid data" }, { status: 400 });
   }
 
   const guests = body.guests.map((name) => ({
@@ -29,9 +29,9 @@ export async function POST(req: Request) {
 
   if (error) {
     logger.error({ error_message: error.message });
-    console.error("Insert error:", error);
+    console.error("Insert guest data error: ", error);
     return NextResponse.json(
-      { error: "Failed saveing guests" },
+      { error: "Failed saving guests" },
       { status: 500 }
     );
   }
