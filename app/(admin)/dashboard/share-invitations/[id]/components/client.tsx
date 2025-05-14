@@ -13,7 +13,7 @@ import { Plus, Upload } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import ChangeInvitationButton from "./ChangeInvitationButton";
-import { columns } from "./Columns";
+import { columns } from "./columns";
 
 interface GuestClientProps {
   guestData: GuestColumn[];
