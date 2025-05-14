@@ -4,15 +4,7 @@ import { Button } from "@/components/ui/button";
 import { GuestColumn } from "@/types/guest-column";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { CellAction } from "./cell-action";
-
-// export interface GuestColumn {
-//   id: number;
-//   name: string;
-//   phone_number?: string;
-//   address?: string;
-//   notes?: string;
-// }
+import { CellAction } from "./CellAction";
 
 export const columns: ColumnDef<GuestColumn>[] = [
   {

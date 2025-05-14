@@ -4,7 +4,7 @@ import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
-import { GuestClient } from "./components/client";
+import { GuestClient } from "./components/Client";
 
 const ShareInvitationPage = () => {
   const params = useParams();

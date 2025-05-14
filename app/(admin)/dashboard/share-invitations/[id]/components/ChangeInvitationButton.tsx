@@ -11,7 +11,10 @@ export default function ChangeInvitationButton() {
   };
 
   return (
-    <button onClick={handleClick} className="text-blue-600 underline text-sm">
+    <button
+      onClick={handleClick}
+      className="text-blue-600 underline text-xs md:text-sm cursor-pointer"
+    >
       Change Invitation
     </button>
   );
