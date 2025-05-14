@@ -2,6 +2,7 @@
 
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
+import { Guest } from "@/types/invitation-data";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
 import { GuestClient } from "./components/Client";
@@ -16,7 +17,13 @@ const ShareInvitationPage = () => {
   );
 
   const formattedGuests = useMemo<GuestColumn[]>(() => {
-    return (selectedInvitation?.guests ?? []).map((item) => ({
+    const sortedGuests = selectedInvitation?.guests?.sort(
+      (a: Guest, b: Guest) => {
+        return b.id - a.id;
+      }
+    );
+
+    return (sortedGuests ?? []).map((item) => ({
       id: item.id,
       name: item.name,
       phone_number: item.phone_number ?? "-",
