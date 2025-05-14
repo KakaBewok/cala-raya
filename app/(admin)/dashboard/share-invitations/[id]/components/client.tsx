@@ -2,15 +2,18 @@ import { AlertModal } from "@/components/dashboard/AlertModal";
 import { DataTable } from "@/components/dashboard/DataTable";
 import Heading from "@/components/dashboard/Heading";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Upload } from "lucide-react";
 import { useState } from "react";
 // import { toast } from "react-toastify";
+import { ExcelUploadModal } from "@/components/dashboard/ExcelUploadModal";
+import { GuestInputModal } from "@/components/dashboard/GuestInputModal";
+import { TooltipHover } from "@/components/Tooltip";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
 import InvitationData from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
 import ChangeInvitationButton from "./ChangeInvitationButton";
-import { columns } from "./columns";
+import { columns } from "./Columns";
 
 interface GuestClientProps {
   guestData: GuestColumn[];
@@ -22,7 +25,11 @@ export const GuestClient: React.FC<GuestClientProps> = ({
 }) => {
   const { loading, invitationAdminData: invitations } = useInvitationAdmin();
   const [ids, setIds] = useState<number[]>([]);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [alertModalOpen, setAlertModalOpen] = useState<boolean>(false);
+  const [guestInputModalOpen, setGuestInputModalOpen] =
+    useState<boolean>(false);
+  const [excelUploadModalOpen, setExcelUploadModalOpen] =
+    useState<boolean>(false);
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
 
@@ -61,13 +68,13 @@ export const GuestClient: React.FC<GuestClientProps> = ({
 
   const openDeleteModal = (ids: number[]) => {
     setIds(ids);
-    setModalOpen(true);
+    setAlertModalOpen(true);
   };
 
   return (
     <>
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
           <Heading
             title={`Guests List (${guestData?.length ?? 0})`}
             description={`${bridesAndGrooms} - ${
@@ -76,23 +83,48 @@ export const GuestClient: React.FC<GuestClientProps> = ({
                 : ""
             }`}
           />
-          {invitations.length > 0 && <ChangeInvitationButton />}
+          {invitations.length > 1 && <ChangeInvitationButton />}
         </div>
-        <Button
-          onClick={() => alert("This feature is not available yet.")}
-          variant="outline"
-          className="dark:bg-slate-200"
-        >
-          <Plus className="w-4 h-4 dark:text-slate-900" />
-        </Button>
+        <div className="flex items-center gap-2">
+          <TooltipHover message="Upload Guests List">
+            <Button
+              onClick={() => setExcelUploadModalOpen(true)}
+              variant="outline"
+              className="dark:bg-slate-200 cursor-pointer"
+            >
+              <Upload className="w-4 h-4 dark:text-slate-900" />
+            </Button>
+          </TooltipHover>
+          <TooltipHover message="Input Guests Manually">
+            <Button
+              onClick={() => setGuestInputModalOpen(true)}
+              variant="outline"
+              className="dark:bg-slate-200 cursor-pointer"
+            >
+              <Plus className="w-4 h-4 dark:text-slate-900" />
+            </Button>
+          </TooltipHover>
+        </div>
       </div>
 
       <AlertModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
+        isOpen={alertModalOpen}
+        onClose={() => setAlertModalOpen(false)}
         onConfirm={() => alert("This feature is not available yet.")}
         loading={loading}
         description="All data under this guests will also be deleted."
+      />
+      <GuestInputModal
+        isOpen={guestInputModalOpen}
+        onClose={() => setGuestInputModalOpen(false)}
+        onSubmit={() => alert("This feature is not available yet.")}
+        loading={loading}
+      />
+      <ExcelUploadModal
+        isOpen={excelUploadModalOpen}
+        onClose={() => setExcelUploadModalOpen(false)}
+        onUpload={() => alert("This feature is not available yet.")}
+        loading={loading}
       />
       <DataTable
         onDelete={openDeleteModal}
