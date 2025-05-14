@@ -9,11 +9,12 @@ import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
 import InvitationData from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
-import { Plus, Upload } from "lucide-react";
+import { Plus, SquarePen, Upload } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import ChangeInvitationButton from "./ChangeInvitationButton";
 import { columns } from "./columns";
+import { EditMessageModal } from "@/components/dashboard/EditMessageModal";
 
 interface GuestClientProps {
   guestData: GuestColumn[];
@@ -35,6 +36,8 @@ export const GuestClient: React.FC<GuestClientProps> = ({
   const [guestInputModalOpen, setGuestInputModalOpen] =
     useState<boolean>(false);
   const [excelUploadModalOpen, setExcelUploadModalOpen] =
+    useState<boolean>(false);
+  const [editMessageModalOpen, setEditMessageModalOpen] =
     useState<boolean>(false);
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
@@ -98,6 +101,30 @@ export const GuestClient: React.FC<GuestClientProps> = ({
     }
   };
 
+  // const handleSaveTemplate = async (template: string) => {
+  //   if (!invitation?.id) {
+  //     toast.error("Invitation ID tidak ditemukan.");
+  //     return;
+  //   }
+
+  //   const { error } = await supabase
+  //     .from("invitations")
+  //     .update({ message_template: template })
+  //     .eq("id", invitation.id);
+
+  //   if (error) {
+  //     toast.error("Gagal menyimpan template. Silakan coba lagi.");
+  //     console.error("Save error:", error);
+  //     return;
+  //   }
+
+  //   toast.success("Template berhasil disimpan!");
+  //   setEditMessageModalOpen(false);
+
+  //   // Refresh data invitation jika perlu
+  //   await fetchInvitation(); // atau router.refresh(), tergantung implementasi kamu
+  // };
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -112,25 +139,34 @@ export const GuestClient: React.FC<GuestClientProps> = ({
           />
           {invitations.length > 1 && <ChangeInvitationButton />}
         </div>
-        <div className="flex items-center gap-2">
-          <TooltipHover message="Upload Guests List">
-            <Button
-              onClick={() => setExcelUploadModalOpen(true)}
-              variant="outline"
-              className="dark:bg-slate-200 cursor-pointer"
-            >
-              <Upload className="w-4 h-4 dark:text-slate-900" />
-            </Button>
-          </TooltipHover>
-          <TooltipHover message="Input Guests">
-            <Button
-              onClick={() => setGuestInputModalOpen(true)}
-              variant="outline"
-              className="dark:bg-slate-200 cursor-pointer"
-            >
-              <Plus className="w-4 h-4 dark:text-slate-900" />
-            </Button>
-          </TooltipHover>
+        <div className="flex flex-col md:flex-row items-center md:items-center gap-2">
+          <div className="flex items-center gap-2">
+            <TooltipHover message="Upload Guests List">
+              <Button
+                onClick={() => setExcelUploadModalOpen(true)}
+                variant="outline"
+                className="dark:bg-slate-200 cursor-pointer"
+              >
+                <Upload className="w-4 h-4 dark:text-slate-900" />
+              </Button>
+            </TooltipHover>
+            <TooltipHover message="Input Guests">
+              <Button
+                onClick={() => setGuestInputModalOpen(true)}
+                variant="outline"
+                className="dark:bg-slate-200 cursor-pointer"
+              >
+                <Plus className="w-4 h-4 dark:text-slate-900" />
+              </Button>
+            </TooltipHover>
+          </div>
+          <Button
+            onClick={() => setEditMessageModalOpen(true)}
+            className="dark:bg-green-600 dark:hover:bg-green-500 cursor-pointer bg-green-600 hover:bg-green-500 text-white "
+          >
+            <span className="text-xs md:text-sm">Message</span>
+            <SquarePen className="w-4 h-4 dark:text-slate-50" />
+          </Button>
         </div>
       </div>
 
@@ -140,6 +176,13 @@ export const GuestClient: React.FC<GuestClientProps> = ({
         onConfirm={() => alert("This feature is not available yet.")}
         loading={loading}
         description="All data under this guests will also be deleted."
+      />
+      <EditMessageModal
+        isOpen={editMessageModalOpen}
+        onClose={() => setEditMessageModalOpen(false)}
+        onSubmit={() => alert("This feature is not available yet.")}
+        initialTemplate={""}
+        loading={loading}
       />
       <GuestInputModal
         isOpen={guestInputModalOpen}
