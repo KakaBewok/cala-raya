@@ -1,31 +1,41 @@
 "use client";
 
+import GeneralLoading from "@/components/GeneralLoading";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { useSelectedInvitation } from "@/hooks/use-selected-invitation";
 import { formatDate } from "@/utils/format-date";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function SelectInvitationGrid() {
-  const { invitationAdminData: invitations, setLoading } = useInvitationAdmin();
+  const { invitationAdminData: invitations } = useInvitationAdmin();
   const { getInvitationId, setInvitationId } = useSelectedInvitation();
+  const [shouldRender, setShouldRender] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
-    setLoading(true);
     if (invitations.length === 1) {
       const firstInvitation = invitations[0];
       router.replace(`/dashboard/share-invitations/${firstInvitation.id}`);
-    } else if (invitations.length > 1) {
+      return;
+    }
+
+    if (invitations.length > 1) {
       const id = getInvitationId();
       if (id) {
         router.replace(`/dashboard/share-invitations/${id}`);
+        return;
       }
     }
-    setLoading(false);
-  }, []);
+
+    setShouldRender(true);
+  }, [getInvitationId, invitations, router]);
+
+  if (!shouldRender) {
+    return <GeneralLoading />;
+  }
 
   if (invitations.length === 0 || invitations === null) {
     return (

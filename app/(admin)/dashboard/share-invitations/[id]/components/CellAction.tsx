@@ -1,7 +1,6 @@
 import { AlertModal } from "@/components/dashboard/AlertModal";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-// import { toast } from "react-toastify";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
 

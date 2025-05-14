@@ -19,6 +19,7 @@ interface GuestClientProps {
   guestData: GuestColumn[];
   selectedInvitation?: InvitationData;
 }
+
 export const GuestClient: React.FC<GuestClientProps> = ({
   guestData,
   selectedInvitation,
@@ -121,7 +122,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
               <Upload className="w-4 h-4 dark:text-slate-900" />
             </Button>
           </TooltipHover>
-          <TooltipHover message="Input Guests Manually">
+          <TooltipHover message="Input Guests">
             <Button
               onClick={() => setGuestInputModalOpen(true)}
               variant="outline"
