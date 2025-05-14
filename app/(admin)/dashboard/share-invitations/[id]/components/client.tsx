@@ -32,7 +32,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
 
-  console.log("ids: ", ids);
+  console.log("testids: ", ids);
 
   // const handleDeleteIds = () => {
   //     setLoading(true);
