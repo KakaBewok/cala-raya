@@ -5,7 +5,7 @@ import { GuestColumn } from "@/types/guest-column";
 import { Guest } from "@/types/invitation-data";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
-import { GuestClient } from "./components/Client";
+import { GuestClient } from "./components/client";
 
 const ShareInvitationPage = () => {
   const params = useParams();
