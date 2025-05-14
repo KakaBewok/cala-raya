@@ -1,18 +1,28 @@
+import { authOptions } from "@/configs/auth";
 import db from "@/configs/db-config";
-import { NextResponse } from "next/server";
 import logger from "@/lib/logger";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
+
+interface RequestBody {
+  guests: string[];
+  invitationId: number;
+}
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  const session = await getServerSession(authOptions);
+  if (!session)
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  if (!Array.isArray(body)) {
+  const body: RequestBody = await req.json();
+
+  if (!Array.isArray(body.guests) || !body.invitationId) {
     return NextResponse.json({ error: "Invalid data format" }, { status: 400 });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const guests = body.map((guest: any) => ({
-    name: guest.name,
-    invitation_id: guest.invitationId,
+  const guests = body.guests.map((name) => ({
+    name,
+    invitation_id: body.invitationId,
   }));
 
   const { data, error } = await db.from("guests").insert(guests);

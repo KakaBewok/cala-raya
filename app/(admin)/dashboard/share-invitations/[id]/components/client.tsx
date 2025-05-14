@@ -11,6 +11,7 @@ import InvitationData from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
 import { Plus, Upload } from "lucide-react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import ChangeInvitationButton from "./ChangeInvitationButton";
 import { columns } from "./Columns";
 
@@ -22,7 +23,12 @@ export const GuestClient: React.FC<GuestClientProps> = ({
   guestData,
   selectedInvitation,
 }) => {
-  const { loading, invitationAdminData: invitations } = useInvitationAdmin();
+  const {
+    loading,
+    setLoading,
+    invitationAdminData: invitations,
+    refetchInvitations,
+  } = useInvitationAdmin();
   const [ids, setIds] = useState<number[]>([]);
   const [alertModalOpen, setAlertModalOpen] = useState<boolean>(false);
   const [guestInputModalOpen, setGuestInputModalOpen] =
@@ -54,20 +60,41 @@ export const GuestClient: React.FC<GuestClientProps> = ({
   //     );
   // };
 
-  //   const handleCreateCategory = () => {
-  //     setLoading(true);
-  //     router.get(
-  //       route("admin.category.create"),
-  //       {},
-  //       {
-  //         onFinish: () => setLoading(false),
-  //       }
-  //     );
-  //   };
-
   const openDeleteModal = (ids: number[]) => {
     setIds(ids);
     setAlertModalOpen(true);
+  };
+
+  const submitGuestInput = async (guestNames: string[]) => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/generate-message/manual-guest", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          guests: guestNames,
+          invitationId: selectedInvitation?.id,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to add guests");
+
+      refetchInvitations();
+      setGuestInputModalOpen(false);
+
+      toast.success("Guests added successfully", {
+        position: "top-center",
+      });
+    } catch (err) {
+      toast.error("Failed to add guest", {
+        position: "top-center",
+      });
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -116,7 +143,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       <GuestInputModal
         isOpen={guestInputModalOpen}
         onClose={() => setGuestInputModalOpen(false)}
-        onSubmit={() => alert("This feature is not available yet.")}
+        onSubmit={submitGuestInput}
         loading={loading}
       />
       <ExcelUploadModal
