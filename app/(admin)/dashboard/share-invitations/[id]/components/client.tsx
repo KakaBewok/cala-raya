@@ -106,29 +106,36 @@ export const GuestClient: React.FC<GuestClientProps> = ({
     }
   };
 
-  // const handleSaveTemplate = async (template: string) => {
-  //   if (!invitation?.id) {
-  //     toast.error("Invitation ID tidak ditemukan.");
-  //     return;
-  //   }
+  const handleSaveTemplate = async (template: string) => {
+    if (!selectedInvitation?.id) {
+      toast.error("Invitation ID not found!");
+      return;
+    }
 
-  //   const { error } = await supabase
-  //     .from("invitations")
-  //     .update({ message_template: template })
-  //     .eq("id", invitation.id);
+    try {
+      setLoading(true);
+      const res = await fetch("/api/template-message", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          invitationId: selectedInvitation?.id,
+          template,
+        }),
+      });
 
-  //   if (error) {
-  //     toast.error("Gagal menyimpan template. Silakan coba lagi.");
-  //     console.error("Save error:", error);
-  //     return;
-  //   }
+      if (!res.ok) throw new Error("Failed to save template");
 
-  //   toast.success("Template berhasil disimpan!");
-  //   setEditMessageModalOpen(false);
+      refetchInvitations();
 
-  //   // Refresh data invitation jika perlu
-  //   await fetchInvitation(); // atau router.refresh(), tergantung implementasi kamu
-  // };
+      toast.success("Template updated successfully!");
+      setEditMessageModalOpen(false);
+    } catch (err) {
+      console.error("Save template error: ", err);
+      toast.error("Failed to save template. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -183,8 +190,8 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       <EditMessageModal
         isOpen={editMessageModalOpen}
         onClose={() => setEditMessageModalOpen(false)}
-        onSubmit={() => alert("This feature is not available yet.")}
-        initialTemplate={""}
+        onSubmit={handleSaveTemplate}
+        initialTemplate={selectedInvitation?.message_template || ""}
         loading={loading}
       />
       <GuestInputModal
