@@ -127,7 +127,7 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
         {!isPreviewText && (
           <div>
             <textarea
-              className="w-full p-3 h-60 text-xs md:text-sm border border-neutral-400 bg-yellow-100 rounded-sm"
+              className="w-full p-3 h-60 text-xs md:text-sm border border-neutral-400 bg-sky-100 rounded-sm"
               value={template}
               onChange={(e) => setTemplate(e.target.value)}
               placeholder="Write a message template..."
@@ -182,7 +182,7 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
             <span className="block font-semibold mb-1 text-neutral-700 dark:text-white">
               Preview
             </span>
-            <div className="bg-neutral-200 h-80 overflow-y-auto border border-neutral-400 p-3 rounded-sm">
+            <div className="bg-sky-100 h-80 overflow-y-auto border border-neutral-400 p-3 rounded-sm">
               <p>{previewText}</p>
             </div>
           </div>

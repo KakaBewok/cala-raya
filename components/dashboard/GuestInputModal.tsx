@@ -73,7 +73,9 @@ export const GuestInputModal: React.FC<GuestInputModalProps> = ({
   return (
     <CustomModal
       title="Add Guests"
-      description="Add guest names manually."
+      description={`${
+        guestList.length > 0 ? `${guestList.length} Guest(s) will be added` : ""
+      }`}
       isOpen={isOpen}
       onClose={onClose}
     >
