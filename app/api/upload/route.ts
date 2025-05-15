@@ -18,7 +18,7 @@ interface UploadResponse {
   detail?: string;
 }
 
-export default async function POST(
+export async function POST(
   req: NextApiRequest,
   res: NextApiResponse<UploadResponse>
 ) {
