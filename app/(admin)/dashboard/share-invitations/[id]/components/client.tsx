@@ -1,5 +1,6 @@
 import { AlertModal } from "@/components/dashboard/AlertModal";
 import { DataTable } from "@/components/dashboard/DataTable";
+import { EditMessageModal } from "@/components/dashboard/EditMessageModal";
 import { ExcelUploadModal } from "@/components/dashboard/ExcelUploadModal";
 import { GuestInputModal } from "@/components/dashboard/GuestInputModal";
 import Heading from "@/components/dashboard/Heading";
@@ -13,8 +14,7 @@ import { Plus, SquarePen, Upload } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import ChangeInvitationButton from "./ChangeInvitationButton";
-import { columns } from "./columns";
-import { EditMessageModal } from "@/components/dashboard/EditMessageModal";
+import { columns } from "./Columns";
 
 interface GuestClientProps {
   guestData: GuestColumn[];
@@ -41,6 +41,11 @@ export const GuestClient: React.FC<GuestClientProps> = ({
     useState<boolean>(false);
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
+  const description = `${bridesAndGrooms} - ${
+    selectedInvitation?.event_date
+      ? formatDate(selectedInvitation.event_date)
+      : ""
+  }`;
 
   console.log("testids: ", ids);
 
@@ -131,10 +136,8 @@ export const GuestClient: React.FC<GuestClientProps> = ({
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
           <Heading
             title={`Guests List (${guestData?.length ?? 0})`}
-            description={`${bridesAndGrooms} - ${
-              selectedInvitation?.event_date
-                ? formatDate(selectedInvitation.event_date)
-                : ""
+            description={`${
+              selectedInvitation ? `${description}` : "Loading..."
             }`}
           />
           {invitations.length > 1 && <ChangeInvitationButton />}
