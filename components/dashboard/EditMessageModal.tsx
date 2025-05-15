@@ -106,7 +106,7 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
 
   const handleSubmit = () => {
     if (!template.includes("{guest_name}") || !template.includes("{url}")) {
-      setErrorMessage("Template harus mengandung tag {guest_name} dan {url}");
+      setErrorMessage("Template must contain tags {guest_name} and {url}");
       return;
     }
 
