@@ -1,13 +1,13 @@
 "use client";
 
+import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import UserImage from "@/public/assets/images/user.png";
+import { User } from "@/types/invitation-data";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ClickOutside from "./ClickOutside";
-import { User } from "@/types/invitation-data";
-import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -49,7 +49,7 @@ const DropdownUser = () => {
               {user?.name}
             </span>
             <span className="block text-sm text-slate-500 dark:text-slate-400">
-              {user?.email}
+              {user?.email ?? "Loading..."}
             </span>
           </span>
 

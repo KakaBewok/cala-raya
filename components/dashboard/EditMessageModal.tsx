@@ -1,9 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import InputError from "@/components/dashboard/InputError";
 import { CustomModal } from "@/components/dashboard/CustomModal";
+import InputError from "@/components/dashboard/InputError";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+
+interface SampleData {
+  guest_name: string;
+  event_title: string;
+  event_date: string;
+  start_time: string;
+  end_time: string;
+  time_zone: string;
+  location: string;
+  url: string;
+}
 
 interface EditMessageModalProps {
   isOpen: boolean;
@@ -12,16 +23,7 @@ interface EditMessageModalProps {
   initialTemplate?: string;
   loading: boolean;
   defaultTemplate?: string;
-  sampleData?: {
-    guest_name: string;
-    event_title: string;
-    event_date: string;
-    start_time: string;
-    end_time: string;
-    time_zone: string;
-    location: string;
-    url: string;
-  };
+  sampleData?: SampleData;
 }
 
 export const EditMessageModal: React.FC<EditMessageModalProps> = ({
@@ -51,14 +53,14 @@ Dengan segala kerendahan hati, kami mengundang Bapak/Ibu/Saudara/i dan teman-tem
 
 Pada:
 🗓️ Tanggal  : {event_date}
-🕛 Pukul    : {start_time} {time_zone} s/d {end_time}
+🕛 Pukul    : {start_time} {time_zone} s/d {end_time} {time_zone}
 📍 Lokasi   : {location}
 
 Undangan lengkap bisa diakses di link berikut:
 {url}
 
 Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir di acara kami
-Mohon maaf perihal undangan hanya dibagikan melalui pesan ini
+Mohon maaf perihal undangan hanya dibagikan melalui pesan ini.
 
 Terima kasih banyak atas perhatiannya 💕`.trim(),
 }) => {
@@ -76,6 +78,7 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
     if (isOpen) {
       setTemplate(initialTemplate || defaultTemplate);
       setPreviewText("");
+      setIsPreviewText(false);
     }
   }, [isOpen, initialTemplate, defaultTemplate]);
 
@@ -114,7 +117,7 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
   return (
     <CustomModal
       title="Edit Template"
-      description="Your words, your vibe - edit away!"
+      description="Give your invite a personal touch!"
       isOpen={isOpen}
       onClose={onClose}
     >
@@ -124,17 +127,17 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
         {!isPreviewText && (
           <div>
             <textarea
-              className="w-full border p-3 h-60 text-xs md:text-sm"
+              className="w-full p-3 h-60 text-xs md:text-sm border border-neutral-400 bg-yellow-100 rounded-sm"
               value={template}
               onChange={(e) => setTemplate(e.target.value)}
               placeholder="Write a message template..."
               disabled={loading}
             />
-            <p className="text-xs text-gray-500 mt-2">
-              <span className="font-semibold text-neutral-700 dark:text-white">
+            <p className="text-xs text-neutral-900 mt-2">
+              <span className="font-bold text-neutral-700 dark:text-white">
                 Use tags
-              </span>
-              : <code>{"{guest_name}"}</code>, <code>{"{event_title}"}</code>,{" "}
+              </span>{" "}
+              <code>{"{guest_name}"}</code>, <code>{"{event_title}"}</code>,{" "}
               <code>{"{event_date}"}</code>, <code>{"{start_time}"}</code>,{" "}
               <code>{"{time_zone}"}</code>, <code>{"{end_time}"}</code>,{" "}
               <code>{"{location}"}</code>, <code>{"{url}"}</code>
@@ -145,7 +148,8 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
         <div>
           {isPreviewText ? (
             <Button
-              variant="outline"
+              className="bg-green-500 hover:bg-green-600 text-white dark:bg-green-500 dark:hover:bg-green-600 cursor-pointer"
+              size={"sm"}
               onClick={() => setIsPreviewText(false)}
               disabled={loading}
             >
@@ -154,39 +158,51 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
           ) : (
             <div className="flex flex-wrap gap-2">
               <Button
-                variant="outline"
+                size={"sm"}
+                className="bg-sky-600 hover:bg-sky-700 text-white dark:bg-sky-600 dark:hover:bg-sky-700 cursor-pointer"
                 onClick={handlePreview}
                 disabled={loading}
               >
                 Preview
               </Button>
-              <Button variant="ghost" onClick={handleReset} disabled={loading}>
-                Reset ke Default
+              <Button
+                size={"sm"}
+                className="bg-red-200 hover:bg-red-200 text-red-600 dark:bg-red-200 dark:hover:bg-red-200 cursor-pointer"
+                onClick={handleReset}
+                disabled={loading}
+              >
+                Reset to Default
               </Button>
             </div>
           )}
-          {/* <Button variant="ghost" onClick={handleReset} disabled={loading}>
-            Reset ke Default
-          </Button> */}
         </div>
 
         {isPreviewText && (
-          <div className="p-3 border text-sm bg-muted rounded whitespace-pre-wrap">
-            <span className="block font-semibold mb-1 text-gray-700">
-              Hasil Preview:
+          <div className="text-sm bg-muted rounded whitespace-pre-wrap w-full">
+            <span className="block font-semibold mb-1 text-neutral-700 dark:text-white">
+              Preview
             </span>
-            <div className="h-80 overflow-y-auto">
+            <div className="bg-neutral-200 h-80 overflow-y-auto border border-neutral-400 p-3 rounded-sm">
               <p>{previewText}</p>
             </div>
           </div>
         )}
 
         <div className="pt-4 flex justify-end gap-3">
-          <Button variant="outline" onClick={onClose} disabled={loading}>
-            Batal
+          <Button
+            variant="outline"
+            onClick={onClose}
+            disabled={loading}
+            className="cursor-pointer"
+          >
+            Cancel
           </Button>
-          <Button onClick={handleSubmit} disabled={loading}>
-            Simpan
+          <Button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="cursor-pointer"
+          >
+            Save
           </Button>
         </div>
       </div>
