@@ -1,14 +1,29 @@
+"use client";
+
 import { AlertModal } from "@/components/dashboard/AlertModal";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
+import { CheckIcon, CopyIcon, MessageCircle } from "lucide-react";
+import { useParams } from "next/navigation";
+import { encode } from "@/utils/hash";
+import { formatTime } from "@/utils/format-time";
+import { formatDate } from "@/utils/format-date";
 
 export const CellAction = ({ data }: { data: GuestColumn }) => {
-  const { loading } = useInvitationAdmin();
+  const params = useParams();
+  const id = params.id as string;
+  const { loading, invitationAdminData: invitations } = useInvitationAdmin();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
+  const [isShare, setIsShare] = useState<boolean>(false);
 
-  console.log(data.name);
+  console.log(data.id);
+
+  const selectedInvitation = invitations.find(
+    (invitation) => invitation.id === Number(id)
+  );
 
   //   const handleDeleteId = (e?: React.MouseEvent<HTMLButtonElement>) => {
   //     e?.stopPropagation();
@@ -59,6 +74,57 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
   //     setModalOpen(true);
   //   };
 
+  //
+
+  const generateUrl = () => {
+    if (!selectedInvitation?.id || !data.id) return null;
+    const token = encode([selectedInvitation?.id, data.id]);
+    return `${selectedInvitation?.web_url}/${selectedInvitation?.slug}?id=${token}`;
+  };
+
+  const generateMessage = () => {
+    const url = generateUrl();
+    const templateMessage =
+      selectedInvitation?.message_template ||
+      "Please create a message template";
+
+    const rundown = selectedInvitation?.rundowns?.[0];
+
+    return templateMessage
+      .replace("{guest_name}", data.name)
+      .replace("{event_title}", selectedInvitation?.event_title ?? "-")
+      .replace(
+        "{event_date}",
+        formatDate(selectedInvitation?.event_date ?? "") ?? "-"
+      )
+      .replace("{start_time}", formatTime(rundown?.start_time ?? "") ?? "-")
+      .replace("{time_zone}", rundown?.time_zone ?? "-")
+      .replace("{end_time}", formatTime(rundown?.end_time ?? "") ?? "-")
+      .replace("{location}", selectedInvitation?.location ?? "-")
+      .replace("{url}", url ?? "-");
+  };
+
+  const handleShareWA = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    const message = generateMessage();
+    const phone = selectedInvitation?.phone_number.replace(/^0/, "62");
+    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    setIsShare(true);
+    setTimeout(() => {
+      setIsShare(false);
+    }, 6000);
+    window.open(waUrl, "_blank");
+  };
+
+  const handleCopy = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(generateMessage());
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 6000);
+  };
+
   const temp = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     alert("This feature is not available yet.");
@@ -81,7 +147,7 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
           disabled={loading}
           variant="destructive"
           onClick={temp}
-          className="h-8 p-0 bg-red-500 w-9 hover:bg-red-600"
+          className="h-8 p-0 bg-red-500 w-9 hover:bg-red-600 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +167,7 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
         <Button
           disabled={loading}
           variant="ghost"
-          className="h-8 p-0 w-9 bg-amber-400 hover:bg-amber-500"
+          className="h-8 p-0 w-9 bg-amber-400 hover:bg-amber-500  cursor-pointer"
           onClick={temp}
         >
           <svg
@@ -122,23 +188,26 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
         <Button
           disabled={loading}
           variant="ghost"
-          className="h-8 p-0 w-9 bg-sky-500 hover:bg-sky-600"
-          onClick={temp}
+          className={`h-8 p-0 w-9 bg-sky-500 hover:bg-sky-600 cursor-pointer`}
+          onClick={handleCopy}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            id="eye"
-            className="fill-current"
-            width="21"
-            height="21"
-            fill="none"
-          >
-            <path
-              fill="#F9F9FC"
-              d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z"
-            ></path>
-          </svg>
+          {copied ? (
+            <CheckIcon className="h-4 w-4 text-white" />
+          ) : (
+            <CopyIcon className="h-4 w-4 text-white" />
+          )}
+        </Button>
+        <Button
+          disabled={loading}
+          variant="ghost"
+          className={`h-8 p-0 w-9 bg-green-500 hover:bg-green-600 cursor-pointer`}
+          onClick={handleShareWA}
+        >
+          {isShare ? (
+            <CheckIcon className="h-4 w-4 text-white" />
+          ) : (
+            <MessageCircle className="h-4 w-4 text-white" />
+          )}
         </Button>
       </div>
     </div>

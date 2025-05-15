@@ -178,7 +178,7 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
         </div>
 
         {isPreviewText && (
-          <div className="text-sm bg-muted rounded whitespace-pre-wrap w-full">
+          <div className="text-sm rounded whitespace-pre-wrap w-full">
             <span className="block font-semibold mb-1 text-neutral-700 dark:text-white">
               Preview
             </span>
