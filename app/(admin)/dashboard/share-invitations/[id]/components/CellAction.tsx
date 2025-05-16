@@ -108,10 +108,26 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
     return applyTemplate(template, dataMap);
   };
 
+  const normalizePhoneNumber = (raw?: string): string | null => {
+    if (!raw) return null;
+
+    const cleaned = raw.replace(/\D/g, "");
+
+    if (cleaned.startsWith("0")) {
+      return "62" + cleaned.slice(1);
+    }
+
+    if (cleaned.startsWith("62")) {
+      return cleaned;
+    }
+
+    return null;
+  };
+
   const handleShareWA = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     const message = generateMessage();
-    const phone = data.phone_number?.replace(/^0/, "62");
+    const phone = normalizePhoneNumber(data.phone_number);
     const waUrl = phone
       ? `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
       : `https://wa.me/?text=${encodeURIComponent(message)}`;
