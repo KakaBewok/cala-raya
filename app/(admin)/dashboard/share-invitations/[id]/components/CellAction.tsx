@@ -165,7 +165,7 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
         loading={loading}
         description="All data under this guests will also be deleted."
       />
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1">
         <Button
           disabled={loading}
           variant="destructive"
