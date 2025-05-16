@@ -2,14 +2,14 @@
 
 import { AlertModal } from "@/components/dashboard/AlertModal";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
+import { formatDate } from "@/utils/format-date";
+import { formatTime } from "@/utils/format-time";
+import { encode } from "@/utils/hash";
 import { CheckIcon, CopyIcon, MessageCircle } from "lucide-react";
 import { useParams } from "next/navigation";
-import { encode } from "@/utils/hash";
-import { formatTime } from "@/utils/format-time";
-import { formatDate } from "@/utils/format-date";
+import { useState } from "react";
 
 export const CellAction = ({ data }: { data: GuestColumn }) => {
   const params = useParams();
@@ -18,8 +18,6 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const [isShare, setIsShare] = useState<boolean>(false);
-
-  console.log(data.id);
 
   const selectedInvitation = invitations.find(
     (invitation) => invitation.id === Number(id)
@@ -82,33 +80,42 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
     return `${selectedInvitation?.web_url}/${selectedInvitation?.slug}?id=${token}`;
   };
 
+  const applyTemplate = (template: string, data: Record<string, string>) => {
+    return Object.entries(data).reduce((result, [key, value]) => {
+      return result.replace(new RegExp(`{${key}}`, "g"), value);
+    }, template);
+  };
+
   const generateMessage = () => {
-    const url = generateUrl();
-    const templateMessage =
-      selectedInvitation?.message_template ||
-      "Please create a message template";
+    if (!selectedInvitation) return "Template not found";
 
-    const rundown = selectedInvitation?.rundowns?.[0];
+    const template =
+      selectedInvitation.message_template || "Please create a message template";
 
-    return templateMessage
-      .replace("{guest_name}", data.name)
-      .replace("{event_title}", selectedInvitation?.event_title ?? "-")
-      .replace(
-        "{event_date}",
-        formatDate(selectedInvitation?.event_date ?? "") ?? "-"
-      )
-      .replace("{start_time}", formatTime(rundown?.start_time ?? "") ?? "-")
-      .replace("{time_zone}", rundown?.time_zone ?? "-")
-      .replace("{end_time}", formatTime(rundown?.end_time ?? "") ?? "-")
-      .replace("{location}", selectedInvitation?.location ?? "-")
-      .replace("{url}", url ?? "-");
+    const rundown = selectedInvitation.rundowns?.[0];
+
+    const dataMap: Record<string, string> = {
+      guest_name: data.name,
+      event_title: selectedInvitation.event_title ?? "-",
+      event_date: formatDate(selectedInvitation.event_date || "") ?? "-",
+      start_time: formatTime(rundown?.start_time || "") ?? "-",
+      end_time: formatTime(rundown?.end_time || "") ?? "-",
+      time_zone: rundown?.time_zone ?? "-",
+      location: selectedInvitation.location ?? "-",
+      url: generateUrl() ?? "-",
+    };
+
+    return applyTemplate(template, dataMap);
   };
 
   const handleShareWA = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     const message = generateMessage();
-    const phone = selectedInvitation?.phone_number.replace(/^0/, "62");
-    const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    const phone = data.phone_number?.replace(/^0/, "62");
+    const waUrl = phone
+      ? `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
+      : `https://wa.me/?text=${encodeURIComponent(message)}`;
+
     setIsShare(true);
     setTimeout(() => {
       setIsShare(false);
@@ -138,7 +145,7 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
           e?.stopPropagation();
           setModalOpen(false);
         }}
-        onConfirm={() => alert("This feature is not available yet.")}
+        onConfirm={() => temp}
         loading={loading}
         description="All data under this guests will also be deleted."
       />
