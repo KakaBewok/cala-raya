@@ -1,8 +1,9 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import Hero from "./components/Hero";
 
 const galleryImages = Array.from(
   { length: 9 },
@@ -10,47 +11,11 @@ const galleryImages = Array.from(
 );
 
 export default function InvitationPage() {
-  const [isOpened, setIsOpened] = useState(false);
   const mainRef = useRef<HTMLDivElement>(null);
-
-  const handleOpenInvitation = () => {
-    setIsOpened(true);
-    setTimeout(() => {
-      mainRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 300);
-  };
 
   return (
     <div className="font-serif bg-[#fdf8f8]">
-      {/* Hero Section */}
-      <AnimatePresence>
-        {!isOpened && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-cover bg-center flex items-center justify-center"
-            style={{
-              backgroundImage: `url('https://slametandfatma.wedding/galeri/1.jpg')`,
-            }}
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, y: -200 }}
-            transition={{ duration: 1 }}
-          >
-            <div className="bg-white/80 backdrop-blur-md p-8 rounded-xl text-center shadow-xl">
-              <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-2">
-                Slamet & Fatma
-              </h1>
-              <p className="text-gray-600 mb-4">
-                Kepada Yth. Bapak/Ibu/Saudara/i
-              </p>
-              <button
-                onClick={handleOpenInvitation}
-                className="px-6 py-2 bg-pink-600 text-white rounded-full hover:bg-pink-700 transition shadow"
-              >
-                Buka Undangan
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Hero />
 
       <main ref={mainRef} className="pt-24">
         {/* Cover Nama Pasangan */}
