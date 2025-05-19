@@ -27,14 +27,14 @@ export const playfair = Playfair_Display({
   display: "swap",
 });
 
-export const optivaground = localFont({
-  src: "./optivaground/optivaground-bold.otf",
-  variable: "--font-optivaground",
-  display: "swap",
-});
-
 // export const optivaground = localFont({
-//   src: "optivaground-bold.otf",
+//   src: "./optivaground/optivaground-bold.otf",
 //   variable: "--font-optivaground",
 //   display: "swap",
 // });
+
+export const optivaground = localFont({
+  src: "../public/fonts/optivaground/optivaground-bold.otf",
+  variable: "--font-optivaground",
+  display: "swap",
+});
