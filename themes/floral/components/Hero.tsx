@@ -42,9 +42,8 @@ const Hero = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
+          <div className="w-full absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
           <section className="relative h-screen w-full max-w-sm mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
-
             <div className="relative z-20 h-full flex flex-col justify-between items-center text-center text-white">
               <h1 className="mt-32 text-7xl font-bold">SF</h1>
               <div
