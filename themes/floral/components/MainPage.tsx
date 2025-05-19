@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Cover from "./Cover";
-import MusicButton from "./MusicButton";
 
 export default function MainPage() {
   const galleryImages = Array.from(
@@ -10,7 +9,7 @@ export default function MainPage() {
   );
 
   return (
-    <main className="relative">
+    <main className="max-w-md mx-auto">
       <Cover />
 
       {/* Profile Section */}
@@ -67,7 +66,6 @@ export default function MainPage() {
       </section>
 
       {/* Coming Soon: Event, RSVP, Wishes, Gift */}
-      <MusicButton />
     </main>
   );
 }

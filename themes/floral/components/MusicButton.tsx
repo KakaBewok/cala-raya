@@ -3,7 +3,7 @@
 import { Volume2, VolumeX } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function SongButton() {
+export default function SongButton({ isOpen }: { isOpen: boolean }) {
   //   const { invitationData: data } = useInvitation();
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
 
@@ -25,7 +25,7 @@ export default function SongButton() {
 
   return (
     <div className="fixed left-5 bottom-5 z-40">
-      {isPlaying && (
+      {isOpen && isPlaying && (
         <audio
           autoPlay
           loop
@@ -33,7 +33,6 @@ export default function SongButton() {
           className="hidden"
         />
       )}
-      {/* {isPlaying && data.audio_url && <audio autoPlay loop src={`/images/assets/music/lagunya.mp3`} className="hidden" />} */}
 
       <button
         onClick={() => setIsPlaying(!isPlaying)}
