@@ -32,3 +32,9 @@ export const optivaground = localFont({
   variable: "--font-optivaground",
   display: "swap",
 });
+
+// export const optivaground = localFont({
+//   src: "optivaground-bold.otf",
+//   variable: "--font-optivaground",
+//   display: "swap",
+// });
