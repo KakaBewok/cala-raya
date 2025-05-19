@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Roboto, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display, Roboto } from "next/font/google";
 import localFont from "next/font/local";
 
 // default font for the app
@@ -28,7 +28,7 @@ export const playfair = Playfair_Display({
 });
 
 export const optivaground = localFont({
-  src: "./optivaground/OPTIVagRound-Bold.otf",
+  src: "./optivaground/optivaground-bold.otf",
   variable: "--font-optivaground",
   display: "swap",
 });

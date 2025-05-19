@@ -1,12 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { optivaground } from "@/fonts/fonts";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
-  const [isOpened, setIsOpened] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const handleOpenInvitation = () => {
     setIsAnimating(true);
@@ -34,7 +35,7 @@ const Hero = () => {
         <motion.div
           className="fixed inset-0 z-50 bg-cover bg-center flex items-center justify-center origin-top"
           style={{
-            backgroundImage: `url('https://slametandfatma.wedding/galeri/1.jpg')`,
+            backgroundImage: `url('https://slametandfatma.wedding/galeri/4.jpg')`,
           }}
           initial={{ y: 0 }}
           animate={isAnimating ? { y: "-100%" } : { y: 0 }}
@@ -42,35 +43,22 @@ const Hero = () => {
           transition={{ duration: 1, ease: "easeInOut" }}
         >
           <section className="relative h-screen w-full max-w-sm mx-auto">
-            {/* <video
-              autoPlay
-              muted
-              loop
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              <source
-                src="https://slametandfatma.wedding/video/myvideo.mp4"
-                type="video/mp4"
-              />
-            </video> */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/70 to-black/95 z-10 pointer-events-none" />
-
-            <div className="relative z-20 h-full flex flex-col justify-around items-center text-center text-white">
-              <h1 className="text-5xl font-bold font-serif">AB</h1>
-              <div className="border border-red-500 flex flex-col items-center justify-center">
-                <p className="text-sm mb-2">Hello</p>
-                <p
-                  className={`tracking-wider font-medium ${optivaground.className} text-3xl mb-6`}
-                >
-                  Family and Friends
-                </p>
-                <button
+            <div className="relative z-20 h-full flex flex-col justify-between items-center text-center text-white">
+              <h1 className="mt-32 text-7xl font-bold">SF</h1>
+              <div
+                className={`tracking-wider ${optivaground.className} mb-20 flex flex-col items-start justify-center`}
+              >
+                <p className={`text-sm mb-2`}>Kepada Yth.</p>
+                <p className={`text-3xl mb-3`}>Family and Friends</p>
+                <Button
+                  size="lg"
                   onClick={handleOpenInvitation}
-                  className="mt-4 px-6 py-2 border border-white hover:bg-white hover:text-black transition duration-300"
+                  className="bg-orange-300 cursor-pointer"
                 >
-                  OPEN INVITATION
-                </button>
+                  Buka Undangan
+                </Button>
               </div>
             </div>
           </section>
