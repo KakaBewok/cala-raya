@@ -126,3 +126,26 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+/* custom animation */
+@keyframes swayFloat {
+  0%,
+  100% {
+    transform: rotate(-3deg) translateY(0);
+  }
+  50% {
+    transform: rotate(3deg) translateY(-6px);
+  }
+}
+
+.flower-animate {
+  animation: swayFloat 4s ease-in-out infinite;
+}
+
+.flower-animate-slow {
+  animation: swayFloat 6s ease-in-out infinite;
+}
+
+.flower-animate-fast {
+  animation: swayFloat 2.6s ease-in-out infinite;
+}

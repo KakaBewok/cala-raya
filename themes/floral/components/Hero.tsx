@@ -2,9 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { optivaground } from "@/fonts/fonts";
+import { useInvitation } from "@/hooks/use-invitation";
+import { findImage } from "@/utils/find-image";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const Hero = ({
   isOpen,
@@ -13,7 +15,11 @@ const Hero = ({
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }) => {
+  const { invitationData: data, guest } = useInvitation();
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
+
+  const initial1 = data?.host_one_nickname?.charAt(0)?.toUpperCase() ?? "";
+  const initial2 = data?.host_two_nickname?.charAt(0)?.toUpperCase() ?? "";
 
   const handleOpenInvitation = () => {
     setIsAnimating(true);
@@ -46,7 +52,7 @@ const Hero = ({
           transition={{ duration: 1, ease: "easeInOut" }}
         >
           <Image
-            src="https://slametandfatma.wedding/galeri/4.jpg"
+            src={findImage(data, "hero")}
             alt="Hero background"
             fill
             priority
@@ -55,7 +61,10 @@ const Hero = ({
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
 
           <div className="relative h-screen z-20 flex flex-col justify-between items-center text-center text-white">
-            <h1 className="mt-28 text-7xl font-bold">SF</h1>
+            <h1 className="text-7xl font-serif mt-28">
+              • {initial1}
+              {initial2} •
+            </h1>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -63,7 +72,7 @@ const Hero = ({
               className={`tracking-wider ${optivaground.className} mb-20 flex flex-col items-start justify-center`}
             >
               <p className={`text-sm mb-2`}>Kepada Yth.</p>
-              <p className={`text-3xl mb-3`}>Family and Friends</p>
+              <p className={`text-3xl mb-3`}>{guest?.name}</p>
               <Button
                 size="lg"
                 onClick={handleOpenInvitation}
