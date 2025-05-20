@@ -128,7 +128,7 @@ html {
 }
 
 /* custom animation */
-@keyframes swayFloat {
+@keyframes swingToRight {
   0%,
   100% {
     transform: rotate(-3deg) translateY(0);
@@ -138,14 +138,36 @@ html {
   }
 }
 
-.flower-animate {
-  animation: swayFloat 4s ease-in-out infinite;
+@keyframes swingToLeft {
+  0%,
+  100% {
+    transform: rotate(3deg) translateY(-4px);
+  }
+  50% {
+    transform: rotate(-3deg) translateY(0);
+  }
 }
 
-.flower-animate-slow {
-  animation: swayFloat 6s ease-in-out infinite;
+.swing-left {
+  animation: swingToLeft 4s ease-in-out infinite;
 }
 
-.flower-animate-fast {
-  animation: swayFloat 2.6s ease-in-out infinite;
+.swing-left-slow {
+  animation: swingToLeft 6s ease-in-out infinite;
+}
+
+.swing-left-fast {
+  animation: swingToLeft 2.6s ease-in-out infinite;
+}
+
+.swing-right {
+  animation: swingToRight 4s ease-in-out infinite;
+}
+
+.swing-right-slow {
+  animation: swingToRight 6s ease-in-out infinite;
+}
+
+.swing-right-fast {
+  animation: swingToRight 2.6s ease-in-out infinite;
 }
