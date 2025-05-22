@@ -5,6 +5,7 @@ import { formatDate } from "@/utils/format-date";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import DetailInfo from "../detail-info";
+import { findImage } from "@/utils/find-image";
 
 const TagItem = ({ title }: { title: string }) => {
   return (
@@ -48,23 +49,23 @@ export default function Thumbnail() {
     return <DetailInfo />;
   }
   return (
-    <div
-      style={{
-        backgroundImage: `url(${
-          data?.images?.find((image) => image.type === "thumbnail")?.url
-        })`,
-      }}
-      className="mb-10 flex min-h-screen flex-col justify-end bg-cover bg-center bg-no-repeat"
-    >
+    <div className="mb-10 flex min-h-screen flex-col justify-end bg-cover bg-center bg-no-repeat relative">
+      <Image
+        src={findImage(data, "thumbnail")}
+        alt="Hero background"
+        fill
+        priority
+        className="object-cover object-center z-0"
+      />
       <audio
         autoPlay
-        src="/assets/music/opening-netflix.mp3"
+        src="/assets/music/netflix/opening-netflix.mp3"
         className="hidden"
       />
-      <div className="bg-gradient-to-b from-transparent via-black to-black pt-2 pb-8">
+      <div className="bg-gradient-to-b from-transparent via-black to-black pt-2 pb-8 z-10">
         <div className="mb-3 space-y-2 px-5">
           <Image
-            src={`/assets/images/NIKAHFIX.webp`}
+            src={`/assets/images/netflix/NIKAHFIX.webp`}
             alt="NIKAHFIX"
             width={56}
             height={15}

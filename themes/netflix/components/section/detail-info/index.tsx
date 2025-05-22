@@ -12,7 +12,7 @@ import Bridegroom from "../bride-groom";
 import Countdown from "../countdown";
 import Footer from "../footer";
 import Gift from "../gift";
-import Location from "../location";
+import TimelineAndLocation from "../timeline-location";
 import LoveStory from "../love-story";
 import OurGallery from "../our-gallery";
 import TitleInfo from "../title-info";
@@ -46,10 +46,10 @@ export default function DetailInfo() {
         <TitleInfo />
         <BreakingNews />
         <Bridegroom />
-        <LoveStory />
+        {data?.stories && <LoveStory />}
         <OurGallery />
         <Countdown />
-        <Location />
+        <TimelineAndLocation />
         <Gift />
         <WishSection />
       </div>

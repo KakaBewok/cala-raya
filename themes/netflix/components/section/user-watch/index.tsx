@@ -10,7 +10,7 @@ export default function UserWatch({ onClick }: { onClick: () => void }) {
     <div className="space-y-36 py-14 text-center">
       <Image
         className="mx-auto scale-110 cursor-pointer transition-transform duration-400 hover:scale-150"
-        src={`/assets/images/NIKAHFIX.webp`}
+        src={`/assets/images/netflix/NIKAHFIX.webp`}
         width={125}
         height={48}
         alt="Nikah Fix"
@@ -20,7 +20,7 @@ export default function UserWatch({ onClick }: { onClick: () => void }) {
         <div onClick={onClick} className="group cursor-pointer">
           <Image
             className="mx-auto transition-transform duration-400 group-hover:scale-125"
-            src={`/assets/images/guest-icon.png`}
+            src={`/assets/images/netflix/guest-icon.png`}
             width={100}
             height={100}
             alt="Nikah Fix"

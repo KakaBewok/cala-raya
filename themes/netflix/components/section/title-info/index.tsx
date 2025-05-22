@@ -9,7 +9,7 @@ export default function TitleInfo() {
     <div className="mb-14 space-y-2" data-aos="fade-right">
       <div className="flex items-center gap-1">
         <Image
-          src={`/assets/images/favicon.ico`}
+          src={`/assets/images/netflix/favicon.ico`}
           alt="Netflix Logo (N)"
           width={18}
           height={18}
@@ -33,7 +33,7 @@ export default function TitleInfo() {
         <span className="mr-2 text-white">1h 26m</span>
         <span>
           <Image
-            src={`/assets/images/4k-icon.png`}
+            src={`/assets/images/netflix/4k-icon.png`}
             width={16}
             height={16}
             alt="4k"
@@ -41,7 +41,7 @@ export default function TitleInfo() {
         </span>
         <span>
           <Image
-            src={`/assets/images/hd-icon.png`}
+            src={`/assets/images/netflix/hd-icon.png`}
             width={16}
             height={16}
             alt="hd"

@@ -5,6 +5,7 @@ import { useInvitation } from "@/hooks/use-invitation";
 import badwords from "indonesian-badwords";
 import Image from "next/image";
 import { forwardRef, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 interface WishItemProps {
   guest_name: string;
@@ -20,7 +21,7 @@ const WishItem = forwardRef<HTMLDivElement, WishItemProps>(
           alt="profile"
           width={25}
           height={25}
-          src={`/assets/images/face.png`}
+          src={`/assets/images/netflix/face.png`}
           style={{
             backgroundColor: icon_color,
             minWidth: 25,
@@ -52,7 +53,7 @@ const colorList = [
 export default function WishSection() {
   const { invitationData, guest } = useInvitation();
 
-  const lastChildRef = useRef<HTMLDivElement>(null);
+  const firstChildRef = useRef<HTMLDivElement>(null);
 
   const [data, setData] = useState<WishItemProps[]>([]);
   const [message, setMessage] = useState<string>("");
@@ -63,20 +64,20 @@ export default function WishSection() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (message.length < 5) {
-      setError("Pesan minimal 5 karakter!");
-      return;
-    }
+    // if (message.length < 5) {
+    //   setError("Pesan minimal 5 karakter!");
+    //   return;
+    // }
 
     setLoading(true);
     setError(null);
 
     // random color based data length
     const randomColor = colorList[data.length % colorList.length];
-    const newmessage = badwords.censor(message);
+    const newmessage = message ? badwords.censor(message) : "";
     const { error } = await db.from("rsvps").insert([
       {
-        guest_name: guest?.name,
+        guest_name: guest?.name ?? "Guest",
         message: newmessage,
         icon_color: randomColor,
         attendance_status: attending === "1" || attending === "2",
@@ -89,10 +90,12 @@ export default function WishSection() {
 
     if (error) {
       setError(error.message);
+      toast.error("Gagal mengirim pesan :(");
     } else {
       fetchData();
       setTimeout(scrollToLastChild, 500);
       setMessage("");
+      toast.success("Berhasil dikirim!");
     }
   };
 
@@ -100,15 +103,17 @@ export default function WishSection() {
     const { data, error } = await db
       .from("rsvps")
       .select("guest_name, message, icon_color")
-      .eq("invitation_id", invitationData?.id);
+      .eq("invitation_id", invitationData?.id)
+      .not("message", "eq", "")
+      .order("updated_at", { ascending: false });
 
     if (error) console.error("Error fetching data: ", error);
     else setData(data);
   };
 
   const scrollToLastChild = () => {
-    if (lastChildRef.current) {
-      lastChildRef.current.scrollIntoView({ behavior: "smooth" });
+    if (firstChildRef.current) {
+      firstChildRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -132,7 +137,7 @@ export default function WishSection() {
             message={item.message}
             icon_color={item.icon_color}
             key={index}
-            ref={index === data.length - 1 ? lastChildRef : null}
+            ref={index === 0 ? firstChildRef : null}
           />
         ))}
       </div>
@@ -147,8 +152,7 @@ export default function WishSection() {
         <div className="space-y-1">
           <label className="text-sm font-semibold">Pesan buat kita ✌️</label>
           <textarea
-            required
-            minLength={5}
+            // minLength={5}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="mt-1 w-full rounded-sm bg-slate-100 px-2 py-1 text-black focus:outline-none"
