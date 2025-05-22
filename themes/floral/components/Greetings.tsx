@@ -42,16 +42,16 @@ export default function Greetings() {
 
         {/* Kiri Tengah */}
         <Image
-          src={`/assets/images/floral/bunga8.webp`}
-          width={130}
-          height={130}
+          src={`/assets/images/floral/bunga9.webp`}
+          width={65}
+          height={65}
           alt="Bunga kiri tengah"
           className="swing-left-fast absolute z-20 top-[40%] -left-7"
         />
 
         {/* Kanan tengah */}
         <Image
-          src={`/assets/images/floral/bunga7.webp`}
+          src={`/assets/images/floral/bunga6.webp`}
           width={60}
           height={60}
           alt="Bunga kanan tengah"
@@ -68,27 +68,15 @@ export default function Greetings() {
               • {initial1}
               {initial2} •
             </h1>
-            <p
+            <div
               className="text-xs text-[#c6a886] leading-relaxed font-light"
               data-aos="zoom-in"
               data-aos-duration={900}
-            >
-              It has been eight long years.
-              <br />
-              Look how far we’ve come.
-              <br />
-              Though it took the long way,
-              <br />
-              we knew we’d get there someday.
-              <br />
-              <br />
-              And now,
-              <br />
-              <strong className="font-semibold text-[#c6a886]">
-                we’ve finally made it.
-              </strong>
-              <br />
-              <br />
+              dangerouslySetInnerHTML={{
+                __html: data?.greetings || "",
+              }}
+            ></div>
+            <p className="text-xs text-[#c6a886] leading-relaxed font-light">
               {formatEventDate(data?.event_date ?? "")}
             </p>
           </div>
@@ -98,20 +86,20 @@ export default function Greetings() {
       <div className="relative z-10 w-full">
         {/* Kiri Bawah */}
         <Image
-          src={`/assets/images/floral/bunga2.webp`}
-          width={80}
-          height={80}
+          src={`/assets/images/floral/bunga8.webp`}
+          width={110}
+          height={110}
           alt="Bunga kiri bawah"
-          className="swing-left-fast absolute -z-10 bottom-[107px] left-[6vw]"
+          className="swing-left-fast absolute -z-10 bottom-[117px] left-[6vw]"
         />
 
         {/* Kanan Bawah */}
         <Image
-          src={`/assets/images/floral/bunga5.webp`}
-          width={160}
-          height={160}
+          src={`/assets/images/floral/bunga2.webp`}
+          width={80}
+          height={80}
           alt="Bunga kanan bawah"
-          className="swing-right-fast absolute bottom-28 -z-10 right-[6vw]"
+          className="swing-left-fast absolute bottom-28 -z-10 right-[6vw]"
         />
 
         <div className="z-20 mt-20 w-full flex justify-center items-center bg-[#efe7dd] h-32">
