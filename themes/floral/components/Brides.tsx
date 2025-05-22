@@ -45,7 +45,11 @@ const Brides = () => {
       <div className="absolute inset-11 border border-[#c6a886] z-10 pointer-events-none" />
 
       {/* Content box */}
-      <div className="absolute bottom-0 z-20 w-full bg-gradient-to-t from-white/80 via-white/60 to-transparent text-right px-6 py-8 backdrop-blur-sm">
+      <div
+        className="absolute bottom-0 z-20 w-full bg-gradient-to-t from-white/80 via-white/60 to-transparent text-right px-6 py-8 backdrop-blur-sm"
+        data-aos="zoom-in"
+        data-aos-offset={120}
+      >
         <h2
           className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-md text-shadow-sm`}
         >
@@ -69,30 +73,3 @@ const Brides = () => {
 };
 
 export default Brides;
-
-// export default function ScrollImageColor() {
-//   const { scrollY } = useScroll();
-
-//   // Transformasi filter grayscale dari 100% ke 0% (warna penuh)
-//   const filter = useTransform(
-//     scrollY,
-//     [0, 300], // jarak scroll
-//     ["grayscale(100%)", "grayscale(0%)"]
-//   );
-
-//   const scale = useTransform(scrollY, [0, 300], [1, 1.1]); // opsional: efek membesar sedikit
-
-//   return (
-//     <div className="h-[2000px] pt-20 flex justify-center">
-//       <motion.div style={{ filter, scale }}>
-//         <Image
-//           src="/your-image.jpg"
-//           alt="Scroll effect image"
-//           width={300}
-//           height={300}
-//           className="rounded-xl shadow-lg"
-//         />
-//       </motion.div>
-//     </div>
-//   );
-// }

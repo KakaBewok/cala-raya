@@ -3,12 +3,23 @@ import Image from "next/image";
 import Cover from "./Cover";
 import Greetings from "./Greetings";
 import Brides from "./Brides";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 export default function MainPage() {
   const galleryImages = Array.from(
     { length: 9 },
     (_, i) => `https://slametandfatma.wedding/galeri/${i + 1}.jpg`
   );
+
+  useEffect(() => {
+    AOS.init({ duration: 1400, once: false, offset: 130 });
+
+    setTimeout(() => {
+      AOS.refresh();
+    }, 100);
+  }, []);
 
   return (
     <main className="max-w-md mx-auto">
