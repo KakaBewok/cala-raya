@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Cover from "./Cover";
 import Greetings from "./Greetings";
+import Brides from "./Brides";
 
 export default function MainPage() {
   const galleryImages = Array.from(
@@ -13,6 +14,7 @@ export default function MainPage() {
     <main className="max-w-md mx-auto">
       <Cover />
       <Greetings />
+      <Brides />
 
       {/* Profile Section */}
       <section className="text-center py-16 px-4 bg-white">

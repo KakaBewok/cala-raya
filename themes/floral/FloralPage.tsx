@@ -11,7 +11,7 @@ export default function InvitationPage() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    AOS.init({ duration: 1400, once: true, offset: 300 });
+    AOS.init({ duration: 1400, once: false, offset: 300 });
 
     setTimeout(() => {
       AOS.refresh();

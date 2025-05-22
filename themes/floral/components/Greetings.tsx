@@ -29,10 +29,12 @@ export default function Greetings() {
           height={80}
           alt="Bunga kanan atas"
           className="swing-right-fast absolute z-20 -top-5 -right-6"
+          data-aos="zoom-in"
         />
 
         {/* Kiri Atas */}
         <Image
+          data-aos="zoom-in"
           src={`/assets/images/floral/bunga3.webp`}
           width={80}
           height={80}
@@ -42,6 +44,7 @@ export default function Greetings() {
 
         {/* Kiri Tengah */}
         <Image
+          data-aos="zoom-in"
           src={`/assets/images/floral/bunga9.webp`}
           width={65}
           height={65}
@@ -51,6 +54,7 @@ export default function Greetings() {
 
         {/* Kanan tengah */}
         <Image
+          data-aos="zoom-in"
           src={`/assets/images/floral/bunga6.webp`}
           width={60}
           height={60}
@@ -86,6 +90,7 @@ export default function Greetings() {
       <div className="relative z-10 w-full">
         {/* Kiri Bawah */}
         <Image
+          data-aos="zoom-in"
           src={`/assets/images/floral/bunga8.webp`}
           width={110}
           height={110}
@@ -95,6 +100,7 @@ export default function Greetings() {
 
         {/* Kanan Bawah */}
         <Image
+          data-aos="zoom-in"
           src={`/assets/images/floral/bunga2.webp`}
           width={80}
           height={80}
