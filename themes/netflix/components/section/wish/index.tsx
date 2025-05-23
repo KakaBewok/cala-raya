@@ -123,24 +123,27 @@ export default function WishSection() {
 
   return (
     <div aos-data="zoom-in">
-      <h2 className="mb-2 text-lg leading-5 font-bold text-white">
-        Best Wishes for the Couple ❤️
-      </h2>
-      <p className="mb-5 text-xs text-neutral-500">
-        {data.length > 0 ? `${data.length} Message(s)` : ""}
-      </p>
-      {/* comments list */}
-      <div className="wish-container max-h-[25rem] space-y-4 overflow-auto rounded-sm border border-neutral-950 bg-neutral-900 p-3">
-        {data.map((item, index) => (
-          <WishItem
-            guest_name={item.guest_name}
-            message={item.message}
-            icon_color={item.icon_color}
-            key={index}
-            ref={index === 0 ? firstChildRef : null}
-          />
-        ))}
-      </div>
+      {data && data.length > 0 && (
+        <>
+          <h2 className="mb-2 text-lg leading-5 font-bold text-white">
+            Best Wishes for the Couple ❤️
+          </h2>
+          <p className="mb-5 text-xs text-neutral-500">
+            {data.length > 0 ? `${data.length} Message(s)` : ""}
+          </p>
+          <div className="wish-container max-h-[25rem] space-y-4 overflow-auto rounded-sm border border-neutral-950 bg-neutral-900 p-3">
+            {data.map((item, index) => (
+              <WishItem
+                guest_name={item.guest_name}
+                message={item.message}
+                icon_color={item.icon_color}
+                key={index}
+                ref={index === 0 ? firstChildRef : null}
+              />
+            ))}
+          </div>
+        </>
+      )}
       {/* form input */}
       <form onSubmit={handleSubmit} className="mt-9 space-y-4">
         {error && (

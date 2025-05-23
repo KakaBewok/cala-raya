@@ -81,7 +81,9 @@ export default function Thumbnail() {
               <span className="rounded-md bg-[#E50913] px-2 py-1 text-xs text-white">
                 Coming Soon
               </span>
-              <p className="text-sm">{formatDate(data?.event_date || null)}</p>
+              <p className="text-sm">
+                {formatDate(data?.event_date || null, true, "en-US")}
+              </p>
             </div>
           </div>
           <div>

@@ -1,7 +1,7 @@
 "use client";
 
 import AutoScrollToggle from "@/components/AutoScrollToggle";
-import QRCodeGuest from "@/components/QRCodeGuest";
+// import QRCodeGuest from "@/components/QRCodeGuest";
 import { useInvitation } from "@/hooks/use-invitation";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -17,6 +17,8 @@ import LoveStory from "../love-story";
 import OurGallery from "../our-gallery";
 import TitleInfo from "../title-info";
 import WishSection from "../wish";
+import Image from "next/image";
+import { findImage } from "@/utils/find-image";
 
 export default function DetailInfo() {
   const { invitationData: data } = useInvitation();
@@ -32,7 +34,17 @@ export default function DetailInfo() {
 
   return (
     <div className="space-y-5 pt-4 pb-10 relative">
-      <video
+      <div className="relative aspect-3/2">
+        <Image
+          src={findImage(data, "hero")}
+          alt="Hero"
+          fill
+          priority
+          className="object-cover object-center z-0 rounded-sm"
+        />
+      </div>
+
+      {/* <video
         className="w-full rounded-xs"
         autoPlay
         muted
@@ -41,19 +53,20 @@ export default function DetailInfo() {
       >
         <source src={data?.videos?.[0].url} type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
+      </video> */}
+
       <div className="space-y-3 px-4">
         <TitleInfo />
         <BreakingNews />
         <Bridegroom />
-        {data?.stories && <LoveStory />}
+        {(data?.stories?.length ?? 0) > 0 && <LoveStory />}
         <OurGallery />
         <Countdown />
         <TimelineAndLocation />
         <Gift />
         <WishSection />
       </div>
-      <QRCodeGuest />
+      {/* <QRCodeGuest /> */}
       <AutoScrollToggle />
       <Footer />
       <SongButton />

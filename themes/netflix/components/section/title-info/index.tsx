@@ -49,11 +49,12 @@ export default function TitleInfo() {
         </span>
       </div>
       <div className="w-fit rounded bg-[#E50913] px-2 py-1 text-xs font-bold text-white">
-        Coming soon on Saturday, {formatDate(data?.event_date || null)}
+        Coming soon on {formatDate(data?.event_date || null, true, "en-US")}
       </div>
       <div className="pt-2">
         <p className="mb-2 text-sm leading-[1.15rem] text-white">
-          {data?.greetings}
+          {data?.greetings ??
+            "Setelah dipertemukan dalam situasi yang tepat, di mana keduanya telah siap untuk memulai hubungan bersama, tibalah mereka di awal perjalanan baru menuju pernikahan."}
         </p>
         <p className="text-[11px] leading-[1rem] text-[#A3A1A1]">
           &quot;Segala sesuatu Kami ciptakan berpasang-pasangan agar kamu

@@ -19,7 +19,6 @@ const LoveItem: React.FC<LoveItemProps> = ({
         <div>
           <Image
             className="w-full rounded-sm object-cover"
-            // height={100}
             width={300}
             height={200}
             style={{ maxHeight: "100px" }}

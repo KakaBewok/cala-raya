@@ -20,7 +20,7 @@ export default function Bridegroom() {
             height={170}
           />
           <div>
-            <h4 className="text-md mt-2 font-medium text-white">
+            <h4 className="text-sm mb-1 mt-2 font-medium text-white">
               {data?.host_two_name}
             </h4>
             <p className="text-xs leading-4 text-[#A3A1A1]">
@@ -37,7 +37,7 @@ export default function Bridegroom() {
             height={170}
           />
           <div>
-            <h4 className="text-md mt-2 font-medium text-white">
+            <h4 className="text-md mb-1 mt-2 font-medium text-white">
               {data?.host_one_name}
             </h4>
             <p className="text-xs leading-4 text-[#A3A1A1]">
