@@ -24,28 +24,28 @@ export default function Greetings() {
       <div className="relative z-10">
         {/* Kanan atas */}
         <Image
-          src={`/assets/images/floral/bunga4.webp`}
+          src={`/assets/images/floral/11.webp`}
           width={80}
           height={80}
           alt="Bunga kanan atas"
-          className="swing-right-fast absolute z-20 -top-5 -right-6"
+          className="swing-right-fast absolute z-20 -top-8 -right-6"
           data-aos="zoom-in"
         />
 
         {/* Kiri Atas */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/bunga3.webp`}
+          src={`/assets/images/floral/28.webp`}
           width={80}
           height={80}
           alt="Bunga kiri atas"
-          className="swing-left-fast absolute -top-14 -left-7"
+          className="swing-left-fast absolute -top-14 -left-5"
         />
 
         {/* Kiri Tengah */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/bunga9.webp`}
+          src={`/assets/images/floral/26.webp`}
           width={65}
           height={65}
           alt="Bunga kiri tengah"
@@ -55,7 +55,7 @@ export default function Greetings() {
         {/* Kanan tengah */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/bunga6.webp`}
+          src={`/assets/images/floral/18.webp`}
           width={60}
           height={60}
           alt="Bunga kanan tengah"
@@ -91,9 +91,9 @@ export default function Greetings() {
         {/* Kiri Bawah */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/bunga8.webp`}
-          width={110}
-          height={110}
+          src={`/assets/images/floral/16.webp`}
+          width={80}
+          height={80}
           alt="Bunga kiri bawah"
           className="swing-left-fast absolute -z-10 bottom-[117px] left-[6vw]"
         />
