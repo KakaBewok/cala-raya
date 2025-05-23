@@ -59,7 +59,9 @@ const RundownItem: React.FC<RundownItemProps> = ({
           </div>
         </div>
       </div>
-      <p className="mt-2 text-xs text-[#A3A1A1]">{location}</p>
+      <p className="mt-2 text-xs text-[#A3A1A1]">
+        <span className="text-sm">Lokasi</span>: <br /> {location}
+      </p>
       <Link
         href={location_url}
         target="_blank"
