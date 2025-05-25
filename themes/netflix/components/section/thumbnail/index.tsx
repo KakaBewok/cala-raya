@@ -59,9 +59,9 @@ export default function Thumbnail() {
           className="object-contain object-center mx-auto z-0 w-full"
         />
 
-        {/* <div className="absolute top-0 left-0 w-full h-35 bg-gradient-to-t from-transparent via-black/60 to-black z-10" />
+        {/* <div className="absolute top-0 left-0 w-full h-56 bg-gradient-to-t from-transparent via-black to-black z-10" /> */}
 
-        <div className="absolute bottom-0 left-0 w-full h-35 bg-gradient-to-b from-transparent via-black/60 to-black z-10" /> */}
+        {/* <div className="absolute bottom-0 left-0 w-full h-35 bg-gradient-to-b from-transparent via-black/60 to-black z-10" /> */}
       </div>
 
       <audio

@@ -9,7 +9,7 @@ export default function Netflix() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-black text-white">
-      <div className="container mx-auto max-w-sm">
+      <div className="container mx-auto max-w-sm h-screen">
         {isLogin ? (
           <Thumbnail />
         ) : (
