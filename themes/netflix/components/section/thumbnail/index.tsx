@@ -49,8 +49,8 @@ export default function Thumbnail() {
     return <DetailInfo />;
   }
   return (
-    <div className="mb-10 flex h-screen flex-col justify-end relative">
-      <div className="relative h-[90vh] w-full overflow-hidden">
+    <div className="overflow-hidden mb-10 flex h-screen flex-col justify-end relative">
+      <div className="relative h-[90vh] w-full">
         <Image
           src={findImage(data, "thumbnail")}
           alt="Hero background"

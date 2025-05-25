@@ -7,7 +7,7 @@ export default function UserWatch({ onClick }: { onClick: () => void }) {
   const { guest } = useInvitation();
 
   return (
-    <div className="space-y-36 py-14 text-center">
+    <div className="h-screen space-y-36 py-14 text-center">
       <Image
         className="mx-auto scale-110 cursor-pointer transition-transform duration-400 hover:scale-150"
         src={`/assets/images/netflix/NIKAHFIX.webp`}
