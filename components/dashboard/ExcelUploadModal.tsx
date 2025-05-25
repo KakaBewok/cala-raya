@@ -6,7 +6,7 @@ import { FileUpload } from "./FileUpload";
 interface ExcelUploadModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onUpload: (file: File) => void;
+  onUpload: (file: File | null, setFile: (file: File | null) => void) => void;
   loading: boolean;
 }
 
@@ -26,8 +26,7 @@ export const ExcelUploadModal: React.FC<ExcelUploadModalProps> = ({
   if (!isMounted) return null;
 
   const handleUpload = () => {
-    if (!file) return;
-    onUpload(file);
+    onUpload(file, setFile);
   };
 
   const handleFileChange = (files: File[]) => {
@@ -56,7 +55,33 @@ export const ExcelUploadModal: React.FC<ExcelUploadModalProps> = ({
             Cancel
           </Button>
           <Button onClick={handleUpload} disabled={loading || !file}>
-            Upload
+            {loading ? (
+              <>
+                <svg
+                  className="h-5 w-5 animate-spin text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  ></path>
+                </svg>
+                Uploading...
+              </>
+            ) : (
+              "Upload"
+            )}
           </Button>
         </div>
       </div>

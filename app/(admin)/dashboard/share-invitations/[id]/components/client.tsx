@@ -39,6 +39,9 @@ export const GuestClient: React.FC<GuestClientProps> = ({
     useState<boolean>(false);
   const [editMessageModalOpen, setEditMessageModalOpen] =
     useState<boolean>(false);
+  //
+  // const [file, setFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
   const description = `${bridesAndGrooms} - ${
@@ -49,25 +52,42 @@ export const GuestClient: React.FC<GuestClientProps> = ({
 
   console.log("testids: ", ids);
 
-  // const handleDeleteIds = () => {
-  //     setLoading(true);
-  //     router.post(
-  //         route("admin.category.destroy-bulk", { ids }),
-  //         {},
-  //         {
-  //             onSuccess: () => {
-  //                 router.visit(route("admin.category.index")),
-  //                     setTimeout(() => {
-  //                         toast.success("Data deleted.", {
-  //                             position: "top-center",
-  //                         });
-  //                     }, 1000);
-  //             },
-  //             onError: (error) => console.log("An error occurred: ", error),
-  //             onFinish: () => setLoading(false),
-  //         }
-  //     );
-  // };
+  const handleUpload = async (
+    file: File | null,
+    setFile: (file: File | null) => void
+  ) => {
+    if (!file) {
+      toast.error("Please upload the file!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("invitation_id", String(selectedInvitation?.id ?? ""));
+
+    setIsUploading(true);
+
+    try {
+      const response = await fetch("/api/generate-message/upload-excel", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        refetchInvitations();
+        setExcelUploadModalOpen(false);
+        toast.success("File uploaded successfully!");
+        setFile(null);
+      } else {
+        toast.error("Upload failed.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred while uploading.");
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   const openDeleteModal = (ids: number[]) => {
     setIds(ids);
@@ -203,8 +223,8 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       <ExcelUploadModal
         isOpen={excelUploadModalOpen}
         onClose={() => setExcelUploadModalOpen(false)}
-        onUpload={() => alert("This feature is not available yet.")}
-        loading={loading}
+        onUpload={handleUpload}
+        loading={isUploading}
       />
       <DataTable
         onDelete={openDeleteModal}

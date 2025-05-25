@@ -6,7 +6,9 @@ import logger from "@/lib/logger";
 
 interface GuestData {
   name: string;
-  invitation_id: number;
+  phone?: string;
+  address?: string;
+  notes?: string;
 }
 
 // disable automatic body parsing for this route
@@ -27,26 +29,6 @@ async function parseExcelFile(file: File): Promise<GuestData[]> {
   return data;
 }
 
-// Function to validate the guest data
-// to ensure all required fields are present
-function validateGuestData(item: GuestData): boolean {
-  return !!(item.invitation_id && item.name);
-}
-
-async function findInvitationId(invitationId: number): Promise<number> {
-  const { data, error } = await db
-    .from("invitations")
-    .select("id")
-    .eq("id", invitationId)
-    .single();
-
-  if (error || !data) {
-    throw new Error(`Invitation not found for id: ${invitationId}`);
-  }
-
-  return data.id;
-}
-
 // Function to upsert guest data into the database
 const upsertGuestsToDB = async (guests: GuestData[]) => {
   const { data, error } = await db.from("guests").upsert(guests);
@@ -63,6 +45,7 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
+    const invitation_id = Number(formData.get("invitation_id") ?? 0);
 
     if (!file || !(file instanceof File)) {
       return NextResponse.json(
@@ -73,18 +56,17 @@ export async function POST(request: NextRequest) {
 
     const data = await parseExcelFile(file);
 
-    const guests: GuestData[] = [];
+    const guests = [];
 
     for (const item of data) {
-      if (!validateGuestData(item)) {
-        continue;
-      }
-
-      const invitationId = await findInvitationId(item.invitation_id);
+      if (!item.name) continue;
 
       guests.push({
         name: item.name,
-        invitation_id: invitationId,
+        invitation_id,
+        phone_number: item.phone ?? "-",
+        address: item.address ?? "-",
+        notes: item.notes ?? "-",
       });
     }
 

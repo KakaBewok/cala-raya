@@ -10,6 +10,7 @@ import { encode } from "@/utils/hash";
 import { CheckIcon, CopyIcon, MessageCircle } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export const CellAction = ({ data }: { data: GuestColumn }) => {
   const params = useParams();
@@ -87,10 +88,9 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
   };
 
   const generateMessage = () => {
-    if (!selectedInvitation) return "Template not found";
+    if (!selectedInvitation) return "Invitation data not found";
 
-    const template =
-      selectedInvitation.message_template || "Please create a message template";
+    const template = selectedInvitation?.message_template;
 
     const rundown = selectedInvitation.rundowns?.[0];
 
@@ -126,6 +126,14 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
 
   const handleShareWA = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+
+    if (!selectedInvitation || !selectedInvitation.message_template) {
+      toast.error(
+        "Template message not found. Please create a template message!"
+      );
+      return;
+    }
+
     const message = generateMessage();
     const phone = normalizePhoneNumber(data.phone_number);
     const waUrl = phone
@@ -141,7 +149,20 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
 
   const handleCopy = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+
+    if (!selectedInvitation || !selectedInvitation.message_template) {
+      toast.error(
+        "Template message not found. Please create a template message!"
+      );
+      return;
+    }
+
     navigator.clipboard.writeText(generateMessage());
+
+    toast.success("Message copied!", {
+      position: "top-center",
+    });
+
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
