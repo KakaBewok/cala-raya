@@ -34,13 +34,13 @@ export default function DetailInfo() {
 
   return (
     <div className="space-y-5 pt-4 pb-10 relative">
-      <div className="relative aspect-3/2">
+      <div className="relative aspect-3/2 px-2">
         <Image
           src={findImage(data, "hero")}
           alt="Hero"
           fill
           priority
-          className="object-cover object-center z-0 rounded-sm"
+          className="object-cover object-center z-0"
         />
       </div>
 

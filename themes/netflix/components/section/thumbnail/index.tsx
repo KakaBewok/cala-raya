@@ -49,20 +49,27 @@ export default function Thumbnail() {
     return <DetailInfo />;
   }
   return (
-    <div className="mb-10 flex min-h-screen flex-col justify-end relative">
-      <Image
-        src={findImage(data, "thumbnail")}
-        alt="Hero background"
-        priority
-        fill
-        className="object-cover object-center z-0"
-      />
+    <div className="mb-10 flex h-screen flex-col justify-end relative">
+      <div className="relative h-[90vh] w-full overflow-hidden">
+        <Image
+          src={findImage(data, "thumbnail")}
+          alt="Hero background"
+          fill
+          priority
+          className="object-contain object-center mx-auto z-0 w-full"
+        />
+
+        {/* <div className="absolute top-0 left-0 w-full h-35 bg-gradient-to-t from-transparent via-black/60 to-black z-10" />
+
+        <div className="absolute bottom-0 left-0 w-full h-35 bg-gradient-to-b from-transparent via-black/60 to-black z-10" /> */}
+      </div>
+
       <audio
         autoPlay
         src="/assets/music/netflix/opening-netflix.mp3"
         className="hidden"
       />
-      <div className="bg-gradient-to-b from-transparent via-black to-black pt-2 pb-8 z-10">
+      <div className="w-full absolute bg-gradient-to-b from-transparent via-black to-black pt-2 pb-8 z-10">
         <div className="mb-3 space-y-2 px-5">
           <Image
             src={`/assets/images/netflix/NIKAHFIX.webp`}
