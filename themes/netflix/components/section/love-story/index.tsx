@@ -4,6 +4,10 @@ import LoveItem from "./love-item";
 export default function LoveStory() {
   const { invitationData: data } = useInvitation();
 
+  const sortedStory = data?.stories?.sort(
+    (a, b) => a.order_number - b.order_number
+  );
+
   return (
     <div className="mb-14">
       <h2
@@ -12,8 +16,8 @@ export default function LoveStory() {
       >
         Our Love Story
       </h2>
-      <div className="space-y-4">
-        {data?.stories?.map((item, index) => (
+      <div className="space-y-5">
+        {sortedStory?.map((item, index) => (
           <LoveItem
             key={index}
             imageUrl={item.image_url}

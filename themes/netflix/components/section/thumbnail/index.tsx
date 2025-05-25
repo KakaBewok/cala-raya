@@ -49,12 +49,12 @@ export default function Thumbnail() {
     return <DetailInfo />;
   }
   return (
-    <div className="mb-10 flex min-h-screen flex-col justify-end bg-cover bg-center bg-no-repeat relative">
+    <div className="mb-10 flex min-h-screen flex-col justify-end relative">
       <Image
         src={findImage(data, "thumbnail")}
         alt="Hero background"
-        fill
         priority
+        fill
         className="object-cover object-center z-0"
       />
       <audio
