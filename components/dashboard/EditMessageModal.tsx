@@ -5,15 +5,20 @@ import InputError from "@/components/dashboard/InputError";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
-interface SampleData {
-  guest_name: string;
-  event_title: string;
+export interface SampleRundown {
+  title: string;
   event_date: string;
   start_time: string;
   end_time: string;
   time_zone: string;
   location: string;
+}
+
+interface SampleData {
+  guest_name: string;
+  event_title: string;
   url: string;
+  rundowns: SampleRundown[];
 }
 
 interface EditMessageModalProps {
@@ -35,12 +40,25 @@ export const EditMessageModal: React.FC<EditMessageModalProps> = ({
   sampleData = {
     guest_name: "Fairuz Ummi",
     event_title: "Pernikahan Slamet & Fatma",
-    event_date: "1 Juni 2025",
-    start_time: "10:00",
-    time_zone: "WIB",
-    end_time: "13:00",
-    location: "Gedung Serbaguna Jakarta",
     url: "https://calaraya.vercel.app/slamet-fatma?id=QqHD9",
+    rundowns: [
+      {
+        title: "Akad Nikah",
+        event_date: "Minggu, 1 Juni 2025",
+        start_time: "10:00",
+        end_time: "13:00",
+        time_zone: "WIB",
+        location: "Gedung Serbaguna Jakarta",
+      },
+      {
+        title: "Resepsi",
+        event_date: "Minggu, 2 Juni 2025",
+        start_time: "09:00",
+        end_time: "11:00",
+        time_zone: "WIB",
+        location: "Masjid Al-Falah",
+      },
+    ],
   },
   defaultTemplate = `
 Yth. Bapak/Ibu/Saudara/i
@@ -50,11 +68,7 @@ di Tempat
 Dengan segala kerendahan hati, kami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara
 
 {event_title}
-
-Pada:
-🗓️ Tanggal  : {event_date}
-🕛 Pukul    : {start_time} {time_zone} s/d {end_time} {time_zone}
-📍 Lokasi   : {location}
+{event_rundowns}
 
 Undangan lengkap bisa diakses di link berikut:
 {url}
@@ -84,16 +98,27 @@ Terima kasih banyak atas perhatiannya 💕`.trim(),
 
   if (!isMounted) return null;
 
+  const generateRundownText = (rundowns: SampleRundown[]) => {
+    if (!rundowns || rundowns.length === 0) return "";
+
+    return rundowns
+      .map((rundown) => {
+        return `
+${rundown.title}:
+🗓️ Tanggal  : ${rundown.event_date}
+🕛 Pukul    : ${rundown.start_time} ${rundown.time_zone} s/d ${rundown.end_time} ${rundown.time_zone}
+📍 Lokasi   : ${rundown.location}`;
+      })
+      .join("\n");
+  };
+
   const handlePreview = () => {
+    const rundownText = generateRundownText(sampleData.rundowns);
     const rendered = template
       .replace(/{guest_name}/g, sampleData.guest_name)
       .replace(/{event_title}/g, sampleData.event_title)
-      .replace(/{event_date}/g, sampleData.event_date)
-      .replace(/{start_time}/g, sampleData.start_time)
-      .replace(/{end_time}/g, sampleData.end_time)
-      .replace(/{time_zone}/g, sampleData.time_zone)
-      .replace(/{location}/g, sampleData.location)
-      .replace(/{url}/g, sampleData.url);
+      .replace(/{url}/g, sampleData.url)
+      .replace(/{event_rundowns}/g, rundownText);
 
     setIsPreviewText(true);
     setPreviewText(rendered);

@@ -101,7 +101,7 @@ export interface Guest {
   address?: string;
 }
 
-interface Rundown {
+export interface Rundown {
   id: number;
   invitation_id: number;
   title: string;

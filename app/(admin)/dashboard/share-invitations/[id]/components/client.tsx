@@ -39,8 +39,6 @@ export const GuestClient: React.FC<GuestClientProps> = ({
     useState<boolean>(false);
   const [editMessageModalOpen, setEditMessageModalOpen] =
     useState<boolean>(false);
-  //
-  // const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;

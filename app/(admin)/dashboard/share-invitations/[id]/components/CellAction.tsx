@@ -4,6 +4,7 @@ import { AlertModal } from "@/components/dashboard/AlertModal";
 import { Button } from "@/components/ui/button";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
+import { Rundown } from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
 import { formatTime } from "@/utils/format-time";
 import { encode } from "@/utils/hash";
@@ -81,6 +82,26 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
     return `${selectedInvitation?.web_url}/${selectedInvitation?.slug}?id=${token}`;
   };
 
+  const generateRundownText = (rundowns: Rundown[] = []) => {
+    if (rundowns.length === 0) return "";
+
+    return rundowns
+      .map((rundown) => {
+        const date = formatDate(rundown.date, true);
+        const start = formatTime(rundown.start_time);
+        const end = rundown.end_time ? formatTime(rundown.end_time) : "Selesai";
+        const zone = rundown.time_zone;
+        const location = rundown.location;
+
+        return `
+${rundown.title}:
+🗓️ Tanggal  : ${date}
+🕛 Pukul    : ${start} ${zone} s/d ${end === "Selesai" ? end : `${end} ${zone}`}
+📍 Lokasi   : ${location}`;
+      })
+      .join("\n");
+  };
+
   const applyTemplate = (template: string, data: Record<string, string>) => {
     return Object.entries(data).reduce((result, [key, value]) => {
       return result.replace(new RegExp(`{${key}}`, "g"), value);
@@ -92,17 +113,11 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
 
     const template = selectedInvitation?.message_template;
 
-    const rundown = selectedInvitation.rundowns?.[0];
-
     const dataMap: Record<string, string> = {
       guest_name: data.name,
       event_title: selectedInvitation.event_title ?? "-",
-      event_date: formatDate(selectedInvitation.event_date || "") ?? "-",
-      start_time: formatTime(rundown?.start_time || "") ?? "-",
-      end_time: formatTime(rundown?.end_time || "") ?? "-",
-      time_zone: rundown?.time_zone ?? "-",
-      location: selectedInvitation.location ?? "-",
       url: generateUrl() ?? "-",
+      event_rundowns: generateRundownText(selectedInvitation.rundowns),
     };
 
     return applyTemplate(template, dataMap);
