@@ -173,7 +173,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
               <Button
                 onClick={() => setExcelUploadModalOpen(true)}
                 variant="outline"
-                className="dark:bg-slate-200 cursor-pointer"
+                className="dark:bg-slate-200 hover:dark:bg-slate-300 cursor-pointer"
               >
                 <Upload className="w-4 h-4 dark:text-slate-900" />
               </Button>
@@ -182,19 +182,21 @@ export const GuestClient: React.FC<GuestClientProps> = ({
               <Button
                 onClick={() => setGuestInputModalOpen(true)}
                 variant="outline"
-                className="dark:bg-slate-200 cursor-pointer"
+                className="dark:bg-slate-200 hover:dark:bg-slate-300 cursor-pointer"
               >
                 <Plus className="w-4 h-4 dark:text-slate-900" />
               </Button>
             </TooltipHover>
           </div>
-          <Button
-            onClick={() => setEditMessageModalOpen(true)}
-            className="dark:bg-green-600 dark:hover:bg-green-500 cursor-pointer bg-green-600 hover:bg-green-500 text-white "
-          >
-            <span className="text-xs md:text-sm">Message</span>
-            <SquarePen className="w-4 h-4 dark:text-slate-50" />
-          </Button>
+          <TooltipHover message="Create Template Message">
+            <Button
+              onClick={() => setEditMessageModalOpen(true)}
+              className="dark:bg-green-600 dark:hover:bg-green-500 cursor-pointer bg-green-600 hover:bg-green-500 text-white "
+            >
+              <span className="text-xs md:text-sm">Message</span>
+              <SquarePen className="w-4 h-4 dark:text-slate-50" />
+            </Button>
+          </TooltipHover>
         </div>
       </div>
 
