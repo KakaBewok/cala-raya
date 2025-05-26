@@ -76,7 +76,7 @@ Undangan lengkap bisa diakses di link berikut:
 Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir di acara kami
 Mohon maaf perihal undangan hanya dibagikan melalui pesan ini.
 
-Terima kasih banyak atas perhatiannya 💕`.trim(),
+Terima kasih banyak atas perhatiannya💕`.trim(),
 }) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [template, setTemplate] = useState<string>(initialTemplate);
