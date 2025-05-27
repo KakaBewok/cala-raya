@@ -23,6 +23,9 @@ export async function POST(req: Request) {
   const guests = body.guests.map((name) => ({
     name,
     invitation_id: body.invitationId,
+    phone_number: "",
+    address: "",
+    notes: "",
   }));
 
   const { data, error } = await db.from("guests").insert(guests);

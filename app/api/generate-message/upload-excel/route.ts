@@ -3,13 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import toast from "react-hot-toast";
 import * as XLSX from "xlsx";
 import logger from "@/lib/logger";
-
-interface GuestData {
-  name: string;
-  phone?: string;
-  address?: string;
-  notes?: string;
-}
+import { GuestData } from "@/types/guest-data";
 
 // disable automatic body parsing for this route
 // because we are using formData to upload a file
@@ -64,9 +58,9 @@ export async function POST(request: NextRequest) {
       guests.push({
         name: item.name,
         invitation_id,
-        phone_number: item.phone ?? "-",
-        address: item.address ?? "-",
-        notes: item.notes ?? "-",
+        phone_number: item.phone ?? "",
+        address: item.address ?? "",
+        notes: item.notes ?? "",
       });
     }
 

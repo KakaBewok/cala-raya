@@ -1,5 +1,6 @@
 import db from "@/configs/db-config";
 import { NextRequest, NextResponse } from "next/server";
+import logger from "@/lib/logger";
 
 export async function DELETE(
   req: NextRequest,
@@ -14,9 +15,11 @@ export async function DELETE(
   const { error } = await db.from("guests").delete().eq("id", id);
 
   if (error) {
+    logger.error({ error_message: error.message, guest_id: id });
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 
+  logger.info({ guest_id: id }, "guest deleted");
   return NextResponse.json(
     { message: "Guest deleted successfully" },
     { status: 200 }

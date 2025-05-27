@@ -1,9 +1,11 @@
 "use client";
 
 import { AlertModal } from "@/components/dashboard/AlertModal";
+import { EditGuestModal } from "@/components/dashboard/EditGuestModal";
 import { Button } from "@/components/ui/button";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
+import { GuestData } from "@/types/guest-data";
 import { Rundown } from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
 import { formatTime } from "@/utils/format-time";
@@ -21,10 +23,12 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
     invitationAdminData: invitations,
     refetchInvitations,
   } = useInvitationAdmin();
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const [isShare, setIsShare] = useState<boolean>(false);
   const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
+  const [loadingEdit, setLoadingEdit] = useState<boolean>(false);
 
   const selectedInvitation = invitations.find(
     (invitation) => invitation.id === Number(id)
@@ -48,7 +52,7 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
         position: "top-center",
       });
 
-      setModalOpen(false);
+      setDeleteModalOpen(false);
     } catch (error) {
       console.error("An error occurred: ", error);
       toast.error("Failed to delete");
@@ -57,37 +61,38 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
     }
   };
 
-  //   const handleEditProduct = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //     e.stopPropagation();
+  const handleEditId = async (guest: GuestData) => {
+    setLoadingEdit(true);
+    try {
+      const res = await fetch(`/api/update-guest/${data.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(guest),
+      });
 
-  //     setLoading(true);
-  //     router.get(
-  //       route("admin.category.edit", data.id),
-  //       {},
-  //       {
-  //         onFinish: () => setLoading(false),
-  //       }
-  //     );
-  //   };
+      if (!res.ok) throw new Error("Update failed");
 
-  //   const handleShowDetailsCategory = (
-  //     e: React.MouseEvent<HTMLButtonElement>
-  //   ) => {
-  //     e.stopPropagation();
-
-  //     setLoading(true);
-  //     router.get(
-  //       route("admin.category.show", data.id),
-  //       {},
-  //       {
-  //         onFinish: () => setLoading(false),
-  //       }
-  //     );
-  //   };
+      refetchInvitations();
+      setEditModalOpen(false);
+      toast.success("Guest updated", {
+        position: "top-center",
+      });
+    } catch (err) {
+      toast.error("Failed to update");
+      console.error(err);
+    } finally {
+      setLoadingEdit(false);
+    }
+  };
 
   const handleModalDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setModalOpen(true);
+    setDeleteModalOpen(true);
+  };
+
+  const handleModalEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setEditModalOpen(true);
   };
 
   const generateUrl = () => {
@@ -198,22 +203,27 @@ ${rundown.title}:
     }, 6000);
   };
 
-  const temp = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    alert("This feature is not available yet.");
-  };
-
   return (
     <div>
       <AlertModal
-        isOpen={modalOpen}
+        isOpen={deleteModalOpen}
         onClose={(e) => {
           e?.stopPropagation();
-          setModalOpen(false);
+          setDeleteModalOpen(false);
         }}
         onConfirm={handleDeleteId}
         loading={loadingDelete}
         description="All data under this guest will also be deleted."
+      />
+      <EditGuestModal
+        selectedData={data}
+        isOpen={editModalOpen}
+        onClose={(e) => {
+          e?.stopPropagation();
+          setEditModalOpen(false);
+        }}
+        onSubmit={handleEditId}
+        loading={loadingEdit}
       />
       <div className="flex items-center gap-1">
         <Button
@@ -241,7 +251,7 @@ ${rundown.title}:
           disabled={loading}
           variant="ghost"
           className="h-8 p-0 w-9 bg-amber-400 hover:bg-amber-500 dark:hover:bg-amber-500 cursor-pointer"
-          onClick={temp}
+          onClick={handleModalEdit}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
