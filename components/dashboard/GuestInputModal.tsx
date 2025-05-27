@@ -109,7 +109,7 @@ export const GuestInputModal: React.FC<GuestInputModalProps> = ({
           {guestList.map((name, idx) => (
             <span
               key={idx}
-              className=" bg-sky-200 text-sky-800 dark:bg-sky-900 dark:text-white text-xs font-medium px-2 py-1 rounded"
+              className=" bg-sky-200 text-sky-800 dark:bg-sky-500 dark:text-white text-xs font-medium px-2 py-1 rounded"
             >
               {name}
               <button
@@ -118,7 +118,7 @@ export const GuestInputModal: React.FC<GuestInputModalProps> = ({
                     prev.filter((guestName) => guestName !== name)
                   )
                 }
-                className="ml-2 text-red-500 hover:text-red-700 cursor-pointer"
+                className="ml-2 text-red-500 hover:text-red-700 dark:text-red-600 font-semibold text-md cursor-pointer"
                 aria-label="Delete guest"
               >
                 ×
