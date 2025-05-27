@@ -178,6 +178,7 @@ export const EditGuestModal: React.FC<EditGuestModalProps> = ({
             />
             <div className="pt-4 flex justify-end gap-3">
               <Button
+                type="button"
                 variant="outline"
                 onClick={onCloseHandler}
                 disabled={loading}
