@@ -150,7 +150,7 @@ ${rundown.title}:
         {errorMessage && <InputError message={errorMessage} className="mb-2" />}
 
         {!isPreviewText && (
-          <div>
+          <div className="mb-5">
             <textarea
               className="dark:bg-neutral-800 dark:text-white w-full p-3 h-60 text-xs md:text-sm border border-neutral-400 bg-sky-100 rounded-sm"
               value={template}
@@ -161,7 +161,8 @@ ${rundown.title}:
             <p className="dark:text-white text-xs text-neutral-900 mt-2">
               <span className="font-bold text-neutral-700 dark:text-white">
                 Use tags:
-              </span>{" "}
+              </span>
+              <br />
               <code>{" {guest_name}"}</code>, <code>{"{event_title}"}</code>,
               <code>{" {event_rundowns}"}</code>, <code>{"{url}"}</code>
             </p>
@@ -182,7 +183,7 @@ ${rundown.title}:
             <div className="flex flex-wrap gap-2">
               <Button
                 size={"sm"}
-                className="bg-sky-600 hover:bg-sky-700 text-white dark:bg-sky-600 dark:hover:bg-sky-700 cursor-pointer"
+                className="w-full md:w-auto bg-sky-600 hover:bg-sky-700 text-white dark:bg-sky-600 dark:hover:bg-sky-700 cursor-pointer"
                 onClick={handlePreview}
                 disabled={loading}
               >
@@ -190,7 +191,7 @@ ${rundown.title}:
               </Button>
               <Button
                 size={"sm"}
-                className="bg-red-200 hover:bg-red-200 text-red-600 dark:bg-red-200 dark:hover:bg-red-200 cursor-pointer"
+                className="w-full md:w-auto bg-red-200 hover:bg-red-200 text-red-600 dark:bg-red-200 dark:hover:bg-red-200 cursor-pointer"
                 onClick={handleReset}
                 disabled={loading}
               >

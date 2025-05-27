@@ -16,30 +16,46 @@ import toast from "react-hot-toast";
 export const CellAction = ({ data }: { data: GuestColumn }) => {
   const params = useParams();
   const id = params.id as string;
-  const { loading, invitationAdminData: invitations } = useInvitationAdmin();
+  const {
+    loading,
+    invitationAdminData: invitations,
+    refetchInvitations,
+  } = useInvitationAdmin();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const [isShare, setIsShare] = useState<boolean>(false);
+  const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
 
   const selectedInvitation = invitations.find(
     (invitation) => invitation.id === Number(id)
   );
 
-  //   const handleDeleteId = (e?: React.MouseEvent<HTMLButtonElement>) => {
-  //     e?.stopPropagation();
+  const handleDeleteId = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.stopPropagation();
+    setLoadingDelete(true);
 
-  //     setLoading(true);
-  //     router.delete(route("admin.category.destroy", data.id), {
-  //       onSuccess: () => {
-  //         toast.success("Data deleted.", {
-  //           position: "top-center",
-  //         }),
-  //           setModalOpen(false);
-  //       },
-  //       onError: (error) => console.log("An error occurred: ", error),
-  //       onFinish: () => setLoading(false),
-  //     });
-  //   };
+    try {
+      const res = await fetch(`/api/delete-guest/${data.id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to delete");
+      }
+
+      refetchInvitations();
+      toast.success("Guest deleted", {
+        position: "top-center",
+      });
+
+      setModalOpen(false);
+    } catch (error) {
+      console.error("An error occurred: ", error);
+      toast.error("Failed to delete");
+    } finally {
+      setLoadingDelete(false);
+    }
+  };
 
   //   const handleEditProduct = (e: React.MouseEvent<HTMLButtonElement>) => {
   //     e.stopPropagation();
@@ -69,12 +85,10 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
   //     );
   //   };
 
-  //   const handleModalDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //     e.stopPropagation();
-  //     setModalOpen(true);
-  //   };
-
-  //
+  const handleModalDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setModalOpen(true);
+  };
 
   const generateUrl = () => {
     if (!selectedInvitation?.id || !data.id) return null;
@@ -197,16 +211,16 @@ ${rundown.title}:
           e?.stopPropagation();
           setModalOpen(false);
         }}
-        onConfirm={() => temp}
-        loading={loading}
-        description="All data under this guests will also be deleted."
+        onConfirm={handleDeleteId}
+        loading={loadingDelete}
+        description="All data under this guest will also be deleted."
       />
       <div className="flex items-center gap-1">
         <Button
           disabled={loading}
           variant="destructive"
-          onClick={temp}
-          className="h-8 p-0 bg-red-500 w-9 hover:bg-red-600 cursor-pointer"
+          onClick={handleModalDelete}
+          className="h-8 p-0 bg-red-500 w-9 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +240,7 @@ ${rundown.title}:
         <Button
           disabled={loading}
           variant="ghost"
-          className="h-8 p-0 w-9 bg-amber-400 hover:bg-amber-500  cursor-pointer"
+          className="h-8 p-0 w-9 bg-amber-400 hover:bg-amber-500 dark:hover:bg-amber-500 cursor-pointer"
           onClick={temp}
         >
           <svg
@@ -247,7 +261,7 @@ ${rundown.title}:
         <Button
           disabled={loading}
           variant="ghost"
-          className={`h-8 p-0 w-9 bg-sky-500 hover:bg-sky-600 cursor-pointer`}
+          className={`h-8 p-0 w-9 bg-sky-500 hover:bg-sky-600 dark:hover:bg-sky-600 cursor-pointer`}
           onClick={handleCopy}
         >
           {copied ? (
@@ -259,7 +273,7 @@ ${rundown.title}:
         <Button
           disabled={loading}
           variant="ghost"
-          className={`h-8 p-0 w-9 bg-green-500 hover:bg-green-600 cursor-pointer`}
+          className={`h-8 p-0 w-9 bg-green-500 hover:bg-green-600 dark:hover:bg-green-600 cursor-pointer`}
           onClick={handleShareWA}
         >
           {isShare ? (

@@ -71,7 +71,7 @@ export const FileUpload = ({
 
   return (
     <div className="w-full" {...getRootProps()}>
-      {files.length > 0 && (
+      {files.length > 0 ? (
         <Button
           variant="outline"
           size="sm"
@@ -80,6 +80,14 @@ export const FileUpload = ({
         >
           Remove File
         </Button>
+      ) : (
+        <a
+          href="/templates/guest-template.xlsx"
+          download
+          className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
+        >
+          📥 Download Template
+        </a>
       )}
 
       <motion.div
