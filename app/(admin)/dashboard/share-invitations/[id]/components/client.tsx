@@ -32,7 +32,8 @@ export const GuestClient: React.FC<GuestClientProps> = ({
     refetchInvitations,
   } = useInvitationAdmin();
   const [ids, setIds] = useState<number[]>([]);
-  const [alertModalOpen, setAlertModalOpen] = useState<boolean>(false);
+  const [bulkDeleteModalOpen, setBulkDeleteModalOpen] =
+    useState<boolean>(false);
   const [guestInputModalOpen, setGuestInputModalOpen] =
     useState<boolean>(false);
   const [excelUploadModalOpen, setExcelUploadModalOpen] =
@@ -40,6 +41,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
   const [editMessageModalOpen, setEditMessageModalOpen] =
     useState<boolean>(false);
   const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
   const description = `${bridesAndGrooms} - ${
@@ -48,7 +50,33 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       : ""
   }`;
 
-  console.log("testids: ", ids);
+  const handleBulkDelete = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.stopPropagation();
+    setLoadingDelete(true);
+
+    try {
+      const res = await fetch(`/api/delete-guest`, {
+        method: "DELETE",
+        body: JSON.stringify({ ids }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to delete");
+      }
+
+      refetchInvitations();
+      toast.success("Guests deleted", {
+        position: "top-center",
+      });
+
+      setBulkDeleteModalOpen(false);
+    } catch (error) {
+      console.error("An error occurred: ", error);
+      toast.error("Failed to delete");
+    } finally {
+      setLoadingDelete(false);
+    }
+  };
 
   const handleUpload = async (
     file: File | null,
@@ -89,7 +117,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
 
   const openDeleteModal = (ids: number[]) => {
     setIds(ids);
-    setAlertModalOpen(true);
+    setBulkDeleteModalOpen(true);
   };
 
   const submitGuestInput = async (guestNames: string[]) => {
@@ -201,10 +229,10 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       </div>
 
       <AlertModal
-        isOpen={alertModalOpen}
-        onClose={() => setAlertModalOpen(false)}
-        onConfirm={() => alert("This feature is not available yet.")}
-        loading={loading}
+        isOpen={bulkDeleteModalOpen}
+        onClose={() => setBulkDeleteModalOpen(false)}
+        onConfirm={handleBulkDelete}
+        loading={loadingDelete}
         description="All data under this guests will also be deleted."
       />
       <EditMessageModal

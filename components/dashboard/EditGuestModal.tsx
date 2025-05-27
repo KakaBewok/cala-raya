@@ -33,7 +33,7 @@ export const EditGuestModal: React.FC<EditGuestModalProps> = ({
   loading,
 }) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [guest, setGuest] = useState<GuestColumn>(selectedData);
+
   const formSchema = z.object({
     name: z
       .string()
@@ -61,38 +61,34 @@ export const EditGuestModal: React.FC<EditGuestModalProps> = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: guest.name,
-      phone_number: guest.phone_number,
-      address: guest.address,
-      notes: guest.notes,
+      name: selectedData.name,
+      phone_number: selectedData.phone_number,
+      address: selectedData.address,
+      notes: selectedData.notes,
     },
   });
+
+  const resetForm = () => {
+    form.reset({
+      name: selectedData.name,
+      phone_number: selectedData.phone_number,
+      address: selectedData.address,
+      notes: selectedData.notes,
+    });
+  };
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!isOpen) {
-      setGuest(selectedData);
-    }
-  }, [isOpen]);
+    resetForm();
+  }, [selectedData]);
 
   if (!isMounted) return null;
 
-  const resetForm = () => {
-    form.reset({
-      name: guest.name,
-      phone_number: guest.phone_number,
-      address: guest.address,
-      notes: guest.notes,
-    });
-  };
-
   function onSubmitHandler(values: z.infer<typeof formSchema>) {
     onSubmit(values);
-    resetForm();
-    console.log(values);
   }
 
   function onCloseHandler() {
