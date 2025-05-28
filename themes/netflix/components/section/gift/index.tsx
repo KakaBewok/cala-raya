@@ -65,26 +65,28 @@ const Gift = () => {
         ))}
       </div>
 
-      <div className="relative w-full rounded-sm border border-neutral-950 bg-neutral-900 p-3 text-center transition-shadow hover:shadow-lg">
-        <h3 className="text-md font-semibold text-red-500">Hadiah fisik</h3>
-        <p className="mt-2 text-xs tracking-wider">
-          {data?.gift_infos?.[0].gift_delivery_address}
-        </p>
+      {data?.gift_infos?.[0].gift_delivery_address && (
+        <div className="relative w-full rounded-sm border border-neutral-950 bg-neutral-900 p-3 text-center transition-shadow hover:shadow-lg">
+          <h3 className="text-md font-semibold text-red-500">Hadiah fisik</h3>
+          <p className="mt-2 text-xs tracking-wider">
+            {data?.gift_infos?.[0].gift_delivery_address}
+          </p>
 
-        <button
-          onClick={() =>
-            handleCopy(data?.gift_infos?.[0].gift_delivery_address || "")
-          }
-          className="cursor pointer absolute top-2 right-2"
-          aria-label="Copy"
-        >
-          {addressCopied ? (
-            <CopyCheck className="h-5 w-5 text-red-500" />
-          ) : (
-            <Copy className="h-5 w-5 text-white" />
-          )}
-        </button>
-      </div>
+          <button
+            onClick={() =>
+              handleCopy(data?.gift_infos?.[0].gift_delivery_address || "")
+            }
+            className="cursor pointer absolute top-2 right-2"
+            aria-label="Copy"
+          >
+            {addressCopied ? (
+              <CopyCheck className="h-5 w-5 text-red-500" />
+            ) : (
+              <Copy className="h-5 w-5 text-white" />
+            )}
+          </button>
+        </div>
+      )}
     </section>
   );
 };
