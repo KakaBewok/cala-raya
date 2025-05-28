@@ -8,7 +8,8 @@ export default function Bridegroom() {
   return (
     <div className="mb-14" data-aos="zoom-in">
       <h2 className="mb-4 text-lg leading-5 font-bold text-white">
-        {data?.host_one_nickname} & {data?.host_two_nickname}
+        {/* {data?.host_one_nickname} & {data?.host_two_nickname} */}
+        Brides & Grooms
       </h2>
       <div className="grid grid-cols-2 gap-4">
         <div>

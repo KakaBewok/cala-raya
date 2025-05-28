@@ -4,6 +4,10 @@ import { GalleryItem } from "./gallery-item";
 export default function OurGallery() {
   const { invitationData: data } = useInvitation();
 
+  const sortedGallery = data?.images?.sort(
+    (a, b) => a.order_number - b.order_number
+  );
+
   return (
     <div className="mb-14">
       <h2
@@ -13,7 +17,7 @@ export default function OurGallery() {
         Our Gallery
       </h2>
       <div className="grid grid-cols-3 gap-3">
-        {data?.images
+        {sortedGallery
           ?.filter((image) => image.type == "gallery")
           .map((item, index) => (
             <GalleryItem key={index} src={item.url} />

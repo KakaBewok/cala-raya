@@ -47,7 +47,7 @@ export interface User {
   role: string;
 }
 
-interface Theme {
+export interface Theme {
   id: number;
   name: string;
   preview_image: string;
@@ -55,14 +55,14 @@ interface Theme {
   description: string;
 }
 
-interface Music {
+export interface Music {
   id: number;
   title: string;
   artist: string;
   url: string;
 }
 
-interface Video {
+export interface Video {
   id: number;
   invitation_id: number;
   title: string;
@@ -72,15 +72,16 @@ interface Video {
   order_number: number;
 }
 
-interface Image {
+export interface Image {
   id: number;
   invitation_id: number;
   url: string;
   caption: string;
   type: string;
+  order_number: number;
 }
 
-interface GiftInfo {
+export interface GiftInfo {
   id: number;
   invitation_id: number;
   provider_name: string;
@@ -116,7 +117,7 @@ export interface Rundown {
   order_number: number;
 }
 
-interface Story {
+export interface Story {
   id: number;
   invitation_id: number;
   title: string;
@@ -126,7 +127,7 @@ interface Story {
   order_number: number;
 }
 
-interface RSVP {
+export interface RSVP {
   id: number;
   invitation_id: number;
   guest_name: string;

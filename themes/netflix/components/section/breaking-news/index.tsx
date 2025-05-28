@@ -38,7 +38,10 @@ export default function BreakingNews() {
               kebahagiaan perjalanan baru kami.
             </p>
             <p className="mt-4">Dengan penuh cinta dan harapan,</p>
-            <p>The Bride & Groom 💖</p>
+            <p>
+              {" "}
+              {data?.host_one_nickname} & {data?.host_two_nickname} 💖
+            </p>
           </div>
         )}
       </div>
