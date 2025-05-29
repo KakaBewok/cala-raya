@@ -50,20 +50,13 @@ export default function Thumbnail() {
   }
   return (
     <div className="overflow-hidden mb-10 flex h-screen flex-col justify-end relative">
-      <div className="relative h-[90vh] w-full">
-        <Image
-          src={findImage(data, "thumbnail")}
-          alt="Hero background"
-          fill
-          priority
-          className="object-contain object-center mx-auto z-0 w-full"
-        />
-
-        {/* <div className="absolute top-0 left-0 w-full h-56 bg-gradient-to-t from-transparent via-black to-black z-10" /> */}
-
-        {/* <div className="absolute bottom-0 left-0 w-full h-35 bg-gradient-to-b from-transparent via-black/60 to-black z-10" /> */}
-      </div>
-
+      <Image
+        src={findImage(data, "thumbnail")}
+        alt="Hero background"
+        fill
+        priority
+        className="object-cover object-center z-0"
+      />
       <audio
         autoPlay
         src="/assets/music/netflix/opening-netflix.mp3"
