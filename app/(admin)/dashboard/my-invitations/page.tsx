@@ -8,7 +8,10 @@ const InvitationPage = () => {
 
   return (
     <>
-      <div className="p-2 pt-6 space-y-7">Under maintenance</div>
+      <div className="p-2 pt-6 space-y-7">
+        Under maintenance. Silahkan ke menu Share Invitations untuk setting
+        template pesan, input tamu dan sebarkan undangan.
+      </div>
     </>
   );
 };
