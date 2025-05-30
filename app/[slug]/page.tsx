@@ -4,6 +4,7 @@ import Loading from "@/components/Loading";
 import db from "@/configs/db-config";
 import { useInvitation } from "@/hooks/use-invitation";
 import FloralPage from "@/themes/floral/FloralPage";
+import MagazinePage from "@/themes/magazine/MagazinePage";
 import MonochromePage from "@/themes/monochrome/MonochromePage";
 import NetflixPage from "@/themes/netflix/NetflixPage";
 import { ThemeName } from "@/types/theme-name";
@@ -16,6 +17,7 @@ const themeMap: Record<ThemeName, React.ComponentType> = {
   monochrome: MonochromePage,
   netflix: NetflixPage,
   floral: FloralPage,
+  magazine: MagazinePage,
 };
 
 export default function InvitationPage() {
