@@ -6,12 +6,17 @@ import MainPage from "./components/MainPage";
 import MusicButton from "./components/MusicButton";
 
 export default function InvitationPage() {
+  const [opened, setOpened] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <>
-      <Hero isOpen={isOpen} setIsOpen={setIsOpen} />
-      <MainPage />
+      <Hero
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onOpen={() => setOpened(true)}
+      />
+      {opened && <MainPage />}
       <MusicButton isOpen={isOpen} />
     </>
   );

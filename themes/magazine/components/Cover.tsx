@@ -1,51 +1,78 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
 import { optivaground } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
-import { MoveDown } from "lucide-react";
 import Image from "next/image";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const Cover = () => {
   const { invitationData: data } = useInvitation();
-  const tag = `#${data?.host_one_nickname}${data?.host_two_nickname}Day`;
 
-  const formatEventDate = (dateString: string) => {
-    if (!dateString) return null;
+  const ref = useRef(null);
 
-    const eventDate = new Date(dateString);
-    const day = String(eventDate.getDate()).padStart(2, "0");
-    const month = String(eventDate.getMonth() + 1).padStart(2, "0");
-    const year = eventDate.getFullYear();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "start -2%"],
+  });
 
-    return `${day} . ${month} . ${year}`;
-  };
+  // Transformasi ukuran
+  const rawWidth = useTransform(scrollYProgress, [0, 1], ["85vw", "100vw"]);
+  const rawHeight = useTransform(scrollYProgress, [0, 1], ["92vh", "100vh"]);
+  const filter = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["grayscale(100%)", "grayscale(0%)"]
+  );
+
+  // Smooth transisi
+  const width = useSpring(rawWidth, { stiffness: 100, damping: 25 });
+  const height = useSpring(rawHeight, { stiffness: 100, damping: 25 });
 
   return (
-    <div className="relative h-screen flex items-center justify-center overflow-hidden">
-      <Image
-        src={findImage(data, "cover")}
-        alt="Cover background"
-        fill
-        priority
-        className="object-cover object-center z-0"
-      />
+    <section
+      ref={ref}
+      className="relative w-full min-h-screen bg-white flex items-center justify-center overflow-hidden"
+    >
+      <motion.div className="" style={{ width, height, filter }}>
+        <Image
+          src={findImage(data, "cover")}
+          alt="Cover photo"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+      </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
+      <div className="absolute inset-10 border border-[#c6a886] z-10 pointer-events-none" />
+      <div className="absolute inset-11 border border-[#c6a886] z-10 pointer-events-none" />
 
-      <div className="relative z-20 h-screen flex flex-col justify-between items-center text-white">
-        <div className="tracking-wider mt-28 flex flex-col items-center justify-center">
-          <p className="text-sm mb-2">{tag}</p>
-          <p className={`${optivaground.className} text-4xl mb-2`}>
-            {data?.host_one_nickname} & {data?.host_two_nickname}
-          </p>
-          <p className="text-sm">{formatEventDate(data?.event_date ?? "")}</p>
-        </div>
-
-        <Button className="mb-16 w-7 h-7 bg-neutral-600/20 text-white cursor-pointer rounded-full transition animate-bounce flex items-center justify-center">
-          <MoveDown size={11} className="animate-pulse" />
-        </Button>
+      {/* Content box */}
+      <div
+        className="absolute bottom-0 z-20 w-full bg-gradient-to-t from-white/80 via-white/60 to-transparent text-right px-6 py-8 backdrop-blur-sm"
+        data-aos="zoom-in"
+        data-aos-offset={120}
+      >
+        <h2
+          className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-md text-shadow-sm`}
+        >
+          {data?.host_two_name}
+        </h2>
+        <p className="mt-2 text-sm sm:text-base text-white drop-shadow-md font-light">
+          {data?.host_two_additional_info}
+        </p>
       </div>
-    </div>
+
+      {/* flower */}
+      <Image
+        src="/assets/images/floral/bunga2.webp"
+        alt="Bunga kiri"
+        width={120}
+        height={120}
+        className="absolute bottom-0 left-0 z-30"
+      />
+    </section>
   );
 };
 

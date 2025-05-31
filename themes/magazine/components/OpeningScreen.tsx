@@ -1,37 +1,34 @@
-"use client";
-
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import Image from "next/image";
-import { optivaground } from "@/fonts/fonts";
+import { poppins } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
 
-export default function OpeningScreen({ onOpen }: { onOpen: () => void }) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+interface OpeningScreenProps {
+  isOpenInvitation: boolean;
+  setIsOpenInvitation: (isOpen: boolean) => void;
+}
 
+export default function OpeningScreen({
+  isOpenInvitation,
+  setIsOpenInvitation,
+}: OpeningScreenProps) {
   const { invitationData: data, guest } = useInvitation();
 
-  const initial1 = data?.host_one_nickname?.charAt(0)?.toUpperCase() ?? "";
-  const initial2 = data?.host_two_nickname?.charAt(0)?.toUpperCase() ?? "";
-
   const handleClick = () => {
-    setIsOpen(true);
-    setTimeout(() => {
-      onOpen(); // memberi tahu induk bahwa sudah terbuka
-    }, 1000);
+    setIsOpenInvitation(true);
   };
 
   return (
     <AnimatePresence>
-      {!isOpen && (
+      {!isOpenInvitation && (
         <motion.div
-          initial={{ y: 0, opacity: 0 }}
+          className="max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden"
+          initial={{ y: "-100%", opacity: 1 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "-100%" }}
           transition={{ duration: 1, ease: "easeInOut" }}
-          className="absolute inset-0 z-40 bg-white flex flex-col items-center justify-center shadow-xl rounded-xl"
         >
           <Image
             src={findImage(data, "hero")}
@@ -42,23 +39,34 @@ export default function OpeningScreen({ onOpen }: { onOpen: () => void }) {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
 
-          <div className="relative h-screen z-20 flex flex-col justify-between items-center text-center text-white">
-            <h1 className="text-7xl font-serif mt-28">
-              • {initial1}
-              {initial2} •
-            </h1>
+          <div className="relative h-screen w-full z-20 text-white">
+            <div className="absolute top-28 left-1/2 transform -translate-x-1/2">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 1.5 }}
+              >
+                <Image
+                  src={findImage(data, "initial")}
+                  alt="Initial"
+                  priority
+                  width={80}
+                  height={80}
+                />
+              </motion.div>
+            </div>
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: "-100%" }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 1 }}
-              className={`tracking-wider ${optivaground.className} mb-20 flex flex-col items-start justify-center`}
+              className={`gap-5 max-w-48 absolute left-7 bottom-32 tracking-wider ${poppins.className} flex flex-col items-start justify-start`}
             >
-              <p className={`text-sm mb-2`}>Kepada Yth.</p>
-              <p className={`text-3xl mb-3`}>{guest?.name}</p>
+              <p className="text-sm">Halo,</p>
+              <p className="text-3xl leading-relaxed">{guest?.name}</p>
               <Button
-                size="lg"
+                size="sm"
                 onClick={handleClick}
-                className="bg-orange-300 hover:bg-orange-400 cursor-pointer"
+                className="mt-5 text-xs bg-transparent rounded-none border border-white cursor-pointer hover:bg-transparent"
               >
                 Buka Undangan
               </Button>

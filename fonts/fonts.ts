@@ -1,4 +1,10 @@
-import { Geist, Geist_Mono, Playfair_Display, Roboto } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Playfair_Display,
+  Poppins,
+  Roboto,
+} from "next/font/google";
 import localFont from "next/font/local";
 
 // default font for the app
@@ -24,6 +30,13 @@ export const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "600"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+export const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
