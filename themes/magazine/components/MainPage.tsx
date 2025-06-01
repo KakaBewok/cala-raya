@@ -4,7 +4,6 @@ import Cover from "./Cover";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import Greetings from "./Greetings";
 import Bismillah from "./Bismillah";
 import BridesSection from "./BridesSection";
 import MusicButton from "./MusicButton";
@@ -27,7 +26,7 @@ export default function MainPage({
       <Cover />
       <Bismillah />
       <BridesSection />
-      <Greetings />
+      {/* <Greetings /> */}
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );
