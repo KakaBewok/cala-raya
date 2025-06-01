@@ -10,32 +10,32 @@ import { useRef } from "react";
 const Cover = () => {
   const { invitationData: data } = useInvitation();
 
-  const ref = useRef(null);
+  const animationRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: animationRef,
     offset: ["start start", "start -2%"],
   });
 
-  // Transformasi ukuran
+  // size transform
   const rawWidth = useTransform(scrollYProgress, [0, 1], ["85vw", "100vw"]);
   const rawHeight = useTransform(scrollYProgress, [0, 1], ["92vh", "100vh"]);
+  // grayscale transform
   const filter = useTransform(
     scrollYProgress,
     [0, 1],
     ["grayscale(100%)", "grayscale(0%)"]
   );
-
-  // Smooth transisi
+  // smooth transition
   const width = useSpring(rawWidth, { stiffness: 100, damping: 25 });
   const height = useSpring(rawHeight, { stiffness: 100, damping: 25 });
 
   return (
     <section
-      ref={ref}
+      ref={animationRef}
       className="relative w-full min-h-screen bg-white flex items-center justify-center overflow-hidden"
     >
-      <motion.div className="" style={{ width, height, filter }}>
+      <motion.div style={{ width, height, filter }}>
         <Image
           src={findImage(data, "cover")}
           alt="Cover photo"

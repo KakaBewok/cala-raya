@@ -31,8 +31,9 @@ const Gift = () => {
           Wedding Gift
         </h2>
         <p className="mx-auto max-w-xl text-xs text-slate-300">
-          Kehadiran kalian udah bikin kami bahagia. Tapi kalau mau nitip sedikit
-          cinta dalam bentuk hadiah, ini beberapa opsinya ya. Terima kasih! ❤️
+          Restu dan doa dari Anda adalah anugerah yang sangat berarti bagi kami.
+          Namun jika memberi adalah ungkapan kasih sayang Anda, Anda dapat
+          memberikannya secara elektronik.
         </p>
       </div>
 
