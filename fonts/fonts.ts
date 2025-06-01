@@ -1,8 +1,10 @@
 import {
   Geist,
   Geist_Mono,
+  GFS_Didot,
   Playfair_Display,
   Poppins,
+  Raleway,
   Roboto,
 } from "next/font/google";
 import localFont from "next/font/local";
@@ -35,8 +37,20 @@ export const playfair = Playfair_Display({
 
 export const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["200", "400", "700"],
   variable: "--font-poppins",
+  display: "swap",
+});
+
+export const didot = GFS_Didot({
+  weight: ["400"],
+  variable: "--font-didot",
+  display: "swap",
+});
+
+export const raleway = Raleway({
+  weight: ["100", "200", "300", "400"],
+  variable: "--font-raleway",
   display: "swap",
 });
 
