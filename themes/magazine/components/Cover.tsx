@@ -3,7 +3,7 @@
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import Image from "next/image";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { didot, raleway } from "@/fonts/fonts";
 
@@ -17,18 +17,17 @@ const Cover = () => {
     offset: ["start start", "start -2%"],
   });
 
-  // size transform
-  const rawWidth = useTransform(scrollYProgress, [0, 1], ["85vw", "100vw"]);
-  const rawHeight = useTransform(scrollYProgress, [0, 1], ["92vh", "100vh"]);
-  // grayscale transform
+  const clipPath = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["inset(3% 6%)", "inset(0% 0%)"]
+  );
+
   const filter = useTransform(
     scrollYProgress,
     [0, 1],
     ["grayscale(100%)", "grayscale(0%)"]
   );
-  // smooth transition
-  const width = useSpring(rawWidth, { stiffness: 100, damping: 25 });
-  const height = useSpring(rawHeight, { stiffness: 100, damping: 25 });
 
   const formatEventDate = (dateString: string) => {
     if (!dateString) return null;
@@ -44,9 +43,9 @@ const Cover = () => {
   return (
     <section
       ref={animationRef}
-      className="relative w-full min-h-screen bg-[#fdfaf6] flex items-center justify-center overflow-hidden"
+      className="relative w-full h-screen bg-[#fdfaf6] flex items-center justify-center overflow-hidden"
     >
-      <motion.div style={{ width, height, filter }}>
+      <motion.div style={{ clipPath, filter }} className="absolute inset-0">
         <Image
           src={findImage(data, "cover")}
           alt="Cover photo"

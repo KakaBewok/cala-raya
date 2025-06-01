@@ -43,12 +43,14 @@ export const poppins = Poppins({
 });
 
 export const didot = GFS_Didot({
+  subsets: ["greek"],
   weight: ["400"],
   variable: "--font-didot",
   display: "swap",
 });
 
 export const raleway = Raleway({
+  subsets: ["latin"],
   weight: ["100", "200", "300", "400"],
   variable: "--font-raleway",
   display: "swap",

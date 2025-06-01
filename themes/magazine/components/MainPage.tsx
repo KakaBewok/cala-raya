@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Greetings from "./Greetings";
 import Bismillah from "./Bismillah";
+import BridesSection from "./BridesSection";
 
 export default function MainPage() {
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function MainPage() {
     <main className="max-w-md mx-auto z-10 flex flex-col items-center justify-center">
       <Cover />
       <Bismillah />
+      <BridesSection />
       <Greetings />
     </main>
   );
