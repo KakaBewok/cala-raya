@@ -61,3 +61,9 @@ export const optivaground = localFont({
   variable: "--font-optivaground",
   display: "swap",
 });
+
+export const remineFares = localFont({
+  src: "../public/fonts/remine-fares/remine-fares.otf",
+  variable: "--font-reminefares",
+  display: "swap",
+});

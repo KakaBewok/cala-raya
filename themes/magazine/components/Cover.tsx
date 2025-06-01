@@ -5,7 +5,7 @@ import { findImage } from "@/utils/find-image";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { didot, raleway } from "@/fonts/fonts";
+import { didot, remineFares } from "@/fonts/fonts";
 
 const Cover = () => {
   const { invitationData: data } = useInvitation();
@@ -59,9 +59,11 @@ const Cover = () => {
       <div className="absolute z-20 h-screen flex flex-col justify-around items-center text-white">
         <p className={`${didot.className} text-xs`}>The Wedding of</p>
 
-        <h1 className={`${raleway.className} font-medium text-4xl text-left`}>
-          {data?.host_one_nickname.toUpperCase()} <br />&{" "}
-          {data?.host_two_nickname.toUpperCase()}
+        <h1
+          className={`${remineFares.className} font-medium text-4xl text-left`}
+        >
+          {data?.host_one_nickname.toLocaleLowerCase()} <br />&{" "}
+          {data?.host_two_nickname.toLocaleLowerCase()}
         </h1>
 
         <p className={`${didot.className} text-xs leading-tight`}>

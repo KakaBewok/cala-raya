@@ -2,29 +2,41 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { findImage } from "@/utils/find-image";
 import { useInvitation } from "@/hooks/use-invitation";
+import { remineFares } from "@/fonts/fonts";
 
 export default function BrideSection() {
   const { invitationData: data } = useInvitation();
   const animationRef = useRef(null);
+  const lineRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: animationRef,
-    offset: ["start 22%", "start 21%"],
+    offset: ["start 22%", "start start"],
+  });
+
+  const { scrollYProgress: lineScrollY } = useScroll({
+    target: lineRef,
+    offset: ["start 70%", "start 67%"],
   });
 
   const clipPath = useTransform(
     scrollYProgress,
-    [0, 1],
-    ["inset(12% 28% 23% 9%)", "inset(0% 0% 0% 0%)"]
+    [0, 0.5, 1],
+    ["inset(12% 28% 23% 9%)", "inset(6% 14% 11% 5%)", "inset(0% 0% 0% 0%)"]
+  );
+  const rawLineHeight = useTransform(
+    lineScrollY,
+    [0, 0.5, 1],
+    ["0px", "80px", "160px"]
   );
 
-  //   const clipPath = useSpring(rawClipPath, {
-  //     stiffness: 70, // Kekakuan pegas. Semakin kecil, semakin lembut.
-  //     damping: 20,
-  //   });
+  const lineHeight = useSpring(rawLineHeight, {
+    damping: 20,
+    stiffness: 100,
+  });
 
   return (
     <section
@@ -45,10 +57,17 @@ export default function BrideSection() {
       </motion.div>
 
       <motion.div className="absolute top-9 right-10 z-10 text-right">
-        <p className="text-3xl font-normal text-gray-700 tracking-wide">
-          {data?.host_two_nickname}
+        <p
+          className={`${remineFares.className} text-3xl font-normal text-gray-700 tracking-wide`}
+          data-aos="zoom-in"
+        >
+          {data?.host_two_nickname.toLowerCase()}
         </p>
-        <div className="w-px h-40 bg-gray-600 mt-10 ml-auto" />{" "}
+        <motion.div
+          ref={lineRef}
+          style={{ height: lineHeight }}
+          className="w-px bg-gray-600 mt-10 ml-auto"
+        />
       </motion.div>
     </section>
   );

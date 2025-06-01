@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import MainPage from "./components/MainPage";
-import MusicButton from "./components/MusicButton";
 import OpeningScreen from "./components/OpeningScreen";
 
 export default function InvitationPage() {
@@ -14,8 +13,7 @@ export default function InvitationPage() {
         isOpenInvitation={isOpenInvitation}
         setIsOpenInvitation={setIsOpenInvitation}
       />
-      {isOpenInvitation && <MainPage />}
-      <MusicButton isOpenInvitation={isOpenInvitation} />
+      {isOpenInvitation && <MainPage isOpenInvitation={isOpenInvitation} />}
     </>
   );
 }

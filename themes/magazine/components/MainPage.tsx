@@ -7,8 +7,13 @@ import { useEffect } from "react";
 import Greetings from "./Greetings";
 import Bismillah from "./Bismillah";
 import BridesSection from "./BridesSection";
+import MusicButton from "./MusicButton";
 
-export default function MainPage() {
+export default function MainPage({
+  isOpenInvitation,
+}: {
+  isOpenInvitation: boolean;
+}) {
   useEffect(() => {
     AOS.init({ duration: 1400, once: false, offset: 130 });
 
@@ -23,6 +28,7 @@ export default function MainPage() {
       <Bismillah />
       <BridesSection />
       <Greetings />
+      <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );
 }
