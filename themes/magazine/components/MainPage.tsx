@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import Bismillah from "./Bismillah";
 import BridesSection from "./BridesSection";
 import MusicButton from "./MusicButton";
+import GroomsSection from "./GroomsSection";
+import EventInfo from "./EventInfo";
 
 export default function MainPage({
   isOpenInvitation,
@@ -26,7 +28,8 @@ export default function MainPage({
       <Cover />
       <Bismillah />
       <BridesSection />
-      {/* <Greetings /> */}
+      <GroomsSection />
+      <EventInfo />
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );
