@@ -1,9 +1,9 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { poppins } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { poppins } from "@/fonts/fonts";
-import { Button } from "@/components/ui/button";
 
 interface OpeningScreenProps {
   isOpenInvitation: boolean;
