@@ -1,12 +1,12 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { findImage } from "@/utils/find-image";
-import { useInvitation } from "@/hooks/use-invitation";
 import { poppins, remineFares } from "@/fonts/fonts";
+import { useInvitation } from "@/hooks/use-invitation";
+import { findImage } from "@/utils/find-image";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Instagram } from "lucide-react";
+import Image from "next/image";
+import { useRef } from "react";
 
 export default function BrideSection() {
   const { invitationData: data } = useInvitation();
@@ -47,7 +47,7 @@ export default function BrideSection() {
       <motion.div style={{ clipPath }} className="absolute inset-0 z-20">
         <Image
           src={findImage(data, "brides")}
-          alt="Brides"
+          alt="Bride"
           fill
           className="object-cover object-center"
           priority
