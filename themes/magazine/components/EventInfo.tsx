@@ -54,7 +54,7 @@ const EventInfo = () => {
         priority
       />
       <div
-        className="border border-red-500 absolute z-20 inset-x-10 inset-y-16 bg-orange-50 flex flex-col justify-start items-center text-white pt-10"
+        className="border border-red-500 absolute z-20 inset-x-[8%] inset-y-[8%] bg-orange-50 flex flex-col justify-start items-center text-white pt-6"
         data-aos="fade-up"
       >
         {data?.rundowns?.map((rundown, index) => (
