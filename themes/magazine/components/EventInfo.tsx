@@ -1,12 +1,48 @@
 "use client";
 
+import { poppins, remineFares } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
+import { Rundown } from "@/types/invitation-data";
 import { findImage } from "@/utils/find-image";
+import { formatDate } from "@/utils/format-date";
+import { formatTime } from "@/utils/format-time";
+import { DateTime } from "luxon";
 import Image from "next/image";
-import { remineFares } from "@/fonts/fonts";
+import Link from "next/link";
 
 const EventInfo = () => {
   const { invitationData: data } = useInvitation();
+
+  const generateGoogleCalendarUrl = (rundown: Rundown): string => {
+    const date = rundown.date;
+    const startTime = rundown.start_time;
+    const endTime = rundown.end_time || startTime;
+
+    const startDateTimeISO = `${date}T${startTime}`;
+    const endDateTimeISO = `${date}T${endTime}`;
+
+    const start = DateTime.fromISO(startDateTimeISO)
+      .toUTC()
+      .toFormat("yyyyLLdd'T'HHmmss'Z'");
+    const end = DateTime.fromISO(endDateTimeISO)
+      .toUTC()
+      .toFormat("yyyyLLdd'T'HHmmss'Z'");
+
+    const eventTitle = data?.event_title || "Wedding Event";
+    const location = rundown.location || "Indonesia";
+    const rundownTitle = `(${rundown.title})` || ``;
+    const description = `${eventTitle} will be held at ${location} ${rundownTitle}`;
+
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+      eventTitle
+    )}&dates=${start}/${end}&details=${encodeURIComponent(
+      description
+    )}&location=${encodeURIComponent(
+      rundown.location_url || ""
+    )}&ctz=Asia/Jakarta`;
+
+    return googleCalendarUrl;
+  };
 
   return (
     <section className="relative w-full h-screen bg-white flex items-center justify-center overflow-hidden">
@@ -18,16 +54,80 @@ const EventInfo = () => {
         priority
       />
       <div
-        className="absolute z-20 inset-x-10 inset-y-7 bg-orange-50 flex flex-col justify-start items-center text-white"
+        className="absolute z-20 inset-x-10 inset-y-7 bg-orange-50 flex flex-col justify-start items-center text-white py-6"
         data-aos="fade-up"
       >
-        <div className="border border-red-500 p-6 w-full text-center flex flex-col justify-center items-center">
+        {data?.rundowns?.map((rundown, index) => (
           <div
-            className={`border border-blue-500 ${remineFares.className}text-2xl font-medium text-neutral-700 w-14`}
+            className="p-6 w-full flex flex-col justify-center items-center"
+            key={index}
           >
-            AKAD NIKAH
+            <h1
+              className={`
+                px-5
+                pb-3
+                w-fit
+                border-b-1 border-neutral-700
+                text-2xl font-medium text-neutral-700
+                mb-5
+                ${remineFares.className}
+            `}
+            >
+              {rundown.title || `Rundown ${index + 1}`}
+            </h1>
+            <p
+              className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
+            >
+              {formatDate(rundown.date, true)}
+            </p>
+            <p
+              className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
+            >
+              · {formatTime(rundown.start_time)} {rundown.time_zone} ·
+            </p>
+            <Link
+              href={generateGoogleCalendarUrl(rundown)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${poppins.className} text-xs font-medium underline text-neutral-700`}
+            >
+              Tambah ke Kalender
+            </Link>
           </div>
-        </div>
+        ))}
+        {/* <div className="border border-red-500 p-6 w-full flex flex-col justify-center items-center">
+          <h1
+            className={`
+                px-5
+                pb-3
+                w-fit
+                border-b-1 border-neutral-700
+                text-2xl font-medium text-neutral-700
+                mb-5
+                ${remineFares.className}
+            `}
+          >
+            {rundown.title || `Rundown ${index + 1}`}
+          </h1>
+          <p
+            className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
+          >
+            {formatDate(rundown.date, true)}
+          </p>
+          <p
+            className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
+          >
+            · {formatTime(rundown.start_time)} {rundown.time_zone} ·
+          </p>
+          <Link
+            href={generateGoogleCalendarUrl(rundown)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${poppins.className} text-xs font-medium underline text-neutral-700`}
+          >
+            Tambah ke Kalender
+          </Link>
+        </div> */}
       </div>
     </section>
   );
