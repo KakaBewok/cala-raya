@@ -54,12 +54,12 @@ const EventInfo = () => {
         priority
       />
       <div
-        className="absolute z-20 inset-x-10 inset-y-7 bg-orange-50 flex flex-col justify-start items-center text-white py-6"
+        className="absolute z-20 inset-x-10 inset-y-16 bg-orange-50 flex flex-col justify-start items-center text-white py-10"
         data-aos="fade-up"
       >
         {data?.rundowns?.map((rundown, index) => (
           <div
-            className="p-6 w-full flex flex-col justify-center items-center"
+            className="p-9 w-full flex flex-col justify-center items-center"
             key={index}
           >
             <h1
@@ -73,7 +73,7 @@ const EventInfo = () => {
                 ${remineFares.className}
             `}
             >
-              {rundown.title || `Rundown ${index + 1}`}
+              {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
             </h1>
             <p
               className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
@@ -95,7 +95,7 @@ const EventInfo = () => {
             </Link>
           </div>
         ))}
-        {/* <div className="border border-red-500 p-6 w-full flex flex-col justify-center items-center">
+        <div className="p-9 w-full flex flex-col justify-center items-center">
           <h1
             className={`
                 px-5
@@ -107,27 +107,21 @@ const EventInfo = () => {
                 ${remineFares.className}
             `}
           >
-            {rundown.title || `Rundown ${index + 1}`}
+            LOKASI
           </h1>
           <p
-            className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
+            className={`${remineFares.className} text-md font-medium mb-6 text-neutral-700`}
           >
-            {formatDate(rundown.date, true)}
+            {data?.rundowns?.[0]?.location || "-"}
           </p>
-          <p
-            className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
-          >
-            · {formatTime(rundown.start_time)} {rundown.time_zone} ·
-          </p>
+
           <Link
-            href={generateGoogleCalendarUrl(rundown)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${poppins.className} text-xs font-medium underline text-neutral-700`}
+            href={data?.rundowns?.[0]?.location_url || "#"}
+            className="py-2 px-4 text-xs bg-transparent rounded-none border border-neutral-700 text-neutral-700 cursor-pointer hover:bg-transparent"
           >
-            Tambah ke Kalender
+            LIHAT LOKASI
           </Link>
-        </div> */}
+        </div>
       </div>
     </section>
   );
