@@ -1,14 +1,15 @@
 "use client";
 
-import Cover from "./Cover";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Bismillah from "./Bismillah";
 import BridesSection from "./BridesSection";
-import MusicButton from "./MusicButton";
-import GroomsSection from "./GroomsSection";
+import Cover from "./Cover";
 import EventInfo from "./EventInfo";
+import GroomsSection from "./GroomsSection";
+import MusicButton from "./MusicButton";
+import VideoFrame from "./VideoFrame";
 
 export default function MainPage({
   isOpenInvitation,
@@ -30,6 +31,7 @@ export default function MainPage({
       <BridesSection />
       <GroomsSection />
       <EventInfo />
+      <VideoFrame />
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );
