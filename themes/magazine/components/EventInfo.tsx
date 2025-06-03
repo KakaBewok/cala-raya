@@ -54,12 +54,12 @@ const EventInfo = () => {
         priority
       />
       <div
-        className="absolute z-20 inset-x-10 inset-y-16 bg-orange-50 flex flex-col justify-start items-center text-white py-10"
+        className="border border-red-500 absolute z-20 inset-x-10 inset-y-16 bg-orange-50 flex flex-col justify-start items-center text-white pt-10"
         data-aos="fade-up"
       >
         {data?.rundowns?.map((rundown, index) => (
           <div
-            className="p-9 w-full flex flex-col justify-center items-center"
+            className="border border-red-500 p-9 w-full flex flex-col justify-center items-center"
             key={index}
           >
             <h1
@@ -95,7 +95,7 @@ const EventInfo = () => {
             </Link>
           </div>
         ))}
-        <div className="p-9 w-full flex flex-col justify-center items-center">
+        <div className="border border-red-500 p-9 w-full flex flex-col justify-center items-center">
           <h1
             className={`
                 px-5
