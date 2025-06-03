@@ -1,5 +1,3 @@
-"use client";
-
 import { poppins, remineFares } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { Rundown } from "@/types/invitation-data";
@@ -29,7 +27,7 @@ const EventInfo = () => {
       .toFormat("yyyyLLdd'T'HHmmss'Z'");
 
     const eventTitle = data?.event_title || "Wedding Event";
-    const location = rundown.location || "Indonesia";
+    const location = rundown.location || "-";
     const rundownTitle = `(${rundown.title})` || ``;
     const description = `${eventTitle} will be held at ${location} ${rundownTitle}`;
 
@@ -54,12 +52,12 @@ const EventInfo = () => {
         priority
       />
       <div
-        className="border z-20 h-auto bg-orange-50 flex flex-col justify-start items-center py-6"
+        className="z-20 h-auto bg-orange-50 flex flex-col justify-start items-center py-6"
         data-aos="fade-up"
       >
         {data?.rundowns?.map((rundown, index) => (
           <div
-            className="border p-6 w-full flex flex-col justify-center items-center"
+            className="p-6 w-full flex flex-col justify-center items-center"
             key={index}
           >
             <h1
@@ -95,7 +93,7 @@ const EventInfo = () => {
             </Link>
           </div>
         ))}
-        <div className="border p-6 w-full flex flex-col justify-center items-center">
+        <div className="p-6 w-full flex flex-col justify-center items-center">
           <h1
             className={`
                 px-5

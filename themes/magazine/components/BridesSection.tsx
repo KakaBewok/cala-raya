@@ -2,10 +2,12 @@
 
 import { poppins, remineFares } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
+import { createSocialMediaLink } from "@/utils/create-social-media-link";
 import { findImage } from "@/utils/find-image";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Instagram } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 
 export default function BrideSection() {
@@ -81,7 +83,13 @@ export default function BrideSection() {
         >
           <div className="flex gap-2 items-center text-white text-xs bg-transparent rounded-none border border-white cursor-pointer px-3 py-2">
             <Instagram className="h-4 w-4 font-light" />{" "}
-            {data?.host_two_social_media}
+            <Link
+              href={createSocialMediaLink(data?.host_two_social_media || "")}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {`@${data?.host_two_social_media}`}
+            </Link>
           </div>
           <div className="w-[140px] text-white text-xs font-normal text-right">
             {data?.host_two_additional_info}
