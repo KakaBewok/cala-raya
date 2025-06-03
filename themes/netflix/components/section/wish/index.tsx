@@ -64,11 +64,6 @@ export default function WishSection() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // if (message.length < 5) {
-    //   setError("Pesan minimal 5 karakter!");
-    //   return;
-    // }
-
     setLoading(true);
     setError(null);
 
