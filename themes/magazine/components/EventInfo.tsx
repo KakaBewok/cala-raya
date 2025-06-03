@@ -45,7 +45,7 @@ const EventInfo = () => {
   };
 
   return (
-    <section className="relative w-full h-screen bg-white flex items-center justify-center overflow-hidden">
+    <section className="py-6 px-10 relative w-full h-auto bg-white overflow-hidden">
       <Image
         src={findImage(data, "event-info")}
         alt="Event info"
@@ -54,12 +54,12 @@ const EventInfo = () => {
         priority
       />
       <div
-        className="border border-red-500 absolute z-20 inset-x-[8%] inset-y-[8%] bg-orange-50 flex flex-col justify-start items-center text-white pt-6"
+        className="border z-20 h-auto bg-orange-50 flex flex-col justify-start items-center py-6"
         data-aos="fade-up"
       >
         {data?.rundowns?.map((rundown, index) => (
           <div
-            className="border border-red-500 p-9 w-full flex flex-col justify-center items-center"
+            className="border p-6 w-full flex flex-col justify-center items-center"
             key={index}
           >
             <h1
@@ -95,7 +95,7 @@ const EventInfo = () => {
             </Link>
           </div>
         ))}
-        <div className="border border-red-500 p-9 w-full flex flex-col justify-center items-center">
+        <div className="border p-6 w-full flex flex-col justify-center items-center">
           <h1
             className={`
                 px-5
