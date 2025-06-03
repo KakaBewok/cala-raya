@@ -1,5 +1,6 @@
 "use client";
 
+import { useInvitation } from "@/hooks/use-invitation";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -16,6 +17,8 @@ export default function MainPage({
 }: {
   isOpenInvitation: boolean;
 }) {
+  const { invitationData: data } = useInvitation();
+
   useEffect(() => {
     AOS.init({ duration: 1400, once: false, offset: 130 });
 
@@ -31,7 +34,9 @@ export default function MainPage({
       <BridesSection />
       <GroomsSection />
       <EventInfo />
-      <VideoFrame />
+      {Array.isArray(data?.videos) &&
+        data.videos.length > 0 &&
+        data.videos[0].url && <VideoFrame />}
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );
