@@ -25,9 +25,7 @@ export default function Footer() {
       </div>
 
       <div className="flex items-start gap-5">
-        <span className="text-neutral-300 font-medium text-sm -mt-0.5">
-          crafted by
-        </span>
+        <span className="text-neutral-300 font-medium text-sm">crafted by</span>
         <Link
           href="https://instagram.com/calarayaproject"
           target="_blank"
