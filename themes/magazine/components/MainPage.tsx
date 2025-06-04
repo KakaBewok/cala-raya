@@ -15,6 +15,7 @@ import RSVP from "./Rsvp";
 import GiftInfo from "./GiftInfo";
 import ClosingSection from "./ClosingSection";
 import Footer from "./Footer";
+import Gallery from "./Gallery";
 
 export default function MainPage({
   isOpenInvitation,
@@ -38,6 +39,7 @@ export default function MainPage({
       <BridesSection />
       <GroomsSection />
       <EventInfo />
+      <Gallery />
       {Array.isArray(data?.videos) &&
         data.videos.length > 0 &&
         data.videos[0].url && <VideoFrame />}
