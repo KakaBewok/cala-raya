@@ -14,6 +14,7 @@ import VideoFrame from "./VideoFrame";
 import RSVP from "./Rsvp";
 import GiftInfo from "./GiftInfo";
 import ClosingSection from "./ClosingSection";
+import Footer from "./Footer";
 
 export default function MainPage({
   isOpenInvitation,
@@ -43,6 +44,7 @@ export default function MainPage({
       <RSVP />
       <GiftInfo />
       <ClosingSection />
+      <Footer />
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );
