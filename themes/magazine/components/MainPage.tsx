@@ -12,6 +12,8 @@ import GroomsSection from "./GroomsSection";
 import MusicButton from "./MusicButton";
 import VideoFrame from "./VideoFrame";
 import RSVP from "./Rsvp";
+import GiftInfo from "./GiftInfo";
+import ClosingSection from "./ClosingSection";
 
 export default function MainPage({
   isOpenInvitation,
@@ -39,6 +41,8 @@ export default function MainPage({
         data.videos.length > 0 &&
         data.videos[0].url && <VideoFrame />}
       <RSVP />
+      <GiftInfo />
+      <ClosingSection />
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );
