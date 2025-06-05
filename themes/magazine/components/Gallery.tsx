@@ -3,6 +3,7 @@ import { Eye, X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
 import { remineFares } from "@/fonts/fonts";
+import { Button } from "@/components/ui/button";
 
 interface GalleryImage {
   id: number;
@@ -87,7 +88,7 @@ const HorizontalGallery = () => {
         }`}
       >
         <div
-          className={`absolute -left-[250px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-bold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`absolute -left-[250px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-semibold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
         </div>
@@ -99,30 +100,29 @@ const HorizontalGallery = () => {
         }`}
       >
         <div
-          className={`absolute -right-[190px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-bold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`absolute -right-[190px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-semibold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
         </div>
       </div>
 
       {/* Toggle Button */}
-      <button
+      <Button
+        size="sm"
         onClick={toggleGallery}
         disabled={isTransitioning}
-        className={`absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 bg-white/90 hover:bg-white text-gray-800 px-6 py-3 rounded-full shadow-lg flex items-center gap-2 font-medium ${
+        className={`cursor-pointer text-white border rounded-none border-white bg-transparent absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
           isTransitioning ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
         {isGalleryOpen ? (
           <>
-            <X size={20} /> Close
+            <X size={20} />
           </>
         ) : (
-          <>
-            <Eye size={20} /> Open
-          </>
+          <>Buka Gallery</>
         )}
-      </button>
+      </Button>
 
       {/* Gallery */}
       <div
@@ -136,8 +136,11 @@ const HorizontalGallery = () => {
         {layout.map((column, index) => {
           if (column.type === "first") {
             return (
-              <div key={index} className="flex-shrink-0 px-4 first:pl-8">
-                <div className="h-screen py-8">
+              <div
+                key={index}
+                className="flex-shrink-0 px-4 first:pl-8 border border-red-500"
+              >
+                <div className="h-screen py-8 border border-blue-500">
                   <div className="relative h-full w-[500px] group overflow-hidden">
                     <Image
                       src={column.images[0].src}
