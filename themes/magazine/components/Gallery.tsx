@@ -87,7 +87,7 @@ const HorizontalGallery = () => {
         }`}
       >
         <div
-          className={`absolute -left-[140%] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-bold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`absolute -left-[250px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-bold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
         </div>
@@ -99,7 +99,7 @@ const HorizontalGallery = () => {
         }`}
       >
         <div
-          className={`absolute -right-[107%] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-bold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`absolute -right-[190px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-bold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
         </div>
