@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
-import { Eye, X } from "lucide-react";
+import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
 import { remineFares } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
+import SwipeHandIcon from "./SwipeHandIcon";
 
 interface GalleryImage {
   id: number;
@@ -16,6 +17,26 @@ const HorizontalGallery = () => {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [isGalleryOpen, setIsGalleryOpen] = React.useState<boolean>(false);
   const [isTransitioning, setIsTransitioning] = React.useState<boolean>(false);
+  const [hasUserSwiped, setHasUserSwiped] = React.useState<boolean>(false);
+
+  const eventDate = new Date(data?.event_date ?? "");
+  const day = String(eventDate.getDate()).padStart(2, "0");
+  const month = String(eventDate.getMonth() + 1).padStart(2, "0");
+  const year = String(eventDate.getFullYear()).slice(-2);
+
+  React.useEffect(() => {
+    const ref = scrollRef.current;
+    if (!ref) return;
+
+    const handleScroll = () => {
+      if (!hasUserSwiped && isGalleryOpen) {
+        setHasUserSwiped(true);
+      }
+    };
+
+    ref.addEventListener("scroll", handleScroll);
+    return () => ref.removeEventListener("scroll", handleScroll);
+  }, [hasUserSwiped, isGalleryOpen]);
 
   const images = useMemo(() => {
     const filtered = data?.images?.filter((image) => image.type === "gallery");
@@ -28,11 +49,28 @@ const HorizontalGallery = () => {
     }));
   }, [data?.images]);
 
+  // const toggleGallery = () => {
+  //   setIsTransitioning(true);
+  //   setTimeout(() => {
+  //     setIsGalleryOpen(!isGalleryOpen);
+  //   }, 100);
+  //   setTimeout(() => {
+  //     setIsTransitioning(false);
+  //   }, 1000);
+  // };
+
   const toggleGallery = () => {
     setIsTransitioning(true);
+
     setTimeout(() => {
-      setIsGalleryOpen(!isGalleryOpen);
+      const newState = !isGalleryOpen;
+      setIsGalleryOpen(newState);
+
+      if (newState) {
+        setHasUserSwiped(false);
+      }
     }, 100);
+
     setTimeout(() => {
       setIsTransitioning(false);
     }, 1000);
@@ -88,7 +126,7 @@ const HorizontalGallery = () => {
         }`}
       >
         <div
-          className={`absolute -left-[250px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-semibold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`absolute -left-[252px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-semibold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
         </div>
@@ -100,7 +138,7 @@ const HorizontalGallery = () => {
         }`}
       >
         <div
-          className={`absolute -right-[190px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-semibold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`absolute -right-[192px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-semibold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
         </div>
@@ -110,9 +148,13 @@ const HorizontalGallery = () => {
       <Button
         size="sm"
         onClick={toggleGallery}
-        disabled={isTransitioning}
-        className={`cursor-pointer text-white border rounded-none border-white bg-transparent absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
+        // disabled={isTransitioning}
+        className={`cursor-pointer text-neutral-700 border rounded-none border-neutral-700 bg-transparent absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
           isTransitioning ? "opacity-50 cursor-not-allowed" : ""
+        } ${
+          isGalleryOpen
+            ? "bg-neutral-300 text-neutral-800 rounded-lg border-none"
+            : ""
         }`}
       >
         {isGalleryOpen ? (
@@ -120,7 +162,7 @@ const HorizontalGallery = () => {
             <X size={20} />
           </>
         ) : (
-          <>Buka Gallery</>
+          <span className="text-xs">Buka Gallery</span>
         )}
       </Button>
 
@@ -136,23 +178,40 @@ const HorizontalGallery = () => {
         {layout.map((column, index) => {
           if (column.type === "first") {
             return (
-              <div
-                key={index}
-                className="flex-shrink-0 px-4 first:pl-8 border border-red-500"
-              >
-                <div className="h-screen py-8 border border-blue-500">
-                  <div className="relative h-full w-[500px] group overflow-hidden">
+              <div key={index} className="flex-shrink-0 ">
+                <div className="h-screen w-screen flex items-center justify-center ">
+                  <div
+                    className={`absolute top-[50%] right-3 -translate-y-1/2 z-10 h-14 w-14 transition-opacity duration-700 ${
+                      isGalleryOpen && !hasUserSwiped
+                        ? "opacity-100"
+                        : "opacity-0 pointer-events-none"
+                    }`}
+                  >
+                    <SwipeHandIcon />
+                  </div>
+                  <div className="relative h-56 w-56 group ">
+                    <div
+                      className={`${
+                        remineFares.className
+                      } absolute -top-24 -right-5 text-neutral-600 text-3xl leading-[2.5rem] font-semibold z-10 transition-opacity duration-700
+                        ${
+                          isGalleryOpen
+                            ? "opacity-100"
+                            : "opacity-0 pointer-events-none"
+                        }`}
+                    >
+                      <div>{day}</div>
+                      <div>{month}</div>
+                      <div>{year}</div>
+                    </div>
                     <Image
                       src={column.images[0].src}
                       alt={column.images[0].alt}
                       fill
-                      className={`object-cover transition-all duration-500 ${
+                      className={`object-cover object-center transition-all duration-500 ${
                         isGalleryOpen ? "grayscale-0" : "grayscale"
                       }`}
                     />
-                    <div className="absolute bottom-4 left-4 text-white text-xl font-semibold bg-black/40 px-3 py-1 rounded">
-                      Pembuka
-                    </div>
                   </div>
                 </div>
               </div>
