@@ -82,7 +82,7 @@ const HorizontalGallery = () => {
 
     while (imageIndex < images.length) {
       const isDoubleColumn =
-        Math.random() > 0.4 && imageIndex + 1 < images.length;
+        Math.random() > 0.3 && imageIndex + 1 < images.length;
 
       if (isDoubleColumn) {
         columns.push({
@@ -126,7 +126,7 @@ const HorizontalGallery = () => {
         }`}
       >
         <div
-          className={`absolute -left-[252px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-semibold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`absolute -left-[250px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
         </div>
@@ -138,7 +138,7 @@ const HorizontalGallery = () => {
         }`}
       >
         <div
-          className={`absolute -right-[192px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-semibold text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`absolute -right-[190px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
         </div>
@@ -169,7 +169,7 @@ const HorizontalGallery = () => {
       {/* Gallery */}
       <div
         ref={scrollRef}
-        className={`flex h-screen overflow-x-auto scrollbar-hide transition-all duration-300 ${
+        className={`flex h-screen w-screen overflow-x-auto scrollbar-hide transition-all duration-300 ${
           isGalleryOpen
             ? "cursor-grab active:cursor-grabbing"
             : "cursor-default"
@@ -180,6 +180,20 @@ const HorizontalGallery = () => {
             return (
               <div key={index} className="flex-shrink-0 ">
                 <div className="h-screen w-screen flex items-center justify-center ">
+                  <div
+                    className={`
+                        absolute top-1/2 left-1/2 h-[1px] bg-neutral-700 z-10 rounded-full
+                        transition-all duration-700 ease-in-out
+                        ${
+                          isGalleryOpen
+                            ? "w-0 opacity-0 scale-x-0"
+                            : "w-40 opacity-100 scale-x-100"
+                        }
+                    `}
+                    style={{
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  />
                   <div
                     className={`absolute top-[50%] right-3 -translate-y-1/2 z-10 h-14 w-14 transition-opacity duration-700 ${
                       isGalleryOpen && !hasUserSwiped
@@ -220,19 +234,30 @@ const HorizontalGallery = () => {
 
           if (column.type === "last") {
             return (
-              <div key={index} className="flex-shrink-0 px-4 last:pr-8">
-                <div className="h-screen py-8">
-                  <div className="relative h-full w-[500px] group overflow-hidden">
+              <div className="flex-shrink-0 w-screen h-screen" key={index}>
+                {/* 1 */}
+                <div className="flex flex-col w-full h-full items-center justify-center border border-red-500">
+                  <div className="relative w-full h-full">
                     <Image
                       src={column.images[0].src}
                       alt={column.images[0].alt}
                       fill
-                      className={`object-cover transition-all duration-500 ${
+                      className={`object-cover object-center transition-all duration-500 ${
                         isGalleryOpen ? "grayscale-0" : "grayscale"
                       }`}
                     />
-                    <div className="absolute bottom-4 right-4 text-white text-xl font-semibold bg-black/40 px-3 py-1 rounded">
-                      Penutup
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/10`}
+                    ></div>
+                    <div
+                      className={`absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2`}
+                    >
+                      <h1
+                        className={`${remineFares.className} text-4xl font-medium text-white`}
+                      >
+                        {data?.host_one_nickname.toLocaleLowerCase()} <br /> &
+                        {data?.host_two_nickname.toLocaleLowerCase()}
+                      </h1>
                     </div>
                   </div>
                 </div>
@@ -241,37 +266,51 @@ const HorizontalGallery = () => {
           }
 
           return (
-            <div key={index} className="flex-shrink-0 px-4">
+            <div key={index} className="flex-shrink-0">
               {column.type === "single" ? (
-                <div className="h-screen py-8">
-                  <div className="relative h-full w-80 group overflow-hidden">
-                    <Image
-                      src={column.images[0].src}
-                      alt={column.images[0].alt}
-                      fill
-                      className={`object-cover transition-all duration-500 ${
-                        isGalleryOpen ? "grayscale-0" : "grayscale"
-                      }`}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="h-screen py-8 flex flex-col gap-4">
-                  {column.images.map((img, i) => (
-                    <div
-                      key={i}
-                      className="relative flex-1 w-80 group overflow-hidden"
-                    >
+                <div className="flex-shrink-0 w-screen h-screen">
+                  {/* 1 */}
+                  <div className="flex flex-col w-full h-full p-6 items-center justify-center">
+                    <div className="relative w-full h-full">
                       <Image
-                        src={img.src}
-                        alt={img.alt}
+                        src={column.images[0].src}
+                        alt={column.images[0].alt}
                         fill
-                        className={`object-cover  transition-all duration-500 ${
+                        className={`object-cover object-center transition-all duration-500 ${
                           isGalleryOpen ? "grayscale-0" : "grayscale"
                         }`}
                       />
                     </div>
-                  ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="flex-shrink-0 w-screen h-screen flex flex-col">
+                  {/* 1 */}
+                  <div className="flex flex-col w-full h-full p-12 items-center justify-center">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={column.images[0].src}
+                        alt={column.images[0].alt}
+                        fill
+                        className={`object-cover object-center transition-all duration-500 ${
+                          isGalleryOpen ? "grayscale-0" : "grayscale"
+                        }`}
+                      />
+                    </div>
+                  </div>
+                  {/* 2 */}
+                  <div className="flex flex-col w-full h-full items-center justify-center">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={column.images[1].src}
+                        alt={column.images[1].alt}
+                        fill
+                        className={`object-cover object-center transition-all duration-500 ${
+                          isGalleryOpen ? "grayscale-0" : "grayscale"
+                        }`}
+                      />
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
