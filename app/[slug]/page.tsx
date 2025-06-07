@@ -69,7 +69,7 @@ export default function InvitationPage() {
         console.error("Unexpected error: ", err);
         toast.error("Unexpected error occurred.");
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     };
 
