@@ -236,7 +236,7 @@ const HorizontalGallery = () => {
             return (
               <div className="flex-shrink-0 w-screen h-screen" key={index}>
                 {/* 1 */}
-                <div className="flex flex-col w-full h-full items-center justify-center border border-red-500">
+                <div className="flex flex-col w-full h-full items-center justify-center">
                   <div className="relative w-full h-full">
                     <Image
                       src={column.images[0].src}
