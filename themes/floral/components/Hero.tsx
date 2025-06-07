@@ -49,12 +49,12 @@ const Hero = ({
       {!isOpen && (
         <motion.div
           className="max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden"
-          initial={{ y: "-100%", opacity: 1 }}
-          animate={isAnimating ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
-          exit={{ y: "-100%" }}
-          //  initial={{ y: 0 }}
-          // animate={isAnimating ? { y: "-100%" } : { y: 0 }}
-          // exit={{ opacity: 0 }}
+          // initial={{ y: "-100%", opacity: 1 }}
+          // animate={isAnimating ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
+          // exit={{ y: "-100%" }}
+          initial={{ y: 0 }}
+          animate={isAnimating ? { y: "-100%" } : { y: 0 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
           <Image

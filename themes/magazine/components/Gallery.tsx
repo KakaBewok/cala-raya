@@ -16,7 +16,6 @@ const HorizontalGallery = () => {
   const { invitationData: data } = useInvitation();
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [isGalleryOpen, setIsGalleryOpen] = React.useState<boolean>(false);
-  const [isTransitioning, setIsTransitioning] = React.useState<boolean>(false);
   const [hasUserSwiped, setHasUserSwiped] = React.useState<boolean>(false);
 
   const eventDate = new Date(data?.event_date ?? "");
@@ -49,19 +48,7 @@ const HorizontalGallery = () => {
     }));
   }, [data?.images]);
 
-  // const toggleGallery = () => {
-  //   setIsTransitioning(true);
-  //   setTimeout(() => {
-  //     setIsGalleryOpen(!isGalleryOpen);
-  //   }, 100);
-  //   setTimeout(() => {
-  //     setIsTransitioning(false);
-  //   }, 1000);
-  // };
-
   const toggleGallery = () => {
-    setIsTransitioning(true);
-
     setTimeout(() => {
       const newState = !isGalleryOpen;
       setIsGalleryOpen(newState);
@@ -70,10 +57,6 @@ const HorizontalGallery = () => {
         setHasUserSwiped(false);
       }
     }, 100);
-
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, 1000);
   };
 
   const createLayout = (images: GalleryImage[]) => {
@@ -148,10 +131,7 @@ const HorizontalGallery = () => {
       <Button
         size="sm"
         onClick={toggleGallery}
-        // disabled={isTransitioning}
         className={`cursor-pointer text-neutral-700 border rounded-none border-neutral-700 bg-transparent absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
-          isTransitioning ? "opacity-50 cursor-not-allowed" : ""
-        } ${
           isGalleryOpen
             ? "bg-neutral-300 text-neutral-800 rounded-lg border-none"
             : ""
