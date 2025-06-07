@@ -19,7 +19,7 @@ export default function Greetings() {
   };
 
   return (
-    <div className="h-screen bg-[#fdfaf6] flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="h-screen w-full bg-[#fdfaf6] flex flex-col items-center justify-center relative overflow-hidden">
       {/* Frame */}
       <div className="relative z-10">
         {/* Kanan atas */}

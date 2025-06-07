@@ -1,60 +1,35 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { optivaground } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
-const Hero = ({
-  isOpen,
-  setIsOpen,
-  onOpen,
-}: {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  onOpen: () => void;
-}) => {
+interface OpeningScreenProps {
+  isOpenInvitation: boolean;
+  setIsOpenInvitation: (isOpen: boolean) => void;
+}
+
+const OpeningScreen = ({
+  isOpenInvitation,
+  setIsOpenInvitation,
+}: OpeningScreenProps) => {
   const { invitationData: data, guest } = useInvitation();
-  const [isAnimating, setIsAnimating] = useState<boolean>(false);
-
   const initial1 = data?.host_one_nickname?.charAt(0)?.toUpperCase() ?? "";
   const initial2 = data?.host_two_nickname?.charAt(0)?.toUpperCase() ?? "";
 
-  const handleOpenInvitation = () => {
-    setIsAnimating(true);
-    setTimeout(() => {
-      setIsOpen(true);
-      onOpen();
-      setIsAnimating(false);
-    }, 1000);
+  const handleClick = () => {
+    setIsOpenInvitation(true);
   };
-
-  useEffect(() => {
-    if (!isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isOpen]);
 
   return (
     <AnimatePresence>
-      {!isOpen && (
+      {!isOpenInvitation && (
         <motion.div
-          className="max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden"
-          // initial={{ y: "-100%", opacity: 1 }}
-          // animate={isAnimating ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
-          // exit={{ y: "-100%" }}
-          initial={{ y: 0 }}
-          animate={isAnimating ? { y: "-100%" } : { y: 0 }}
-          exit={{ opacity: 0 }}
+          className="bg-[#eedcc5] max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ y: "-100%" }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
           <Image
@@ -81,7 +56,7 @@ const Hero = ({
               <p className={`text-3xl mb-3`}>{guest?.name}</p>
               <Button
                 size="lg"
-                onClick={handleOpenInvitation}
+                onClick={handleClick}
                 className="bg-orange-300 hover:bg-orange-400 cursor-pointer"
               >
                 Buka Undangan
@@ -94,4 +69,4 @@ const Hero = ({
   );
 };
 
-export default Hero;
+export default OpeningScreen;
