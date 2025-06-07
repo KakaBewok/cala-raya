@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import MainPage from "./components/MainPage";
 import OpeningScreen from "./components/OpeningScreen";

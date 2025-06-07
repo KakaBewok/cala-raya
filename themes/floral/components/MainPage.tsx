@@ -1,3 +1,5 @@
+"use client";
+
 import Cover from "./Cover";
 import AOS from "aos";
 import "aos/dist/aos.css";
