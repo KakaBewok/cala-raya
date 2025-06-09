@@ -4,12 +4,13 @@ import { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+  const slug = (await params).slug;
   const { data, error } = await db
     .from("invitations")
     .select("event_title, slug")
-    .eq("slug", params.slug)
+    .eq("slug", slug)
     .single();
 
   if (!data || error) {
