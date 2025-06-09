@@ -1,7 +1,7 @@
 import db from "@/configs/db-config";
 import { formatDate } from "@/utils/format-date";
 import { decode } from "@/utils/hash";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 
 export async function generateMetadata({
   params,
@@ -9,6 +9,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  parent: ResolvingMetadata;
 }): Promise<Metadata> {
   const slug = (await params).slug;
   const id = (await searchParams).id;
