@@ -21,7 +21,7 @@ export async function generateMetadata({
       openGraph: {
         title: "Undangan tidak ditemukan",
         description: "Silakan periksa kembali link undangan Anda.",
-        url: `https://calaraya.vercel.app/${params.slug}`,
+        url: `https://calaraya.vercel.app/${slug}`,
         // images: [
         //   {
         //     url: "https://calaraya.vercel.app/og-image-not-found.jpg",
@@ -39,7 +39,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${data.event_title}`,
       description: `Digital Invitation by Cala Raya Project.`,
-      url: `https://calaraya.vercel.app/${data.slug}`,
+      url: `https://calaraya.vercel.app/${slug}`,
       //   images: [
       //     {
       //       url:
