@@ -36,7 +36,7 @@ export async function generateMetadata({
 
   return {
     title: `${data.event_title}`,
-    description: `Digital Invitation by Cala Raya Project.`,
+    description: `${formatDate(data.event_date, true)}`,
     openGraph: {
       title: `${data.event_title}`,
       description: `${formatDate(data.event_date, true)}`,
