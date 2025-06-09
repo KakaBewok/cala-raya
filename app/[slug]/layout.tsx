@@ -1,12 +1,11 @@
 import db from "@/configs/db-config";
 import { formatDate } from "@/utils/format-date";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-  parent: ResolvingMetadata;
 }): Promise<Metadata> {
   const slug = (await params).slug;
 
