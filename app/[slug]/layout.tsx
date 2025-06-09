@@ -1,25 +1,19 @@
 import db from "@/configs/db-config";
 import { formatDate } from "@/utils/format-date";
-import { decode } from "@/utils/hash";
 import { Metadata, ResolvingMetadata } from "next";
 
 export async function generateMetadata({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   parent: ResolvingMetadata;
 }): Promise<Metadata> {
   const slug = (await params).slug;
-  const id = (await searchParams).id;
-  const invId = decode(id as string)[0];
 
   const { data, error } = await db
     .from("invitations")
     .select("event_title, slug, event_date")
     .eq("slug", slug)
-    .eq("id", invId)
     .single();
 
   if (!data || error) {
