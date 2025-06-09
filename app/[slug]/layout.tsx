@@ -1,4 +1,5 @@
 import db from "@/configs/db-config";
+import { formatDate } from "@/utils/format-date";
 import { Metadata } from "next";
 
 export async function generateMetadata({
@@ -9,7 +10,7 @@ export async function generateMetadata({
   const slug = (await params).slug;
   const { data, error } = await db
     .from("invitations")
-    .select("event_title, slug")
+    .select("event_title, slug, event_date")
     .eq("slug", slug)
     .single();
 
@@ -38,7 +39,7 @@ export async function generateMetadata({
     description: `Digital Invitation by Cala Raya Project.`,
     openGraph: {
       title: `${data.event_title}`,
-      description: `Digital Invitation by Cala Raya Project.`,
+      description: `${formatDate(data.event_date, true)}`,
       url: `https://calaraya.vercel.app/${slug}`,
       //   images: [
       //     {
