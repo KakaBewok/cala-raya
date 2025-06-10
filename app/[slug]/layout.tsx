@@ -28,7 +28,9 @@ export async function generateMetadata({
     };
   }
 
-  const previewImage = data.images.find((image) => image.url === "preview").url;
+  const previewImageObj = data.images.find((image) => image.url === "preview");
+  const previewImage =
+    previewImageObj?.url ?? "https://calaraya.vercel.app/default-og-image.jpg";
 
   return {
     title: `${data.event_title}`,

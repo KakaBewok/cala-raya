@@ -77,7 +77,6 @@ const Sidebar = () => {
               Cala Raya 💌
             </h1>
           </Link>
-          <hr className="bg-neutral-900 dark:bg-neutral-200 mt-5" />
         </div>
 
         <button
