@@ -30,7 +30,7 @@ export async function generateMetadata({
 
   const previewImageObj = data.images.find((image) => image.url === "preview");
   const previewImage =
-    previewImageObj?.url ?? "https://calaraya.vercel.app/default-og-image.jpg";
+    previewImageObj?.url ?? "https://calaraya.vercel.app/og-image.jpg";
 
   return {
     title: `${data.event_title}`,
