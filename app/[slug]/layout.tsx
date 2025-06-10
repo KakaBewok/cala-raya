@@ -5,9 +5,10 @@ import { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  // params: Promise<{ slug: string }>;
+  params: { slug: string };
 }): Promise<Metadata> {
-  const slug = (await params).slug;
+  const slug = params.slug;
 
   const { data, error } = await db
     .from("invitations")
