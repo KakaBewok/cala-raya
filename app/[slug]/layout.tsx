@@ -5,10 +5,9 @@ import { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  // params: Promise<{ slug: string }>;
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const slug = params.slug;
+  const slug = (await params).slug;
 
   const { data, error } = await db
     .from("invitations")
@@ -30,6 +29,7 @@ export async function generateMetadata({
   }
 
   const previewImageObj = data.images.find((image) => image.type === "preview");
+  console.log(previewImageObj);
   const previewImage =
     previewImageObj?.url ?? "https://calaraya.vercel.app/og-image.jpg";
 
