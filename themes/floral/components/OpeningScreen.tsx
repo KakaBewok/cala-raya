@@ -15,8 +15,8 @@ const OpeningScreen = ({
   setIsOpenInvitation,
 }: OpeningScreenProps) => {
   const { invitationData: data, guest } = useInvitation();
-  const initial1 = data?.host_one_nickname?.charAt(0)?.toUpperCase() ?? "";
-  const initial2 = data?.host_two_nickname?.charAt(0)?.toUpperCase() ?? "";
+  // const initial1 = data?.host_one_nickname?.charAt(0)?.toUpperCase() ?? "";
+  // const initial2 = data?.host_two_nickname?.charAt(0)?.toUpperCase() ?? "";
 
   const handleClick = () => {
     setIsOpenInvitation(true);
@@ -41,13 +41,21 @@ const OpeningScreen = ({
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
 
-          <div className="relative h-screen z-20 flex flex-col justify-between items-center text-center text-white">
-            <h1 className="text-7xl font-serif mt-28">
+          <div className="h-screen z-20 flex flex-col justify-between items-center text-center text-white">
+            {/* <h1 className="text-7xl font-serif mt-28">
               • {initial1}
               {initial2} •
-            </h1>
+            </h1> */}
+            <Image
+              src="/assets/images/floral/initial.webp"
+              alt="Initial"
+              width={150}
+              height={150}
+              priority
+              className="mt-20"
+            />
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: "-100%" }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 1 }}
               className={`tracking-wider ${optivaground.className} mb-20 flex flex-col items-start justify-center`}

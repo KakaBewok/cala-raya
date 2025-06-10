@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function Greetings() {
   const { invitationData: data } = useInvitation();
 
-  const initial1 = data?.host_one_nickname?.charAt(0)?.toUpperCase() ?? "";
-  const initial2 = data?.host_two_nickname?.charAt(0)?.toUpperCase() ?? "";
+  // const initial1 = data?.host_one_nickname?.charAt(0)?.toUpperCase() ?? "";
+  // const initial2 = data?.host_two_nickname?.charAt(0)?.toUpperCase() ?? "";
 
   const formatEventDate = (dateString: string) => {
     if (!dateString) return null;
@@ -15,11 +15,11 @@ export default function Greetings() {
     const month = String(eventDate.getMonth() + 1).padStart(2, "0");
     const year = eventDate.getFullYear();
 
-    return `${day} . ${month} . ${year}`;
+    return `${day} · ${month} · ${year}`;
   };
 
   return (
-    <div className="h-screen w-full bg-[#fdfaf6] flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="h-screen w-full bg-[#fdfaf6] flex flex-col items-center justify-center overflow-hidden">
       {/* Frame */}
       <div className="relative z-10">
         {/* Kanan atas */}
@@ -64,14 +64,25 @@ export default function Greetings() {
 
         <div className="border border-[#e6d6c9] p-1 text-center max-w-md bg-white/60 backdrop-blur-md relative z-10">
           <div className="border border-[#e6d6c9] p-16 text-center max-w-md bg-white/60 backdrop-blur-md relative z-10">
-            <h1
+            {/* <h1
               className="text-4xl font-serif text-[#c6a886] mb-6"
               data-aos="zoom-in"
               data-aos-duration={900}
             >
               • {initial1}
               {initial2} •
-            </h1>
+            </h1> */}
+            <div data-aos="fade-up">
+              <Image
+                src="/assets/images/floral/initial.webp"
+                alt="Initial"
+                width={150}
+                height={150}
+                priority
+                style={{ filter: "invert(3%) brightness(0.8)" }}
+                className="mb-6"
+              />
+            </div>
             <div
               className="text-xs text-[#c6a886] leading-relaxed font-light"
               data-aos="zoom-in"
@@ -105,7 +116,7 @@ export default function Greetings() {
           width={80}
           height={80}
           alt="Bunga kanan bawah"
-          className="swing-left-fast absolute bottom-28 -z-10 right-[6vw]"
+          className="swing-right-fast absolute bottom-28 -z-10 right-[6vw]"
         />
 
         <div className="z-20 mt-20 w-full flex justify-center items-center bg-[#efe7dd] h-32">
