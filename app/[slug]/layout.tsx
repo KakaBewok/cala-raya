@@ -11,7 +11,7 @@ export async function generateMetadata({
 
   const { data, error } = await db
     .from("invitations")
-    .select("event_title, slug, event_date")
+    .select("event_title, slug, event_date, images (*)")
     .eq("slug", slug)
     .single();
 
@@ -24,16 +24,11 @@ export async function generateMetadata({
         title: "Undangan tidak ditemukan",
         description: "Silakan periksa kembali link undangan Anda.",
         url: `https://calaraya.vercel.app/${slug}`,
-        // images: [
-        //   {
-        //     url: "https://calaraya.vercel.app/og-image-not-found.jpg",
-        //     width: 1200,
-        //     height: 630,
-        //   },
-        // ],
       },
     };
   }
+
+  const previewImage = data.images.find((image) => image.url === "preview").url;
 
   return {
     title: `${data.event_title}`,
@@ -42,15 +37,14 @@ export async function generateMetadata({
       title: `${data.event_title}`,
       description: `${formatDate(data.event_date, true)}`,
       url: `https://calaraya.vercel.app/${slug}`,
-      //   images: [
-      //     {
-      //       url:
-      //         data.cover_image_url || "https://calaraya.vercel.app/og-image.jpg",
-      //       width: 1200,
-      //       height: 630,
-      //       alt: `Cover Undangan ${data.event_title}`,
-      //     },
-      //   ],
+      images: [
+        {
+          url: previewImage,
+          width: 1200,
+          height: 630,
+          alt: `Cover ${data.event_title}`,
+        },
+      ],
     },
   };
 }
