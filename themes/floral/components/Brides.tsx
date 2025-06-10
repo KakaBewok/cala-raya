@@ -40,11 +40,7 @@ const Brides = () => {
       <div className="absolute inset-11 border border-[#c6a886] z-10 pointer-events-none" />
 
       {/* Content box */}
-      <div
-        className="absolute bottom-0 z-20 w-full bg-gradient-to-t from-white/80 via-white/60 to-transparent text-right px-6 py-8 backdrop-blur-sm"
-        data-aos="fade-up"
-        data-aos-offset={120}
-      >
+      <div className="absolute bottom-0 z-20 w-full bg-gradient-to-t from-white/80 via-white/60 to-transparent text-right px-6 py-8 backdrop-blur-sm">
         <h2
           className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-sm`}
         >
@@ -56,13 +52,13 @@ const Brides = () => {
       </div>
 
       {/* flower */}
-      {/* <Image
+      <Image
         src="/assets/images/floral/bunga2.webp"
         alt="Bunga kiri"
         width={120}
         height={120}
         className="absolute bottom-0 left-0 z-30"
-      /> */}
+      />
     </section>
   );
 };

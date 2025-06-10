@@ -41,7 +41,7 @@ const Cover = () => {
           <p className="text-sm">{formatEventDate(data?.event_date ?? "")}</p>
         </div>
 
-        <Button className="mb-10 w-7 h-7 bg-neutral-600/20 text-white cursor-pointer rounded-full transition animate-bounce flex items-center justify-center">
+        <Button className="mb-18 w-7 h-7 bg-neutral-600/20 text-white cursor-pointer rounded-full transition animate-bounce flex items-center justify-center">
           <MoveDown size={11} className="animate-pulse" />
         </Button>
       </div>
