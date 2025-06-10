@@ -109,9 +109,13 @@ export default function Greetings() {
         />
 
         <div className="z-20 mt-20 w-full flex justify-center items-center bg-[#efe7dd] h-32">
-          <p className="text-[#c1915a] text-xl font-arabic">
-            بسم الله الرحمن الرحيم
-          </p>
+          <Image
+            src="/assets/images/floral/bismillah.png"
+            alt="Bismillah"
+            width={150}
+            height={150}
+            data-aos="fade-up"
+          />
         </div>
       </div>
     </div>
