@@ -53,11 +53,25 @@ const Brides = () => {
 
       {/* flower */}
       <Image
-        src="/assets/images/floral/bunga2.webp"
+        src="/assets/images/floral/16.webp"
         alt="Bunga kiri"
-        width={120}
-        height={120}
-        className="absolute bottom-0 left-0 z-30"
+        width={100}
+        height={100}
+        className="swing-left-fast absolute -bottom-10 -left-5 z-30 transform rotate-12"
+      />
+      <Image
+        src="/assets/images/floral/28.webp"
+        alt="Bunga kiri"
+        width={100}
+        height={100}
+        className="swing-right-fast absolute bottom-5 -left-5 z-20 transform rotate-[32deg]"
+      />
+      <Image
+        src="/assets/images/floral/12.webp"
+        alt="Bunga kiri"
+        width={80}
+        height={80}
+        className="swing-left-slow absolute -bottom-16 left-14 z-20 transform rotate-[32deg]"
       />
     </section>
   );

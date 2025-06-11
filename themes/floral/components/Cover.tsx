@@ -21,13 +21,13 @@ const Cover = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center overflow-hidden">
+    <div className="max-w-md h-screen flex items-center justify-center overflow-hidden">
       <Image
         src={findImage(data, "cover")}
         alt="Cover background"
         fill
         priority
-        className="object-cover object-center z-0"
+        className="object-cover object-center z-0 max-w-md mx-auto"
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
