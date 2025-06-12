@@ -15,7 +15,12 @@ const EventInfo = () => {
         rundowns
           .sort((a, b) => a.order_number - b.order_number)
           .map((rundown, index) => (
-            <div className="space-y-2 text-neutral-400" key={index}>
+            <div
+              className="space-y-2 text-neutral-400"
+              key={index}
+              data-aos="fade-left"
+              data-aos-offset="100"
+            >
               <p className="text-xs font-medium">{rundown.title}</p>
               <div className="h-[2px] w-6 bg-neutral-400 mt-1 rounded-md" />
               <h3 className="text-xl font-semibold">
@@ -29,7 +34,11 @@ const EventInfo = () => {
             </div>
           ))}
 
-      <div className="space-y-2 text-neutral-400">
+      <div
+        className="space-y-2 text-neutral-400"
+        data-aos="fade-right"
+        data-aos-offset="100"
+      >
         <p className="text-xs font-medium">Lokasi</p>
         <div className="h-[2px] w-6 bg-neutral-400 mt-1 rounded-md" />
         <h3 className="text-xl font-semibold">{rundowns?.[0].location}</h3>

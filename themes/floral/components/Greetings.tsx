@@ -19,7 +19,7 @@ export default function Greetings() {
   };
 
   return (
-    <div className="h-screen w-full bg-[#fdfaf6] flex flex-col items-center justify-center overflow-hidden">
+    <div className="pt-28 h-screen w-full bg-[#fdfaf6] flex flex-col items-center justify-between overflow-hidden border border-red-500">
       {/* Frame */}
       <div className="relative z-10">
         {/* Kanan atas */}
@@ -98,33 +98,32 @@ export default function Greetings() {
         </div>
       </div>
       {/* Bismillah */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full bg-green-300">
         {/* Kiri Bawah */}
         <Image
           data-aos="zoom-in"
           src={`/assets/images/floral/16.webp`}
-          width={80}
-          height={80}
+          width={110}
+          height={110}
           alt="Bunga kiri bawah"
-          className="swing-left-fast absolute -z-10 bottom-[117px] left-[6vw]"
+          className="swing-left-fast absolute -z-10 bottom-[157px] left-[6vw]"
         />
 
         {/* Kanan Bawah */}
         <Image
           data-aos="zoom-in"
           src={`/assets/images/floral/bunga2.webp`}
-          width={80}
-          height={80}
+          width={110}
+          height={110}
           alt="Bunga kanan bawah"
-          className="swing-right-fast absolute bottom-28 -z-10 right-[6vw]"
+          className="swing-right-fast absolute bottom-36 -z-10 right-[6vw]"
         />
-
-        <div className="z-20 mt-20 w-full flex justify-center items-center bg-[#efe7dd] h-32">
+        <div className="py-7 z-20 w-full flex justify-center items-center bg-[#efe7dd]">
           <Image
             src="/assets/images/floral/bismillah.png"
             alt="Bismillah"
-            width={150}
-            height={150}
+            width={180}
+            height={180}
             data-aos="fade-up"
           />
         </div>
