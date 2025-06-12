@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Greetings from "./Greetings";
 import Brides from "./Brides";
 import MusicButton from "./MusicButton";
+import Grooms from "./Grooms";
 
 export default function MainPage({
   isOpenInvitation,
@@ -26,6 +27,7 @@ export default function MainPage({
       <Cover />
       <Greetings />
       <Brides />
+      <Grooms />
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );
