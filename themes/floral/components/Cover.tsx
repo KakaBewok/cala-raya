@@ -21,7 +21,7 @@ const Cover = () => {
   };
 
   return (
-    <div className="max-w-md h-screen flex items-center justify-center overflow-hidden">
+    <div className="max-w-md h-screen flex items-center justify-center overflow-hidden bg-[#fdfaf6]">
       <Image
         src={findImage(data, "cover")}
         alt="Cover background"

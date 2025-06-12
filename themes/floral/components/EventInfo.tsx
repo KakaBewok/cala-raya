@@ -71,9 +71,9 @@ const EventInfo = () => {
       <Image
         src="/assets/images/floral/15.webp"
         alt="Bunga 3"
-        width={100}
-        height={100}
-        className="swing-right-fast absolute top-0 -left-6 z-30 transform rotate-[40deg]"
+        width={90}
+        height={90}
+        className="swing-right-fast absolute -top-1 -left-6 z-30 transform rotate-[40deg]"
       />
     </section>
   );
