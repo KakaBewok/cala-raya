@@ -8,6 +8,7 @@ import Greetings from "./Greetings";
 import Brides from "./Brides";
 import MusicButton from "./MusicButton";
 import Grooms from "./Grooms";
+import EventInfo from "./EventInfo";
 
 export default function MainPage({
   isOpenInvitation,
@@ -28,6 +29,7 @@ export default function MainPage({
       <Greetings />
       <Brides />
       <Grooms />
+      <EventInfo />
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );

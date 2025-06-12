@@ -53,7 +53,7 @@ const Grooms = () => {
         >
           {data?.host_one_name}
         </h2>
-        <p className="text-xs font-semibold text-white max-w-32 text-left">
+        <p className="text-xs font-semibold text-white max-w-32 text-left drop-shadow-2xl">
           {data?.host_one_additional_info}
         </p>
         <div className="font-semibold w-fit flex items-center gap-2 text-white text-xs bg-transparent rounded-sm border border-white cursor-pointer px-3 py-1">
@@ -63,7 +63,7 @@ const Grooms = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {`@${data?.host_two_social_media}`}
+            {`@${data?.host_one_social_media}`}
           </Link>
         </div>
       </div>
