@@ -67,3 +67,9 @@ export const remineFares = localFont({
   variable: "--font-reminefares",
   display: "swap",
 });
+
+export const amalfiCoast = localFont({
+  src: "../public/fonts/amalfi-coast/amalfi-coast.ttf",
+  variable: "--font-amalfi-coast",
+  display: "swap",
+});

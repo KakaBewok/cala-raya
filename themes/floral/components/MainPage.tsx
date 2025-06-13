@@ -9,6 +9,7 @@ import Brides from "./Brides";
 import MusicButton from "./MusicButton";
 import Grooms from "./Grooms";
 import EventInfo from "./EventInfo";
+import Gallery from "./Gallery";
 
 export default function MainPage({
   isOpenInvitation,
@@ -30,6 +31,7 @@ export default function MainPage({
       <Brides />
       <Grooms />
       <EventInfo />
+      <Gallery />
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );
