@@ -104,12 +104,12 @@ const VerticalGallery = () => {
     <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden border border-red-500">
       {/* Door Effect Top */}
       <div
-        className={`bg-yellow-500 absolute top-0 left-0 w-full h-1/2 z-30 transition-transform duration-1000 ease-in-out ${
-          isGalleryOpen ? "-translate-y-full" : "translate-y-0"
+        className={`absolute top-0 left-0 w-full h-1/2 z-30 transition-transform duration-2000 ease-in-out ${
+          isGalleryOpen ? "-translate-y-[70%]" : "translate-y-0"
         }`}
       >
         <div
-          className={`absolute left-1/2 -translate-x-1/2 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-neutral-700 whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-neutral-700 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
         </div>
@@ -117,12 +117,12 @@ const VerticalGallery = () => {
 
       {/* Door Effect Bottom */}
       <div
-        className={`bg-green-500 absolute bottom-0 left-0 w-full h-1/2 z-30 transition-transform duration-1000 ease-in-out ${
-          isGalleryOpen ? "translate-y-full" : "translate-y-0"
+        className={`absolute bottom-0 left-0 w-full h-1/2 z-30 transition-transform duration-2000 ease-in-out ${
+          isGalleryOpen ? "translate-y-[70%]" : "translate-y-0"
         }`}
       >
         <div
-          className={`absolute left-1/2 -translate-x-1/2 top-0 ${amalfiCoast.className} text-[75px] font-light text-neutral-700 whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 top-0 ${amalfiCoast.className} text-[75px] font-light text-neutral-700 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
         </div>
