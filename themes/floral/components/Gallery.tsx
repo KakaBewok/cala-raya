@@ -109,7 +109,7 @@ const VerticalGallery = () => {
         }`}
       >
         <div
-          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-neutral-700 whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
         </div>
@@ -122,7 +122,7 @@ const VerticalGallery = () => {
         }`}
       >
         <div
-          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 top-0 ${amalfiCoast.className} text-[75px] font-light text-neutral-700 whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 top-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
         </div>
@@ -132,10 +132,10 @@ const VerticalGallery = () => {
       <Button
         size="sm"
         onClick={toggleGallery}
-        className={`cursor-pointer text-neutral-700 border rounded-none border-neutral-700 bg-transparent absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
+        className={`rounded-sm transition-all duration-500 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
           isGalleryOpen
-            ? "bg-neutral-300 text-neutral-800 rounded-lg border-none"
-            : ""
+            ? "bg-neutral-300 text-white rounded-lg border-none"
+            : "bg-[#c4a790]"
         }`}
       >
         {isGalleryOpen ? (
