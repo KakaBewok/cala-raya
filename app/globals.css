@@ -149,6 +149,19 @@ html {
   }
 }
 
+@keyframes loadingLine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-loading-line {
+  animation: loadingLine 2s ease-out infinite;
+}
+
 .swing-left {
   animation: swingToLeft 4s ease-in-out infinite;
 }

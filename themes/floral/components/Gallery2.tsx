@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
 import { amalfiCoast, remineFares } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
-import SwipeHandIcon from "./SwipeHandIcon";
+// import SwipeHandIcon from "./SwipeHandIcon";
 
 interface GalleryImage {
   id: number;
@@ -159,106 +159,44 @@ const VerticalGallery = () => {
         {layout.map((column, index) => {
           if (column.type === "first") {
             return (
-              //  <div key={index} className="flex-shrink-0 ">
-              //   <div className="h-screen w-screen flex items-center justify-center ">
-              //     <div
-              //       className={`
-              //           absolute top-1/2 left-1/2 h-[1px] bg-neutral-700 z-10 rounded-full
-              //           transition-all duration-700 ease-in-out
-              //           ${
-              //             isGalleryOpen
-              //               ? "w-0 opacity-0 scale-x-0"
-              //               : "w-40 opacity-100 scale-x-100"
-              //           }
-              //       `}
-              //       style={{
-              //         transform: "translate(-50%, -50%)",
-              //       }}
-              //     />
-              //     <div
-              //       className={`absolute top-[50%] right-3 -translate-y-1/2 z-10 h-14 w-14 transition-opacity duration-700 ${
-              //         isGalleryOpen && !hasUserSwiped
-              //           ? "opacity-100"
-              //           : "opacity-0 pointer-events-none"
-              //       }`}
-              //     >
-              //       <SwipeHandIcon />
-              //     </div>
-              //     <div className="relative h-56 w-56 group ">
-              //       <div
-              //         className={`${
-              //           remineFares.className
-              //         } absolute -top-24 -right-5 text-neutral-600 text-3xl leading-[2.5rem] font-semibold z-10 transition-opacity duration-700
-              //           ${
-              //             isGalleryOpen
-              //               ? "opacity-100"
-              //               : "opacity-0 pointer-events-none"
-              //           }`}
-              //       >
-              //         <div>{day}</div>
-              //         <div>{month}</div>
-              //         <div>{year}</div>
-              //       </div>
-              //       <Image
-              //         src={column.images[0].src}
-              //         alt={column.images[0].alt}
-              //         fill
-              //         className={`object-cover object-center transition-all duration-500 ${
-              //           isGalleryOpen ? "grayscale-0" : "grayscale"
-              //         }`}
-              //       />
-              //     </div>
-              //   </div>
-              // </div>
-
-              <div key={index} className="flex-shrink-0 ">
-                <div className="h-screen w-screen flex items-center justify-center ">
+              <div
+                key={index}
+                className="border border-blue-500 shrink-0 h-full pl-10 pr-[10px] flex flex-col justify-center"
+              >
+                <div className="relative h-1/2 w-72">
                   <div
-                    className={`
-                        absolute top-1/2 left-1/2 h-[1px] bg-neutral-700 z-10 rounded-full
-                        transition-all duration-700 ease-in-out
-                        ${
-                          isGalleryOpen
-                            ? "w-0 opacity-0 scale-x-0"
-                            : "w-40 opacity-100 scale-x-100"
-                        }
-                    `}
-                    style={{
-                      transform: "translate(-50%, -50%)",
-                    }}
-                  />
-                  <div
-                    className={`absolute top-[50%] right-3 -translate-y-1/2 z-10 h-14 w-14 transition-opacity duration-700 ${
-                      isGalleryOpen && !hasUserSwiped
+                    className={`${
+                      remineFares.className
+                    } absolute -top-24 -right-5 text-neutral-600 text-3xl leading-[2.5rem] font-semibold z-10 transition-opacity duration-700
+                    ${
+                      !isGalleryOpen
                         ? "opacity-100"
                         : "opacity-0 pointer-events-none"
                     }`}
                   >
-                    <SwipeHandIcon />
+                    <div>{day}</div>
+                    <div>{month}</div>
+                    <div>{year}</div>
                   </div>
-                  <div className="relative h-56 w-56 group ">
-                    <div
-                      className={`${
-                        remineFares.className
-                      } absolute -top-24 -right-5 text-neutral-600 text-3xl leading-[2.5rem] font-semibold z-10 transition-opacity duration-700
-                        ${
-                          isGalleryOpen
-                            ? "opacity-100"
-                            : "opacity-0 pointer-events-none"
-                        }`}
-                    >
-                      <div>{day}</div>
-                      <div>{month}</div>
-                      <div>{year}</div>
-                    </div>
-                    <Image
-                      src={column.images[0].src}
-                      alt={column.images[0].alt}
-                      fill
-                      className={`object-cover object-center transition-all duration-500 ${
-                        isGalleryOpen ? "grayscale-0" : "grayscale"
-                      }`}
-                    />
+                  <Image
+                    src={column.images[0].src}
+                    alt={column.images[0].alt}
+                    fill
+                    className={`object-cover object-center transition-all duration-500 ${
+                      isGalleryOpen ? "grayscale-0" : "grayscale"
+                    }`}
+                  />
+                </div>
+                <div
+                  className={`${
+                    isGalleryOpen
+                      ? "opacity-100"
+                      : "opacity-0 pointer-events-none"
+                  } transition-opacity duration-1500 mt-4 flex items-center gap-3 text-gray-500 uppercase tracking-widest text-sm`}
+                >
+                  <span>Scroll</span>
+                  <div className="relative w-24 h-[2px] overflow-hidden">
+                    <span className="absolute left-0 top-0 h-full w-full animate-loading-line bg-gray-500"></span>
                   </div>
                 </div>
               </div>
