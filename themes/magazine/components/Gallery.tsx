@@ -102,29 +102,29 @@ const HorizontalGallery = () => {
 
   return (
     <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden">
-      {/* Door Effects Left*/}
+      {/* left */}
       <div
-        className={`absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
+        className={`flex justify-center items-center absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
           isGalleryOpen ? "-translate-x-full" : "translate-x-0"
         }`}
       >
-        <div
-          className={`absolute -left-[250px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+        <p
+          className={`-ml-[25vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
-        </div>
+        </p>
       </div>
-      {/* Door Effects Right*/}
+      {/* right */}
       <div
-        className={`absolute top-0 right-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
+        className={`flex justify-center items-center absolute top-0 right-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
           isGalleryOpen ? "translate-x-full" : "translate-x-0"
         }`}
       >
-        <div
-          className={`absolute -right-[190px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+        <p
+          className={`-mr-[26vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
-        </div>
+        </p>
       </div>
 
       {/* Toggle Button */}
@@ -302,3 +302,26 @@ const HorizontalGallery = () => {
 };
 
 export default HorizontalGallery;
+
+// <div
+//   className={`absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
+//     isGalleryOpen ? "-translate-x-full" : "translate-x-0"
+//   }`}
+// >
+//   <div
+//     className={`absolute -left-[250px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+//   >
+//     {data?.host_one_nickname.toLowerCase()}
+//   </div>
+// </div>
+// <div
+//   className={`absolute top-0 right-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
+//     isGalleryOpen ? "translate-x-full" : "translate-x-0"
+//   }`}
+// >
+//   <div
+//     className={`absolute -right-[190px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+//   >
+//     {data?.host_two_nickname.toLowerCase()}
+//   </div>
+// </div>
