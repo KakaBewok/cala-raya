@@ -108,7 +108,7 @@ const EventInfo = () => {
             LOKASI
           </h1>
           <p
-            className={`${remineFares.className} text-md font-medium mb-6 text-neutral-700`}
+            className={`${remineFares.className} text-md font-medium mb-6 text-neutral-700 text-center`}
           >
             {data?.rundowns?.[0]?.location || "-"}
           </p>
