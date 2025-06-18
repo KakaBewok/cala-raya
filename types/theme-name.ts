@@ -1,1 +1,6 @@
-export type ThemeName = "monochrome" | "netflix" | "floral" | "magazine";
+export type ThemeName =
+  | "monochrome"
+  | "netflix"
+  | "floral"
+  | "magazine"
+  | "maroon";

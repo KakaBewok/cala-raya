@@ -5,6 +5,7 @@ import db from "@/configs/db-config";
 import { useInvitation } from "@/hooks/use-invitation";
 import FloralPage from "@/themes/floral/FloralPage";
 import MagazinePage from "@/themes/magazine/MagazinePage";
+import MaroonPage from "@/themes/maroon/MaroonPage";
 import MonochromePage from "@/themes/monochrome/MonochromePage";
 import NetflixPage from "@/themes/netflix/NetflixPage";
 import { ThemeName } from "@/types/theme-name";
@@ -18,6 +19,7 @@ const themeMap: Record<ThemeName, React.ComponentType> = {
   netflix: NetflixPage,
   floral: FloralPage,
   magazine: MagazinePage,
+  maroon: MaroonPage,
 };
 
 export default function InvitationPage() {
