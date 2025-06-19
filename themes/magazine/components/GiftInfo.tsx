@@ -56,7 +56,7 @@ const GiftInfo = () => {
 
       {/* Address */}
       <div className="bg-white rounded-sm py-5 px-4">
-        <p className="font-bold mb-2 text-xs text-neutral-600">ALAMAT</p>
+        <p className="font-bold mb-2 text-xs text-neutral-600">HADIAH FISIK</p>
         <p className="text-neutral-400 text-xs mb-4">
           {data?.gift_infos?.[0].gift_delivery_address || ""}
         </p>
