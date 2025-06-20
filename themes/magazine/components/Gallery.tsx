@@ -235,8 +235,8 @@ const HorizontalGallery = () => {
                       <h1
                         className={`${remineFares.className} text-4xl font-medium text-white`}
                       >
-                        {data?.host_one_nickname.toLocaleLowerCase()} <br /> &
-                        {data?.host_two_nickname.toLocaleLowerCase()}
+                        {data?.host_two_nickname.toLocaleLowerCase()} <br /> &{" "}
+                        {data?.host_one_nickname.toLocaleLowerCase()}
                       </h1>
                     </div>
                   </div>
