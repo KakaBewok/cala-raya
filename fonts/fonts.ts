@@ -73,3 +73,15 @@ export const amalfiCoast = localFont({
   variable: "--font-amalfi-coast",
   display: "swap",
 });
+
+export const ninfa = localFont({
+  // src: "../public/fonts/ninfa/ninfa_regular.otf",
+  src: [
+    { path: "../public/fonts/ninfa/ninfa_black.otf", weight: "700" },
+    { path: "../public/fonts/ninfa/ninfa_light.otf", weight: "300" },
+    { path: "../public/fonts/ninfa/ninfa_regular.otf", weight: "400" },
+    { path: "../public/fonts/ninfa/ninfa_bold.otf", weight: "700" },
+  ],
+  variable: "--font-ninfa",
+  display: "swap",
+});
