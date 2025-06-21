@@ -5,7 +5,7 @@ import { findImage } from "@/utils/find-image";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { didot, remineFares } from "@/fonts/fonts";
+import { didot } from "@/fonts/fonts";
 
 const Cover = () => {
   const { invitationData: data } = useInvitation();
@@ -20,7 +20,7 @@ const Cover = () => {
   const clipPath = useTransform(
     scrollYProgress,
     [0, 1],
-    ["inset(3% 6%)", "inset(0% 0%)"]
+    ["inset(5% 8%)", "inset(3% 4%)"]
   );
 
   const filter = useTransform(
@@ -28,17 +28,6 @@ const Cover = () => {
     [0, 1],
     ["grayscale(100%)", "grayscale(0%)"]
   );
-
-  const formatEventDate = (dateString: string) => {
-    if (!dateString) return null;
-
-    const eventDate = new Date(dateString);
-    const day = String(eventDate.getDate()).padStart(2, "0");
-    const month = String(eventDate.getMonth() + 1).padStart(2, "0");
-    const year = eventDate.getFullYear();
-
-    return `${day} · ${month} · ${year}`;
-  };
 
   return (
     <section
@@ -56,19 +45,8 @@ const Cover = () => {
       </motion.div>
 
       {/* Content box */}
-      <div className="absolute z-20 h-screen flex flex-col justify-around items-center text-white">
-        <p className={`${didot.className} text-xs`}>The Wedding of</p>
-
-        <h1
-          className={`${remineFares.className} font-medium text-4xl text-left`}
-        >
-          {data?.host_one_nickname.toLocaleLowerCase()} <br />&{" "}
-          {data?.host_two_nickname.toLocaleLowerCase()}
-        </h1>
-
-        <p className={`${didot.className} text-xs leading-tight`}>
-          {formatEventDate(data?.event_date ?? "")}
-        </p>
+      <div className="absolute z-20 top-28">
+        <p className={`${didot.className} text-lg`}>The Wedding of</p>
       </div>
     </section>
   );
