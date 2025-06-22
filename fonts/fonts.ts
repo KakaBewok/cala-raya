@@ -2,6 +2,7 @@ import {
   Geist,
   Geist_Mono,
   GFS_Didot,
+  Great_Vibes,
   Playfair_Display,
   Poppins,
   Raleway,
@@ -56,6 +57,13 @@ export const raleway = Raleway({
   display: "swap",
 });
 
+export const greatVibes = Great_Vibes({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-great-vibes",
+  display: "swap",
+});
+
 export const optivaground = localFont({
   src: "../public/fonts/optivaground/optivaground-bold.otf",
   variable: "--font-optivaground",
@@ -76,10 +84,10 @@ export const amalfiCoast = localFont({
 
 export const ninfa = localFont({
   src: [
-    { path: "../public/fonts/ninfa/ninfa_black.otf", weight: "700" },
-    { path: "../public/fonts/ninfa/ninfa_light.otf", weight: "300" },
-    { path: "../public/fonts/ninfa/ninfa_regular.otf", weight: "400" },
-    { path: "../public/fonts/ninfa/ninfa_bold.otf", weight: "700" },
+    { path: "../public/fonts/ninfa/ninfa-semibold.otf", weight: "600" },
+    { path: "../public/fonts/ninfa/ninfa-light.otf", weight: "300" },
+    { path: "../public/fonts/ninfa/ninfa-regular.otf", weight: "400" },
+    { path: "../public/fonts/ninfa/ninfa-bold.otf", weight: "700" },
   ],
   variable: "--font-ninfa",
   display: "swap",

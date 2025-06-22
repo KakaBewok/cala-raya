@@ -1,4 +1,4 @@
-import { ninfa } from "@/fonts/fonts";
+import { playfair } from "@/fonts/fonts";
 import Image from "next/image";
 
 export default function Greetings() {
@@ -68,14 +68,14 @@ export default function Greetings() {
 
         <div className="border border-rose-900 p-1 text-center max-w-md bg-white/60 backdrop-blur-md z-10">
           <div
-            className={`${ninfa.className} border border-rose-900 text-center max-w-md bg-white/60 backdrop-blur-md z-10 px-10 py-20`}
+            className={`${playfair.className} border border-rose-900 text-center max-w-md bg-white/60 backdrop-blur-md z-10 px-10 py-20`}
           >
             <div className="w-full h-fit flex flex-col justify-center items-center gap-11">
               <p
                 className={`text-xs text-rose-800 leading-relaxed tracking-wider font-light`}
               >
-                Dan di antara tanda tanda kebesaranNya ialah Dia menciptakan
-                pasangan pasangan untukmu dari jenismu sendiri, agar kamu
+                Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan
+                pasangan-pasangan untukmu dari jenismu sendiri, agar kamu
                 cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di
                 antaramu rasa kasih dan sayang.
               </p>

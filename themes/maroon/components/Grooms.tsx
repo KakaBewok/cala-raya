@@ -1,4 +1,3 @@
-import { optivaground } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import Image from "next/image";
@@ -7,6 +6,7 @@ import { useRef } from "react";
 import { Instagram } from "lucide-react";
 import Link from "next/link";
 import { createSocialMediaLink } from "@/utils/create-social-media-link";
+import { playfair } from "@/fonts/fonts";
 
 const Grooms = () => {
   const { invitationData: data } = useInvitation();
@@ -44,13 +44,11 @@ const Grooms = () => {
 
       {/* Content box */}
       <div
-        className="gap-3 flex flex-col justify-center items-start absolute bottom-0 z-20 w-full bg-gradient-to-t from-white/80 via-white/60 to-transparent px-6 py-8 backdrop-blur-sm"
+        className={`${playfair.className} gap-3 flex flex-col justify-center items-start absolute bottom-0 z-20 w-full bg-gradient-to-t from-white via-white/60 to-transparent px-6 py-8 backdrop-blur-sm`}
         data-aos="fade-up"
         data-aos-offset="100"
       >
-        <h2
-          className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-sm`}
-        >
+        <h2 className={`tracking-widest text-2xl text-[#fff] drop-shadow-sm`}>
           {data?.host_one_name}
         </h2>
         <p className="text-xs font-semibold text-white max-w-32 text-left drop-shadow-2xl">

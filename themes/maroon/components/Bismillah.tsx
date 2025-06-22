@@ -1,4 +1,4 @@
-import { ninfa } from "@/fonts/fonts";
+import { ninfa, playfair } from "@/fonts/fonts";
 import Image from "next/image";
 
 const Bismillah = () => {
@@ -17,8 +17,9 @@ const Bismillah = () => {
         data-aos="fade-up"
         data-aos-offset="100"
       >
-        Kami mengundang Bapak Ibu Saudara i untuk hadir pada acara pernikahan
-        kami
+        Kami mengundang{" "}
+        <span className={`${playfair.className}`}>Bapak/Ibu/Saudara/i</span>{" "}
+        untuk hadir pada acara pernikahan kami
       </p>
     </div>
   );
