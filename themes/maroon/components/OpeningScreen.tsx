@@ -24,9 +24,10 @@ export default function OpeningScreen({
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsDomLoaded(true);
     }, 1500);
+    return () => clearTimeout(timer);
   }, []);
 
   return (

@@ -5,10 +5,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Bismillah from "./Bismillah";
-import BridesSection from "./BridesSection";
+import Brides from "./Brides";
 import Cover from "./Cover";
 import EventInfo from "./EventInfo";
-import GroomsSection from "./GroomsSection";
+import Grooms from "./Grooms";
 import MusicButton from "./MusicButton";
 import VideoFrame from "./VideoFrame";
 import RSVP from "./Rsvp";
@@ -16,6 +16,7 @@ import GiftInfo from "./GiftInfo";
 import ClosingSection from "./ClosingSection";
 import Footer from "./Footer";
 import Gallery from "./Gallery";
+import Greetings from "./Greetings";
 
 export default function MainPage({
   isOpenInvitation,
@@ -35,9 +36,10 @@ export default function MainPage({
   return (
     <main className="max-w-md mx-auto z-10 flex flex-col items-center justify-center">
       <Cover />
+      <Greetings />
       <Bismillah />
-      <BridesSection />
-      <GroomsSection />
+      <Brides />
+      <Grooms />
       <EventInfo />
       <Gallery />
       {Array.isArray(data?.videos) &&

@@ -1,11 +1,8 @@
-"use client";
-
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { didot } from "@/fonts/fonts";
 
 const Cover = () => {
   const { invitationData: data } = useInvitation();
@@ -44,9 +41,17 @@ const Cover = () => {
         />
       </motion.div>
 
-      {/* Content box */}
       <div className="absolute z-20 top-28">
-        <p className={`${didot.className} text-lg`}>The Wedding of</p>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <Image
+            src={findImage(data, "initial")}
+            alt="Initial"
+            width={150}
+            height={150}
+            className="object-cover object-center z-0"
+            priority
+          />
+        </motion.div>
       </div>
     </section>
   );

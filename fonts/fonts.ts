@@ -75,7 +75,6 @@ export const amalfiCoast = localFont({
 });
 
 export const ninfa = localFont({
-  // src: "../public/fonts/ninfa/ninfa_regular.otf",
   src: [
     { path: "../public/fonts/ninfa/ninfa_black.otf", weight: "700" },
     { path: "../public/fonts/ninfa/ninfa_light.otf", weight: "300" },
