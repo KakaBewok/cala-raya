@@ -5,6 +5,7 @@ import { formatDate } from "@/utils/format-date";
 import { formatTime } from "@/utils/format-time";
 import { DateTime } from "luxon";
 import Link from "next/link";
+import Image from "next/image";
 
 const EventInfo = () => {
   const { invitationData: data } = useInvitation();
@@ -41,7 +42,7 @@ const EventInfo = () => {
   };
 
   return (
-    <section className="relative w-full h-auto bg-white overflow-hidden">
+    <section className="border border-red-500 relative w-full h-auto bg-white overflow-hidden">
       <div
         className={`${ninfa.className} z-20 h-auto bg-orange-50 flex flex-col justify-start items-center py-6`}
         data-aos="fade-up"
@@ -84,7 +85,7 @@ const EventInfo = () => {
                 Tambah ke Kalender
               </Link>
               <p
-                className={`mt-4 text-xs font-light text-rose-900 text-center`}
+                className={`mt-4 text-xs font-light text-rose-900 text-center w-3/4`}
               >
                 {rundown.location}
               </p>
@@ -97,6 +98,23 @@ const EventInfo = () => {
             </div>
           ))}
       </div>
+      <Image
+        src={`/assets/images/floral/11.webp`}
+        width={90}
+        height={90}
+        alt="Kiri"
+        className="swing-right-fast absolute z-20 top-28 -right-8"
+        data-aos="fade-left"
+      />
+
+      <Image
+        data-aos="zoom-in"
+        src={`/assets/images/floral/28.webp`}
+        width={80}
+        height={80}
+        alt="Kanan"
+        className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-6 -rotate-x-45"
+      />
     </section>
   );
 };
