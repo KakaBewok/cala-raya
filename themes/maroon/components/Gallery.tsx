@@ -2,8 +2,9 @@ import React, { useMemo } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
-import { amalfiCoast, remineFares } from "@/fonts/fonts";
+import { amalfiCoast, ninfa, remineFares } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
+import SwipeHandIcon from "./SwipeHandIcon";
 // import SwipeHandIcon from "./SwipeHandIcon";
 
 interface GalleryImage {
@@ -101,15 +102,15 @@ const VerticalGallery = () => {
   }, [images]);
 
   return (
-    <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden border border-red-500">
+    <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden">
       {/* Door Effect Top */}
       <div
         className={`absolute top-0 left-0 w-full h-1/2 z-30 transition-transform duration-2000 ease-in-out ${
-          isGalleryOpen ? "-translate-y-[70%]" : "translate-y-0"
+          isGalleryOpen ? "-translate-y-[60%]" : "translate-y-0"
         }`}
       >
         <div
-          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute left-5 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-rose-900 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
         </div>
@@ -118,11 +119,11 @@ const VerticalGallery = () => {
       {/* Door Effect Bottom */}
       <div
         className={`absolute bottom-0 left-0 w-full h-1/2 z-30 transition-transform duration-2000 ease-in-out ${
-          isGalleryOpen ? "translate-y-[70%]" : "translate-y-0"
+          isGalleryOpen ? "translate-y-[60%]" : "translate-y-0"
         }`}
       >
         <div
-          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 top-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute right-5 top-0 ${amalfiCoast.className} text-[75px] font-light text-rose-900 whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
         </div>
@@ -132,10 +133,12 @@ const VerticalGallery = () => {
       <Button
         size="sm"
         onClick={toggleGallery}
-        className={`rounded-sm transition-all duration-500 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
+        className={`${
+          ninfa.className
+        } transition-all duration-800 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-4 flex items-center gap-2 font-light ${
           isGalleryOpen
-            ? "bg-neutral-300 text-white rounded-lg border-none"
-            : "bg-[#c4a790]"
+            ? "bg-neutral-400 text-white rounded-lg border-none"
+            : "bg-rose-900 rounded-none"
         }`}
       >
         {isGalleryOpen ? (
@@ -143,7 +146,7 @@ const VerticalGallery = () => {
             <X size={20} />
           </>
         ) : (
-          <span className="text-xs">Buka Gallery</span>
+          <span className="text-xs">BUKA GALLERY</span>
         )}
       </Button>
 
@@ -156,6 +159,15 @@ const VerticalGallery = () => {
             : "cursor-default"
         }`}
       >
+        <div
+          className={`absolute top-[50%] right-3 -translate-y-1/2 z-10 h-14 w-14 transition-opacity duration-700 ${
+            isGalleryOpen && !hasUserSwiped
+              ? "opacity-100"
+              : "opacity-0 pointer-events-none"
+          }`}
+        >
+          <SwipeHandIcon />
+        </div>
         {layout.map((column, index) => {
           if (column.type === "first") {
             return (
@@ -164,10 +176,10 @@ const VerticalGallery = () => {
                 className="border border-blue-500 shrink-0 h-screen px-[10px] max-w-screen basis-4/5 flex flex-col justify-center"
               >
                 <div className="relative mb-16 aspect-[2/3]">
-                  {/* <div
+                  <div
                     className={`${
-                      remineFares.className
-                    } absolute -top-24 -right-5 text-neutral-600 text-3xl leading-[2.5rem] font-semibold z-10 transition-opacity duration-700
+                      ninfa.className
+                    } absolute -top-28 -right-9 text-neutral-600 text-xl leading-[2.5rem] z-10 transition-opacity duration-700 font-medium
                     ${
                       !isGalleryOpen
                         ? "opacity-100"
@@ -177,7 +189,7 @@ const VerticalGallery = () => {
                     <div>{day}</div>
                     <div>{month}</div>
                     <div>{year}</div>
-                  </div> */}
+                  </div>
                   <Image
                     src={column.images[0].src}
                     alt={column.images[0].alt}
