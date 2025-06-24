@@ -2,9 +2,9 @@ import React, { useMemo } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
-import { remineFares } from "@/fonts/fonts";
+import { amalfiCoast, remineFares } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
-import SwipeHandIcon from "./SwipeHandIcon";
+// import SwipeHandIcon from "./SwipeHandIcon";
 
 interface GalleryImage {
   id: number;
@@ -12,7 +12,7 @@ interface GalleryImage {
   alt: string;
 }
 
-const HorizontalGallery = () => {
+const VerticalGallery = () => {
   const { invitationData: data } = useInvitation();
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [isGalleryOpen, setIsGalleryOpen] = React.useState<boolean>(false);
@@ -101,40 +101,41 @@ const HorizontalGallery = () => {
   }, [images]);
 
   return (
-    <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden">
-      {/* left */}
+    <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden border border-red-500">
+      {/* Door Effect Top */}
       <div
-        className={`flex justify-center items-center absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
-          isGalleryOpen ? "-translate-x-full" : "translate-x-0"
+        className={`absolute top-0 left-0 w-full h-1/2 z-30 transition-transform duration-2000 ease-in-out ${
+          isGalleryOpen ? "-translate-y-[70%]" : "translate-y-0"
         }`}
       >
-        <p
-          className={`-ml-[25vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+        <div
+          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
-        </p>
+        </div>
       </div>
-      {/* right */}
+
+      {/* Door Effect Bottom */}
       <div
-        className={`flex justify-center items-center absolute top-0 right-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
-          isGalleryOpen ? "translate-x-full" : "translate-x-0"
+        className={`absolute bottom-0 left-0 w-full h-1/2 z-30 transition-transform duration-2000 ease-in-out ${
+          isGalleryOpen ? "translate-y-[70%]" : "translate-y-0"
         }`}
       >
-        <p
-          className={`-mr-[26vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+        <div
+          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 top-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
-        </p>
+        </div>
       </div>
 
       {/* Toggle Button */}
       <Button
         size="sm"
         onClick={toggleGallery}
-        className={`cursor-pointer text-neutral-700 border rounded-none border-neutral-700 bg-transparent absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
+        className={`rounded-sm transition-all duration-500 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
           isGalleryOpen
-            ? "bg-neutral-300 text-neutral-800 rounded-lg border-none"
-            : ""
+            ? "bg-neutral-300 text-white rounded-lg border-none"
+            : "bg-[#c4a790]"
         }`}
       >
         {isGalleryOpen ? (
@@ -149,7 +150,7 @@ const HorizontalGallery = () => {
       {/* Gallery */}
       <div
         ref={scrollRef}
-        className={`flex h-screen w-screen overflow-x-auto scrollbar-hide transition-all duration-300 ${
+        className={`flex h-screen w-full overflow-y-hidden overflow-x-auto scrollbar-hide transition-all duration-300 ${
           isGalleryOpen
             ? "cursor-grab active:cursor-grabbing"
             : "cursor-default"
@@ -158,56 +159,46 @@ const HorizontalGallery = () => {
         {layout.map((column, index) => {
           if (column.type === "first") {
             return (
-              <div key={index} className="flex-shrink-0 ">
-                <div className="h-screen w-screen flex items-center justify-center ">
-                  <div
-                    className={`
-                        absolute top-1/2 left-1/2 h-[1px] bg-neutral-700 z-10 rounded-full
-                        transition-all duration-700 ease-in-out
-                        ${
-                          isGalleryOpen
-                            ? "w-0 opacity-0 scale-x-0"
-                            : "w-40 opacity-100 scale-x-100"
-                        }
-                    `}
-                    style={{
-                      transform: "translate(-50%, -50%)",
-                    }}
-                  />
-                  <div
-                    className={`absolute top-[50%] right-3 -translate-y-1/2 z-10 h-14 w-14 transition-opacity duration-700 ${
-                      isGalleryOpen && !hasUserSwiped
+              <div
+                key={index}
+                className="border border-blue-500 shrink-0 h-screen px-[10px] max-w-screen basis-4/5 flex flex-col justify-center"
+              >
+                <div className="relative mb-16 aspect-[2/3]">
+                  {/* <div
+                    className={`${
+                      remineFares.className
+                    } absolute -top-24 -right-5 text-neutral-600 text-3xl leading-[2.5rem] font-semibold z-10 transition-opacity duration-700
+                    ${
+                      !isGalleryOpen
                         ? "opacity-100"
                         : "opacity-0 pointer-events-none"
                     }`}
                   >
-                    <SwipeHandIcon />
-                  </div>
-                  <div className="relative h-56 w-56 group ">
-                    <div
-                      className={`${
-                        remineFares.className
-                      } absolute -top-24 -right-5 text-neutral-600 text-3xl leading-[2.5rem] font-semibold z-10 transition-opacity duration-700
-                        ${
-                          isGalleryOpen
-                            ? "opacity-100"
-                            : "opacity-0 pointer-events-none"
-                        }`}
-                    >
-                      <div>{day}</div>
-                      <div>{month}</div>
-                      <div>{year}</div>
-                    </div>
-                    <Image
-                      src={column.images[0].src}
-                      alt={column.images[0].alt}
-                      fill
-                      className={`object-cover object-center transition-all duration-500 ${
-                        isGalleryOpen ? "grayscale-0" : "grayscale"
-                      }`}
-                    />
-                  </div>
+                    <div>{day}</div>
+                    <div>{month}</div>
+                    <div>{year}</div>
+                  </div> */}
+                  <Image
+                    src={column.images[0].src}
+                    alt={column.images[0].alt}
+                    fill
+                    className={`object-cover object-center transition-all duration-500 ${
+                      isGalleryOpen ? "grayscale-0" : "grayscale"
+                    }`}
+                  />
                 </div>
+                {/* <div
+                  className={`${
+                    isGalleryOpen
+                      ? "opacity-100"
+                      : "opacity-0 pointer-events-none"
+                  } transition-opacity duration-1500 mt-4 flex items-center gap-3 text-gray-500 uppercase tracking-widest text-sm`}
+                >
+                  <span>Scroll</span>
+                  <div className="relative w-24 h-[2px] overflow-hidden">
+                    <span className="absolute left-0 top-0 h-full w-full animate-loading-line bg-gray-500"></span>
+                  </div>
+                </div> */}
               </div>
             );
           }
@@ -301,27 +292,4 @@ const HorizontalGallery = () => {
   );
 };
 
-export default HorizontalGallery;
-
-// <div
-//   className={`absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
-//     isGalleryOpen ? "-translate-x-full" : "translate-x-0"
-//   }`}
-// >
-//   <div
-//     className={`absolute -left-[250px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
-//   >
-//     {data?.host_one_nickname.toLowerCase()}
-//   </div>
-// </div>
-// <div
-//   className={`absolute top-0 right-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
-//     isGalleryOpen ? "translate-x-full" : "translate-x-0"
-//   }`}
-// >
-//   <div
-//     className={`absolute -right-[190px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
-//   >
-//     {data?.host_two_nickname.toLowerCase()}
-//   </div>
-// </div>
+export default VerticalGallery;

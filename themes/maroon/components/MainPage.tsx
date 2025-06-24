@@ -15,8 +15,8 @@ import RSVP from "./Rsvp";
 import GiftInfo from "./GiftInfo";
 import ClosingSection from "./ClosingSection";
 import Footer from "./Footer";
-import Gallery from "./Gallery";
 import Greetings from "./Greetings";
+import Gallery from "./Gallery";
 
 export default function MainPage({
   isOpenInvitation,

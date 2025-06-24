@@ -10,7 +10,6 @@ const Bismillah = () => {
         width={200}
         height={200}
         data-aos="fade-up"
-        className="border border-rose-900"
       />
       <p
         className={`${ninfa.className} text-xs text-rose-900 font-light tracking-wider`}

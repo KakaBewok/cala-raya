@@ -42,7 +42,7 @@ const EventInfo = () => {
   };
 
   return (
-    <section className="border border-red-500 relative w-full h-auto bg-white overflow-hidden">
+    <section className="relative w-full h-auto bg-white overflow-hidden">
       <div
         className={`${ninfa.className} z-20 h-auto bg-orange-50 flex flex-col justify-start items-center py-6`}
         data-aos="fade-up"
@@ -100,8 +100,8 @@ const EventInfo = () => {
       </div>
       <Image
         src={`/assets/images/floral/11.webp`}
-        width={90}
-        height={90}
+        width={100}
+        height={100}
         alt="Kiri"
         className="swing-right-fast absolute z-20 top-28 -right-8"
         data-aos="fade-left"
@@ -110,10 +110,10 @@ const EventInfo = () => {
       <Image
         data-aos="zoom-in"
         src={`/assets/images/floral/28.webp`}
-        width={80}
-        height={80}
+        width={115}
+        height={115}
         alt="Kanan"
-        className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-6 -rotate-x-45"
+        className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-6 rotate-[40deg]"
       />
     </section>
   );
