@@ -2,10 +2,9 @@ import React, { useMemo } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
-import { amalfiCoast, ninfa, remineFares } from "@/fonts/fonts";
+import { amalfiCoast, ninfa } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
 import SwipeHandIcon from "./SwipeHandIcon";
-// import SwipeHandIcon from "./SwipeHandIcon";
 
 interface GalleryImage {
   id: number;
@@ -199,18 +198,6 @@ const VerticalGallery = () => {
                     }`}
                   />
                 </div>
-                {/* <div
-                  className={`${
-                    isGalleryOpen
-                      ? "opacity-100"
-                      : "opacity-0 pointer-events-none"
-                  } transition-opacity duration-1500 mt-4 flex items-center gap-3 text-gray-500 uppercase tracking-widest text-sm`}
-                >
-                  <span>Scroll</span>
-                  <div className="relative w-24 h-[2px] overflow-hidden">
-                    <span className="absolute left-0 top-0 h-full w-full animate-loading-line bg-gray-500"></span>
-                  </div>
-                </div> */}
               </div>
             );
           }
@@ -218,7 +205,6 @@ const VerticalGallery = () => {
           if (column.type === "last") {
             return (
               <div className="flex-shrink-0 w-screen h-screen" key={index}>
-                {/* 1 */}
                 <div className="flex flex-col w-full h-full items-center justify-center">
                   <div className="relative w-full h-full">
                     <Image
@@ -236,7 +222,7 @@ const VerticalGallery = () => {
                       className={`absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2`}
                     >
                       <h1
-                        className={`${remineFares.className} text-4xl font-medium text-white`}
+                        className={`${amalfiCoast.className} text-4xl font-medium text-white`}
                       >
                         {data?.host_one_nickname.toLocaleLowerCase()} <br /> &
                         {data?.host_two_nickname.toLocaleLowerCase()}
