@@ -65,7 +65,7 @@ const VerticalGallery = () => {
 
     while (imageIndex < images.length) {
       const isDoubleColumn =
-        Math.random() > 0.3 && imageIndex + 1 < images.length;
+        Math.random() > 0.9 && imageIndex + 1 < images.length;
 
       if (isDoubleColumn) {
         columns.push({
@@ -172,7 +172,7 @@ const VerticalGallery = () => {
             return (
               <div
                 key={index}
-                className="border border-blue-500 shrink-0 h-screen px-[10px] max-w-screen basis-4/5 flex flex-col justify-center"
+                className="border border-blue-500 flex-shrink-0 h-screen px-[10px] max-w-screen basis-4/5 flex flex-col justify-center"
               >
                 <div className="relative mb-16 aspect-[2/3]">
                   <div
@@ -206,7 +206,7 @@ const VerticalGallery = () => {
             return (
               <div className="flex-shrink-0 w-screen h-screen" key={index}>
                 <div className="flex flex-col w-full h-full items-center justify-center">
-                  <div className="relative w-full h-full">
+                  <div className="relative w-full h-full border border-red-500">
                     <Image
                       src={column.images[0].src}
                       alt={column.images[0].alt}
@@ -235,27 +235,41 @@ const VerticalGallery = () => {
           }
 
           return (
-            <div key={index} className="flex-shrink-0">
+            <div key={index}>
               {column.type === "single" ? (
-                <div className="flex-shrink-0 w-screen h-screen">
-                  {/* 1 */}
-                  <div className="flex flex-col w-full h-full p-6 items-center justify-center">
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={column.images[0].src}
-                        alt={column.images[0].alt}
-                        fill
-                        className={`object-cover object-center transition-all duration-500 ${
-                          isGalleryOpen ? "grayscale-0" : "grayscale"
-                        }`}
-                      />
-                    </div>
+                // <div className="flex-shrink-0 w-screen h-screen">
+                //   <div className="flex flex-col w-screen h-full p-6 items-center justify-center basis-4/5">
+                //     <div className="relative aspect-[2/3] border border-red-500">
+                //       <Image
+                //         src={column.images[0].src}
+                //         alt={column.images[0].alt}
+                //         fill
+                //         className={`object-cover object-center transition-all duration-500 ${
+                //           isGalleryOpen ? "grayscale-0" : "grayscale"
+                //         }`}
+                //       />
+                //     </div>
+                //   </div>
+                // </div>
+                <div
+                  key={index}
+                  className="border border-blue-500 flex-shrink-0 h-screen px-[10px] max-w-screen flex flex-col justify-center"
+                >
+                  <div className="relative w-full h-full aspect-[2/3]">
+                    <Image
+                      src={column.images[0].src}
+                      alt={column.images[0].alt}
+                      fill
+                      className={`object-cover object-center transition-all duration-500 ${
+                        isGalleryOpen ? "grayscale-0" : "grayscale"
+                      }`}
+                    />
                   </div>
                 </div>
               ) : (
-                <div className="flex-shrink-0 w-screen h-screen flex flex-col">
+                <div className="border border-red-500 flex-shrink-0 w-screen h-screen flex flex-col justify-center items-center gap-5 px-2">
                   {/* 1 */}
-                  <div className="flex flex-col w-full h-full p-12 items-center justify-center">
+                  <div className="flex flex-col w-full h-[36vh] items-center justify-center">
                     <div className="relative w-full h-full">
                       <Image
                         src={column.images[0].src}
@@ -268,7 +282,7 @@ const VerticalGallery = () => {
                     </div>
                   </div>
                   {/* 2 */}
-                  <div className="flex flex-col w-full h-full items-center justify-center">
+                  <div className="flex flex-col w-full h-[36vh] items-center justify-center">
                     <div className="relative w-full h-full">
                       <Image
                         src={column.images[1].src}
