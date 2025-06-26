@@ -12,6 +12,13 @@ interface GalleryImage {
   alt: string;
 }
 
+type LayoutType = "single-up" | "single-down" | "double";
+
+interface LayoutColumn {
+  type: LayoutType;
+  images: GalleryImage[];
+}
+
 const VerticalGallery = () => {
   const { invitationData: data } = useInvitation();
   const scrollRef = React.useRef<HTMLDivElement>(null);
@@ -59,15 +66,18 @@ const VerticalGallery = () => {
     }, 100);
   };
 
-  const createLayout = (images: GalleryImage[]) => {
-    const columns = [];
+  const createLayout = (images: GalleryImage[]): LayoutColumn[] => {
+    const columns: LayoutColumn[] = [];
     let imageIndex = 0;
 
-    while (imageIndex < images.length) {
-      const isDoubleColumn =
-        Math.random() > 0.9 && imageIndex + 1 < images.length;
+    // fix layout pattern
+    const layoutPattern: LayoutType[] = ["single-down", "double", "single-up"];
+    let patternIndex = 0;
 
-      if (isDoubleColumn) {
+    while (imageIndex < images.length) {
+      const layoutType = layoutPattern[patternIndex % layoutPattern.length];
+
+      if (layoutType === "double" && imageIndex + 1 < images.length) {
         columns.push({
           type: "double",
           images: [images[imageIndex], images[imageIndex + 1]],
@@ -75,11 +85,12 @@ const VerticalGallery = () => {
         imageIndex += 2;
       } else {
         columns.push({
-          type: "single",
+          type: layoutType === "double" ? "single-up" : layoutType,
           images: [images[imageIndex]],
         });
         imageIndex += 1;
       }
+      patternIndex++;
     }
 
     return columns;
@@ -172,7 +183,7 @@ const VerticalGallery = () => {
             return (
               <div
                 key={index}
-                className="border border-blue-500 flex-shrink-0 h-screen px-[10px] max-w-screen basis-4/5 flex flex-col justify-center"
+                className="flex-shrink-0 h-screen px-[10px] max-w-screen basis-4/5 flex flex-col justify-center"
               >
                 <div className="relative mb-16 aspect-[2/3]">
                   <div
@@ -236,26 +247,28 @@ const VerticalGallery = () => {
 
           return (
             <div key={index}>
-              {column.type === "single" ? (
-                // <div className="flex-shrink-0 w-screen h-screen">
-                //   <div className="flex flex-col w-screen h-full p-6 items-center justify-center basis-4/5">
-                //     <div className="relative aspect-[2/3] border border-red-500">
-                //       <Image
-                //         src={column.images[0].src}
-                //         alt={column.images[0].alt}
-                //         fill
-                //         className={`object-cover object-center transition-all duration-500 ${
-                //           isGalleryOpen ? "grayscale-0" : "grayscale"
-                //         }`}
-                //       />
-                //     </div>
-                //   </div>
-                // </div>
+              {column.type === "single-down" ? (
                 <div
                   key={index}
-                  className="border border-blue-500 flex-shrink-0 h-screen px-[10px] max-w-screen flex flex-col justify-center"
+                  className="flex-shrink-0 h-screen px-[10px] max-w-screen flex flex-col justify-end"
                 >
-                  <div className="relative w-full h-full aspect-[2/3]">
+                  <div className="relative mb-16 w-full h-[50vh] aspect-[2/3]">
+                    <Image
+                      src={column.images[0].src}
+                      alt={column.images[0].alt}
+                      fill
+                      className={`object-cover object-center transition-all duration-500 ${
+                        isGalleryOpen ? "grayscale-0" : "grayscale"
+                      }`}
+                    />
+                  </div>
+                </div>
+              ) : column.type === "single-up" ? (
+                <div
+                  key={index}
+                  className="flex-shrink-0 h-screen px-[10px] max-w-screen flex flex-col justify-center"
+                >
+                  <div className="relative mb-16 w-full h-[50vh] aspect-[2/3]">
                     <Image
                       src={column.images[0].src}
                       alt={column.images[0].alt}
@@ -267,8 +280,8 @@ const VerticalGallery = () => {
                   </div>
                 </div>
               ) : (
-                <div className="border border-red-500 flex-shrink-0 w-screen h-screen flex flex-col justify-center items-center gap-5 px-2">
-                  {/* 1 */}
+                <div className="flex-shrink-0 w-screen h-screen flex flex-col justify-center items-center gap-[20px] px-[10px]">
+                  {/* up */}
                   <div className="flex flex-col w-full h-[36vh] items-center justify-center">
                     <div className="relative w-full h-full">
                       <Image
@@ -281,7 +294,7 @@ const VerticalGallery = () => {
                       />
                     </div>
                   </div>
-                  {/* 2 */}
+                  {/* down */}
                   <div className="flex flex-col w-full h-[36vh] items-center justify-center">
                     <div className="relative w-full h-full">
                       <Image
