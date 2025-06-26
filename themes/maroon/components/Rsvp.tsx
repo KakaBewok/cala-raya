@@ -1,6 +1,6 @@
 "use client";
 
-import { remineFares } from "@/fonts/fonts";
+import { ninfa, poppins, remineFares } from "@/fonts/fonts";
 import { useEffect, useState } from "react";
 import badwords from "indonesian-badwords";
 import db from "@/configs/db-config";
@@ -76,21 +76,21 @@ const RSVP = () => {
   return (
     <div className="w-full" data-aos="zoom-in">
       {/* form */}
-      <section className="bg-[#f8f3ea] px-6 py-10 w-full flex flex-col items-center">
-        <h2
-          className={`${remineFares.className} text-4xl font-light tracking-wide text-neutral-800 mb-2`}
-        >
-          rsvp
+      <section
+        className={`${ninfa.className} bg-[#f8f3ea] px-6 py-10 w-full flex flex-col items-center`}
+      >
+        <h2 className={`text-2xl font-light tracking-wide text-rose-900 mb-2`}>
+          RSVP
         </h2>
-        <div className="w-28 h-px bg-neutral-800 mb-8" />
+        <div className="w-28 h-px bg-rose-900 mb-8" />
 
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6">
           {/* Message */}
           <div>
             <label
-              className={`${remineFares.className} block text-base tracking-wide text-neutral-700 font-medium mb-2`}
+              className={`block text-xs tracking-wide text-rose-900 font-medium mb-2`}
             >
-              ucapan
+              UCAPAN <span className={`${poppins.className}`}>&</span> DOA
             </label>
             <textarea
               name="message"
@@ -98,7 +98,7 @@ const RSVP = () => {
               onChange={handleChange}
               placeholder="Ucapan untuk pengantin"
               rows={4}
-              className="text-xs w-full bg-white px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
+              className="text-rose-900 text-xs w-full bg-white px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
               required
             />
           </div>
@@ -106,15 +106,15 @@ const RSVP = () => {
           {/* Attending */}
           <div>
             <label
-              className={`${remineFares.className} block text-base tracking-wide text-neutral-700 font-medium mb-2`}
+              className={`block text-xs tracking-wide text-rose-900 font-medium mb-2`}
             >
-              konfirmasi kehadiran
+              KONFIRMASI KEHADIRAN
             </label>
             <select
               name="attending"
               value={form.attending}
               onChange={handleChange}
-              className="cursor-pointer text-xs text-neutral-700 w-full px-4 py-3 bg-white appearance-none focus:outline-none focus:ring-1 focus:ring-neutral-400"
+              className="cursor-pointer text-xs text-rose-900 w-full px-4 py-3 bg-white appearance-none focus:outline-none focus:ring-1 focus:ring-neutral-400"
               required
             >
               <option value="">Pilih</option>
@@ -128,9 +128,9 @@ const RSVP = () => {
           <button
             disabled={loading}
             type="submit"
-            className="cursor-pointer w-full bg-neutral-700 text-white py-2 text-xs tracking-wide hover:bg-neutral-800 transition"
+            className="cursor-pointer w-full bg-rose-900 text-white py-2 text-xs tracking-wide hover:bg-neutral-800 transition"
           >
-            Kirim
+            KIRIM
           </button>
         </form>
       </section>
@@ -153,13 +153,6 @@ const RSVP = () => {
               <p className="font-medium">{item.message}</p>
             </div>
           ))}
-        </div>
-
-        {/* Scroll-down icon */}
-        <div className="flex justify-center mt-4">
-          <div className="w-8 h-8 border border-neutral-400 rounded-full flex items-center justify-center animate-bounce">
-            <span className="text-neutral-500 text-xl">⌄</span>
-          </div>
         </div>
       </section>
     </div>
