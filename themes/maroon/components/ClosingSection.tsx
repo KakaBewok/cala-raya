@@ -1,4 +1,4 @@
-import { poppins, remineFares } from "@/fonts/fonts";
+import { amalfiCoast, playfair, poppins } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { createSocialMediaLink } from "@/utils/create-social-media-link";
 import { findImage } from "@/utils/find-image";
@@ -8,7 +8,18 @@ import Link from "next/link";
 const ClosingSection = () => {
   const { invitationData: data } = useInvitation();
   return (
-    <section className="bg-[#ffffff]">
+    <section>
+      {/* Watermark */}
+      <div className="w-full h-60 overflow-hidden bg-rose-900 flex justify-center items-start">
+        <div
+          className={`${amalfiCoast.className} text-8xl font-light text-white transform -rotate-25 select-none`}
+        >
+          {data?.host_two_nickname.toLocaleLowerCase()}
+          <br className="my-2" />
+          {data?.host_one_nickname.toLocaleLowerCase()}
+        </div>
+      </div>
+
       <div className="relative">
         <Image
           src={findImage(data, "closing")}
@@ -21,7 +32,7 @@ const ClosingSection = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/20 to-black/40"></div>
 
         <div
-          className={`${poppins.className} absolute right-0 top-0  text-neutral-200 p-6 text-right`}
+          className={`${playfair.className} absolute right-0 top-0  text-neutral-200 p-6 text-right`}
           data-aos="fade-up"
         >
           <p className="text-md tracking-wide font-medium">
@@ -51,28 +62,6 @@ const ClosingSection = () => {
             <br />
             dan tag kami
           </p>
-        </div>
-      </div>
-
-      <div className="relative py-14 overflow-hidden">
-        {/* Watermark */}
-        <div className="absolute inset-0 flex justify-center items-center">
-          <p
-            className={`${remineFares.className} text-9xl font-bold text-gray-200 opacity-30 transform -rotate-45 select-none`}
-          >
-            {data?.host_one_nickname.toLocaleLowerCase()}
-            <br />
-            {data?.host_two_nickname.toLocaleLowerCase()}
-          </p>
-        </div>
-        <div className="text-center flex justify-center items-center">
-          <Image
-            src={findImage(data, "initial")}
-            alt="Initial"
-            width={80}
-            height={80}
-            style={{ filter: "invert(7%) brightness(0.3)" }}
-          />
         </div>
       </div>
     </section>

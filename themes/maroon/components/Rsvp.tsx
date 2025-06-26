@@ -1,11 +1,12 @@
 "use client";
 
-import { ninfa, poppins, remineFares } from "@/fonts/fonts";
+import { ninfa, playfair, poppins } from "@/fonts/fonts";
 import { useEffect, useState } from "react";
 import badwords from "indonesian-badwords";
 import db from "@/configs/db-config";
 import toast from "react-hot-toast";
 import { useInvitation } from "@/hooks/use-invitation";
+import Image from "next/image";
 
 const RSVP = () => {
   const { invitationData, guest } = useInvitation();
@@ -135,24 +136,53 @@ const RSVP = () => {
         </form>
       </section>
       {/* RSVP message */}
-      <section className="w-full py-10 px-6 bg-[#f9f4ec] text-neutral-700">
+      <section
+        className={`relative w-full py-10 px-6 bg-[#f9f4ec] text-rose-900 overflow-x-hidden`}
+      >
+        <Image
+          src={`/assets/images/floral/11.webp`}
+          width={100}
+          height={100}
+          alt="Kiri"
+          className="swing-right-fast absolute z-20 bottom-6 -right-8"
+          data-aos="fade-left"
+        />
+
+        <Image
+          data-aos="zoom-in"
+          src={`/assets/images/floral/28.webp`}
+          width={115}
+          height={115}
+          alt="Kanan"
+          className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-14 rotate-[40deg]"
+        />
         <h2
-          className={`${remineFares.className} z-10 text-4xl font-medium text-center mb-2 tracking-wide relative`}
+          className={`${ninfa.className} z-10 text-2xl font-light text-center mb-2 tracking-wide relative`}
         >
-          <span>ucapan & doa</span>
-          <span className="block border-b border-neutral-700 w-28 mx-auto mt-2"></span>
+          <span>
+            UCAPAN <span className={`${poppins.className}`}>&</span> DOA
+          </span>
+          <span className="block border-b border-rose-900 w-28 mx-auto mt-2"></span>
         </h2>
 
-        <div className="mt-8 space-y-6 max-h-96 overflow-y-auto overflow-x-hidden scrollbar-hide">
+        <div className="mt-8 space-y-6 max-h-96 overflow-y-auto overflow-x-hidden scrollbar-hide p-1">
           {data.map((item, index) => (
             <div
               key={index}
-              className="bg-[#f1ebdd] px-6 py-4 rounded-sm text-xs text-center"
+              className={`${playfair.className} bg-rose-100/40 px-6 py-4 rounded-sm text-xs text-center backdrop-blur-xs`}
             >
-              <p className="font-bold mb-3">{item.guest_name}</p>
+              <p className="font-semibold mb-3 tracking-wide">
+                {item.guest_name}
+              </p>
               <p className="font-medium">{item.message}</p>
             </div>
           ))}
+        </div>
+        {/* Scroll-down icon */}
+        <div className="flex justify-center mt-4">
+          <div className="w-6 h-6 border border-rose-900 rounded-full flex items-center justify-center animate-bounce">
+            <span className="text-rose-900 text-lg mb-2">⌄</span>
+          </div>
         </div>
       </section>
     </div>
