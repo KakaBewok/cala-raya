@@ -1,4 +1,4 @@
-import { amalfiCoast, playfair, poppins } from "@/fonts/fonts";
+import { amalfiCoast, playfair } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { createSocialMediaLink } from "@/utils/create-social-media-link";
 import { findImage } from "@/utils/find-image";
