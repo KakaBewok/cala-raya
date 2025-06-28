@@ -114,11 +114,11 @@ const EventInfo = () => {
           <p
             className={`${remineFares.className} text-md font-medium mb-6 text-neutral-700 text-center`}
           >
-            {data?.rundowns?.[0]?.location || "-"}
+            {data?.location || "-"}
           </p>
 
           <Link
-            href={data?.rundowns?.[0]?.location_url || "#"}
+            href={data?.location_url || "#"}
             className="py-2 px-4 text-xs bg-transparent rounded-none border border-neutral-700 text-neutral-700 cursor-pointer hover:bg-transparent"
           >
             LIHAT LOKASI

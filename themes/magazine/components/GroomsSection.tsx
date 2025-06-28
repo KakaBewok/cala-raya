@@ -81,16 +81,19 @@ export default function GroomsSection() {
         <div
           className={`${poppins.className} w-full flex items-end justify-between content-between`}
         >
-          <div className="flex gap-2 items-center text-white text-xs bg-transparent rounded-none border border-white cursor-pointer px-3 py-2">
-            <Instagram className="h-4 w-4 font-light" />{" "}
-            <Link
-              href={createSocialMediaLink(data?.host_one_social_media || "")}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {`@${data?.host_one_social_media}`}
-            </Link>
-          </div>
+          {data?.host_one_social_media && (
+            <div className="flex gap-2 items-center text-white text-xs bg-transparent rounded-none border border-white cursor-pointer px-3 py-2">
+              <Instagram className="h-4 w-4 font-light" />{" "}
+              <Link
+                href={createSocialMediaLink(data?.host_one_social_media || "")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {`@${data?.host_one_social_media}`}
+              </Link>
+            </div>
+          )}
+
           <div className="w-[140px] text-white text-xs font-normal text-right">
             {data?.host_one_additional_info}
           </div>

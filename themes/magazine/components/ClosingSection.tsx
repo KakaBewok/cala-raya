@@ -19,39 +19,44 @@ const ClosingSection = () => {
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/20 to-black/40"></div>
-
-        <div
-          className={`${poppins.className} absolute right-0 top-0  text-neutral-200 p-6 text-right`}
-          data-aos="fade-up"
-        >
-          <p className="text-md tracking-wide font-medium">
-            <span className="border-b-1 border-neutral-200 pb-1">
-              {" "}
-              <Link
-                href={createSocialMediaLink(data?.host_one_social_media || "")}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @{data?.host_one_social_media}
-              </Link>
-            </span>{" "}
-            |{" "}
-            <span className="border-b-1 border-neutral-200 pb-1">
-              <Link
-                href={createSocialMediaLink(data?.host_two_social_media || "")}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @{data?.host_two_social_media}
-              </Link>
-            </span>
-          </p>
-          <p className="text-xs font-medium mt-4">
-            Bagikan hari bahagia di Instagram
-            <br />
-            dan tag kami
-          </p>
-        </div>
+        {data?.host_one_social_media && data?.host_two_social_media && (
+          <div
+            className={`${poppins.className} absolute right-0 top-0  text-neutral-200 p-6 text-right`}
+            data-aos="fade-up"
+          >
+            <p className="text-md tracking-wide font-medium">
+              <span className="border-b-1 border-neutral-200 pb-1">
+                {" "}
+                <Link
+                  href={createSocialMediaLink(
+                    data?.host_one_social_media || ""
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @{data?.host_one_social_media}
+                </Link>
+              </span>{" "}
+              |{" "}
+              <span className="border-b-1 border-neutral-200 pb-1">
+                <Link
+                  href={createSocialMediaLink(
+                    data?.host_two_social_media || ""
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @{data?.host_two_social_media}
+                </Link>
+              </span>
+            </p>
+            <p className="text-xs font-medium mt-4">
+              Bagikan hari bahagia di Instagram
+              <br />
+              dan tag kami
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="relative py-14 overflow-hidden">
