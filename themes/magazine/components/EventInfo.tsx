@@ -78,15 +78,18 @@ const EventInfo = () => {
             >
               {formatDate(rundown.date, true)}
             </p>
-            <p
-              className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
-            >
-              · {formatTime(rundown.start_time)} {rundown.time_zone} -{" "}
-              {rundown.end_time
-                ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
-                : "selesai"}{" "}
-              ·
-            </p>
+            {rundown.start_time && (
+              <p
+                className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
+              >
+                · {formatTime(rundown.start_time)} {rundown.time_zone} -{" "}
+                {rundown.end_time && rundown.start_time
+                  ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
+                  : "selesai"}{" "}
+                ·
+              </p>
+            )}
+
             <Link
               href={generateGoogleCalendarUrl(rundown)}
               target="_blank"
