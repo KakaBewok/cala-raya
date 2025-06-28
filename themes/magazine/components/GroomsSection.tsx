@@ -81,9 +81,6 @@ export default function GroomsSection() {
         <div
           className={`${poppins.className} w-full flex items-end justify-between content-between`}
         >
-          <div className="w-[140px] text-white text-xs font-normal text-right">
-            {data?.host_one_additional_info}
-          </div>
           <div
             className={`${
               !data?.host_one_social_media ? "opacity-0" : ""
@@ -97,6 +94,9 @@ export default function GroomsSection() {
             >
               {`@${data?.host_one_social_media}`}
             </Link>
+          </div>
+          <div className="w-[140px] text-white text-xs font-normal text-right">
+            {data?.host_one_additional_info}
           </div>
         </div>
       </div>
