@@ -74,7 +74,7 @@ export default function GroomsSection() {
 
       <div className={`absolute bottom-0 left-0 w-full z-40 py-10 px-6`}>
         <h1
-          className={`${remineFares.className} text-white text-right font-medium text-4xl mb-5`}
+          className={`${remineFares.className} text-white text-left font-medium text-4xl mb-5`}
         >
           {data?.host_one_name.toLocaleLowerCase()}
         </h1>
@@ -95,7 +95,7 @@ export default function GroomsSection() {
               {`@${data?.host_one_social_media}`}
             </Link>
           </div>
-          <div className="w-[140px] text-white text-xs font-normal text-right">
+          <div className="w-[140px] text-white text-xs font-normal text-left">
             {data?.host_one_additional_info}
           </div>
         </div>
