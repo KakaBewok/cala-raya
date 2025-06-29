@@ -1,6 +1,5 @@
 import { amalfiCoast, playfair } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
-import { createSocialMediaLink } from "@/utils/create-social-media-link";
 import { findImage } from "@/utils/find-image";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,33 +34,16 @@ const ClosingSection = () => {
           className={`${playfair.className} absolute right-0 top-0  text-neutral-200 p-6 text-right`}
           data-aos="fade-up"
         >
-          <p className="text-md tracking-wide font-medium">
-            <span className="border-b-1 border-neutral-200 pb-1">
-              {" "}
-              <Link
-                href={createSocialMediaLink(data?.host_one_social_media || "")}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @{data?.host_one_social_media}
-              </Link>
-            </span>{" "}
-            |{" "}
-            <span className="border-b-1 border-neutral-200 pb-1">
-              <Link
-                href={createSocialMediaLink(data?.host_two_social_media || "")}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @{data?.host_two_social_media}
-              </Link>
-            </span>
+          <p className="text-xs font-medium mb-3">
+            Bagikan hari bahagia di Instagram dan tag kami
           </p>
-          <p className="text-xs font-medium mt-4">
-            Bagikan hari bahagia di Instagram
-            <br />
-            dan tag kami
-          </p>
+          <Link
+            href={`https://www.instagram.com/explore/tags/${data?.host_one_nickname}${data?.host_two_nickname}`}
+            className="text-lg tracking-wide font-medium underline"
+          >
+            #{data?.host_one_nickname}
+            {data?.host_two_nickname}
+          </Link>
         </div>
       </div>
     </section>
