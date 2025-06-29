@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
-import { amalfiCoast, remineFares } from "@/fonts/fonts";
+import { amalfiCoast, ninfa } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
 import SwipeHandIcon from "./SwipeHandIcon";
 
@@ -10,6 +10,13 @@ interface GalleryImage {
   id: number;
   src: string;
   alt: string;
+}
+
+type LayoutType = "single-up" | "single-down" | "double";
+
+interface LayoutColumn {
+  type: LayoutType;
+  images: GalleryImage[];
 }
 
 const VerticalGallery = () => {
@@ -59,15 +66,18 @@ const VerticalGallery = () => {
     }, 100);
   };
 
-  const createLayout = (images: GalleryImage[]) => {
-    const columns = [];
+  const createLayout = (images: GalleryImage[]): LayoutColumn[] => {
+    const columns: LayoutColumn[] = [];
     let imageIndex = 0;
 
-    while (imageIndex < images.length) {
-      const isDoubleColumn =
-        Math.random() > 0.3 && imageIndex + 1 < images.length;
+    // fix layout pattern
+    const layoutPattern: LayoutType[] = ["single-down", "double", "single-up"];
+    let patternIndex = 0;
 
-      if (isDoubleColumn) {
+    while (imageIndex < images.length) {
+      const layoutType = layoutPattern[patternIndex % layoutPattern.length];
+
+      if (layoutType === "double" && imageIndex + 1 < images.length) {
         columns.push({
           type: "double",
           images: [images[imageIndex], images[imageIndex + 1]],
@@ -75,11 +85,12 @@ const VerticalGallery = () => {
         imageIndex += 2;
       } else {
         columns.push({
-          type: "single",
+          type: layoutType === "double" ? "single-up" : layoutType,
           images: [images[imageIndex]],
         });
         imageIndex += 1;
       }
+      patternIndex++;
     }
 
     return columns;
@@ -101,15 +112,15 @@ const VerticalGallery = () => {
   }, [images]);
 
   return (
-    <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden border border-red-500">
+    <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden">
       {/* Door Effect Top */}
       <div
         className={`absolute top-0 left-0 w-full h-1/2 z-30 transition-transform duration-2000 ease-in-out ${
-          isGalleryOpen ? "-translate-y-[70%]" : "translate-y-0"
+          isGalleryOpen ? "-translate-y-[60%]" : "translate-y-0"
         }`}
       >
         <div
-          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute left-5 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_one_nickname.toLowerCase()}
         </div>
@@ -118,11 +129,11 @@ const VerticalGallery = () => {
       {/* Door Effect Bottom */}
       <div
         className={`absolute bottom-0 left-0 w-full h-1/2 z-30 transition-transform duration-2000 ease-in-out ${
-          isGalleryOpen ? "translate-y-[70%]" : "translate-y-0"
+          isGalleryOpen ? "translate-y-[60%]" : "translate-y-0"
         }`}
       >
         <div
-          className={`-rotate-[15deg] absolute left-1/2 -translate-x-1/2 top-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute right-5 top-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
         >
           {data?.host_two_nickname.toLowerCase()}
         </div>
@@ -132,10 +143,12 @@ const VerticalGallery = () => {
       <Button
         size="sm"
         onClick={toggleGallery}
-        className={`rounded-sm transition-all duration-500 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
+        className={`${
+          ninfa.className
+        } transition-all duration-800 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-4 flex items-center gap-2 font-light ${
           isGalleryOpen
-            ? "bg-neutral-300 text-white rounded-lg border-none"
-            : "bg-[#c4a790]"
+            ? "bg-neutral-400 text-white rounded-lg border-none"
+            : "bg-orange-400 rounded-none"
         }`}
       >
         {isGalleryOpen ? (
@@ -143,123 +156,58 @@ const VerticalGallery = () => {
             <X size={20} />
           </>
         ) : (
-          <span className="text-xs">Buka Gallery</span>
+          <span className="text-xs">BUKA GALLERY</span>
         )}
       </Button>
 
       {/* Gallery */}
       <div
         ref={scrollRef}
-        className={`flex h-screen w-screen overflow-x-auto scrollbar-hide transition-all duration-300 ${
+        className={`flex h-screen w-full overflow-y-hidden overflow-x-auto scrollbar-hide transition-all duration-300 ${
           isGalleryOpen
             ? "cursor-grab active:cursor-grabbing"
             : "cursor-default"
         }`}
       >
+        <div
+          className={`absolute top-[50%] right-3 -translate-y-1/2 z-10 h-14 w-14 transition-opacity duration-700 ${
+            isGalleryOpen && !hasUserSwiped
+              ? "opacity-100"
+              : "opacity-0 pointer-events-none"
+          }`}
+        >
+          <SwipeHandIcon />
+        </div>
         {layout.map((column, index) => {
           if (column.type === "first") {
             return (
-              //  <div key={index} className="flex-shrink-0 ">
-              //   <div className="h-screen w-screen flex items-center justify-center ">
-              //     <div
-              //       className={`
-              //           absolute top-1/2 left-1/2 h-[1px] bg-neutral-700 z-10 rounded-full
-              //           transition-all duration-700 ease-in-out
-              //           ${
-              //             isGalleryOpen
-              //               ? "w-0 opacity-0 scale-x-0"
-              //               : "w-40 opacity-100 scale-x-100"
-              //           }
-              //       `}
-              //       style={{
-              //         transform: "translate(-50%, -50%)",
-              //       }}
-              //     />
-              //     <div
-              //       className={`absolute top-[50%] right-3 -translate-y-1/2 z-10 h-14 w-14 transition-opacity duration-700 ${
-              //         isGalleryOpen && !hasUserSwiped
-              //           ? "opacity-100"
-              //           : "opacity-0 pointer-events-none"
-              //       }`}
-              //     >
-              //       <SwipeHandIcon />
-              //     </div>
-              //     <div className="relative h-56 w-56 group ">
-              //       <div
-              //         className={`${
-              //           remineFares.className
-              //         } absolute -top-24 -right-5 text-neutral-600 text-3xl leading-[2.5rem] font-semibold z-10 transition-opacity duration-700
-              //           ${
-              //             isGalleryOpen
-              //               ? "opacity-100"
-              //               : "opacity-0 pointer-events-none"
-              //           }`}
-              //       >
-              //         <div>{day}</div>
-              //         <div>{month}</div>
-              //         <div>{year}</div>
-              //       </div>
-              //       <Image
-              //         src={column.images[0].src}
-              //         alt={column.images[0].alt}
-              //         fill
-              //         className={`object-cover object-center transition-all duration-500 ${
-              //           isGalleryOpen ? "grayscale-0" : "grayscale"
-              //         }`}
-              //       />
-              //     </div>
-              //   </div>
-              // </div>
-
-              <div key={index} className="flex-shrink-0 ">
-                <div className="h-screen w-screen flex items-center justify-center ">
+              <div
+                key={index}
+                className="flex-shrink-0 h-screen px-[10px] max-w-screen basis-4/5 flex flex-col justify-center"
+              >
+                <div className="relative mb-16 aspect-[2/3]">
                   <div
-                    className={`
-                        absolute top-1/2 left-1/2 h-[1px] bg-neutral-700 z-10 rounded-full
-                        transition-all duration-700 ease-in-out
-                        ${
-                          isGalleryOpen
-                            ? "w-0 opacity-0 scale-x-0"
-                            : "w-40 opacity-100 scale-x-100"
-                        }
-                    `}
-                    style={{
-                      transform: "translate(-50%, -50%)",
-                    }}
-                  />
-                  <div
-                    className={`absolute top-[50%] right-3 -translate-y-1/2 z-10 h-14 w-14 transition-opacity duration-700 ${
-                      isGalleryOpen && !hasUserSwiped
+                    className={`${
+                      ninfa.className
+                    } absolute -top-28 -right-9 text-neutral-600 text-xl leading-[2.5rem] z-10 transition-opacity duration-700 font-medium
+                    ${
+                      !isGalleryOpen
                         ? "opacity-100"
                         : "opacity-0 pointer-events-none"
                     }`}
                   >
-                    <SwipeHandIcon />
+                    <div>{day}</div>
+                    <div>{month}</div>
+                    <div>{year}</div>
                   </div>
-                  <div className="relative h-56 w-56 group ">
-                    <div
-                      className={`${
-                        remineFares.className
-                      } absolute -top-24 -right-5 text-neutral-600 text-3xl leading-[2.5rem] font-semibold z-10 transition-opacity duration-700
-                        ${
-                          isGalleryOpen
-                            ? "opacity-100"
-                            : "opacity-0 pointer-events-none"
-                        }`}
-                    >
-                      <div>{day}</div>
-                      <div>{month}</div>
-                      <div>{year}</div>
-                    </div>
-                    <Image
-                      src={column.images[0].src}
-                      alt={column.images[0].alt}
-                      fill
-                      className={`object-cover object-center transition-all duration-500 ${
-                        isGalleryOpen ? "grayscale-0" : "grayscale"
-                      }`}
-                    />
-                  </div>
+                  <Image
+                    src={column.images[0].src}
+                    alt={column.images[0].alt}
+                    fill
+                    className={`object-cover object-center transition-all duration-500 ${
+                      isGalleryOpen ? "grayscale-0" : "grayscale"
+                    }`}
+                  />
                 </div>
               </div>
             );
@@ -268,7 +216,6 @@ const VerticalGallery = () => {
           if (column.type === "last") {
             return (
               <div className="flex-shrink-0 w-screen h-screen" key={index}>
-                {/* 1 */}
                 <div className="flex flex-col w-full h-full items-center justify-center">
                   <div className="relative w-full h-full">
                     <Image
@@ -286,7 +233,7 @@ const VerticalGallery = () => {
                       className={`absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2`}
                     >
                       <h1
-                        className={`${remineFares.className} text-4xl font-medium text-white`}
+                        className={`${amalfiCoast.className} text-4xl font-medium text-white`}
                       >
                         {data?.host_one_nickname.toLocaleLowerCase()} <br /> &
                         {data?.host_two_nickname.toLocaleLowerCase()}
@@ -299,27 +246,43 @@ const VerticalGallery = () => {
           }
 
           return (
-            <div key={index} className="flex-shrink-0">
-              {column.type === "single" ? (
-                <div className="flex-shrink-0 w-screen h-screen">
-                  {/* 1 */}
-                  <div className="flex flex-col w-full h-full p-6 items-center justify-center">
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={column.images[0].src}
-                        alt={column.images[0].alt}
-                        fill
-                        className={`object-cover object-center transition-all duration-500 ${
-                          isGalleryOpen ? "grayscale-0" : "grayscale"
-                        }`}
-                      />
-                    </div>
+            <div key={index}>
+              {column.type === "single-down" ? (
+                <div
+                  key={index}
+                  className="flex-shrink-0 h-screen px-[10px] max-w-screen flex flex-col justify-end"
+                >
+                  <div className="relative mb-16 w-full h-[50vh] aspect-[2/3]">
+                    <Image
+                      src={column.images[0].src}
+                      alt={column.images[0].alt}
+                      fill
+                      className={`object-cover object-center transition-all duration-500 ${
+                        isGalleryOpen ? "grayscale-0" : "grayscale"
+                      }`}
+                    />
+                  </div>
+                </div>
+              ) : column.type === "single-up" ? (
+                <div
+                  key={index}
+                  className="flex-shrink-0 h-screen px-[10px] max-w-screen flex flex-col justify-center"
+                >
+                  <div className="relative mb-16 w-full h-[50vh] aspect-[2/3]">
+                    <Image
+                      src={column.images[0].src}
+                      alt={column.images[0].alt}
+                      fill
+                      className={`object-cover object-center transition-all duration-500 ${
+                        isGalleryOpen ? "grayscale-0" : "grayscale"
+                      }`}
+                    />
                   </div>
                 </div>
               ) : (
-                <div className="flex-shrink-0 w-screen h-screen flex flex-col">
-                  {/* 1 */}
-                  <div className="flex flex-col w-full h-full p-12 items-center justify-center">
+                <div className="flex-shrink-0 w-screen h-screen flex flex-col justify-center items-center gap-[20px] px-[10px]">
+                  {/* up */}
+                  <div className="flex flex-col w-full h-[36vh] items-center justify-center">
                     <div className="relative w-full h-full">
                       <Image
                         src={column.images[0].src}
@@ -331,8 +294,8 @@ const VerticalGallery = () => {
                       />
                     </div>
                   </div>
-                  {/* 2 */}
-                  <div className="flex flex-col w-full h-full items-center justify-center">
+                  {/* down */}
+                  <div className="flex flex-col w-full h-[36vh] items-center justify-center">
                     <div className="relative w-full h-full">
                       <Image
                         src={column.images[1].src}
