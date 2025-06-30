@@ -2,9 +2,11 @@ import React, { useMemo } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
-import { amalfiCoast, ninfa } from "@/fonts/fonts";
+import { amalfiCoast, poppins } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
 import SwipeHandIcon from "./SwipeHandIcon";
+import ScrollAnimation from "./ScrollAnimation";
+import VerticalDate from "./VerticalDate";
 
 interface GalleryImage {
   id: number;
@@ -24,11 +26,6 @@ const VerticalGallery = () => {
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [isGalleryOpen, setIsGalleryOpen] = React.useState<boolean>(false);
   const [hasUserSwiped, setHasUserSwiped] = React.useState<boolean>(false);
-
-  const eventDate = new Date(data?.event_date ?? "");
-  const day = String(eventDate.getDate()).padStart(2, "0");
-  const month = String(eventDate.getMonth() + 1).padStart(2, "0");
-  const year = String(eventDate.getFullYear()).slice(-2);
 
   React.useEffect(() => {
     const ref = scrollRef.current;
@@ -144,11 +141,11 @@ const VerticalGallery = () => {
         size="sm"
         onClick={toggleGallery}
         className={`${
-          ninfa.className
+          poppins.className
         } transition-all duration-800 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-4 flex items-center gap-2 font-light ${
           isGalleryOpen
             ? "bg-neutral-400 text-white rounded-lg border-none"
-            : "bg-orange-400 rounded-none"
+            : "bg-[#c4a790] rounded-sm"
         }`}
       >
         {isGalleryOpen ? (
@@ -156,7 +153,7 @@ const VerticalGallery = () => {
             <X size={20} />
           </>
         ) : (
-          <span className="text-xs">BUKA GALLERY</span>
+          <span className="text-xs font-normal">Buka Gallery</span>
         )}
       </Button>
 
@@ -185,21 +182,10 @@ const VerticalGallery = () => {
                 key={index}
                 className="flex-shrink-0 h-screen px-[10px] max-w-screen basis-4/5 flex flex-col justify-center"
               >
-                <div className="relative mb-16 aspect-[2/3]">
-                  <div
-                    className={`${
-                      ninfa.className
-                    } absolute -top-28 -right-9 text-neutral-600 text-xl leading-[2.5rem] z-10 transition-opacity duration-700 font-medium
-                    ${
-                      !isGalleryOpen
-                        ? "opacity-100"
-                        : "opacity-0 pointer-events-none"
-                    }`}
-                  >
-                    <div>{day}</div>
-                    <div>{month}</div>
-                    <div>{year}</div>
-                  </div>
+                <div className="relative aspect-[2/3]">
+                  {data && (
+                    <VerticalDate isGalleryOpen={isGalleryOpen} data={data} />
+                  )}
                   <Image
                     src={column.images[0].src}
                     alt={column.images[0].alt}
@@ -209,6 +195,7 @@ const VerticalGallery = () => {
                     }`}
                   />
                 </div>
+                <ScrollAnimation isGalleryOpen={isGalleryOpen} />
               </div>
             );
           }
