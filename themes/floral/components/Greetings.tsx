@@ -16,7 +16,7 @@ export default function Greetings() {
   };
 
   return (
-    <div className="pt-28  w-full bg-[#fdfaf6] flex flex-col items-center justify-between overflow-hidden">
+    <div className="pt-28 w-full bg-[#fdfaf6] flex flex-col items-center justify-between overflow-hidden border border-red-500">
       {/* Frame */}
       <div className="relative z-10">
         {/* Kanan atas */}
