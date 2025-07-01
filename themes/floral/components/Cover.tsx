@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const Cover = () => {
   const { invitationData: data } = useInvitation();
-  const tag = `#${data?.host_one_nickname}${data?.host_two_nickname}Day`;
+  const tag = `#${data?.host_one_nickname}${data?.host_two_nickname}`;
 
   const formatEventDate = (dateString: string) => {
     if (!dateString) return null;

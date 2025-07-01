@@ -47,7 +47,7 @@ const OpeningScreen = ({
               {initial2} •
             </h1> */}
             <Image
-              src="/assets/images/floral/initial.webp"
+              src={findImage(data, "initial")}
               alt="Initial"
               width={150}
               height={150}

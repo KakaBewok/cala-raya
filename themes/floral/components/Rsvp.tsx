@@ -74,8 +74,6 @@ const RSVP = () => {
     fetchData();
   }, []);
 
-  // bg-[#f1ebdd]
-
   return (
     <div className="w-full overflow-hidden" data-aos="zoom-in">
       {/* form */}

@@ -11,6 +11,9 @@ import Grooms from "./Grooms";
 import EventInfo from "./EventInfo";
 import Gallery from "./Gallery";
 import Rsvp from "./Rsvp";
+import GiftInfo from "./GiftInfo";
+import ClosingSection from "./ClosingSection";
+import Footer from "./Footer";
 
 export default function MainPage({
   isOpenInvitation,
@@ -34,6 +37,9 @@ export default function MainPage({
       <EventInfo />
       <Gallery />
       <Rsvp />
+      <GiftInfo />
+      <ClosingSection />
+      <Footer />
       <MusicButton isOpenInvitation={isOpenInvitation} />
     </main>
   );

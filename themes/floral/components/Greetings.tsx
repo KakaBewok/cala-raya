@@ -1,4 +1,5 @@
 import { useInvitation } from "@/hooks/use-invitation";
+import { findImage } from "@/utils/find-image";
 import Image from "next/image";
 
 export default function Greetings() {
@@ -16,7 +17,7 @@ export default function Greetings() {
   };
 
   return (
-    <div className="pt-28 w-full bg-[#fdfaf6] flex flex-col items-center justify-between overflow-hidden border border-red-500">
+    <div className="pt-28 w-full bg-[#fdfaf6] flex flex-col items-center justify-between overflow-hidden">
       {/* Frame */}
       <div className="relative z-10">
         {/* Kanan atas */}
@@ -61,26 +62,33 @@ export default function Greetings() {
 
         <div className="mb-20 border border-[#e6d6c9] p-1 text-center max-w-md bg-white/60 backdrop-blur-md relative z-10">
           <div className="border border-[#e6d6c9] p-16 text-center max-w-md bg-white/60 backdrop-blur-md relative z-10">
-            <div data-aos="fade-up">
+            <div
+              data-aos="fade-up"
+              className="flex items-center justify-center"
+            >
               <Image
-                src="/assets/images/floral/initial.webp"
+                src={findImage(data, "initial")}
                 alt="Initial"
-                width={150}
-                height={150}
+                width={90}
+                height={90}
                 priority
                 style={{ filter: "invert(3%) brightness(0.8)" }}
-                className="mb-6"
               />
             </div>
-            <div
-              className="text-xs text-[#c6a886] leading-relaxed font-light"
-              data-aos="zoom-in"
-              data-aos-duration={900}
-              dangerouslySetInnerHTML={{
-                __html: data?.greetings || "",
-              }}
-            ></div>
-            <p className="text-xs text-[#c6a886] leading-relaxed font-light">
+            <div className="max-w-[47vw]">
+              <p
+                className="text-xs text-[#c6a886] leading-relaxed font-light"
+                data-aos="zoom-in"
+                data-aos-duration={900}
+              >
+                One of His Signs is that He has created mates for you from your
+                own kind, that you may find peace in them, and He has set
+                between you love and mercy. Surely, there are Signs in this for
+                those who reflect. <br />{" "}
+                <span className="font-medium">(Ar-Rum - 21)</span>
+              </p>
+            </div>
+            <p className="text-xs text-[#c6a886] leading-relaxed font-medium mt-3">
               {formatEventDate(data?.event_date ?? "")}
             </p>
           </div>
