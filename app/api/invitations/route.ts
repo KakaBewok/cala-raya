@@ -11,10 +11,9 @@ export async function GET() {
   }
 
   try {
-    const { data, error } = await db
-      .from("invitations")
-      .select(
-        `
+    const isAdmin = session.user.role === "ADMIN";
+    const query = db.from("invitations").select(
+      `
         *,
         themes (*),
         music (*),
@@ -26,8 +25,12 @@ export async function GET() {
         stories (*),
         rsvps (*)
       `
-      )
-      .eq("user_id", session.user.id);
+    );
+
+    if (!isAdmin) {
+      query.eq("user_id", session.user.id);
+    }
+    const { data, error } = await query;
 
     if (!data || error) {
       return NextResponse.json(
