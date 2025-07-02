@@ -23,13 +23,7 @@ export default function OpeningScreen({
   return (
     <AnimatePresence>
       {!isOpenInvitation && (
-        <motion.div
-          className="bg-[#eedcc5] max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden"
-          initial={{ y: "-100%", opacity: 1 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: "-100%" }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-        >
+        <div className="bg-[#eedcc5] max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden">
           <Image
             src={findImage(data, "hero")}
             alt="Hero background"
@@ -44,7 +38,7 @@ export default function OpeningScreen({
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.5 }}
+                transition={{ duration: 2, delay: 0.5 }}
               >
                 <Image
                   src={findImage(data, "initial")}
@@ -58,7 +52,7 @@ export default function OpeningScreen({
             <motion.div
               initial={{ opacity: 0, x: "-100%" }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 1 }}
+              transition={{ duration: 2, delay: 0.5 }}
               className={`gap-5 max-w-48 absolute left-7 bottom-32 tracking-wider ${poppins.className} flex flex-col items-start justify-start`}
             >
               <p className="text-sm">Halo,</p>
@@ -72,7 +66,7 @@ export default function OpeningScreen({
               </Button>
             </motion.div>
           </div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
