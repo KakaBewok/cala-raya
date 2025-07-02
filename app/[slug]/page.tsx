@@ -8,7 +8,7 @@ import MagazinePage from "@/themes/magazine/MagazinePage";
 import MaroonPage from "@/themes/maroon/MaroonPage";
 import MonochromePage from "@/themes/monochrome/MonochromePage";
 import NetflixPage from "@/themes/netflix/NetflixPage";
-import StylishBoldPage from "@/themes/stylish-bold/StylishBoldPage";
+import StylishBoldPage from "@/themes/stylishBold/StylishBoldPage";
 import { ThemeName } from "@/types/theme-name";
 import { decode } from "@/utils/hash";
 import { useParams, useSearchParams } from "next/navigation";
