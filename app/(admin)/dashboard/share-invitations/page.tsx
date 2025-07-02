@@ -65,7 +65,7 @@ export default function SelectInvitationGrid() {
             }}
           >
             <h2 className="font-semibold text-lg mb-1">
-              {invitation.event_title}
+              {invitation.host_one_nickname} & {invitation.host_two_nickname}
             </h2>
             {invitation.themes?.name && (
               <span className="absolute bottom-2 right-2 bg-sky-200 text-sky-800 dark:bg-sky-900 dark:text-white text-xs font-medium px-2 py-1 rounded">

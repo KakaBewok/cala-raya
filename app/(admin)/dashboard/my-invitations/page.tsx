@@ -44,7 +44,7 @@ const InvitationPage = () => {
             className="bg-white dark:bg-neutral-900 relative p-4 rounded-xl border dark:border-neutral-700 cursor-pointer transition-all"
           >
             <h2 className="font-semibold text-lg mb-1">
-              {invitation.event_title}
+              {invitation.host_one_nickname} & {invitation.host_two_nickname}
             </h2>
             <p className="text-sm text-gray-500">
               {formatDate(invitation.event_date)}

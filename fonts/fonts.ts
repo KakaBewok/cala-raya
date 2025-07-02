@@ -92,3 +92,19 @@ export const ninfa = localFont({
   variable: "--font-ninfa",
   display: "swap",
 });
+
+export const nyghtSerif = localFont({
+  src: "../public/fonts/nyght-serif/NyghtSerif-Dark.otf",
+  variable: "--font-nyght-serif",
+  display: "swap",
+});
+
+export const theSecret = localFont({
+  src: [
+    { path: "../public/fonts/the-secret/TheSecret-Regular.otf" },
+    { path: "../public/fonts/the-secret/TheSecret-Regular.ttf" },
+    { path: "../public/fonts/the-secret/TheSecret-Regular.woff" },
+  ],
+  variable: "--font-the-secret",
+  display: "swap",
+});

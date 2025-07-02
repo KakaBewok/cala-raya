@@ -12,8 +12,10 @@ export async function GET() {
 
   try {
     const isAdmin = session.user.role === "ADMIN";
-    const query = db.from("invitations").select(
-      `
+    const query = db
+      .from("invitations")
+      .select(
+        `
         *,
         themes (*),
         music (*),
@@ -25,7 +27,8 @@ export async function GET() {
         stories (*),
         rsvps (*)
       `
-    );
+      )
+      .order("updated_at", { ascending: false });
 
     if (!isAdmin) {
       query.eq("user_id", session.user.id);

@@ -3,4 +3,5 @@ export type ThemeName =
   | "netflix"
   | "floral"
   | "magazine"
-  | "maroon";
+  | "maroon"
+  | "stylishBold";
