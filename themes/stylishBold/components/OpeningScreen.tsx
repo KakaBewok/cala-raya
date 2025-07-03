@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { poppins } from "@/fonts/fonts";
+import { nyghtSerif } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -23,50 +22,81 @@ export default function OpeningScreen({
   return (
     <AnimatePresence>
       {!isOpenInvitation && (
-        <div className="bg-[#eedcc5] max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden">
+        <motion.div
+          className={`bg-[#eedcc5] max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ y: "-100%" }}
+          transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
+        >
           <Image
             src={findImage(data, "hero")}
             alt="Hero background"
             fill
             priority
-            className="object-cover object-center z-0"
+            className={`grayscale object-cover object-center z-0`}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
 
-          <div className="relative h-screen w-full z-20 text-white">
-            <div className="absolute top-28 left-1/2 transform -translate-x-1/2">
+          <div
+            className={`${nyghtSerif.className} relative h-screen w-full z-20 text-white`}
+          >
+            {/* INITIAL */}
+            <div className="absolute top-0 -left-2">
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 2, delay: 0.5 }}
+                initial={{ opacity: 0, x: "-100%" }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 2.5, delay: 0.7 }}
               >
                 <Image
                   src={findImage(data, "initial")}
                   alt="Initial"
                   priority
-                  width={80}
-                  height={80}
+                  width={220}
+                  height={220}
                 />
               </motion.div>
             </div>
+            {/* GUEST NAME */}
             <motion.div
-              initial={{ opacity: 0, x: "-100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 2, delay: 0.5 }}
-              className={`gap-5 max-w-48 absolute left-7 bottom-32 tracking-wider ${poppins.className} flex flex-col items-start justify-start`}
+              initial={{ opacity: 0, y: "100%" }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 2.5, delay: 0.7 }}
+              className={`gap-3 w-full absolute left-0 bottom-0 tracking-wider flex flex-col items-end justify-center px-10 pb-32`}
             >
-              <p className="text-sm">Halo,</p>
-              <p className="text-3xl leading-relaxed">{guest?.name}</p>
-              <Button
-                size="sm"
+              <p className="text-xs font-light italic">Halo,</p>
+              <p className="text-2xl leading-relaxed">{guest?.name}</p>
+              <button
+                className="cursor-pointer relative inline-flex items-center justify-center font-normal bg-transparent overflow-visible px-4 py-[10px] text-xs"
                 onClick={handleClick}
-                className="mt-5 text-xs bg-transparent rounded-none border border-white cursor-pointer hover:bg-transparent"
+                type="button"
               >
-                Buka Undangan
-              </Button>
+                <div className="absolute inset-0 overflow-hidden">
+                  <svg
+                    className="absolute w-full h-full"
+                    preserveAspectRatio="none"
+                    viewBox="0 0 100 40"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <ellipse
+                      cx="50"
+                      cy="20"
+                      rx="49.5"
+                      ry="19.5"
+                      fill="none"
+                      stroke="#EF4444"
+                      strokeWidth="1"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </svg>
+                </div>
+                <span className="relative z-10 font-nyght-serif text-white">
+                  Buka Undangan
+                </span>
+              </button>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

@@ -94,7 +94,13 @@ export const ninfa = localFont({
 });
 
 export const nyghtSerif = localFont({
-  src: "../public/fonts/nyght-serif/NyghtSerif-Dark.otf",
+  src: [
+    { path: "../public/fonts/nyght-serif/NyghtSerif-Bold.woff2" },
+    { path: "../public/fonts/nyght-serif/NyghtSerif-Dark.woff2" },
+    { path: "../public/fonts/nyght-serif/NyghtSerif-Light.woff2" },
+    { path: "../public/fonts/nyght-serif/NyghtSerif-Medium.woff2" },
+    { path: "../public/fonts/nyght-serif/NyghtSerif-Regular.woff2" },
+  ],
   variable: "--font-nyght-serif",
   display: "swap",
 });
