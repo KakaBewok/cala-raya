@@ -18,8 +18,13 @@ const Cover = () => {
 
   const clipPath = useTransform(
     scrollYProgress,
-    [0, 0.5, 1],
-    ["inset(8% 22% 16% 14%)", "inset(4% 11% 8% 7%)", "inset(0% 0% 0% 0%)"]
+    [0, 0.2, 0.5, 1],
+    [
+      "inset(8% 22% 16% 14%)",
+      "inset(4% 11% 8% 7%)",
+      "inset(2% 6% 4% 4%)",
+      "inset(0% 0% 0% 0%)",
+    ]
   );
 
   const filter = useTransform(
@@ -31,7 +36,7 @@ const Cover = () => {
   return (
     <section
       ref={animationRef}
-      className="relative w-full h-screen bg-rose-900 flex items-center justify-center overflow-hidden"
+      className="relative w-full h-screen bg-[#7A2422] flex items-center justify-center overflow-hidden"
     >
       {/* couple image */}
       <motion.div
