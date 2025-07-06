@@ -1,21 +1,27 @@
 import { nyghtSerif } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
-import { findImage } from "@/utils/find-image";
-import Image from "next/image";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { useRef } from "react";
 
 export default function Greetings() {
   const { invitationData: data } = useInvitation();
+  const lineRef = useRef<HTMLDivElement | null>(null);
 
-  const formatEventDate = (dateString: string) => {
-    if (!dateString) return null;
+  const { scrollYProgress: lineScrollY } = useScroll({
+    target: lineRef,
+    offset: ["start 50%", "start 20%"],
+  });
 
-    const eventDate = new Date(dateString);
-    const day = String(eventDate.getDate()).padStart(2, "0");
-    const month = String(eventDate.getMonth() + 1).padStart(2, "0");
-    const year = eventDate.getFullYear();
+  const rawLineHeight = useTransform(
+    lineScrollY,
+    [0, 0.2, 0.4, 0.6, 0.8, 1],
+    ["0%", "20%", "40%", "60%", "80%", "100%"]
+  );
 
-    return `${day} · ${month} · ${year}`;
-  };
+  const lineHeight = useSpring(rawLineHeight, {
+    damping: 20,
+    stiffness: 50,
+  });
 
   return (
     <div
@@ -29,14 +35,20 @@ export default function Greetings() {
       </div>
 
       {/* line */}
-      <span className="z-40 h-full border border-rose-700 absolute top-0 left-1/2 origin-top -translate-x-1/2"></span>
+      <motion.div
+        className="z-0 border border-rose-700 absolute top-0 left-1/2 origin-top -translate-x-1/2"
+        ref={lineRef}
+        style={{ height: lineHeight }}
+      />
 
       {/* text */}
-      <div className="absolute top-1/2 left-1/2 origin-top -translate-x-1/2">
-        <p className="text-xs font-light text-center leading-5 tracking-wider">
-          It has been seven long years. Look how far we’ve come. Though it took
-          the long way, we knew we’d get there someday. And now, we’ve finally
-          made it
+      <div className="z-10 absolute top-1/2 left-1/2 origin-top -translate-x-1/2 -translate-y-1/2 bg-[#ede0d1] py-4">
+        <p
+          className="text-xs font-light text-center leading-5 tracking-wider"
+          data-aos="fade-left"
+        >
+          {data?.greetings ||
+            "It has been seven long years. Look how far we've come. Though it took the long way, we knew we'd get there someday. And now, we've finally made it"}
         </p>
       </div>
 
