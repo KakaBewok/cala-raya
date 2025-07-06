@@ -32,7 +32,7 @@ export default function BrideSection() {
 
   const { scrollYProgress: lineScrollY } = useScroll({
     target: lineRef,
-    offset: ["start 40%", "start 26%"],
+    offset: ["start 90%", "start 80%"],
   });
 
   const rawLineHeight = useTransform(
@@ -104,26 +104,12 @@ export default function BrideSection() {
           </div>
           {/* line */}
           <motion.div
-            className="border border-rose-700 absolute origin-top top-full left-1/2 -translate-x-1/2"
             ref={lineRef}
             style={{ height: lineHeight }}
+            className="border border-rose-700 absolute origin-top top-full left-1/2 -translate-x-1/2"
           />
         </div>
       </div>
-
-      {/* <motion.div className="absolute top-9 right-10 z-10 text-right">
-        <p
-          className={`${remineFares.className} text-3xl font-normal text-gray-700 tracking-wide`}
-          data-aos="zoom-in"
-        >
-          {data?.host_two_nickname.toLowerCase()}
-        </p>
-        <motion.div
-          ref={lineRef}
-          style={{ height: lineHeight }}
-          className="w-px bg-gray-600 mt-10 ml-auto"
-        />
-      </motion.div> */}
     </section>
   );
 }
