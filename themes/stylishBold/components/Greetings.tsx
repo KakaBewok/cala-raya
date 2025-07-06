@@ -9,7 +9,7 @@ export default function Greetings() {
 
   const { scrollYProgress: lineScrollY } = useScroll({
     target: lineRef,
-    offset: ["start 50%", "start 20%"],
+    offset: ["start 50%", "start 10%"],
   });
 
   const rawLineHeight = useTransform(
