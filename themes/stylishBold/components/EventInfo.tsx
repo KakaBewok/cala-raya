@@ -1,12 +1,6 @@
-import { poppins, remineFares } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { Rundown } from "@/types/invitation-data";
-import { findImage } from "@/utils/find-image";
-import { formatDate } from "@/utils/format-date";
-import { formatTime } from "@/utils/format-time";
 import { DateTime } from "luxon";
-import Image from "next/image";
-import Link from "next/link";
 
 const EventInfo = () => {
   const { invitationData: data } = useInvitation();
@@ -43,89 +37,83 @@ const EventInfo = () => {
   };
 
   return (
-    <section className="py-6 px-10 relative w-full h-auto bg-white overflow-hidden">
-      <Image
-        src={findImage(data, "event-info")}
-        alt="Event info"
-        fill
-        className="object-cover object-center z-0"
-        priority
-      />
-      <div
-        className="z-20 h-auto bg-orange-50 flex flex-col justify-start items-center py-6"
-        data-aos="fade-up"
-      >
-        {data?.rundowns?.map((rundown, index) => (
-          <div
-            className="p-6 w-full flex flex-col justify-center items-center"
-            key={index}
-          >
-            <h1
-              className={`
-                px-5
-                pb-3
-                w-fit
-                border-b-1 border-neutral-700
-                text-2xl font-medium text-neutral-700
-                mb-5
-                ${remineFares.className}
-            `}
-            >
-              {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
-            </h1>
-            <p
-              className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
-            >
-              {formatDate(rundown.date, true)}
-            </p>
-            {rundown.start_time && (
-              <p
-                className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
-              >
-                · {formatTime(rundown.start_time)} {rundown.time_zone} -{" "}
-                {rundown.end_time && rundown.start_time
-                  ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
-                  : "selesai"}{" "}
-                ·
-              </p>
-            )}
-
-            <Link
-              href={generateGoogleCalendarUrl(rundown)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${poppins.className} text-xs font-medium underline text-neutral-700`}
-            >
-              Tambah ke Kalender
-            </Link>
+    <section className="relative w-full h-screen bg-[#ede0d1] overflow-hidden flex justify-center items-center">
+      {/* LEFT SIDE */}
+      <div className="flex h-full flex-col items-center justify-center pl-6 pr-4 flex-shrink-0 relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center text-[64px] font-nyght-serif text-center leading-none opacity-100">
+          02
+          <br />
+          11
+          <br />
+          24
+        </div>
+        <span className="h-full border border-rose-900 absolute top-[88px] right-0 origin-top"></span>
+      </div>
+      {/* RIGHT SIDE */}
+      <div className="flex-grow relative flex-col flex py-10 gap-6">
+        <div className="flex flex-col gap-7 pl-4 pr-6 py-5">
+          <div className="relative text-4xl text-ruby font-the-secret font-medium after:w-14 after:border-ruby after:border-t-[0.5px] after:absolute after:-bottom-3 after:left-0 after:h-0">
+            Akad Nikah
           </div>
-        ))}
-        <div className="p-6 w-full flex flex-col justify-center items-center">
-          <h1
-            className={`
-                px-5
-                pb-3
-                w-fit
-                border-b-1 border-neutral-700
-                text-2xl font-medium text-neutral-700
-                mb-5
-                ${remineFares.className}
-            `}
-          >
-            LOKASI
-          </h1>
-          <p
-            className={`${remineFares.className} text-md font-medium mb-6 text-neutral-700 text-center`}
-          >
-            {data?.location || "-"}
-          </p>
-
-          <Link
-            href={data?.location_url || "#"}
-            className="py-2 px-4 text-xs bg-transparent rounded-none border border-neutral-700 text-neutral-700 cursor-pointer hover:bg-transparent"
-          >
-            LIHAT LOKASI
-          </Link>
+          <div className="flex flex-col gap-2 font-nyght-serif text-raisin-black">
+            <div className="text-base font-normal">Sabtu, 02 November 2024</div>
+            <div className="text-base font-normal">08:00 10:00 WIB</div>
+            <div className="text-[10px]">
+              <div className="underline cursor-pointer">Tambah ke Kalender</div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-7 pl-4 pr-6 py-5">
+          <div className="relative text-4xl text-ruby font-the-secret font-medium after:w-14 after:border-ruby after:border-t-[0.5px] after:absolute after:-bottom-3 after:left-0 after:h-0">
+            Resepsi
+          </div>
+          <div className="flex flex-col gap-2 font-nyght-serif text-raisin-black">
+            <div className="text-base font-normal">Sabtu, 02 November 2024</div>
+            <div className="text-base font-normal">11:00 14:00 WIB</div>
+            <div className="text-[10px]">
+              <div className="underline cursor-pointer">Tambah ke Kalender</div>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-7 pl-4 pr-6 py-5">
+          <div className="relative text-4xl text-ruby font-the-secret font-medium after:w-14 after:border-ruby after:border-t-[0.5px] after:absolute after:-bottom-3 after:left-0 after:h-0">
+            Lokasi
+          </div>
+          <div className="flex flex-col gap-2 font-nyght-serif text-raisin-black mt-2">
+            <div className="text-base font-normal">Aulia Hall Center</div>
+            <div className="text-xs font-light italic">
+              Sukarindik, Bungursari, Tasikmalaya
+            </div>
+            <div className="mb-2">
+              <button
+                className="relative inline-flex items-center justify-center bg-transparent overflow-visible px-4 py-[10px] text-xs text-raisin-black font-medium"
+                type="button"
+              >
+                <div className="absolute inset-0 overflow-hidden">
+                  <svg
+                    className="absolute w-full h-full stroke-jasper"
+                    preserveAspectRatio="none"
+                    viewBox="0 0 100 40"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <ellipse
+                      cx="50"
+                      cy="20"
+                      rx="49.5"
+                      ry="19.5"
+                      fill="none"
+                      vector-effect="non-scaling-stroke"
+                      stroke-width="1"
+                      stroke="jasper"
+                    ></ellipse>
+                  </svg>
+                </div>
+                <span className="relative z-10 font-nyght-serif">
+                  Lihat Lokasi
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
