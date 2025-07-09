@@ -45,13 +45,13 @@ const EventInfo = () => {
 
   const { scrollYProgress: lineScrollY } = useScroll({
     target: lineRef,
-    offset: ["start 70%", "start 50%"],
+    offset: ["start 70%", "start 40%"],
   });
 
   const rawLineHeight = useTransform(
     lineScrollY,
-    [0, 0.5, 1],
-    ["0%", "50%", "100%"]
+    [0, 0.2, 0.4, 0.6, 0.8, 1],
+    ["0%", "20%", "40%", "60%", "80%", "100%"]
   );
 
   const lineHeight = useSpring(rawLineHeight, {
@@ -86,7 +86,11 @@ const EventInfo = () => {
       {/* RIGHT SIDE */}
       <div className="flex-grow relative flex-col flex gap-6">
         {data?.rundowns?.map((rundown, index) => (
-          <div className="flex flex-col gap-7 pl-4 pr-6 py-5" key={index}>
+          <div
+            className="flex flex-col gap-7 pl-4 pr-6 py-5"
+            key={index}
+            data-aos="fade-left"
+          >
             <div
               className={`${theSecret.className} text-rose-900 text-4xl font-medium`}
             >
@@ -120,7 +124,7 @@ const EventInfo = () => {
           </div>
         ))}
 
-        <div className="flex flex-col gap-6 pl-4 pr-6 py-5">
+        <div className="flex flex-col gap-6 pl-4 pr-6 py-5" data-aos="fade-up">
           <div
             className={`${theSecret.className} text-4xl text-rose-800 font-medium`}
           >
