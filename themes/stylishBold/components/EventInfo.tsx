@@ -124,19 +124,22 @@ const EventInfo = () => {
           </div>
         ))}
 
-        <div className="flex flex-col gap-6 pl-4 pr-6 py-5" data-aos="fade-up">
+        <div
+          className="flex flex-col gap-6 pl-4 pr-6 py-5"
+          data-aos="fade-left"
+        >
           <div
             className={`${theSecret.className} text-4xl text-rose-800 font-medium`}
           >
             <span>Lokasi</span>
-            <div className="mt-3 w-14 h-[0.9px] bg-rose-900" />
+            <div className="mt-2 w-14 h-[0.9px] bg-rose-900" />
           </div>
           <div
-            className={`${nyghtSerif.className} flex flex-col gap-2 text-neutral-800 mt-2`}
+            className={`${nyghtSerif.className} flex flex-col gap-2 text-neutral-800`}
           >
             <div className="text-base font-normal">{data?.location}</div>
-            <div className="cursor-pointer relative inline-flex items-center justify-center font-light overflow-visible px-4 py-[10px] text-xs w-40">
-              <div className="absolute inset-0 overflow-hidden w-40">
+            <div className="cursor-pointer relative inline-flex items-center justify-center font-light overflow-visible px-4 py-[10px] text-xs w-36">
+              <div className="absolute inset-0 overflow-hidden w-36">
                 <svg
                   className="absolute w-full h-full"
                   preserveAspectRatio="none"
