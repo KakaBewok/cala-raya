@@ -2,9 +2,10 @@ import React, { useMemo } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
-import { remineFares } from "@/fonts/fonts";
+import { nyghtSerif, remineFares, theSecret } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
 import SwipeHandIcon from "./SwipeHandIcon";
+import { motion } from "motion/react";
 
 interface GalleryImage {
   id: number;
@@ -101,31 +102,56 @@ const HorizontalGallery = () => {
   }, [images]);
 
   return (
-    <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden">
-      {/* left */}
-      <div
-        className={`flex justify-center items-center absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
-          isGalleryOpen ? "-translate-x-full" : "translate-x-0"
-        }`}
+    <div className="relative w-full h-screen bg-[#ede0d1] overflow-hidden">
+      <motion.div
+        initial={{ opacity: 1 }}
+        animate={isGalleryOpen ? { opacity: 0 } : { opacity: 1 }}
+        transition={{ duration: 2.2, ease: "easeInOut" }}
+        className="w-full h-full flex flex-col justify-between items-start z-20"
       >
-        <p
-          className={`-ml-[25vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+        <motion.div
+          className={`${nyghtSerif.className} text-[64px] text-neutral-400 text-left z-30 tracking-wider pl-5 font-light relative flex items-center mt-28`}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false, amount: 1 }}
+          transition={{ duration: 4, ease: "easeInOut" }}
         >
-          {data?.host_one_nickname.toLowerCase()}
-        </p>
-      </div>
-      {/* right */}
-      <div
-        className={`flex justify-center items-center absolute top-0 right-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
-          isGalleryOpen ? "translate-x-full" : "translate-x-0"
-        }`}
-      >
-        <p
-          className={`-mr-[26vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          {day}
+          <span>.</span>
+          {month}
+          <span>.</span>
+          {year}
+          <div
+            className={`${theSecret.className} flex flex-col absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 text-[64px] font-normal text-rose-700 leading-none`}
+          >
+            <span>{data?.host_two_nickname}</span>
+            <span className="translate-x-12">{data?.host_one_nickname}</span>
+          </div>
+        </motion.div>
+        <div
+          className={`z-40 grid grid-cols-3 w-full h-auto aspect-square gap-[10px] p-5 pb-20`}
         >
-          {data?.host_two_nickname.toLowerCase()}
-        </p>
-      </div>
+          {data?.images
+            ?.filter((image) => image.type === "gallery")
+            .slice(0, 8)
+            .map((image, index) => (
+              <Image
+                src={image.url}
+                alt={`Gallery thumbnail ${index + 1}`}
+                width={200}
+                height={200}
+                className="object-cover object-center aspect-square w-full h-auto"
+                key={index}
+              />
+            ))}
+          <div
+            className={`${nyghtSerif.className} pointer-events-auto w-full h-full flex justify-center items-center relative aspect-square border border-rose-700 text-rose-700 font-medium font-nyght-serif rotate-[6deg] swing-left-fast`}
+            onClick={toggleGallery}
+          >
+            <span>Buka Galeri</span>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Toggle Button */}
       <Button
