@@ -133,7 +133,7 @@ const HorizontalGallery = () => {
         >
           {data?.images
             ?.filter((image) => image.type === "gallery")
-            .slice(0, 8)
+            .slice(0, 5)
             .map((image, index) => (
               <Image
                 src={image.url}
@@ -145,32 +145,37 @@ const HorizontalGallery = () => {
               />
             ))}
           <div
-            className={`${nyghtSerif.className} pointer-events-auto w-full h-full flex justify-center items-center relative aspect-square border border-rose-700 text-rose-700 font-medium font-nyght-serif rotate-[6deg] swing-left-fast`}
+            className={`cursor-pointer ${nyghtSerif.className} pointer-events-auto w-full h-full flex justify-center items-center relative aspect-square border border-rose-700 text-rose-700 font-medium font-nyght-serif rotate-[6deg] swing-left-fast`}
             onClick={toggleGallery}
           >
             <span>Buka Galeri</span>
           </div>
+          {data?.images
+            ?.filter((image) => image.type === "gallery")
+            .slice(5, 8)
+            .map((image, index) => (
+              <Image
+                src={image.url}
+                alt={`Gallery thumbnail ${index + 1}`}
+                width={200}
+                height={200}
+                className="object-cover object-center aspect-square w-full h-auto"
+                key={index}
+              />
+            ))}
         </div>
       </motion.div>
 
       {/* Toggle Button */}
-      <Button
-        size="sm"
-        onClick={toggleGallery}
-        className={`cursor-pointer text-neutral-700 border rounded-none border-neutral-700 bg-transparent absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
-          isGalleryOpen
-            ? "bg-neutral-300 text-neutral-800 rounded-lg border-none"
-            : ""
-        }`}
-      >
-        {isGalleryOpen ? (
-          <>
-            <X size={20} />
-          </>
-        ) : (
-          <span className="text-xs">Buka Gallery</span>
-        )}
-      </Button>
+      {isGalleryOpen && (
+        <Button
+          size="sm"
+          onClick={toggleGallery}
+          className={`cursor-pointer text-neutral-800 rounded-lg border border-neutral-800 bg-transparent absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium`}
+        >
+          <X size={20} />
+        </Button>
+      )}
 
       {/* Gallery */}
       <div
@@ -328,26 +333,3 @@ const HorizontalGallery = () => {
 };
 
 export default HorizontalGallery;
-
-// <div
-//   className={`absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
-//     isGalleryOpen ? "-translate-x-full" : "translate-x-0"
-//   }`}
-// >
-//   <div
-//     className={`absolute -left-[250px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
-//   >
-//     {data?.host_one_nickname.toLowerCase()}
-//   </div>
-// </div>
-// <div
-//   className={`absolute top-0 right-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
-//     isGalleryOpen ? "translate-x-full" : "translate-x-0"
-//   }`}
-// >
-//   <div
-//     className={`absolute -right-[190px] top-1/2 -translate-y-1/2 ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
-//   >
-//     {data?.host_two_nickname.toLowerCase()}
-//   </div>
-// </div>
