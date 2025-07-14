@@ -68,7 +68,7 @@ export default function BrideSection() {
           {/* info */}
           <div className="flex flex-col gap-4 items-center justify-center w-full h-fit">
             <p className="text-2xl text-neutral-900">{data?.host_two_name}</p>
-            <p className="text-xs italic font-light text-neutral-800 block w-[63%] ">
+            <p className="text-xs italic font-light text-neutral-800 block w-[69%] ">
               {data?.host_two_additional_info}
             </p>
           </div>
