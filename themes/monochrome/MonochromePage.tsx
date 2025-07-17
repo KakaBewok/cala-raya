@@ -1,28 +1,19 @@
 "use client";
 
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
-import Footer from "./components/Footer";
-import Gallery from "./components/Gallery";
-import RSVPForm from "./components/RSVPForm";
-import Schedule from "./components/Schedule";
+import { useState } from "react";
+import MainPage from "./components/MainPage";
+import OpeningScreen from "./components/OpeningScreen";
 
-export default function Monochrom() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1200,
-      once: false,
-    });
-  }, []);
+export default function InvitationPage() {
+  const [isOpenInvitation, setIsOpenInvitation] = useState<boolean>(false);
 
   return (
-    <div className="font-serif bg-white text-black">
-      {/* <Hero /> */}
-      <Schedule />
-      <Gallery />
-      <RSVPForm />
-      <Footer />
-    </div>
+    <>
+      <OpeningScreen
+        isOpenInvitation={isOpenInvitation}
+        setIsOpenInvitation={setIsOpenInvitation}
+      />
+      {isOpenInvitation && <MainPage isOpenInvitation={isOpenInvitation} />}
+    </>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { nyghtSerif, remineFares } from "@/fonts/fonts";
+import { remineFares } from "@/fonts/fonts";
 import { useEffect, useState } from "react";
 import badwords from "indonesian-badwords";
 import db from "@/configs/db-config";
@@ -76,10 +76,10 @@ const RSVP = () => {
   return (
     <div className="w-full" data-aos="zoom-in">
       {/* form */}
-      <section
-        className={`${nyghtSerif.className} bg-rose-700 px-6 py-10 w-full flex flex-col items-center`}
-      >
-        <h2 className={`text-4xl font-light tracking-wide text-slate-50 mb-2`}>
+      <section className="bg-[#f8f3ea] px-6 py-10 w-full flex flex-col items-center">
+        <h2
+          className={`${remineFares.className} text-4xl font-light tracking-wide text-neutral-800 mb-2`}
+        >
           rsvp
         </h2>
         <div className="w-28 h-px bg-neutral-800 mb-8" />
@@ -88,7 +88,7 @@ const RSVP = () => {
           {/* Message */}
           <div>
             <label
-              className={`block text-base tracking-wide text-slate-50 font-medium mb-2`}
+              className={`${remineFares.className} block text-base tracking-wide text-neutral-700 font-medium mb-2`}
             >
               ucapan
             </label>
@@ -106,7 +106,7 @@ const RSVP = () => {
           {/* Attending */}
           <div>
             <label
-              className={`block text-base tracking-wide text-neutral-700 font-medium mb-2`}
+              className={`${remineFares.className} block text-base tracking-wide text-neutral-700 font-medium mb-2`}
             >
               konfirmasi kehadiran
             </label>
