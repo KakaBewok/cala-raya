@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { poppins } from "@/fonts/fonts";
+import { commuters, lagunac, poppins } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -25,11 +24,12 @@ export default function OpeningScreen({
       {!isOpenInvitation && (
         <motion.div
           className="bg-[#eedcc5] max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden"
-          initial={{ y: "-100%", opacity: 1 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ y: "-100%" }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 3, ease: "easeIn" }}
         >
+          {/* COVER IMAGE */}
           <Image
             src={findImage(data, "hero")}
             alt="Hero background"
@@ -39,12 +39,13 @@ export default function OpeningScreen({
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
 
+          {/* TEXT */}
           <div className="relative h-screen w-full z-20 text-white">
             <div className="absolute top-28 left-1/2 transform -translate-x-1/2">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.5 }}
+                transition={{ duration: 3 }}
               >
                 <Image
                   src={findImage(data, "initial")}
@@ -56,20 +57,23 @@ export default function OpeningScreen({
               </motion.div>
             </div>
             <motion.div
-              initial={{ opacity: 0, x: "-100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 1 }}
-              className={`gap-5 max-w-48 absolute left-7 bottom-32 tracking-wider ${poppins.className} flex flex-col items-start justify-start`}
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1.5 }}
+              className={`gap-4 w-full absolute bottom-32 tracking-wider ${poppins.className} flex flex-col items-center justify-center`}
             >
-              <p className="text-sm">Halo,</p>
-              <p className="text-3xl leading-relaxed">{guest?.name}</p>
-              <Button
-                size="sm"
+              <p className={`${commuters.className} text-sm font-semibold`}>
+                Hello
+              </p>
+              <p className={`${lagunac.className} text-2xl font-normal`}>
+                {guest?.name}
+              </p>
+              <button
                 onClick={handleClick}
-                className="mt-5 text-xs bg-transparent rounded-none border border-white cursor-pointer hover:bg-transparent"
+                className={`${commuters.className} font-bold px-4 py-2 text-xs bg-transparent rounded-none border border-white cursor-pointer hover:bg-transparent`}
               >
-                Buka Undangan
-              </Button>
+                OPEN INVITATION
+              </button>
             </motion.div>
           </div>
         </motion.div>

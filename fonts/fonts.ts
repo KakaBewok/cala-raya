@@ -114,3 +114,26 @@ export const theSecret = localFont({
   variable: "--font-the-secret",
   display: "swap",
 });
+
+export const commuters = localFont({
+  src: [
+    { path: "../public/fonts/commuters/commuters-bold.otf", weight: "700" },
+    { path: "../public/fonts/commuters/commuters-italic.otf", weight: "400" },
+    { path: "../public/fonts/commuters/commuters-light.otf", weight: "300" },
+    { path: "../public/fonts/commuters/commuters-regular.otf", weight: "400" },
+    { path: "../public/fonts/commuters/commuters-semibold.otf", weight: "600" },
+    { path: "../public/fonts/commuters/commuters-thin.otf", weight: "200" },
+  ],
+  variable: "--font-commuters",
+  display: "swap",
+});
+
+export const lagunac = localFont({
+  src: [
+    { path: "../public/fonts/lagunac/lagunac_bold.otf" },
+    { path: "../public/fonts/lagunac/lagunac_italic.otf" },
+    { path: "../public/fonts/lagunac/lagunac.otf" },
+  ],
+  variable: "--font-lagunac",
+  display: "swap",
+});
