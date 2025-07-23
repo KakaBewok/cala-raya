@@ -55,6 +55,8 @@ const Cover = () => {
         />
       </motion.div>
 
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/40 to-black/10 z-20 pointer-events-none" />
+
       {/* Content box */}
       <div className="absolute z-20 w-full top-1/2 -translate-y-1/2 flex flex-col justify-center items-center text-white">
         <div className="px-7 flex flex-col items-center justify-center gap-4">

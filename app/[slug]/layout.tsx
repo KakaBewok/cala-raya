@@ -11,7 +11,9 @@ export async function generateMetadata({
 
   const { data, error } = await db
     .from("invitations")
-    .select("event_title, slug, event_date, images (*)")
+    .select(
+      "host_one_nickname, host_two_nickname, event_title, slug, event_date, images (*)"
+    )
     .eq("slug", slug)
     .single();
 
@@ -33,7 +35,7 @@ export async function generateMetadata({
     previewImageObj?.url ?? "https://calaraya.vercel.app/og-image.jpg";
 
   return {
-    title: `${data.slug}`,
+    title: `${data.host_two_nickname} ❤️ ${data.host_one_nickname}`,
     description: `${formatDate(data.event_date, true)}`,
     openGraph: {
       title: `${data.event_title}`,

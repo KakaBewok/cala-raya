@@ -16,6 +16,7 @@ import GiftInfo from "./GiftInfo";
 import ClosingSection from "./ClosingSection";
 import Footer from "./Footer";
 import Gallery from "./Gallery";
+import Greetings from "./Greetings";
 
 export default function MainPage({
   isOpenInvitation,
@@ -35,6 +36,7 @@ export default function MainPage({
   return (
     <main className="max-w-md mx-auto z-10 flex flex-col items-center justify-center">
       <Cover />
+      <Greetings />
       <Bismillah />
       <BridesSection />
       <GroomsSection />
