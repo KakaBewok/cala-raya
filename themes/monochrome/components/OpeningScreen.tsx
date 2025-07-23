@@ -27,7 +27,7 @@ export default function OpeningScreen({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ y: "-100%" }}
-          transition={{ duration: 3, ease: "easeIn" }}
+          transition={{ duration: 1.5, ease: "easeIn" }}
         >
           {/* COVER IMAGE */}
           <Image

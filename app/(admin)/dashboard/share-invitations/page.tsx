@@ -58,7 +58,7 @@ export default function SelectInvitationGrid() {
         {invitations.map((invitation) => (
           <Card
             key={invitation.id}
-            className="relative p-4 rounded-xl border dark:border-neutral-700 cursor-pointer transition-all"
+            className="hover:border-purple-600 hover:dark:border-white duration-500 relative p-4 rounded-xl border dark:border-neutral-700 cursor-pointer transition-all"
             onClick={() => {
               setInvitationId(invitation.id);
               router.push(`/dashboard/share-invitations/${invitation.id}`);

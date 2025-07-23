@@ -5,7 +5,7 @@ import { findImage } from "@/utils/find-image";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { didot, remineFares } from "@/fonts/fonts";
+import { lagunac } from "@/fonts/fonts";
 
 const Cover = () => {
   const { invitationData: data } = useInvitation();
@@ -56,19 +56,28 @@ const Cover = () => {
       </motion.div>
 
       {/* Content box */}
-      <div className="absolute z-20 h-screen flex flex-col justify-around items-center text-white">
-        <p className={`${didot.className} text-xs`}>The Wedding of</p>
+      <div className="absolute z-20 w-full top-1/2 -translate-y-1/2 flex flex-col justify-center items-center text-white">
+        <div className="px-7 flex flex-col items-center justify-center gap-4">
+          <p className={`${lagunac.className} text-[10px]`}>THE WEDDING OF</p>
 
-        <h1
-          className={`${remineFares.className} font-medium text-4xl text-left`}
-        >
-          {data?.host_two_nickname.toLocaleLowerCase()} <br />&{" "}
-          {data?.host_one_nickname.toLocaleLowerCase()}
-        </h1>
+          <h1
+            className={`${lagunac.className} font-medium text-4xl text-center`}
+          >
+            {data?.host_two_name.toLocaleUpperCase()}
+          </h1>
 
-        <p className={`${didot.className} text-xs leading-tight`}>
-          {formatEventDate(data?.event_date ?? "")}
-        </p>
+          <p className={`${lagunac.className} text-[10px]`}>AND</p>
+
+          <h1
+            className={`${lagunac.className} font-medium text-4xl text-center`}
+          >
+            {data?.host_one_name.toLocaleUpperCase()}
+          </h1>
+
+          <p className={`${lagunac.className} text-[10px] leading-tight`}>
+            {formatEventDate(data?.event_date ?? "")}
+          </p>
+        </div>
       </div>
     </section>
   );
