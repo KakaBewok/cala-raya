@@ -137,3 +137,9 @@ export const lagunac = localFont({
   variable: "--font-lagunac",
   display: "swap",
 });
+
+export const monthGlade = localFont({
+  src: "../public/fonts/month-glade/MonthGlade.otf",
+  variable: "--font-month-glade",
+  display: "swap",
+});

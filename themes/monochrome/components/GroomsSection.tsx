@@ -1,103 +1,87 @@
 "use client";
 
-import { poppins, remineFares } from "@/fonts/fonts";
+import { commuters, lagunac, monthGlade } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
-import { createSocialMediaLink } from "@/utils/create-social-media-link";
 import { findImage } from "@/utils/find-image";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { Instagram } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
 
-export default function GroomsSection() {
+export default function BrideSection() {
   const { invitationData: data } = useInvitation();
   const animationRef = useRef(null);
-  const lineRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: animationRef,
     offset: ["start 22%", "start start"],
   });
 
-  const { scrollYProgress: lineScrollY } = useScroll({
-    target: lineRef,
-    offset: ["start 70%", "start 67%"],
-  });
-
   const clipPath = useTransform(
     scrollYProgress,
-    [0, 0.5, 1],
-    ["inset(12% 10% 24% 29%)", "inset(6% 5% 12% 14%)", "inset(0% 0% 0% 0%)"]
-  );
-  const rawLineHeight = useTransform(
-    lineScrollY,
-    [0, 0.5, 1],
-    ["0px", "80px", "160px"]
+    [0, 0.25, 0.5, 0.75, 1],
+    [
+      "inset(5.6% 10% 15%)",
+      "inset(2.8% 5% 7.5%)",
+      "inset(1.8% 3% 4.5%)",
+      "inset(1.0% 2% 2.5%)",
+      "inset(0% 0% 0%)",
+    ]
   );
 
-  const lineHeight = useSpring(rawLineHeight, {
-    damping: 20,
-    stiffness: 100,
-  });
+  const filter = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["grayscale(100%)", "grayscale(20%)"]
+  );
 
   return (
     <section
       ref={animationRef}
-      className="relative w-full min-h-screen bg-[#fdfaf6] flex items-center justify-center overflow-hidden"
+      className="relative w-full min-h-screen bg-[#f8f4ec] flex flex-col items-center justify-between overflow-hidden"
     >
-      <motion.div style={{ clipPath }} className="absolute inset-0 z-20">
+      {/* the groom */}
+      <div className="mt-[64px] w-fit z-40" data-aos="fade-up">
+        <p
+          className={`${monthGlade.className} text-white text-[40px] font-semibold -rotate-[21deg]`}
+        >
+          The Groom
+        </p>
+      </div>
+
+      {/* background image */}
+      <motion.div
+        style={{ clipPath, filter }}
+        className="absolute inset-0 z-20"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/20 z-30 pointer-events-none" />
+
         <Image
           src={findImage(data, "grooms")}
-          alt="Grooms"
+          alt="Groom"
           fill
           className="object-cover object-center"
           priority
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/20 z-30 pointer-events-none" />
-
-      <motion.div className="absolute top-14 left-14 z-10 text-left">
-        <p
-          className={`${remineFares.className} text-3xl font-normal text-gray-700 tracking-wide`}
-          data-aos="zoom-in"
-        >
-          {data?.host_one_nickname.toLowerCase()}
-        </p>
-        <motion.div
-          ref={lineRef}
-          style={{ height: lineHeight }}
-          className="w-px bg-gray-600 mt-10 mr-auto"
-        />
-      </motion.div>
-
-      <div className={`absolute bottom-0 left-0 w-full z-40 py-10 px-6`}>
+      {/* groom info */}
+      <div
+        className={`w-full py-10 px-6 flex flex-col gap-4 z-40 text-white`}
+        data-aos="fade-up"
+      >
         <h1
-          className={`${remineFares.className} text-white text-left font-medium text-4xl mb-5`}
+          className={`${lagunac.className} text-center text-[32px] tracking-[0.96px]`}
         >
-          {data?.host_one_name.toLocaleLowerCase()}
+          {data?.host_one_name.toUpperCase()}
         </h1>
-        <div
-          className={`${poppins.className} w-full flex items-end justify-between content-between`}
-        >
-          <div className="w-[140px] text-white text-xs font-normal text-left">
-            {data?.host_one_additional_info}
-          </div>
-          <div
-            className={`${
-              !data?.host_one_social_media ? "opacity-0" : ""
-            } flex gap-2 items-center text-white text-xs bg-transparent rounded-none border border-white cursor-pointer px-3 py-2`}
+        <div className="flex flex-col items-center justify-between gap-4">
+          <p
+            className={`${commuters.className} text-center font-thin leading-[18px] text-xs`}
           >
-            <Instagram className="h-4 w-4 font-light" />{" "}
-            <Link
-              href={createSocialMediaLink(data?.host_one_social_media || "")}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {`@${data?.host_one_social_media}`}
-            </Link>
-          </div>
+            Together with their families
+            <br />
+            <span className="font-bold">{data?.host_one_additional_info}</span>
+          </p>
         </div>
       </div>
     </section>

@@ -1,13 +1,10 @@
 "use client";
 
-import { poppins, remineFares } from "@/fonts/fonts";
+import { commuters, lagunac, monthGlade } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
-import { createSocialMediaLink } from "@/utils/create-social-media-link";
 import { findImage } from "@/utils/find-image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Instagram } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRef } from "react";
 
 export default function BrideSection() {
@@ -40,12 +37,24 @@ export default function BrideSection() {
   return (
     <section
       ref={animationRef}
-      className="relative w-full min-h-screen bg-[#fdfaf6] flex items-center justify-center overflow-hidden"
+      className="relative w-full min-h-screen bg-[#f8f4ec] flex flex-col items-center justify-between overflow-hidden"
     >
+      {/* the bride */}
+      <div className="mt-[64px] w-fit z-40" data-aos="fade-up">
+        <p
+          className={`${monthGlade.className} text-white text-[40px] font-semibold -rotate-[21deg]`}
+        >
+          The Bride
+        </p>
+      </div>
+
+      {/* background image */}
       <motion.div
         style={{ clipPath, filter }}
         className="absolute inset-0 z-20"
       >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/20 z-30 pointer-events-none" />
+
         <Image
           src={findImage(data, "brides")}
           alt="Bride"
@@ -55,43 +64,24 @@ export default function BrideSection() {
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/20 z-30 pointer-events-none" />
-
-      <motion.div className="absolute top-9 right-10 z-10 text-right">
-        <p
-          className={`${remineFares.className} text-3xl font-normal text-gray-700 tracking-wide`}
-          data-aos="zoom-in"
-        >
-          {data?.host_two_nickname.toLowerCase()}
-        </p>
-      </motion.div>
-
-      <div className={`absolute bottom-0 left-0 w-full z-40 py-10 px-6`}>
+      {/* bride info */}
+      <div
+        className={`w-full py-10 px-6 flex flex-col gap-4 z-40 text-white`}
+        data-aos="fade-up"
+      >
         <h1
-          className={`${remineFares.className} text-white text-right font-medium text-4xl mb-5`}
+          className={`${lagunac.className} text-center text-[32px] tracking-[0.96px]`}
         >
-          {data?.host_two_name.toLocaleLowerCase()}
+          {data?.host_two_name.toUpperCase()}
         </h1>
-        <div
-          className={`${poppins.className} w-full flex items-end justify-between content-between`}
-        >
-          <div
-            className={`${
-              !data?.host_two_social_media ? "opacity-0" : ""
-            } flex gap-2 items-center text-white text-xs bg-transparent rounded-none border border-white cursor-pointer px-3 py-2`}
+        <div className="flex flex-col items-center justify-between gap-4">
+          <p
+            className={`${commuters.className} text-center font-thin leading-[18px] text-xs`}
           >
-            <Instagram className="h-4 w-4 font-light" />{" "}
-            <Link
-              href={createSocialMediaLink(data?.host_two_social_media || "")}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {`@${data?.host_two_social_media}`}
-            </Link>
-          </div>
-          <div className="w-[140px] text-white text-xs font-normal text-right">
-            {data?.host_two_additional_info}
-          </div>
+            Together with their families
+            <br />
+            <span className="font-bold">{data?.host_two_additional_info}</span>
+          </p>
         </div>
       </div>
     </section>
