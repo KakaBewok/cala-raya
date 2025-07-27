@@ -4,7 +4,7 @@ import { poppins, remineFares } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { createSocialMediaLink } from "@/utils/create-social-media-link";
 import { findImage } from "@/utils/find-image";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Instagram } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,40 +13,39 @@ import { useRef } from "react";
 export default function BrideSection() {
   const { invitationData: data } = useInvitation();
   const animationRef = useRef(null);
-  const lineRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: animationRef,
     offset: ["start 22%", "start start"],
   });
 
-  const { scrollYProgress: lineScrollY } = useScroll({
-    target: lineRef,
-    offset: ["start 70%", "start 67%"],
-  });
-
   const clipPath = useTransform(
     scrollYProgress,
-    [0, 0.5, 1],
-    ["inset(12% 28% 23% 9%)", "inset(6% 14% 11% 5%)", "inset(0% 0% 0% 0%)"]
-  );
-  const rawLineHeight = useTransform(
-    lineScrollY,
-    [0, 0.5, 1],
-    ["0px", "80px", "160px"]
+    [0, 0.25, 0.5, 0.75, 1],
+    [
+      "inset(5.6% 10% 15%)",
+      "inset(2.8% 5% 7.5%)",
+      "inset(1.8% 3% 4.5%)",
+      "inset(1.0% 2% 2.5%)",
+      "inset(0% 0% 0%)",
+    ]
   );
 
-  const lineHeight = useSpring(rawLineHeight, {
-    damping: 20,
-    stiffness: 100,
-  });
+  const filter = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["grayscale(100%)", "grayscale(20%)"]
+  );
 
   return (
     <section
       ref={animationRef}
       className="relative w-full min-h-screen bg-[#fdfaf6] flex items-center justify-center overflow-hidden"
     >
-      <motion.div style={{ clipPath }} className="absolute inset-0 z-20">
+      <motion.div
+        style={{ clipPath, filter }}
+        className="absolute inset-0 z-20"
+      >
         <Image
           src={findImage(data, "brides")}
           alt="Bride"
@@ -65,11 +64,6 @@ export default function BrideSection() {
         >
           {data?.host_two_nickname.toLowerCase()}
         </p>
-        <motion.div
-          ref={lineRef}
-          style={{ height: lineHeight }}
-          className="w-px bg-gray-600 mt-10 ml-auto"
-        />
       </motion.div>
 
       <div className={`absolute bottom-0 left-0 w-full z-40 py-10 px-6`}>
