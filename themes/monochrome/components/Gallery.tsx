@@ -2,8 +2,7 @@ import React, { useMemo } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
-import { amalfiCoast, poppins } from "@/fonts/fonts";
-import { Button } from "@/components/ui/button";
+import { amalfiCoast, commuters, monthGlade } from "@/fonts/fonts";
 import SwipeHandIcon from "./SwipeHandIcon";
 import ScrollAnimation from "./ScrollAnimation";
 import VerticalDate from "./VerticalDate";
@@ -117,9 +116,9 @@ const VerticalGallery = () => {
         }`}
       >
         <div
-          className={`-rotate-[15deg] absolute left-5 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute left-5 bottom-0 ${monthGlade.className} text-[75px] font-light text-neutral-700 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_one_nickname.toLowerCase()}
+          {data?.host_two_nickname}
         </div>
       </div>
 
@@ -130,22 +129,21 @@ const VerticalGallery = () => {
         }`}
       >
         <div
-          className={`-rotate-[15deg] absolute right-5 top-0 ${amalfiCoast.className} text-[75px] font-light text-[#c4a790] whitespace-nowrap drop-shadow-2xl`}
+          className={`-rotate-[15deg] absolute right-5 top-0 ${monthGlade.className} text-[75px] font-light text-neutral-700 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_two_nickname.toLowerCase()}
+          {data?.host_one_nickname}
         </div>
       </div>
 
       {/* Toggle Button */}
-      <Button
-        size="sm"
+      <div
         onClick={toggleGallery}
         className={`${
-          poppins.className
-        } transition-all duration-800 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-4 flex items-center gap-2 font-light ${
+          commuters.className
+        } transition-all duration-800 ease-out cursor-pointer absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-2 flex items-center gap-2 ${
           isGalleryOpen
-            ? "bg-neutral-400 text-white rounded-lg border-none"
-            : "bg-[#c4a790] rounded-sm"
+            ? "bg-neutral-400 text-white border-none"
+            : "bg-neutral-700 text-white rounded-none"
         }`}
       >
         {isGalleryOpen ? (
@@ -153,9 +151,9 @@ const VerticalGallery = () => {
             <X size={20} />
           </>
         ) : (
-          <span className="text-xs font-normal">Buka Gallery</span>
+          <span className="text-xs font-normal">OPEN GALLERY</span>
         )}
-      </Button>
+      </div>
 
       {/* Gallery */}
       <div
@@ -220,10 +218,10 @@ const VerticalGallery = () => {
                       className={`absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2`}
                     >
                       <h1
-                        className={`${amalfiCoast.className} text-4xl font-medium text-white`}
+                        className={`${monthGlade.className} text-4xl font-medium text-white`}
                       >
-                        {data?.host_one_nickname.toLocaleLowerCase()} <br /> &
-                        {data?.host_two_nickname.toLocaleLowerCase()}
+                        {data?.host_two_nickname} <br /> &
+                        {data?.host_one_nickname}
                       </h1>
                     </div>
                   </div>

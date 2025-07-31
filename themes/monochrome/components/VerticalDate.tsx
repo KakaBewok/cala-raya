@@ -25,7 +25,7 @@ const VerticalDate = ({
     <div
       className={`${
         poppins.className
-      } absolute -top-28 -right-9 text-neutral-600 text-xl leading-[2.5rem] z-10 transition-opacity duration-700 font-normal
+      } absolute -top-14 -right-11 text-neutral-600 text-xl leading-[2.5rem] z-10 transition-opacity duration-700 font-normal
        ${!isGalleryOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
     >
       <div>{createDate(data).day}</div>
