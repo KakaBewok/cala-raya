@@ -2,9 +2,8 @@ import React, { useMemo } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
-import { amalfiCoast, commuters, monthGlade } from "@/fonts/fonts";
+import { commuters, monthGlade } from "@/fonts/fonts";
 import SwipeHandIcon from "./SwipeHandIcon";
-import ScrollAnimation from "./ScrollAnimation";
 import VerticalDate from "./VerticalDate";
 
 interface GalleryImage {
@@ -136,7 +135,7 @@ const VerticalGallery = () => {
       </div>
 
       {/* Toggle Button */}
-      <div
+      <button
         onClick={toggleGallery}
         className={`${
           commuters.className
@@ -153,7 +152,7 @@ const VerticalGallery = () => {
         ) : (
           <span className="text-xs font-normal">OPEN GALLERY</span>
         )}
-      </div>
+      </button>
 
       {/* Gallery */}
       <div
@@ -193,7 +192,6 @@ const VerticalGallery = () => {
                     }`}
                   />
                 </div>
-                <ScrollAnimation isGalleryOpen={isGalleryOpen} />
               </div>
             );
           }
