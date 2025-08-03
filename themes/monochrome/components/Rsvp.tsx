@@ -165,11 +165,9 @@ const RSVP = () => {
           height={140}
           alt="Kiri"
           className="absolute bottom-6 -right-14 -rotate-[30deg] brightness-80"
-          data-aos="fade-left"
         />
 
         <Image
-          data-aos="zoom-in"
           src={findImage(invitationData, "initial")}
           width={125}
           height={125}
