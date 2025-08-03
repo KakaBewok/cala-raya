@@ -45,7 +45,7 @@ const ClosingSection = () => {
         {/* Watermark Name*/}
         <div className="absolute inset-0 flex justify-center items-center">
           <div
-            className={`${monthGlade.className} text-8xl font-normal text-gray-400 opacity-30 transform -rotate-40 select-none flex flex-col justify-center items-center gap-10`}
+            className={`${monthGlade.className} text-8xl font-normal text-gray-300 opacity-30 transform -rotate-40 select-none flex flex-col justify-center items-center gap-10`}
           >
             <p>{data?.host_two_nickname}</p>
             <p>{data?.host_one_nickname}</p>
