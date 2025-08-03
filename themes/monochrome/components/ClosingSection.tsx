@@ -54,7 +54,7 @@ const ClosingSection = () => {
         <div className="flex flex-col justify-center items-center text-center gap-4 p-10 text-slate-600">
           <p className="text-xs font-normal">
             And of everything We created pairs, so that you may remember (the
-            greatness of Allah)
+            greatness of Allah SWT)
           </p>
           <p className="text-xs font-bold">Adh-Dhariyat - 49</p>
         </div>
