@@ -1,4 +1,4 @@
-import { lagunac, monthGlade, poppins, remineFares } from "@/fonts/fonts";
+import { lagunac, monthGlade, poppins } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import Image from "next/image";
