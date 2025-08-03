@@ -42,7 +42,7 @@ const ClosingSection = () => {
       </div>
 
       <div className="relative py-16 overflow-hidden">
-        {/* Watermark */}
+        {/* Watermark Name*/}
         <div className="absolute inset-0 flex justify-center items-center">
           <div
             className={`${monthGlade.className} text-8xl font-normal text-gray-400 opacity-30 transform -rotate-40 select-none flex flex-col justify-center items-center gap-10`}
