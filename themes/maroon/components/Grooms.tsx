@@ -49,7 +49,7 @@ const Grooms = () => {
         data-aos-offset="100"
       >
         <h2
-          className={`max-w-[85%] text-left tracking-widest text-2xl text-[#fff] drop-shadow-sm`}
+          className={`max-w-[80%] text-left tracking-widest text-2xl text-[#fff] drop-shadow-sm`}
         >
           {data?.host_one_name}
         </h2>
