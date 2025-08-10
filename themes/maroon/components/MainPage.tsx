@@ -30,7 +30,7 @@ export default function MainPage({
   }, []);
 
   return (
-    <main className="max-w-md mx-auto z-10 flex flex-col items-center justify-center overflow-hidden">
+    <main className="max-w-md mx-auto z-10 flex flex-col items-center justify-center">
       <Cover />
       <Greetings />
       <Bismillah />
