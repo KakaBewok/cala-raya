@@ -1,4 +1,4 @@
-import { ninfa, playfair } from "@/fonts/fonts";
+import { gandhiSerif, ninfa } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { Rundown } from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
@@ -69,9 +69,11 @@ const EventInfo = () => {
               <p className={`text-md font-light text-rose-900`}>
                 {formatDate(rundown.date, true)?.toUpperCase()}
               </p>
-              <p className={`text-sm font-light text-rose-900`}>
+              <p
+                className={`${gandhiSerif.className} text-sm font-light text-rose-900`}
+              >
                 {formatTime(rundown.start_time)} {rundown.time_zone}{" "}
-                <span className={`${playfair.className}`}>-</span>{" "}
+                <span>-</span>{" "}
                 {rundown.end_time
                   ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
                   : "selesai"}{" "}

@@ -122,7 +122,7 @@ const VerticalGallery = () => {
         <div
           className={`-rotate-[15deg] absolute left-5 bottom-0 ${amalfiCoast.className} text-[75px] font-light text-rose-900 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_one_nickname.toLowerCase()}
+          {data?.host_two_nickname.toLowerCase()}
         </div>
       </div>
 
@@ -135,7 +135,7 @@ const VerticalGallery = () => {
         <div
           className={`-rotate-[15deg] absolute right-5 top-0 ${amalfiCoast.className} text-[75px] font-light text-rose-900 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_two_nickname.toLowerCase()}
+          {data?.host_one_nickname.toLowerCase()}
         </div>
       </div>
 
@@ -235,8 +235,8 @@ const VerticalGallery = () => {
                       <h1
                         className={`${amalfiCoast.className} text-4xl font-medium text-white`}
                       >
-                        {data?.host_one_nickname.toLocaleLowerCase()} <br /> &
-                        {data?.host_two_nickname.toLocaleLowerCase()}
+                        {data?.host_two_nickname.toLocaleLowerCase()} <br /> &
+                        {data?.host_one_nickname.toLocaleLowerCase()}
                       </h1>
                     </div>
                   </div>

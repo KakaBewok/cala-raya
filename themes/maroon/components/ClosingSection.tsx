@@ -7,14 +7,18 @@ import Link from "next/link";
 const ClosingSection = () => {
   const { invitationData: data } = useInvitation();
   return (
-    <section>
+    <section className="w-full overflow-hidden">
       {/* Watermark */}
-      <div className="w-full h-60 overflow-hidden bg-rose-900 flex justify-center items-start">
+      <div className="w-full h-60 overflow-hidden bg-rose-900 flex justify-center items-center">
         <div
-          className={`max-w-sm ${amalfiCoast.className} flex flex-col justify-center items-center text-8xl font-light text-white transform -rotate-35 select-none`}
+          className={`${amalfiCoast.className} flex flex-col justify-center items-center text-8xl font-light text-white transform -rotate-35 select-none`}
         >
-          <p>{data?.host_two_nickname.toLocaleLowerCase()}</p>
-          <p>{data?.host_one_nickname.toLocaleLowerCase()}</p>
+          <p className="tracking-tighter">
+            {data?.host_two_nickname.toLocaleLowerCase()}
+          </p>
+          <p className="tracking-tighter">
+            {data?.host_one_nickname.toLocaleLowerCase()}
+          </p>
         </div>
       </div>
 
@@ -40,8 +44,8 @@ const ClosingSection = () => {
             href={`https://www.instagram.com/explore/tags/${data?.host_one_nickname}${data?.host_two_nickname}`}
             className="text-lg tracking-wide font-medium underline"
           >
-            #{data?.host_one_nickname}
-            {data?.host_two_nickname}
+            #{data?.host_two_nickname}
+            {data?.host_one_nickname}
           </Link>
         </div>
       </div>

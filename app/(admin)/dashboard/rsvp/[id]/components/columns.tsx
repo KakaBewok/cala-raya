@@ -1,12 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { GuestColumn } from "@/types/guest-column";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { CellAction } from "./CellAction";
+import { RsvpColumn } from "@/types/rsvp-column";
 
-export const columns: ColumnDef<GuestColumn>[] = [
+export const columns: ColumnDef<RsvpColumn>[] = [
   {
     accessorKey: "number",
     header: ({ column }) => {
@@ -24,7 +24,7 @@ export const columns: ColumnDef<GuestColumn>[] = [
     cell: ({ row }) => row.index + 1,
   },
   {
-    accessorKey: "name",
+    accessorKey: "guest_name",
     header: ({ column }) => {
       return (
         <Button
@@ -32,14 +32,14 @@ export const columns: ColumnDef<GuestColumn>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="font-bold text-slate-800 dark:text-slate-50"
         >
-          Name
+          Guest Name
           <ArrowUpDown className="w-4 h-4 ml-2" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "phone_number",
+    accessorKey: "total_guest",
     header: ({ column }) => {
       return (
         <Button
@@ -47,14 +47,14 @@ export const columns: ColumnDef<GuestColumn>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="font-bold text-slate-800 dark:text-slate-50"
         >
-          Phone Number
+          Total Guest
           <ArrowUpDown className="w-4 h-4 ml-2" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "address",
+    accessorKey: "message",
     header: ({ column }) => {
       return (
         <Button
@@ -62,22 +62,7 @@ export const columns: ColumnDef<GuestColumn>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="font-bold text-slate-800 dark:text-slate-50"
         >
-          Address
-          <ArrowUpDown className="w-4 h-4 ml-2" />
-        </Button>
-      );
-    },
-  },
-  {
-    accessorKey: "notes",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="font-bold text-slate-800 dark:text-slate-50"
-        >
-          Notes
+          Wishes
           <ArrowUpDown className="w-4 h-4 ml-2" />
         </Button>
       );

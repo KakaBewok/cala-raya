@@ -143,3 +143,14 @@ export const monthGlade = localFont({
   variable: "--font-month-glade",
   display: "swap",
 });
+
+export const gandhiSerif = localFont({
+  src: [
+    { path: "../public/fonts/gandhi-serif/GandhiSerif-Bold.otf" },
+    { path: "../public/fonts/gandhi-serif/GandhiSerif-BoldItalic.otf" },
+    { path: "../public/fonts/gandhi-serif/GandhiSerif-Italic.otf" },
+    { path: "../public/fonts/gandhi-serif/GandhiSerif-Regular.otf" },
+  ],
+  variable: "--font-gandhi-serif",
+  display: "swap",
+});

@@ -72,24 +72,26 @@ const GiftInfo = () => {
           ))}
 
           {/* Address */}
-          <div className="bg-white rounded-sm py-5 px-4">
-            <p className="font-bold mb-2 text-xs text-rose-900">ALAMAT</p>
-            <p className="text-rose-900 text-xs font-light mb-4">
-              {data?.gift_infos?.[0].gift_delivery_address || ""}
-            </p>
-            <button
-              onClick={() =>
-                handleCopy(data?.gift_infos?.[0].gift_delivery_address || "")
-              }
-              className={`${
-                addressCopied
-                  ? "bg-rose-100 text-rose-900"
-                  : "bg-rose-700 text-white"
-              } text-xs px-6 py-2 cursor-pointer`}
-            >
-              {addressCopied ? "Tersalin" : "Salin"}
-            </button>
-          </div>
+          {data?.gift_infos?.[0].gift_delivery_address && (
+            <div className="bg-white rounded-sm py-5 px-4">
+              <p className="font-bold mb-2 text-xs text-rose-900">ALAMAT</p>
+              <p className="text-rose-900 text-xs font-light mb-4">
+                {data?.gift_infos?.[0].gift_delivery_address || ""}
+              </p>
+              <button
+                onClick={() =>
+                  handleCopy(data?.gift_infos?.[0].gift_delivery_address || "")
+                }
+                className={`${
+                  addressCopied
+                    ? "bg-rose-100 text-rose-900"
+                    : "bg-rose-700 text-white"
+                } text-xs px-6 py-2 cursor-pointer`}
+              >
+                {addressCopied ? "Tersalin" : "Salin"}
+              </button>
+            </div>
+          )}
         </>
       )}
     </section>

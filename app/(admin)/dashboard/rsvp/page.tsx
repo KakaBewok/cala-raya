@@ -48,7 +48,10 @@ export default function SelectInvitationGrid() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">View RSVP Details</h1>
+        <h1 className="text-2xl font-bold">
+          View RSVP Details{" "}
+          <span className="text-red-500">(UNDER MANTAINANCE)</span>
+        </h1>
         <p className="text-gray-500">
           Select an invitation to see who’s attending and read their messages
         </p>
