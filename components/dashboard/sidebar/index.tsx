@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import NavLink from "./NavLink";
 import SidebarLinkGroup from "./SidebarLinkGroup";
+import { CheckCircle } from "lucide-react";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -265,6 +266,18 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               {/* <!-- Share Invitations --> */}
+
+              {/* <!-- RSVP --> */}
+              <li>
+                <NavLink
+                  url="/dashboard/rsvp"
+                  active={pathname.startsWith("/dashboard/rsvp")}
+                >
+                  <CheckCircle className="w-5 h-5" />
+                  RSVP
+                </NavLink>
+              </li>
+              {/* <!-- RSVP --> */}
             </ul>
           </div>
         </nav>

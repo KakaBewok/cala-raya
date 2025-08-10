@@ -37,6 +37,7 @@ interface InvitationData {
   is_active: boolean;
   activated_at: string | null;
   expired_at: string | null;
+  additional_info?: string;
 }
 
 export interface User {

@@ -1,6 +1,5 @@
 "use client";
 
-import BadgeCorner from "@/components/BadgeCorner";
 import GeneralLoading from "@/components/GeneralLoading";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -19,14 +18,14 @@ export default function SelectInvitationGrid() {
   useEffect(() => {
     if (invitations.length === 1) {
       const firstInvitation = invitations[0];
-      router.replace(`/dashboard/share-invitations/${firstInvitation.id}`);
+      router.replace(`/dashboard/rsvp/${firstInvitation.id}`);
       return;
     }
 
     if (invitations.length > 1) {
       const id = getInvitationId();
       if (id) {
-        router.replace(`/dashboard/share-invitations/${id}`);
+        router.replace(`/dashboard/rsvp/${id}`);
         return;
       }
     }
@@ -49,9 +48,9 @@ export default function SelectInvitationGrid() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Pick an Invitation</h1>
+        <h1 className="text-2xl font-bold">View RSVP Details</h1>
         <p className="text-gray-500">
-          Select one to share with your friends and family
+          Select an invitation to see who’s attending and read their messages
         </p>
       </div>
 
@@ -59,15 +58,12 @@ export default function SelectInvitationGrid() {
         {invitations.map((invitation) => (
           <Card
             key={invitation.id}
-            className="overflow-hidden hover:border-purple-600 hover:dark:border-white duration-500 relative p-4 rounded-xl border dark:border-neutral-700 cursor-pointer transition-all"
+            className="hover:border-purple-600 hover:dark:border-white duration-500 relative p-4 rounded-xl border dark:border-neutral-700 cursor-pointer transition-all"
             onClick={() => {
               setInvitationId(invitation.id);
-              router.push(`/dashboard/share-invitations/${invitation.id}`);
+              router.push(`/dashboard/rsvp/${invitation.id}`);
             }}
           >
-            {invitation.additional_info && (
-              <BadgeCorner content={invitation.additional_info} />
-            )}
             <h2 className="font-semibold text-lg mb-1">
               {invitation.host_one_nickname} & {invitation.host_two_nickname}
             </h2>

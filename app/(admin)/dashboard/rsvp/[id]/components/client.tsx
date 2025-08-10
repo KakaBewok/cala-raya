@@ -9,7 +9,6 @@ import Heading from "@/components/dashboard/Heading";
 import { TooltipHover } from "@/components/Tooltip";
 import { Button } from "@/components/ui/button";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
-import { GuestColumn } from "@/types/guest-column";
 import InvitationData from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
 import { Plus, SquarePen, Upload } from "lucide-react";
@@ -17,14 +16,15 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import ChangeInvitationButton from "./ChangeInvitationButton";
 import { columns } from "./columns";
+import { RsvpColumn } from "@/types/rsvp-column";
 
-interface GuestClientProps {
-  guestData: GuestColumn[];
+interface RsvpClientProps {
+  rsvpData: RsvpColumn[];
   selectedInvitation?: InvitationData;
 }
 
-export const GuestClient: React.FC<GuestClientProps> = ({
-  guestData,
+export const RsvpClient: React.FC<RsvpClientProps> = ({
+  rsvpData,
   selectedInvitation,
 }) => {
   const {
@@ -190,7 +190,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       <div className="flex items-center justify-between">
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
           <Heading
-            title={`Guests List (${guestData?.length ?? 0})`}
+            title={`Guests List (${rsvpData?.length ?? 0})`}
             description={`${
               selectedInvitation ? `${description}` : "Loading..."
             }`}
@@ -258,9 +258,9 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       />
       <DataTable
         onDelete={openDeleteModal}
-        searchKey="name"
+        searchKey="guest_name"
         columns={columns}
-        data={guestData}
+        data={rsvpData}
       />
     </>
   );

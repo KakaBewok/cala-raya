@@ -1,5 +1,3 @@
-"use client";
-
 import { useSelectedInvitation } from "@/hooks/use-selected-invitation";
 import { useRouter } from "next/navigation";
 
