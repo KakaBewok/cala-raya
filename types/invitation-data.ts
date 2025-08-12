@@ -135,6 +135,7 @@ export interface RSVP {
   message: string;
   attendance_status: boolean;
   total_guest: number;
+  created_at: Date;
 }
 
 export default InvitationData;

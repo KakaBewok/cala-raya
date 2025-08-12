@@ -2,13 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import InvitationData from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
+import BadgeCorner from "@/components/BadgeCorner";
 
 const InvitationCard = ({ invitation }: { invitation: InvitationData }) => {
   return (
     <div
       key={invitation.id}
-      className="hover:border-purple-600 hover:dark:border-white duration-500 bg-white dark:bg-neutral-900 relative p-4 rounded-xl border dark:border-neutral-700 cursor-pointer transition-all"
+      className="overflow-hidden relative hover:border-purple-600 hover:dark:border-white duration-500 bg-white dark:bg-neutral-900 p-4 rounded-xl border dark:border-neutral-700 cursor-pointer transition-all"
     >
+      {invitation.additional_info && (
+        <BadgeCorner content={invitation.additional_info} />
+      )}
       <h2 className="font-semibold text-lg mb-1">
         {invitation.host_one_nickname} & {invitation.host_two_nickname}
       </h2>

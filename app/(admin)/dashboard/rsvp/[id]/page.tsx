@@ -19,6 +19,11 @@ const RsvpInvitationPage = () => {
   const formattedRsvps = useMemo<RsvpColumn[]>(() => {
     return [...(selectedInvitation?.rsvps ?? [])]
       .sort((a, b) => b.id - a.id)
+      .filter(
+        (rsvp, index, self) =>
+          index ===
+          self.findIndex((item) => item.guest_name === rsvp.guest_name)
+      )
       .map(({ id, guest_name, total_guest, message }) => ({
         id,
         guest_name,

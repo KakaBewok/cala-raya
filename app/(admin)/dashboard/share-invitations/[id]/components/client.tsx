@@ -15,8 +15,8 @@ import { formatDate } from "@/utils/format-date";
 import { Plus, SquarePen, Upload } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import ChangeInvitationButton from "./ChangeInvitationButton";
 import { columns } from "./columns";
+import ChangeInvitationButton from "@/components/dashboard/ChangeInvitationButton";
 
 interface GuestClientProps {
   guestData: GuestColumn[];
@@ -195,7 +195,9 @@ export const GuestClient: React.FC<GuestClientProps> = ({
               selectedInvitation ? `${description}` : "Loading..."
             }`}
           />
-          {invitations.length > 1 && <ChangeInvitationButton />}
+          {invitations.length > 1 && (
+            <ChangeInvitationButton url="/dashboard/share-invitations" />
+          )}
         </div>
         <div className="flex flex-col md:flex-row items-center md:items-center gap-2">
           <div className="flex items-center gap-2">

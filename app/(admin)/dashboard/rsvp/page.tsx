@@ -8,6 +8,7 @@ import { useSelectedInvitation } from "@/hooks/use-selected-invitation";
 import { formatDate } from "@/utils/format-date";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import BadgeCorner from "@/components/BadgeCorner";
 
 export default function SelectInvitationGrid() {
   const { invitationAdminData: invitations } = useInvitationAdmin();
@@ -48,10 +49,7 @@ export default function SelectInvitationGrid() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">
-          View RSVP Details{" "}
-          <span className="text-red-500">(UNDER MANTAINANCE)</span>
-        </h1>
+        <h1 className="text-2xl font-bold">View RSVP Details</h1>
         <p className="text-gray-500">
           Select an invitation to see who’s attending and read their messages
         </p>
@@ -61,12 +59,15 @@ export default function SelectInvitationGrid() {
         {invitations.map((invitation) => (
           <Card
             key={invitation.id}
-            className="hover:border-purple-600 hover:dark:border-white duration-500 relative p-4 rounded-xl border dark:border-neutral-700 cursor-pointer transition-all"
+            className="overflow-hidden hover:border-purple-600 hover:dark:border-white duration-500 relative p-4 rounded-xl border dark:border-neutral-700 cursor-pointer transition-all"
             onClick={() => {
               setInvitationId(invitation.id);
               router.push(`/dashboard/rsvp/${invitation.id}`);
             }}
           >
+            {invitation.additional_info && (
+              <BadgeCorner content={invitation.additional_info} />
+            )}
             <h2 className="font-semibold text-lg mb-1">
               {invitation.host_one_nickname} & {invitation.host_two_nickname}
             </h2>

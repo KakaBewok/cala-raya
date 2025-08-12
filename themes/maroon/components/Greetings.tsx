@@ -29,7 +29,8 @@ export default function Greetings() {
         {/* Kiri Tengah */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/26.webp`}
+          src={`/assets/images/floral/11.webp`}
+          // src={`/assets/images/floral/26.webp`}
           width={65}
           height={65}
           alt="Bunga kiri tengah"
@@ -59,7 +60,8 @@ export default function Greetings() {
         {/* Bawah kanan */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/bunga2.webp`}
+          src={`/assets/images/floral/28.webp`}
+          // src={`/assets/images/floral/bunga2.webp`}
           width={110}
           height={110}
           alt="Bunga kanan bawah"

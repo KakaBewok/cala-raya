@@ -1,13 +1,13 @@
 import { useSelectedInvitation } from "@/hooks/use-selected-invitation";
 import { useRouter } from "next/navigation";
 
-export default function ChangeInvitationButton() {
+export default function ChangeInvitationButton({ url }: { url: string }) {
   const { removeInvitationId } = useSelectedInvitation();
   const router = useRouter();
 
   const handleClick = () => {
     removeInvitationId();
-    router.push("/dashboard/share-invitations");
+    router.push(url);
   };
 
   return (
