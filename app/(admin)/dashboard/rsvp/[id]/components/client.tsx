@@ -1,6 +1,5 @@
 "use client";
 
-import { AlertModal } from "@/components/dashboard/AlertModal";
 import { DataTable } from "@/components/dashboard/DataTable";
 import Heading from "@/components/dashboard/Heading";
 import { Button } from "@/components/ui/button";
@@ -8,8 +7,6 @@ import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import InvitationData from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
 import { PartyPopper } from "lucide-react";
-import { useState } from "react";
-import toast from "react-hot-toast";
 import { columns } from "./columns";
 import { RsvpColumn } from "@/types/rsvp-column";
 import ChangeInvitationButton from "@/components/dashboard/ChangeInvitationButton";
@@ -23,12 +20,7 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
   rsvpData,
   selectedInvitation,
 }) => {
-  const { invitationAdminData: invitations, refetchInvitations } =
-    useInvitationAdmin();
-  const [ids, setIds] = useState<number[]>([]);
-  const [bulkDeleteModalOpen, setBulkDeleteModalOpen] =
-    useState<boolean>(false);
-  const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
+  const { invitationAdminData: invitations } = useInvitationAdmin();
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
   const description = `${bridesAndGrooms} - ${
@@ -37,37 +29,8 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
       : ""
   }`;
 
-  const handleBulkDelete = async (e?: React.MouseEvent<HTMLButtonElement>) => {
-    e?.stopPropagation();
-    setLoadingDelete(true);
-
-    try {
-      const res = await fetch(`/api/delete-guest`, {
-        method: "DELETE",
-        body: JSON.stringify({ ids }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to delete");
-      }
-
-      refetchInvitations();
-      toast.success("Guests deleted", {
-        position: "top-center",
-      });
-
-      setBulkDeleteModalOpen(false);
-    } catch (error) {
-      console.error("An error occurred: ", error);
-      toast.error("Failed to delete");
-    } finally {
-      setLoadingDelete(false);
-    }
-  };
-
-  const openDeleteModal = (ids: number[]) => {
-    setIds(ids);
-    setBulkDeleteModalOpen(true);
+  const openDeleteModal = () => {
+    alert("Delete functionality is not implemented yet.");
   };
 
   const sumTotalGuests = (rsvps: RsvpColumn[]) => {
@@ -77,7 +40,7 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
   return (
     <>
       <div className="flex flex-row items-end md:items-center justify-between">
-        <div className="flex flex-col md:flex-row items-start gap-4">
+        <div className="flex flex-col items-start md:flex-row md:items-center gap-4">
           <Heading
             title={`RSVP List (${rsvpData?.length ?? 0})`}
             description={`${
@@ -88,10 +51,7 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
             <ChangeInvitationButton url="/dashboard/rsvp" />
           )}
         </div>
-        <Button
-          // onClick={() => alert("test")}
-          className="dark:bg-blue-600 dark:hover:bg-blue-500 cursor-pointer bg-blue-600 hover:bg-blue-500 text-white rounded-none"
-        >
+        <Button className="dark:bg-blue-600 dark:hover:bg-blue-600 bg-blue-600 hover:bg-blue-600 text-white rounded-none">
           <span className="text-xs md:text-sm font-semibold">
             <span className="font-bold">{sumTotalGuests(rsvpData)}</span> Total
             Guests
@@ -100,13 +60,6 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
         </Button>
       </div>
 
-      <AlertModal
-        isOpen={bulkDeleteModalOpen}
-        onClose={() => setBulkDeleteModalOpen(false)}
-        onConfirm={handleBulkDelete}
-        loading={loadingDelete}
-        description="All data under this guests will also be deleted."
-      />
       <DataTable
         onDelete={openDeleteModal}
         searchKey="guest_name"

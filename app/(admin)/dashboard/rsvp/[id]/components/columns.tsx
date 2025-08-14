@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { CellAction } from "./CellAction";
 import { RsvpColumn } from "@/types/rsvp-column";
 
 export const columns: ColumnDef<RsvpColumn>[] = [
@@ -67,16 +66,5 @@ export const columns: ColumnDef<RsvpColumn>[] = [
         </Button>
       );
     },
-  },
-  {
-    id: "actions",
-    header: () => {
-      return (
-        <span className="font-bold text-slate-800 dark:text-slate-50">
-          Actions
-        </span>
-      );
-    },
-    cell: ({ row }) => <CellAction data={row.original} />,
   },
 ];
