@@ -15,7 +15,9 @@ export async function generateMetadata({
       "host_one_nickname, host_two_nickname, event_title, slug, event_date, images (*)"
     )
     .eq("slug", slug)
-    .single();
+    .limit(1);
+
+  const invitation = data?.[0];
 
   if (!data || error) {
     console.error("Error fetching invitation for metadata: ", error?.message);
@@ -30,16 +32,18 @@ export async function generateMetadata({
     };
   }
 
-  const previewImageObj = data.images.find((image) => image.type === "preview");
+  const previewImageObj = invitation?.images.find(
+    (image) => image.type === "preview"
+  );
   const previewImage =
     previewImageObj?.url ?? "https://calaraya.vercel.app/og-image.jpg";
 
   return {
-    title: `${data.host_two_nickname} ❤️ ${data.host_one_nickname}`,
-    description: `${formatDate(data.event_date, true)}`,
+    title: `${invitation?.host_two_nickname} ❤️ ${invitation?.host_one_nickname}`,
+    description: `${formatDate(invitation?.event_date, true)}`,
     openGraph: {
-      title: `${data.event_title}`,
-      description: `${formatDate(data.event_date, true)}`,
+      title: `${invitation?.event_title}`,
+      description: `${formatDate(invitation?.event_date, true)}`,
       url: `https://calaraya.vercel.app/${slug}`,
       images: [
         {
