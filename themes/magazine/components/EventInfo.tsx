@@ -115,9 +115,15 @@ const EventInfo = () => {
             LOKASI
           </h1>
           <p
-            className={`${remineFares.className} text-md font-medium mb-6 text-neutral-700 text-center`}
+            className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700 text-center`}
           >
             {data?.location || "-"}
+          </p>
+
+          <p
+            className={`${poppins.className} text-[10px] font-light mb-6 text-neutral-500 text-center`}
+          >
+            {data?.location_detail || "-"}
           </p>
 
           <Link

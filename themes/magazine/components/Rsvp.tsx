@@ -17,12 +17,15 @@ const RSVP = () => {
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState({
+    guest: guest?.name || "",
     message: "",
     attending: "",
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLTextAreaElement | HTMLSelectElement | HTMLInputElement
+    >
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -53,7 +56,7 @@ const RSVP = () => {
     } else {
       fetchData();
       toast.success("RSVP berhasil dikirim. Terima kasih!");
-      setForm({ message: "", attending: "" });
+      setForm({ guest: "", message: "", attending: "" });
     }
   };
 
@@ -85,6 +88,23 @@ const RSVP = () => {
         <div className="w-28 h-px bg-neutral-800 mb-8" />
 
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6">
+          {/* Name */}
+          <div>
+            <label
+              className={`${remineFares.className} block text-base tracking-wide text-neutral-700 font-medium mb-2`}
+            >
+              nama
+            </label>
+            <input
+              name="guest"
+              value={form.guest}
+              onChange={handleChange}
+              placeholder="Your name"
+              className="text-xs w-full bg-white px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
+              required
+            />
+          </div>
+
           {/* Message */}
           <div>
             <label

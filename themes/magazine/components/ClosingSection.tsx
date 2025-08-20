@@ -63,7 +63,7 @@ const ClosingSection = () => {
         {/* Watermark */}
         <div className="absolute inset-0 flex justify-center items-center">
           <p
-            className={`${remineFares.className} text-9xl font-bold text-gray-200 opacity-30 transform -rotate-45 select-none`}
+            className={`${remineFares.className} text-9xl font-bold text-gray-200 opacity-50 transform -rotate-45 select-none`}
           >
             {data?.host_one_nickname.toLocaleLowerCase()}
             <br />
