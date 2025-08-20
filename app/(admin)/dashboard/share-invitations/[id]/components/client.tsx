@@ -46,6 +46,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
   const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
+
   const description = `${bridesAndGrooms} - ${
     selectedInvitation?.event_date
       ? formatDate(selectedInvitation.event_date)
@@ -188,18 +189,19 @@ export const GuestClient: React.FC<GuestClientProps> = ({
   return (
     <>
       <div className="flex items-center justify-between">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+        <div className="flex flex-col md:flex-col items-start md:items-start gap-4">
           <Heading
             title={`Guests List (${guestData?.length ?? 0})`}
             description={`${
               selectedInvitation ? `${description}` : "Loading..."
             }`}
+            additionalInfo={`${selectedInvitation?.additional_info ?? ``}`}
           />
+        </div>
+        <div className="flex flex-col md:flex-row items-center md:items-center gap-3 md:gap-5">
           {invitations.length > 1 && (
             <ChangeInvitationButton url="/dashboard/share-invitations" />
           )}
-        </div>
-        <div className="flex flex-col md:flex-row items-center md:items-center gap-2">
           <div className="flex items-center gap-2">
             <TooltipHover message="Upload Guests List">
               <Button

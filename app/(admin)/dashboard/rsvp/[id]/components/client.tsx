@@ -23,6 +23,7 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
   const { invitationAdminData: invitations } = useInvitationAdmin();
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
+
   const description = `${bridesAndGrooms} - ${
     selectedInvitation?.event_date
       ? formatDate(selectedInvitation.event_date)
@@ -39,25 +40,28 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
 
   return (
     <>
-      <div className="flex flex-row items-end md:items-center justify-between">
+      <div className="flex flex-row items-center md:items-center justify-between">
         <div className="flex flex-col items-start md:flex-row md:items-center gap-4">
           <Heading
             title={`RSVP List (${rsvpData?.length ?? 0})`}
             description={`${
               selectedInvitation ? `${description}` : "Loading..."
             }`}
+            additionalInfo={`${selectedInvitation?.additional_info ?? ``}`}
           />
+        </div>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
           {invitations.length > 1 && (
             <ChangeInvitationButton url="/dashboard/rsvp" />
           )}
+          <Button className="dark:bg-blue-600 dark:hover:bg-blue-600 bg-blue-600 hover:bg-blue-600 text-white rounded-none">
+            <span className="text-xs md:text-sm font-semibold">
+              <span className="font-bold">{sumTotalGuests(rsvpData)}</span>{" "}
+              Guests
+            </span>
+            <PartyPopper className="w-6 h-6 dark:text-slate-50" />
+          </Button>
         </div>
-        <Button className="dark:bg-blue-600 dark:hover:bg-blue-600 bg-blue-600 hover:bg-blue-600 text-white rounded-none">
-          <span className="text-xs md:text-sm font-semibold">
-            <span className="font-bold">{sumTotalGuests(rsvpData)}</span> Total
-            Guests
-          </span>
-          <PartyPopper className="w-6 h-6 dark:text-slate-50" />
-        </Button>
       </div>
 
       <DataTable

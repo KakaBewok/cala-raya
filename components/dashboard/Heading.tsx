@@ -1,10 +1,12 @@
 export default function Heading({
   title,
   description,
+  additionalInfo,
   className,
 }: {
   title: string;
   description?: string;
+  additionalInfo?: string;
   className?: string;
 }) {
   return (
@@ -15,6 +17,11 @@ export default function Heading({
       {description && (
         <p className="text-muted-foreground text-xs md:text-sm">
           {description}
+        </p>
+      )}
+      {additionalInfo && (
+        <p className="text-muted-foreground text-xs md:text-sm">
+          {additionalInfo}
         </p>
       )}
     </div>
