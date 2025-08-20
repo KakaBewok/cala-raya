@@ -16,6 +16,7 @@ interface InvitationData {
   event_type: string;
   location: string;
   location_url: string;
+  location_detail: string;
   greetings: string;
   message: string;
   // relationships
@@ -115,6 +116,7 @@ export interface Rundown {
   time_zone: string;
   description: string;
   image_url: string;
+  location_detail: string;
   order_number: number;
 }
 

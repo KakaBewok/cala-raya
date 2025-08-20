@@ -106,9 +106,15 @@ const EventInfo = () => {
           ))}
         <div className="p-6 w-full flex flex-col justify-center items-center">
           <p
-            className={`${commuters.className} text-md font-light mb-6 text-neutral-700 text-center`}
+            className={`${commuters.className} text-md font-light mb-2 text-neutral-700 text-center`}
           >
             {data?.location || "-"}
+          </p>
+
+          <p
+            className={`${commuters.className} text-[10px] font-light mb-6 text-neutral-500 text-center`}
+          >
+            {data?.location_detail || "-"}
           </p>
 
           <Link
