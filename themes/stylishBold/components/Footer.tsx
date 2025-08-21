@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 
+const CONTACT_PERSON = process.env.NEXT_PUBLIC_CONTACT_PERSON!;
+
 export default function Footer() {
   const message = `Halo admin Calaraya Project, aku tertarik untuk bikin undangan digital. Boleh dibantu prosesnya? Terima kasih 🙏`;
   return (
@@ -14,7 +16,7 @@ export default function Footer() {
           <FaInstagram className="text-xl" />
         </Link>
         <Link
-          href={`https://wa.me/6282111531677?text=${encodeURIComponent(
+          href={`https://wa.me/${CONTACT_PERSON}?text=${encodeURIComponent(
             message
           )}`}
           target="_blank"
