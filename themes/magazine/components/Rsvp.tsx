@@ -34,12 +34,12 @@ const RSVP = () => {
     e.preventDefault();
     setLoading(true);
 
-    const { message, attending } = form;
+    const { guest, message, attending } = form;
     const cleanMessage = message ? badwords.censor(message) : "";
 
     const { error } = await db.from("rsvps").insert([
       {
-        guest_name: guest?.name ?? "Guest",
+        guest_name: guest,
         message: cleanMessage,
         attendance_status:
           attending === "1" || attending === "2" || attending === "3",
