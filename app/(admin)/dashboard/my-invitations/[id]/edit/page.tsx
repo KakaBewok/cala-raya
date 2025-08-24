@@ -3,15 +3,23 @@
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { useEffect, useState } from "react";
 import GeneralLoading from "@/components/GeneralLoading";
+import { useParams } from "next/navigation";
 
-type EditInvitationPageProps = {
-  params: {
-    id: string;
-  };
-};
+// type EditInvitationPageProps = {
+//   params: {
+//     id: string;
+//   };
+// };
 
-const EditInvitationPage = ({ params }: EditInvitationPageProps) => {
-  const { id } = params;
+// type EditInvitationPageProps = Promise<{ params: { id: string } }>
+// { params }: EditInvitationPageProps
+
+const EditInvitationPage = () => {
+  // const { id } = params;
+
+  const params = useParams();
+  const id = params.id; // akan jadi "15"
+
   const { invitationAdminData: invitations } = useInvitationAdmin();
   const [shouldRender, setShouldRender] = useState<boolean>(false);
 
