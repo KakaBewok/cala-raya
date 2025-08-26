@@ -1,11 +1,11 @@
 "use client";
 
-import { remineFares } from "@/fonts/fonts";
-import { useEffect, useState } from "react";
-import badwords from "indonesian-badwords";
 import db from "@/configs/db-config";
-import toast from "react-hot-toast";
+import { remineFares } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
+import badwords from "indonesian-badwords";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const RSVP = () => {
   const { invitationData } = useInvitation();
