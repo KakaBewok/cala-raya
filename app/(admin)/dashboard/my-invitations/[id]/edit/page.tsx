@@ -5,23 +5,16 @@ import { useEffect, useState } from "react";
 import GeneralLoading from "@/components/GeneralLoading";
 import { useParams } from "next/navigation";
 
-// type EditInvitationPageProps = {
-//   params: {
-//     id: string;
-//   };
-// };
-
-// type EditInvitationPageProps = Promise<{ params: { id: string } }>
-// { params }: EditInvitationPageProps
-
 const EditInvitationPage = () => {
-  // const { id } = params;
-
   const params = useParams();
-  const id = params.id; // akan jadi "15"
+  const invitationId = params.id;
 
   const { invitationAdminData: invitations } = useInvitationAdmin();
   const [shouldRender, setShouldRender] = useState<boolean>(false);
+
+  const invitation = invitations?.find(
+    (inv) => inv.id.toString() === invitationId
+  );
 
   useEffect(() => {
     setShouldRender(true);
@@ -50,7 +43,7 @@ const EditInvitationPage = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        Edit page is under maintenance. id: {id}
+        Edit page is under maintenance. Title: {invitation?.event_title}
       </div>
     </div>
   );
