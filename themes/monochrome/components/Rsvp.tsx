@@ -44,8 +44,7 @@ const RSVP = () => {
       {
         guest_name: guest,
         message: cleanMessage,
-        attendance_status:
-          attending === "1" || attending === "2" || attending === "3",
+        attendance_status: attending != "0",
         total_guest: attending ?? 0,
         invitation_id: invitationData?.id,
       },
@@ -143,7 +142,14 @@ const RSVP = () => {
               <option value="">Choose</option>
               <option value="1">1 Person</option>
               <option value="2">2 Persons</option>
-              <option value="3">More than 2 people</option>
+              <option value="3">3 Persons</option>
+              <option value="4">4 Persons</option>
+              <option value="5">5 Persons</option>
+              <option value="6">6 Persons</option>
+              <option value="7">7 Persons</option>
+              <option value="8">8 Persons</option>
+              <option value="9">9 Persons</option>
+              <option value="10">10 Persons</option>
               <option value="0">I wont{`'`}t be able to attend</option>
             </select>
           </div>
