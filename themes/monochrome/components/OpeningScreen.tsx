@@ -65,7 +65,9 @@ export default function OpeningScreen({
               <p className={`${commuters.className} text-sm font-semibold`}>
                 Hello
               </p>
-              <p className={`${lagunac.className} text-2xl font-normal`}>
+              <p
+                className={`${lagunac.className} text-2xl font-normal text-center px-6`}
+              >
                 {guest?.name}
               </p>
               <button
