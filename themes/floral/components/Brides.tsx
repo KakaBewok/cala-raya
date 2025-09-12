@@ -49,14 +49,14 @@ const Brides = () => {
         data-aos-offset="100"
       >
         <h2
-          className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-sm`}
+          className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-right pl-6`}
         >
           {data?.host_two_name}
         </h2>
-        <p className="text-xs font-semibold text-white max-w-32 text-right">
+        <p className="text-xs font-semibold text-[#fff] drop-shadow-slate-400 drop-shadow-xs max-w-32 text-right">
           {data?.host_two_additional_info}
         </p>
-        <div className="font-semibold w-fit flex items-center gap-2 text-white text-xs bg-transparent rounded-sm border border-white cursor-pointer px-3 py-1">
+        <div className="font-semibold w-fit flex items-center gap-2 text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-xs bg-transparent rounded-sm border border-white cursor-pointer px-3 py-1">
           <Instagram className="h-4 w-4 font-light" />{" "}
           <Link
             href={createSocialMediaLink(data?.host_two_social_media || "")}
