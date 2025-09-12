@@ -49,7 +49,7 @@ const Brides = () => {
         data-aos-offset="100"
       >
         <h2
-          className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-right pl-10`}
+          className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-right pl-10 z-[99]`}
         >
           {data?.host_two_name}
         </h2>
