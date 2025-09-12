@@ -20,11 +20,11 @@ const ClosingSection = () => {
 
   return (
     <section className="bg-[#ffffff]">
-      <div className="relative">
+      <div className="relative w-full">
         <Image
           src={findImage(data, "closing")}
           alt="Closing image"
-          width={800}
+          width={1000}
           height={600}
           className="w-full h-auto object-cover object-center"
         />
@@ -48,7 +48,7 @@ const ClosingSection = () => {
         </div>
       </div>
 
-      <div className="relative py-28 overflow-hidden">
+      <div className="relative py-28 overflow-hidden w-full">
         <div className="absolute -bottom-14 w-full h-fit flex items-end z-20">
           {[
             {
@@ -122,7 +122,7 @@ const ClosingSection = () => {
             {data?.host_two_nickname.toLocaleLowerCase()}
           </p>
         </div>
-        <div className="text-center flex flex-col justify-center items-center">
+        <div className="text-center flex flex-col justify-center items-center w-full">
           <Image
             src={findImage(data, "initial")}
             alt="Initial"
