@@ -55,13 +55,15 @@ const EventInfo = () => {
         className="z-20 h-auto bg-orange-50 flex flex-col justify-start items-center py-6"
         data-aos="fade-up"
       >
-        {data?.rundowns?.map((rundown, index) => (
-          <div
-            className="p-6 w-full flex flex-col justify-center items-center"
-            key={index}
-          >
-            <h1
-              className={`
+        {data?.rundowns
+          ?.sort((a, b) => a.order_number - b.order_number)
+          .map((rundown, index) => (
+            <div
+              className="p-6 w-full flex flex-col justify-center items-center"
+              key={index}
+            >
+              <h1
+                className={`
                 px-5
                 pb-3
                 w-fit
@@ -70,36 +72,36 @@ const EventInfo = () => {
                 mb-5
                 ${remineFares.className}
             `}
-            >
-              {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
-            </h1>
-            <p
-              className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
-            >
-              {formatDate(rundown.date, true)}
-            </p>
-            {rundown.start_time && (
+              >
+                {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
+              </h1>
               <p
                 className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
               >
-                · {formatTime(rundown.start_time)} {rundown.time_zone} -{" "}
-                {rundown.end_time && rundown.start_time
-                  ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
-                  : "selesai"}{" "}
-                ·
+                {formatDate(rundown.date, true)}
               </p>
-            )}
+              {rundown.start_time && (
+                <p
+                  className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
+                >
+                  · {formatTime(rundown.start_time)} {rundown.time_zone} -{" "}
+                  {rundown.end_time && rundown.start_time
+                    ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
+                    : "selesai"}{" "}
+                  ·
+                </p>
+              )}
 
-            <Link
-              href={generateGoogleCalendarUrl(rundown)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${poppins.className} text-xs font-medium underline text-neutral-700`}
-            >
-              Tambah ke Kalender
-            </Link>
-          </div>
-        ))}
+              <Link
+                href={generateGoogleCalendarUrl(rundown)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${poppins.className} text-xs font-medium underline text-neutral-700`}
+              >
+                Tambah ke Kalender
+              </Link>
+            </div>
+          ))}
         <div className="p-6 w-full flex flex-col justify-center items-center">
           <h1
             className={`
