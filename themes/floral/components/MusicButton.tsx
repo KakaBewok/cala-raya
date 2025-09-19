@@ -1,5 +1,6 @@
 "use client";
 
+import { useInvitation } from "@/hooks/use-invitation";
 import { Volume2, VolumeX } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -8,6 +9,7 @@ export default function SongButton({
 }: {
   isOpenInvitation: boolean;
 }) {
+  const { invitationData: data } = useInvitation();
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
 
   // stop the song when browser is closed or minimized
@@ -29,12 +31,7 @@ export default function SongButton({
   return (
     <div className="fixed left-5 bottom-5 z-40">
       {isOpenInvitation && isPlaying && (
-        <audio
-          autoPlay
-          loop
-          src={"https://slametandfatma.wedding/audio/myaudio.mp3"}
-          className="hidden"
-        />
+        <audio autoPlay loop src={data?.music?.url} className="hidden" />
       )}
 
       <button
