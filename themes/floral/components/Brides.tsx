@@ -44,27 +44,29 @@ const Brides = () => {
 
       {/* Content box */}
       <div
-        className="gap-3 flex flex-col justify-center items-end absolute bottom-0 z-20 w-full bg-gradient-to-t from-white/80 via-white/60 to-transparent px-6 py-8 backdrop-blur-sm"
+        className=" absolute bottom-0 z-20 w-full bg-gradient-to-t from-white/80 via-white/60 to-transparent px-6 py-8 backdrop-blur-sm"
         data-aos="fade-up"
         data-aos-offset="100"
       >
-        <h2
-          className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-right pl-10 z-[99]`}
-        >
-          {data?.host_two_name}
-        </h2>
-        <p className="text-xs font-semibold text-[#fff] drop-shadow-slate-400 drop-shadow-xs max-w-32 text-right">
-          {data?.host_two_additional_info}
-        </p>
-        <div className="font-semibold w-fit flex items-center gap-2 text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-xs bg-transparent rounded-sm border border-white cursor-pointer px-3 py-1">
-          <Instagram className="h-4 w-4 font-light" />{" "}
-          <Link
-            href={createSocialMediaLink(data?.host_two_social_media || "")}
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="border border-red-500 w-full p-5 gap-3 flex flex-col justify-center items-end">
+          <h2
+            className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-right pl-10 z-[99]`}
           >
-            {`@${data?.host_two_social_media}`}
-          </Link>
+            {data?.host_two_name}
+          </h2>
+          <p className="text-xs font-semibold text-[#fff] drop-shadow-slate-400 drop-shadow-xs max-w-32 text-right">
+            {data?.host_two_additional_info}
+          </p>
+          <div className="font-semibold w-fit flex items-center gap-2 text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-xs bg-transparent rounded-sm border border-white cursor-pointer px-3 py-1">
+            <Instagram className="h-4 w-4 font-light" />{" "}
+            <Link
+              href={createSocialMediaLink(data?.host_two_social_media || "")}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {`@${data?.host_two_social_media}`}
+            </Link>
+          </div>
         </div>
       </div>
 
