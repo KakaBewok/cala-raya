@@ -48,7 +48,7 @@ const Brides = () => {
         data-aos="fade-up"
         data-aos-offset="100"
       >
-        <div className="border border-red-500 w-full p-5 gap-3 flex flex-col justify-center items-end">
+        <div className="w-full p-3 gap-3 flex flex-col justify-center items-end">
           <h2
             className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-right pl-10 z-[99]`}
           >
