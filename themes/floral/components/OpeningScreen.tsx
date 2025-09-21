@@ -48,6 +48,11 @@ const OpeningScreen = ({
               priority
               className="mt-20"
             />
+            <h1
+              className={`${optivaground.className} text-2xl font-light tracking-widest uppercase`}
+            >
+              {data?.additional_info ?? ""}
+            </h1>
             <motion.div
               initial={{ opacity: 0, x: "-100%" }}
               animate={{ opacity: 1, x: 0 }}
