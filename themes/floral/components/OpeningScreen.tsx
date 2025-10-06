@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { optivaground } from "@/fonts/fonts";
+import { montserrat, optivaground } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { findImage } from "@/utils/find-image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -40,19 +40,23 @@ const OpeningScreen = ({
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
 
           <div className="h-screen z-20 flex flex-col justify-between items-center text-center text-white">
-            <Image
+            {/* khusus ilham rosi */}
+            {/* <Image
               src={findImage(data, "initial")}
               alt="Initial"
               width={150}
               height={150}
               priority
               className="mt-20"
-            />
-            <h1
-              className={`${optivaground.className} text-2xl font-light tracking-widest uppercase`}
-            >
-              {data?.additional_info ?? ""}
-            </h1>
+            /> */}
+            <div className="h-full w-full flex items-center justify-center">
+              <h1
+                className={`${montserrat.className} mt-40 text-2xl font-light tracking-wide uppercase`}
+              >
+                {data?.additional_info ?? ""}
+              </h1>
+            </div>
+
             <motion.div
               initial={{ opacity: 0, x: "-100%" }}
               animate={{ opacity: 1, x: 0 }}

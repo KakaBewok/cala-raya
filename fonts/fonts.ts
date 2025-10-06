@@ -3,6 +3,7 @@ import {
   Geist_Mono,
   GFS_Didot,
   Great_Vibes,
+  Montserrat,
   Playfair_Display,
   Poppins,
   Raleway,
@@ -153,4 +154,9 @@ export const gandhiSerif = localFont({
   ],
   variable: "--font-gandhi-serif",
   display: "swap",
+});
+
+export const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
 });
