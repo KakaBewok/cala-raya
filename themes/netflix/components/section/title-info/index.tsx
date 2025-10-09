@@ -53,8 +53,9 @@ export default function TitleInfo() {
       </div>
       <div className="pt-2">
         <p className="mb-2 text-sm leading-[1.15rem] text-white">
-          {data?.greetings ??
-            "Setelah dipertemukan dalam situasi yang tepat, di mana keduanya telah siap untuk memulai hubungan bersama, tibalah mereka di awal perjalanan baru menuju pernikahan."}
+          Setelah dipertemukan dalam situasi yang tepat, di mana keduanya telah
+          siap untuk memulai hubungan bersama, tibalah mereka di awal perjalanan
+          baru menuju pernikahan.
         </p>
         <p className="text-[11px] leading-[1rem] text-[#A3A1A1]">
           &quot;Segala sesuatu Kami ciptakan berpasang-pasangan agar kamu
