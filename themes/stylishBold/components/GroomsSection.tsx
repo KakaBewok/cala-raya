@@ -73,35 +73,38 @@ export default function BrideSection() {
             </p>
           </div>
           {/* instagram */}
-          <div className="mt-4 cursor-pointer relative inline-flex items-center justify-center font-light overflow-visible px-4 py-[10px] text-xs">
-            <div className="absolute inset-0 overflow-hidden">
-              <svg
-                className="absolute w-full h-full"
-                preserveAspectRatio="none"
-                viewBox="0 0 100 40"
-                xmlns="http://www.w3.org/2000/svg"
+          {data?.host_one_social_media && (
+            <div className="mt-4 cursor-pointer relative inline-flex items-center justify-center font-light overflow-visible px-4 py-[10px] text-xs">
+              <div className="absolute inset-0 overflow-hidden">
+                <svg
+                  className="absolute w-full h-full"
+                  preserveAspectRatio="none"
+                  viewBox="0 0 100 40"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <ellipse
+                    cx="50"
+                    cy="20"
+                    rx="49.5"
+                    ry="19.5"
+                    fill="none"
+                    stroke="#EF4444"
+                    strokeWidth="1"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                </svg>
+              </div>
+              <Link
+                href={createSocialMediaLink(data?.host_one_social_media || "")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative text-neutral-800"
               >
-                <ellipse
-                  cx="50"
-                  cy="20"
-                  rx="49.5"
-                  ry="19.5"
-                  fill="none"
-                  stroke="#EF4444"
-                  strokeWidth="1"
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
+                {`@${data?.host_one_social_media}`}
+              </Link>
             </div>
-            <Link
-              href={createSocialMediaLink(data?.host_one_social_media || "")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative text-neutral-800"
-            >
-              {`@${data?.host_one_social_media}`}
-            </Link>
-          </div>
+          )}
+
           {/* line */}
           <motion.div
             ref={lineRef}

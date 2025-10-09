@@ -85,44 +85,46 @@ const EventInfo = () => {
       </div>
       {/* RIGHT SIDE */}
       <div className="flex-grow relative flex-col flex gap-6">
-        {data?.rundowns?.map((rundown, index) => (
-          <div
-            className="flex flex-col gap-7 pl-4 pr-6 py-5"
-            key={index}
-            data-aos="fade-left"
-          >
+        {data?.rundowns
+          ?.sort((a, b) => a.order_number - b.order_number)
+          .map((rundown, index) => (
             <div
-              className={`${theSecret.className} text-rose-900 text-4xl font-medium`}
+              className="flex flex-col gap-7 pl-4 pr-6 py-5"
+              key={index}
+              data-aos="fade-left"
             >
-              <p>{rundown.title}</p>
-              <div className="mt-2 w-14 h-[0.9px] bg-rose-900" />
+              <div
+                className={`${theSecret.className} text-rose-900 text-4xl font-medium`}
+              >
+                <p>{rundown.title}</p>
+                <div className="mt-2 w-14 h-[0.9px] bg-rose-900" />
+              </div>
+              <div
+                className={`${nyghtSerif.className} flex flex-col gap-2 text-neutral-800`}
+              >
+                <div className="text-base font-normal">
+                  {formatDate(rundown.date, true)}
+                </div>
+                <div className="text-base font-normal">
+                  {" "}
+                  {formatTime(rundown.start_time)} -{" "}
+                  {rundown.end_time && rundown.start_time
+                    ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
+                    : "selesai"}{" "}
+                </div>
+                <div className="text-[11px]">
+                  <Link
+                    href={generateGoogleCalendarUrl(rundown)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline cursor-pointer"
+                  >
+                    Tambah ke Kalender
+                  </Link>
+                </div>
+              </div>
             </div>
-            <div
-              className={`${nyghtSerif.className} flex flex-col gap-2 text-neutral-800`}
-            >
-              <div className="text-base font-normal">
-                {formatDate(rundown.date, true)}
-              </div>
-              <div className="text-base font-normal">
-                {" "}
-                {formatTime(rundown.start_time)} -{" "}
-                {rundown.end_time && rundown.start_time
-                  ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
-                  : "selesai"}{" "}
-              </div>
-              <div className="text-[11px]">
-                <Link
-                  href={generateGoogleCalendarUrl(rundown)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline cursor-pointer"
-                >
-                  Tambah ke Kalender
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
+          ))}
 
         <div
           className="flex flex-col gap-6 pl-4 pr-6 py-5"
