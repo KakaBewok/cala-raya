@@ -47,8 +47,8 @@ export default function Greetings() {
           className="text-xs font-light text-center leading-5 tracking-wider"
           data-aos="fade-left"
         >
-          {data?.greetings ||
-            "It has been seven long years. Look how far we've come. Though it took the long way, we knew we'd get there someday. And now, we've finally made it"}
+          It’s been a beautiful journey. Through time and love, we’ve grown
+          together, and now, we’re ready to begin a new chapter — as one.
         </p>
       </div>
 
