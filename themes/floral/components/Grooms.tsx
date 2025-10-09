@@ -50,14 +50,14 @@ const Grooms = () => {
       >
         <div className="w-full p-3 gap-3 flex flex-col justify-center items-start">
           <h2
-            className={`${optivaground.className} tracking-widest text-2xl text-[#fff] drop-shadow-slate-400 drop-shadow-sm text-left pr-10 z-[99]`}
+            className={`${optivaground.className} tracking-widest text-2xl text-orange-200 text-left pr-10 z-[99]`}
           >
             {data?.host_one_name}
           </h2>
-          <p className="text-xs font-semibold text-[#fff] drop-shadow-slate-400 drop-shadow-xs max-w-32 text-left">
+          <p className="text-xs text-orange-200 max-w-32 text-left">
             {data?.host_one_additional_info}
           </p>
-          <div className="font-semibold w-fit flex items-center gap-2 text-[#fff] drop-shadow-slate-400 drop-shadow-xs text-xs bg-transparent rounded-sm border border-white cursor-pointer px-3 py-1">
+          <div className="w-fit flex items-center gap-2 text-orange-200 text-xs bg-transparent rounded-sm border border-orange-200 cursor-pointer px-3 py-1">
             <Instagram className="h-4 w-4 font-light" />{" "}
             <Link
               href={createSocialMediaLink(data?.host_one_social_media || "")}

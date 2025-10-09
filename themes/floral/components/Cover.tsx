@@ -34,7 +34,7 @@ const Cover = () => {
 
       <div className="z-20 h-screen flex flex-col justify-between items-center text-white">
         <div className="tracking-wider mt-20 flex flex-col items-center justify-center">
-          <p className="text-sm mb-2">{tag}</p>
+          <p className="text-sm mb-2">{data?.hashtag ? data?.hashtag : tag}</p>
           <h1 className={`${optivaground.className} text-4xl mb-2`}>
             {data?.host_one_nickname} & {data?.host_two_nickname}
           </h1>

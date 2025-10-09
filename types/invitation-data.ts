@@ -17,7 +17,7 @@ interface InvitationData {
   location: string;
   location_url: string;
   location_detail: string;
-  greetings: string;
+  hashtag: string;
   message: string;
   // relationships
   user?: User;
