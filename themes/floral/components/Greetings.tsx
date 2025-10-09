@@ -43,7 +43,7 @@ export default function Greetings() {
         {/* Kiri Tengah */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/26.webp`}
+          src={`/assets/images/floral/11.webp`}
           width={65}
           height={65}
           alt="Bunga kiri tengah"
@@ -100,8 +100,8 @@ export default function Greetings() {
         <Image
           data-aos="zoom-in"
           src={`/assets/images/floral/16.webp`}
-          width={110}
-          height={110}
+          width={100}
+          height={100}
           alt="Bunga kiri bawah"
           className="swing-left-fast absolute -z-10 bottom-[157px] left-[6vw]"
         />
@@ -109,9 +109,9 @@ export default function Greetings() {
         {/* Kanan Bawah */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/bunga2.webp`}
-          width={110}
-          height={110}
+          src={`/assets/images/floral/28.webp`}
+          width={90}
+          height={90}
           alt="Bunga kanan bawah"
           className="swing-right-fast absolute bottom-36 -z-10 right-[6vw]"
         />

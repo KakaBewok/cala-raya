@@ -51,7 +51,7 @@ const OpeningScreen = ({
             /> */}
             <div className="h-full w-full flex items-center justify-center">
               <h1
-                className={`${montserrat.className} mt-40 text-2xl font-light tracking-wide uppercase`}
+                className={`${montserrat.className} mt-40 text-lg font-light tracking-wide uppercase`}
               >
                 {data?.additional_info ?? ""}
               </h1>
