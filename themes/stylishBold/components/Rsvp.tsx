@@ -1,11 +1,13 @@
 "use client";
 
-import { nyghtSerif, remineFares } from "@/fonts/fonts";
+import { nyghtSerif, theSecret } from "@/fonts/fonts";
 import { useEffect, useState } from "react";
 import badwords from "indonesian-badwords";
 import db from "@/configs/db-config";
 import toast from "react-hot-toast";
 import { useInvitation } from "@/hooks/use-invitation";
+import Image from "next/image";
+import { findImage } from "@/utils/find-image";
 
 const RSVP = () => {
   const { invitationData, guest } = useInvitation();
@@ -184,18 +186,64 @@ const RSVP = () => {
       </div>
       <div>
         {/* messages */}
-        <div className="bg-[#ede0d1] py-7">
-          <div className="border border-blue-500">UCAPAN DOA</div>
-          <div className="py-3 border border-red-500 w-full px-4 flex flex-col items-center justify-center gap-2 max-h-96 overflow-y-auto overflow-x-hidden scrollbar-hide">
+        <div className="bg-[#ede0d1] py-3">
+          <div
+            className={`${nyghtSerif.className} text-[45px] text-slate-700 text-left z-30 tracking-wider pl-5 font-light flex justify-center items-center mt-8`}
+          >
+            ucapan
+            <div
+              className={`${theSecret.className} mt-16 text-[44px] font-normal text-rose-700 leading-none`}
+            >
+              doa
+            </div>
+          </div>
+          <div className="py-4 w-full px-4 flex flex-col items-center justify-start gap-2 max-h-96 overflow-y-auto overflow-x-hidden scrollbar-hide">
             {data.map((d, i) => (
               <div
                 key={i}
-                className={`${nyghtSerif.className} text-center p-4 border border-red-500 w-full`}
+                className={`${nyghtSerif.className} text-center p-4 w-full`}
               >
-                <h2 className="font-semibold text-sm">{d.guest_name}</h2>
-                <p className="text-xs">{d.message}</p>
+                <h2 className="text-slate-700 font-semibold text-sm">
+                  {d.guest_name}
+                </h2>
+                <p className="text-slate-600 text-xs font-extralight italic">
+                  {d.message}
+                </p>
               </div>
             ))}
+          </div>
+          <div className="flex justify-center mt-4">
+            <div className="w-6 h-6 border border-slate-800 rounded-full flex items-center justify-center animate-bounce">
+              <span className="text-slate-800 text-md mb-2">⌄</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        {/* footer rsvp */}
+        <div className="py-3 w-full h-70 bg-[#7A2422] relative">
+          <Image
+            src={findImage(invitationData, "closing")}
+            alt="rsvp image"
+            fill
+            className="object-cover object-center transition-all duration-500"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/50 z-10 pointer-events-none" />
+
+          <div
+            className={`z-10 absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center`}
+          >
+            <span
+              className={`text-white tracking-tight font-light italic text-sm ${nyghtSerif.className} leading-none`}
+            >
+              kini berdua
+            </span>
+            <span
+              className={`${theSecret.className} text-[44px] font-normal text-rose-700 leading-none`}
+            >
+              menuju serumah
+            </span>
           </div>
         </div>
       </div>
