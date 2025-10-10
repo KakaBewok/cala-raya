@@ -221,7 +221,7 @@ const RSVP = () => {
       </div>
       <div>
         {/* footer rsvp */}
-        <div className="py-3 w-full h-70 bg-[#7A2422] relative">
+        <div className="py-3 w-full h-90 bg-[#7A2422] relative">
           <Image
             src={findImage(invitationData, "closing")}
             alt="rsvp image"
