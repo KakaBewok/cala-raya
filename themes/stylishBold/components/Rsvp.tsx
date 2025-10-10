@@ -11,14 +11,13 @@ const RSVP = () => {
   const { invitationData, guest } = useInvitation();
   const [data, setData] = useState<
     {
-      id: number;
       guest_name: string;
       message: string;
     }[]
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState({
-    name: "",
+    name: guest?.name ?? "",
     message: "",
     attending: "",
   });
@@ -35,16 +34,16 @@ const RSVP = () => {
     e.preventDefault();
     setLoading(true);
 
-    const { message, attending } = form;
+    const { name, message, attending } = form;
     const cleanMessage = message ? badwords.censor(message) : "";
 
     const { error } = await db.from("rsvps").insert([
       {
-        guest_name: form.name ?? guest?.name,
+        guest_name: name ?? guest?.name,
         message: cleanMessage,
         attendance_status:
           attending === "1" || attending === "2" || attending === "3",
-        total_guest: attending ?? 0,
+        total_guest: Number(attending) ?? 0,
         invitation_id: invitationData?.id,
       },
     ]);
@@ -64,7 +63,7 @@ const RSVP = () => {
   const fetchData = async () => {
     const { data, error } = await db
       .from("rsvps")
-      .select("id, guest_name, message")
+      .select("guest_name, message")
       .eq("invitation_id", invitationData?.id)
       .not("message", "eq", "")
       .order("updated_at", { ascending: false });
@@ -121,13 +120,18 @@ const RSVP = () => {
                   name="attending"
                   value={form.attending}
                   onChange={handleChange}
-                  className="font-light text-center w-full bg-transparent border-0 border-b-2 border-white appearance-none focus:outline-none focus:ring-0 focus:border-white py-2 text-sm text-white"
+                  className="font-light text-center w-full bg-transparent border-0 border-b-2 appearance-none focus:outline-none py-2 text-sm "
                 >
-                  {/* Opsi dropdown perlu warna teks yang kontras saat dibuka */}
-                  <option className="text-blac" value="1">
+                  <option
+                    className="hover:text-slate-800 text-slate-800"
+                    value="1"
+                  >
                     Hadir
                   </option>
-                  <option className="text-black" value="0">
+                  <option
+                    className="hover:text-slate-800 text-slate-800"
+                    value="0"
+                  >
                     Tidak Hadir
                   </option>
                 </select>
@@ -168,6 +172,7 @@ const RSVP = () => {
             {/* Tombol Kirim */}
             <div className="text-center pt-4">
               <button
+                disabled={loading}
                 type="submit"
                 className="px-10 py-3 font-serif border-2 border-white rounded-full bg-[#802B2B] text-white transition-colors duration-300 hover:bg-white hover:text-[#802B2B]"
               >
@@ -179,13 +184,16 @@ const RSVP = () => {
       </div>
       <div>
         {/* messages */}
-        <div>
+        <div className="bg-[#ede0d1] py-7">
           <div className="border border-blue-500">UCAPAN DOA</div>
-          <div className="border border-red-500 w-full px-4 flex flex-col items-center justify-center gap-2">
-            {data.map((d) => (
-              <div key={d.id} className="p-8">
-                <h2 className="font-semibold text-lg">{d.guest_name}</h2>
-                <p className="text-md">{d.message}</p>
+          <div className="py-3 border border-red-500 w-full px-4 flex flex-col items-center justify-center gap-2 max-h-96 overflow-y-auto overflow-x-hidden scrollbar-hide">
+            {data.map((d, i) => (
+              <div
+                key={i}
+                className={`${nyghtSerif.className} text-center p-4 border border-red-500 w-full`}
+              >
+                <h2 className="font-semibold text-sm">{d.guest_name}</h2>
+                <p className="text-xs">{d.message}</p>
               </div>
             ))}
           </div>
