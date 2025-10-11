@@ -2,7 +2,7 @@
 
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Bismillah from "./Bismillah";
 import BridesSection from "./BridesSection";
 import Cover from "./Cover";
@@ -15,12 +15,15 @@ import ClosingSection from "./ClosingSection";
 import Footer from "./Footer";
 import Gallery from "./Gallery";
 import Greetings from "./Greetings";
+import GiftModal from "./GiftModal";
 
 export default function MainPage({
   isOpenInvitation,
 }: {
   isOpenInvitation: boolean;
 }) {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   useEffect(() => {
     AOS.init({ duration: 1400, once: false, offset: 130 });
 
@@ -42,10 +45,11 @@ export default function MainPage({
         <EventInfo />
         <Gallery />
         <RSVP />
-        <GiftInfo />
+        <GiftInfo setIsModalOpen={setIsModalOpen} />
         <ClosingSection />
         <Footer />
         <MusicButton isOpenInvitation={isOpenInvitation} />
+        <GiftModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </main>
     </>
   );

@@ -172,7 +172,7 @@ const RSVP = () => {
             </div>
 
             {/* Tombol Kirim */}
-            <div className="text-center pt-4">
+            {/* <div className="text-center pt-4">
               <button
                 disabled={loading}
                 type="submit"
@@ -180,14 +180,47 @@ const RSVP = () => {
               >
                 Kirim
               </button>
+            </div> */}
+            <div className="w-full flex justify-center">
+              <button
+                className="text-center cursor-pointer relative items-center justify-center font-normal bg-transparent overflow-visible px-4 py-[10px] text-xs"
+                disabled={loading}
+                type="button"
+              >
+                <div className="absolute inset-0 overflow-hidden">
+                  <svg
+                    className="absolute w-full h-full"
+                    preserveAspectRatio="none"
+                    viewBox="0 0 100 40"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <ellipse
+                      cx="50"
+                      cy="20"
+                      rx="49.5"
+                      ry="19.5"
+                      fill="none"
+                      stroke="#FFFF"
+                      strokeWidth="1"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </svg>
+                </div>
+                <span
+                  className={`${nyghtSerif.className} relative z-10 font-nyght-serif text-white text-center`}
+                >
+                  Kirim
+                </span>
+              </button>
             </div>
           </form>
         </div>
       </div>
       <div>
         {/* messages */}
-        <div className="bg-[#ede0d1] py-3">
+        <div className="bg-[#ede0d1] py-3 overflow-hidden">
           <div
+            data-aos="fade-left"
             className={`${nyghtSerif.className} text-[45px] text-slate-700 text-left z-30 tracking-wider pl-5 font-light flex justify-center items-center mt-8`}
           >
             ucapan
@@ -233,6 +266,7 @@ const RSVP = () => {
 
           <div
             className={`z-10 absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center`}
+            data-aos="fade-up"
           >
             <span
               className={`text-white tracking-tight font-light italic text-sm ${nyghtSerif.className} leading-none`}
