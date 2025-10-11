@@ -256,7 +256,7 @@ const RSVP = () => {
         {/* footer rsvp */}
         <div className="py-3 w-full h-90 bg-[#7A2422] relative">
           <Image
-            src={findImage(invitationData, "closing")}
+            src={findImage(invitationData, "rsvp-footer")}
             alt="rsvp image"
             fill
             className="object-cover object-center transition-all duration-500"
