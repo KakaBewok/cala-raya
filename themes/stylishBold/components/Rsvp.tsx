@@ -185,7 +185,7 @@ const RSVP = () => {
               <button
                 className="text-center cursor-pointer relative items-center justify-center font-normal bg-transparent overflow-visible px-4 py-[10px] text-xs"
                 disabled={loading}
-                type="button"
+                type="submit"
               >
                 <div className="absolute inset-0 overflow-hidden">
                   <svg
