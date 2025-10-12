@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const RSVP = () => {
-  const { invitationData } = useInvitation();
+  const { invitationData, guest } = useInvitation();
   const [data, setData] = useState<
     {
       guest_name: string;
@@ -17,7 +17,7 @@ const RSVP = () => {
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState({
-    guest: "",
+    guest: guest?.name || "",
     message: "",
     attending: "",
   });
