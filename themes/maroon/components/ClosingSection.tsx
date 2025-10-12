@@ -44,8 +44,9 @@ const ClosingSection = () => {
             href={`https://www.instagram.com/explore/tags/${data?.host_one_nickname}${data?.host_two_nickname}`}
             className="text-lg tracking-wide font-medium underline"
           >
-            #{data?.host_two_nickname}
-            {data?.host_one_nickname}
+            {data?.hashtag
+              ? `${data?.hashtag}`
+              : `#${data?.host_one_nickname}${data?.host_two_nickname}`}
           </Link>
         </div>
       </div>
