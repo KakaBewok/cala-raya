@@ -92,47 +92,51 @@ const GiftModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               </button>
             </div>
           ))}
-          <div className={`${nyghtSerif.className} flex flex-col items-center`}>
-            <h3 className="text-sm font-semibold tracking-wider">Alamat</h3>
-            {data?.gift_infos?.[0].gift_delivery_address && (
-              <p className="mt-1 px-4 text-sm leading-relaxed">
-                {data?.gift_infos?.[0].gift_delivery_address}
-              </p>
-            )}
-
-            <button
-              className="mt-4 cursor-pointer relative inline-flex items-center justify-center font-normal bg-transparent overflow-visible px-4 py-[10px] text-xs"
-              onClick={() =>
-                handleCopy(data?.gift_infos?.[0].gift_delivery_address || "")
-              }
-              type="button"
+          {data?.gift_infos?.[0].gift_delivery_address && (
+            <div
+              className={`${nyghtSerif.className} flex flex-col items-center`}
             >
-              <div className="absolute inset-0 overflow-hidden">
-                <svg
-                  className="absolute w-full h-full"
-                  preserveAspectRatio="none"
-                  viewBox="0 0 100 40"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <ellipse
-                    cx="50"
-                    cy="20"
-                    rx="49.5"
-                    ry="19.5"
-                    fill="none"
-                    stroke="#FFFF"
-                    strokeWidth="1"
-                    vectorEffect="non-scaling-stroke"
-                  />
-                </svg>
-              </div>
-              <span
-                className={`${nyghtSerif.className} relative z-10 font-nyght-serif text-white`}
+              <h3 className="text-sm font-semibold tracking-wider">Alamat</h3>
+              {data?.gift_infos?.[0].gift_delivery_address && (
+                <p className="mt-1 px-4 text-sm leading-relaxed">
+                  {data?.gift_infos?.[0].gift_delivery_address}
+                </p>
+              )}
+
+              <button
+                className="mt-4 cursor-pointer relative inline-flex items-center justify-center font-normal bg-transparent overflow-visible px-4 py-[10px] text-xs"
+                onClick={() =>
+                  handleCopy(data?.gift_infos?.[0].gift_delivery_address || "")
+                }
+                type="button"
               >
-                {addressCopied ? "Tersalin" : "Salin"}
-              </span>
-            </button>
-          </div>
+                <div className="absolute inset-0 overflow-hidden">
+                  <svg
+                    className="absolute w-full h-full"
+                    preserveAspectRatio="none"
+                    viewBox="0 0 100 40"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <ellipse
+                      cx="50"
+                      cy="20"
+                      rx="49.5"
+                      ry="19.5"
+                      fill="none"
+                      stroke="#FFFF"
+                      strokeWidth="1"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </svg>
+                </div>
+                <span
+                  className={`${nyghtSerif.className} relative z-10 font-nyght-serif text-white`}
+                >
+                  {addressCopied ? "Tersalin" : "Salin"}
+                </span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
