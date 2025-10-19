@@ -12,6 +12,7 @@ export interface SampleRundown {
   end_time: string;
   time_zone: string;
   location: string;
+  order_number: number;
 }
 
 interface SampleData {
@@ -49,6 +50,7 @@ export const EditMessageModal: React.FC<EditMessageModalProps> = ({
         end_time: "13:00",
         time_zone: "WIB",
         location: "Gedung Serbaguna Jakarta",
+        order_number: 1,
       },
       {
         title: "Resepsi",
@@ -57,6 +59,7 @@ export const EditMessageModal: React.FC<EditMessageModalProps> = ({
         end_time: "11:00",
         time_zone: "WIB",
         location: "Masjid Al-Falah",
+        order_number: 2,
       },
     ],
   },
@@ -102,6 +105,7 @@ Terima kasih banyak atas perhatiannya💕`.trim(),
     if (!rundowns || rundowns.length === 0) return "";
 
     return rundowns
+      .sort((a, b) => a.order_number - b.order_number)
       .map((rundown) => {
         return `
 ${rundown.title}:
