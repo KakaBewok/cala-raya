@@ -105,6 +105,7 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
     if (rundowns.length === 0) return "";
 
     return rundowns
+      .sort((a, b) => a.order_number - b.order_number)
       .map((rundown) => {
         const date = formatDate(rundown.date, true);
         const start = formatTime(rundown.start_time);
