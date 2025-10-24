@@ -10,7 +10,7 @@ import EventInfo from "./EventInfo";
 import Grooms from "./Grooms";
 import MusicButton from "./MusicButton";
 import RSVP from "./Rsvp";
-// import GiftInfo from "./GiftInfo";
+import GiftInfo from "./GiftInfo";
 import ClosingSection from "./ClosingSection";
 import Footer from "./Footer";
 import Greetings from "./Greetings";
@@ -39,7 +39,7 @@ export default function MainPage({
       <EventInfo />
       {/* <Gallery /> */}
       <RSVP />
-      {/* <GiftInfo /> */}
+      <GiftInfo />
       <ClosingSection />
       <Footer />
       <MusicButton isOpenInvitation={isOpenInvitation} />
