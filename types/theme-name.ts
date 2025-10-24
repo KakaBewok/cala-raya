@@ -4,4 +4,5 @@ export type ThemeName =
   | "floral"
   | "magazine"
   | "maroon"
+  | "maroon_custom"
   | "stylishBold";
