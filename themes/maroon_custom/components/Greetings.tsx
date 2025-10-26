@@ -8,7 +8,7 @@ export default function Greetings() {
       <div className="relative z-10 w-full h-full">
         {/* Kanan atas */}
         <Image
-          src={`/assets/images/floral/11.webp`}
+          src={`/assets/images/maroon_custom/blue1.webp`}
           width={80}
           height={80}
           alt="Bunga kanan atas"
@@ -19,18 +19,17 @@ export default function Greetings() {
         {/* Kiri Atas */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/28.webp`}
+          src={`/assets/images/maroon_custom/blue2.webp`}
           width={80}
           height={80}
           alt="Bunga kiri atas"
-          className="swing-left-fast absolute -top-10 -left-5"
+          className="swing-left-fast absolute -top-11 -left-5"
         />
 
         {/* Kiri Tengah */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/11.webp`}
-          // src={`/assets/images/floral/26.webp`}
+          src={`/assets/images/maroon_custom/white2.webp`}
           width={65}
           height={65}
           alt="Bunga kiri tengah"
@@ -40,7 +39,7 @@ export default function Greetings() {
         {/* Kanan tengah */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/18.webp`}
+          src={`/assets/images/maroon_custom/white2.webp`}
           width={60}
           height={60}
           alt="Bunga kanan tengah"
@@ -50,9 +49,9 @@ export default function Greetings() {
         {/* Bawah kiri */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/16.webp`}
-          width={110}
-          height={110}
+          src={`/assets/images/maroon_custom/blue3.webp`}
+          width={80}
+          height={80}
           alt="Bunga kiri bawah"
           className="swing-left-fast absolute z-20 -bottom-24 left-[2vw]"
         />
@@ -60,10 +59,9 @@ export default function Greetings() {
         {/* Bawah kanan */}
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/28.webp`}
-          // src={`/assets/images/floral/bunga2.webp`}
-          width={110}
-          height={110}
+          src={`/assets/images/maroon_custom/blue4.webp`}
+          width={100}
+          height={100}
           alt="Bunga kanan bawah"
           className="swing-right-fast absolute -bottom-32 z-20 right-[2vw]"
         />
