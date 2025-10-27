@@ -39,8 +39,8 @@ const Brides = () => {
       </motion.div>
 
       {/* double line */}
-      <div className="absolute inset-10 border border-[#c6a886] z-10 pointer-events-none" />
-      <div className="absolute inset-11 border border-[#c6a886] z-10 pointer-events-none" />
+      <div className="absolute inset-10 border border-[#f8f6f3] z-10 pointer-events-none" />
+      <div className="absolute inset-11 border border-[#f8f6f3] z-10 pointer-events-none" />
 
       {/* Content box */}
       <div
@@ -72,18 +72,18 @@ const Brides = () => {
 
       {/* flower */}
       <Image
-        src="/assets/images/floral/16.webp"
+        src="/assets/images/maroon_custom/blue4.webp"
         alt="Bunga 1"
-        width={110}
-        height={110}
+        width={90}
+        height={90}
         className="swing-left-fast absolute -bottom-10 -left-5 z-40 transform rotate-12"
       />
       <Image
-        src="/assets/images/floral/28.webp"
+        src="/assets/images/maroon_custom/blue3.webp"
         alt="Bunga 2"
         width={100}
         height={100}
-        className="swing-right-slow absolute bottom-5 -left-5 z-30 transform rotate-[32deg]"
+        className="swing-right-slow absolute -bottom-7 -left-7 z-30 transform rotate-[32deg]"
       />
       <Image
         src="/assets/images/floral/12.webp"

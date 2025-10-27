@@ -140,7 +140,7 @@ const RSVP = () => {
         className={`relative w-full py-10 px-6 bg-[#f9f4ec] text-[#1C7ED6] overflow-x-hidden`}
       >
         <Image
-          src={`/assets/images/floral/11.webp`}
+          src={`/assets/images/maroon_custom/blue1.webp`}
           width={100}
           height={100}
           alt="Kiri"
@@ -150,9 +150,9 @@ const RSVP = () => {
 
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/floral/28.webp`}
-          width={115}
-          height={115}
+          src={`/assets/images/maroon_custom/blue4.webp`}
+          width={100}
+          height={100}
           alt="Kanan"
           className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-14 rotate-[40deg]"
         />

@@ -30,8 +30,8 @@ export default function Greetings() {
         <Image
           data-aos="zoom-in"
           src={`/assets/images/maroon_custom/white2.webp`}
-          width={65}
-          height={65}
+          width={50}
+          height={50}
           alt="Bunga kiri tengah"
           className="swing-left-fast absolute z-20 top-[40%] -left-7"
         />
@@ -40,8 +40,8 @@ export default function Greetings() {
         <Image
           data-aos="zoom-in"
           src={`/assets/images/maroon_custom/white2.webp`}
-          width={60}
-          height={60}
+          width={50}
+          height={50}
           alt="Bunga kanan tengah"
           className="swing-left-fast absolute z-20 top-[40%] -right-6"
         />

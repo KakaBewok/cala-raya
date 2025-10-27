@@ -108,7 +108,7 @@ const EventInfo = () => {
           ))}
       </div>
       <Image
-        src={`/assets/images/floral/11.webp`}
+        src={`/assets/images/maroon_custom/blue1.webp`}
         width={100}
         height={100}
         alt="Kiri"
@@ -118,9 +118,9 @@ const EventInfo = () => {
 
       <Image
         data-aos="zoom-in"
-        src={`/assets/images/floral/28.webp`}
-        width={115}
-        height={115}
+        src={`/assets/images/maroon_custom/blue3.webp`}
+        width={90}
+        height={90}
         alt="Kanan"
         className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-6 rotate-[40deg]"
       />
