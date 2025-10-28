@@ -39,7 +39,7 @@ export async function generateMetadata({
     previewImageObj?.url ?? "https://calaraya.vercel.app/og-image.jpg";
 
   return {
-    title: `${invitation?.host_two_nickname} ❤️ ${invitation?.host_one_nickname}`,
+    title: `${invitation?.host_one_nickname} ❤️ ${invitation?.host_two_nickname}`,
     description: `${formatDate(invitation?.event_date, true)}`,
     openGraph: {
       title: `${invitation?.event_title}`,
