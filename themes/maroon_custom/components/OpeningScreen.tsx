@@ -58,21 +58,21 @@ export default function OpeningScreen({
           <div
             className={`${
               isDomLoaded ? "-translate-x-full" : "translate-x-0"
-            } border-r-[1px] border-[#1C7ED6] backdrop-blur-sm absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out`}
+            } border-r-[1px] border-rose-900 backdrop-blur-sm absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out`}
           >
             <Image
-              src="/assets/images/maroon_custom/blue2.webp"
+              src="/assets/images/floral/16.webp"
               alt="Bunga 1"
               width={110}
               height={110}
-              className="swing-left-slow absolute -top-20 -left-7 z-40 transform rotate-[45deg] "
+              className="swing-left-slow absolute -top-14 -left-5 z-40 transform rotate-[45deg]"
             />
             <Image
-              src="/assets/images/maroon_custom/blue4.webp"
+              src="/assets/images/floral/28.webp"
               alt="Bunga 2"
               width={100}
               height={100}
-              className="swing-right-slow absolute top-5 -left-5 z-30 transform rotate-[35deg]"
+              className="swing-right-slow absolute top-5 -left-5 z-30 transform rotate-[32deg]"
             />
             <Image
               src="/assets/images/floral/12.webp"
@@ -93,17 +93,17 @@ export default function OpeningScreen({
           <div
             className={`${
               isDomLoaded ? "translate-x-full" : "translate-x-0"
-            } border-l-[1px] border-[#1C7ED6] backdrop-blur-sm absolute top-0 right-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out`}
+            } border-l-[1px] border-rose-900 backdrop-blur-sm absolute top-0 right-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out`}
           >
             <Image
-              src="/assets/images/maroon_custom/blue2.webp"
+              src="/assets/images/floral/16.webp"
               alt="Bunga 1"
               width={110}
               height={110}
               className="swing-left-fast absolute -bottom-10 -right-5 z-40 transform -rotate-12"
             />
             <Image
-              src="/assets/images/maroon_custom/blue4.webp"
+              src="/assets/images/floral/28.webp"
               alt="Bunga 2"
               width={100}
               height={100}
@@ -134,11 +134,11 @@ export default function OpeningScreen({
                   The Wedding of
                 </p>
                 <h1
-                  className={`leading-20 transform -rotate-[27deg] ${amalfiCoast.className} text-5xl text-[#74C0FC] tracking-widest font-light italic`}
+                  className={`leading-20 transform -rotate-[27deg] ${amalfiCoast.className} text-5xl text-rose-900 tracking-widest font-light italic`}
                 >
-                  {data?.host_two_nickname} <br />{" "}
+                  {data?.host_one_nickname} <br />{" "}
                   <span className="text-3xl">and</span>{" "}
-                  {data?.host_one_nickname}
+                  {data?.host_two_nickname}
                 </h1>
               </div>
             </div>
@@ -146,11 +146,11 @@ export default function OpeningScreen({
               className={`${ninfa.className} w-full gap-4 absolute left-1/2 transform -translate-x-1/2 bottom-32 tracking-wider ${poppins.className} flex flex-col items-center justify-center`}
             >
               <p className="text-sm text-neutral-600">Kepada Yth.</p>
-              <p className="text-2xl text-[#74C0FC]">{guest?.name}</p>
+              <p className="text-2xl text-rose-900">{guest?.name}</p>
               <Button
                 size="lg"
                 onClick={handleClick}
-                className="text-xs bg-[#1C7ED6] rounded-none cursor-pointer hover:bg-[#1776c9] text-white"
+                className="text-xs bg-rose-900 rounded-none cursor-pointer hover:bg-rose-950 text-white"
               >
                 BUKA UNDANGAN
               </Button>

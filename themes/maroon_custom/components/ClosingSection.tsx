@@ -9,9 +9,9 @@ const ClosingSection = () => {
   return (
     <section className="w-full overflow-hidden">
       {/* Watermark */}
-      <div className="w-full h-60 overflow-hidden bg-[#1C7ED6] flex justify-center items-center">
+      <div className="w-full h-60 overflow-hidden bg-rose-900 flex justify-center items-center">
         <div
-          className={`${amalfiCoast.className} flex flex-col justify-center items-center text-8xl font-light text-white transform -rotate-[20deg] select-none`}
+          className={`${amalfiCoast.className} flex flex-col justify-center items-center text-8xl font-light text-white transform -rotate-35 select-none`}
         >
           <p className="tracking-tighter">
             {data?.host_two_nickname.toLocaleLowerCase()}

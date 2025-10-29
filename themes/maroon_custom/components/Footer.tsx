@@ -6,7 +6,7 @@ const CONTACT_PERSON = process.env.NEXT_PUBLIC_CONTACT_PERSON!;
 export default function Footer() {
   const message = `Halo admin Calaraya Project, aku tertarik untuk bikin undangan digital. Boleh dibantu prosesnya? Terima kasih 🙏`;
   return (
-    <footer className="w-full bg-[#1C7ED6] text-white p-5 flex justify-between items-start z-50">
+    <footer className="w-full bg-rose-900 text-white p-5 flex justify-between items-start z-50">
       <div className="flex items-center gap-3">
         <Link
           href="https://instagram.com/calarayaproject"
@@ -27,7 +27,7 @@ export default function Footer() {
       </div>
 
       <div className="flex items-start gap-5">
-        <span className="text-neutral-100 font-medium text-sm">crafted by</span>
+        <span className="text-neutral-300 font-medium text-sm">crafted by</span>
         <Link
           href="https://instagram.com/calarayaproject"
           target="_blank"

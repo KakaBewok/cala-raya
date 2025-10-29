@@ -1,7 +1,7 @@
 import { gandhiSerif, ninfa } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { Rundown } from "@/types/invitation-data";
-import { formatDate } from "@/utils/format-date";
+// import { formatDate } from "@/utils/format-date";
 import { formatTime } from "@/utils/format-time";
 import { DateTime } from "luxon";
 import Link from "next/link";
@@ -59,18 +59,19 @@ const EventInfo = () => {
                 px-5
                 pb-3
                 w-fit
-                border-b-1 border-[#74C0FC]
-                text-2xl font-semibold text-[#1C7ED6]
+                border-b-1 border-rose-900
+                text-2xl font-medium text-rose-900
                 mb-5
             `}
               >
                 {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
               </h1>
-              <p className={`text-md font-light text-[#1C7ED6]`}>
-                {formatDate(rundown.date, true)?.toUpperCase()}
+              <p className={`text-md font-light text-rose-900`}>
+                AHAD, 16 NOVEMBER 2025
+                {/* {formatDate(rundown.date, true)?.toUpperCase()} */}
               </p>
               <p
-                className={`${gandhiSerif.className} text-sm font-light text-[#1C7ED6]`}
+                className={`${gandhiSerif.className} text-sm font-light text-rose-900`}
               >
                 {formatTime(rundown.start_time)} {rundown.time_zone}{" "}
                 <span>-</span>{" "}
@@ -82,25 +83,25 @@ const EventInfo = () => {
                 href={generateGoogleCalendarUrl(rundown)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-xs font-medium underline text-[#1C7ED6]`}
+                className={`text-xs font-light underline text-rose-900`}
               >
                 Tambah ke Kalender
               </Link>
               <p
-                className={`leading-none mt-4 text-sm text-[#1C7ED6] text-center w-3/4`}
+                className={`mt-4 text-md font-light text-rose-900 text-center w-3/4`}
               >
                 {rundown.location}
               </p>
               {rundown.location_detail && (
                 <p
-                  className={` mt-0 text-xs font-light text-[#74C0FC] opacity-100 text-center w-3/4`}
+                  className={` mt-0 text-xs font-light text-rose-900 opacity-100 text-center w-3/4`}
                 >
                   {rundown.location_detail}
                 </p>
               )}
               <Link
                 href={rundown?.location_url || "#"}
-                className="py-2 px-4 text-xs bg-[#1C7ED6] text-white cursor-pointer hover:bg-[#1571c2]"
+                className="py-2 px-4 text-xs bg-rose-900 text-white cursor-pointer hover:bg-rose-950"
               >
                 LIHAT LOKASI
               </Link>
@@ -108,7 +109,7 @@ const EventInfo = () => {
           ))}
       </div>
       <Image
-        src={`/assets/images/maroon_custom/blue1.webp`}
+        src={`/assets/images/floral/11.webp`}
         width={100}
         height={100}
         alt="Kiri"
@@ -118,9 +119,9 @@ const EventInfo = () => {
 
       <Image
         data-aos="zoom-in"
-        src={`/assets/images/maroon_custom/blue3.webp`}
-        width={90}
-        height={90}
+        src={`/assets/images/floral/28.webp`}
+        width={115}
+        height={115}
         alt="Kanan"
         className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-6 rotate-[40deg]"
       />

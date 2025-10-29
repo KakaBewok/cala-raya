@@ -80,16 +80,16 @@ const RSVP = () => {
       <section
         className={`${ninfa.className} bg-[#f8f3ea] px-6 py-10 w-full flex flex-col items-center`}
       >
-        <h2 className={`text-2xl font-light tracking-wide text-[#1C7ED6] mb-2`}>
+        <h2 className={`text-2xl font-light tracking-wide text-rose-900 mb-2`}>
           RSVP
         </h2>
-        <div className="w-28 h-px bg-[#A5D8FF] mb-8" />
+        <div className="w-28 h-px bg-rose-900 mb-8" />
 
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6">
           {/* Message */}
           <div>
             <label
-              className={`block text-xs tracking-wide text-[#1C7ED6] font-medium mb-2`}
+              className={`block text-xs tracking-wide text-rose-900 font-medium mb-2`}
             >
               UCAPAN <span className={`${poppins.className}`}>&</span> DOA
             </label>
@@ -99,7 +99,7 @@ const RSVP = () => {
               onChange={handleChange}
               placeholder="Ucapan untuk pengantin"
               rows={4}
-              className="text-[#1C7ED6] text-xs w-full bg-white px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
+              className="text-rose-900 text-xs w-full bg-white px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
               required
             />
           </div>
@@ -107,7 +107,7 @@ const RSVP = () => {
           {/* Attending */}
           <div>
             <label
-              className={`block text-xs tracking-wide text-[#1C7ED6] font-medium mb-2`}
+              className={`block text-xs tracking-wide text-rose-900 font-medium mb-2`}
             >
               KONFIRMASI KEHADIRAN
             </label>
@@ -115,7 +115,7 @@ const RSVP = () => {
               name="attending"
               value={form.attending}
               onChange={handleChange}
-              className="cursor-pointer text-xs text-[#1C7ED6] w-full px-4 py-3 bg-white appearance-none focus:outline-none focus:ring-1 focus:ring-neutral-400"
+              className="cursor-pointer text-xs text-rose-900 w-full px-4 py-3 bg-white appearance-none focus:outline-none focus:ring-1 focus:ring-neutral-400"
               required
             >
               <option value="">Pilih</option>
@@ -129,7 +129,7 @@ const RSVP = () => {
           <button
             disabled={loading}
             type="submit"
-            className="cursor-pointer w-full bg-[#1C7ED6] text-white py-2 text-xs tracking-wide hover:bg-neutral-800 transition"
+            className="cursor-pointer w-full bg-rose-900 text-white py-2 text-xs tracking-wide hover:bg-neutral-800 transition"
           >
             KIRIM
           </button>
@@ -137,10 +137,10 @@ const RSVP = () => {
       </section>
       {/* RSVP message */}
       <section
-        className={`relative w-full py-10 px-6 bg-[#f9f4ec] text-[#1C7ED6] overflow-x-hidden`}
+        className={`relative w-full py-10 px-6 bg-[#f9f4ec] text-rose-900 overflow-x-hidden`}
       >
         <Image
-          src={`/assets/images/maroon_custom/blue1.webp`}
+          src={`/assets/images/floral/11.webp`}
           width={100}
           height={100}
           alt="Kiri"
@@ -150,9 +150,9 @@ const RSVP = () => {
 
         <Image
           data-aos="zoom-in"
-          src={`/assets/images/maroon_custom/blue4.webp`}
-          width={100}
-          height={100}
+          src={`/assets/images/floral/28.webp`}
+          width={115}
+          height={115}
           alt="Kanan"
           className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-14 rotate-[40deg]"
         />
@@ -162,14 +162,14 @@ const RSVP = () => {
           <span>
             UCAPAN <span className={`${poppins.className}`}>&</span> DOA
           </span>
-          <span className="block border-b border-[#1C7ED6] w-28 mx-auto mt-2"></span>
+          <span className="block border-b border-rose-900 w-28 mx-auto mt-2"></span>
         </h2>
 
         <div className="mt-8 space-y-6 max-h-96 overflow-y-auto overflow-x-hidden scrollbar-hide p-1">
           {data.map((item, index) => (
             <div
               key={index}
-              className={`${playfair.className} bg-[#A5D8FF]/10 px-6 py-4 rounded-sm text-xs text-center backdrop-blur-xs`}
+              className={`${playfair.className} bg-rose-100/40 px-6 py-4 rounded-sm text-xs text-center backdrop-blur-xs`}
             >
               <p className="font-semibold mb-3 tracking-wide">
                 {item.guest_name}
@@ -180,8 +180,8 @@ const RSVP = () => {
         </div>
         {/* Scroll-down icon */}
         <div className="flex justify-center mt-4">
-          <div className="w-6 h-6 border border-[#1C7ED6] rounded-full flex items-center justify-center animate-bounce">
-            <span className="text-[#1C7ED6] text-lg mb-2">⌄</span>
+          <div className="w-6 h-6 border border-rose-900 rounded-full flex items-center justify-center animate-bounce">
+            <span className="text-rose-900 text-lg mb-2">⌄</span>
           </div>
         </div>
       </section>
