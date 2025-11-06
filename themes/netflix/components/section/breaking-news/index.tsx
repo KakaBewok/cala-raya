@@ -40,7 +40,7 @@ export default function BreakingNews() {
             <p className="mt-4">Dengan penuh cinta dan harapan,</p>
             <p>
               {" "}
-              {data?.host_one_nickname} & {data?.host_two_nickname} 💖
+              {data?.host_two_nickname} & {data?.host_one_nickname} 💖
             </p>
           </div>
         )}
