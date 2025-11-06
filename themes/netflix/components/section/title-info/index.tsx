@@ -19,7 +19,7 @@ export default function TitleInfo() {
         </span>
       </div>
       <h2 className="text-lg leading-5 font-bold text-white">
-        {data?.host_one_nickname} &amp; {data?.host_two_nickname}: Sebelum Hari
+        {data?.host_two_nickname} &amp; {data?.host_one_nickname}: Sebelum Hari
         H
       </h2>
       <div className="flex items-center gap-1">
