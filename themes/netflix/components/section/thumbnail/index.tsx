@@ -72,7 +72,7 @@ export default function Thumbnail() {
           />
           <div>
             <h1 className="text-3xl leading-none font-bold">
-              {data?.host_one_nickname} & {data?.host_two_nickname}: <br />
+              {data?.host_two_nickname} & {data?.host_one_nickname}: <br />
               Sebelum Hari H
             </h1>
           </div>
