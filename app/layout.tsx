@@ -6,10 +6,10 @@ import { Providers } from "./Providers";
 
 export const metadata: Metadata = {
   title: "Cala Raya Project",
-  description: "Digital invitation service for your special moments.",
+  description: "Digital Invitation & Website Creation Service.",
   openGraph: {
     title: "Cala Raya Project",
-    description: "Digital invitation service for your special moments.",
+    description: "Digital Invitation & Website Creation Service.",
     url: "https://calaraya.vercel.app/",
     images: [
       {
