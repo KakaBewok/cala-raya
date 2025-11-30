@@ -53,7 +53,7 @@ export default function Navbar() {
           href="#order"
           className="dark:bg-transparent dark:border-2 dark:border-green-400 dark:text-green-400 hidden md:block bg-green-800 hover:bg-green-900 text-white py-2 px-4 rounded-xs transition duration-400 shadow-sm font-semibold"
         >
-          Order Now
+          Login
         </a>
 
         {/* Mobile Hamburger Icon */}
@@ -104,7 +104,7 @@ export default function Navbar() {
             onClick={closeMenu}
             className="dark:bg-transparent dark:border-2 dark:border-green-400 dark:text-green-400 bg-green-800 hover:bg-green-900 text-white text-center py-2 rounded-xs duration-400 transition shadow-sm"
           >
-            Order Now
+            Login
           </a>
         </div>
       </div>
