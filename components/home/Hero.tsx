@@ -69,8 +69,8 @@ export default function Hero() {
               {[
                 { icon: Zap, text: "Proses Cepat" },
                 { icon: Figma, text: "Desain Modern" },
-                { icon: Settings2, text: "Customizable" },
-                { icon: Wallet, text: "Murah" },
+                { icon: Settings2, text: "Fleksibel" },
+                { icon: Wallet, text: "Harga Murah" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 md:gap-3">
                   <div className="w-7 h-7 md:w-10 md:h-10 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
@@ -89,7 +89,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative "
+            className="relative block md:hidden lg:block"
           >
             {/* Card Stack Mockup */}
             <div className="relative h-[550px] ">
