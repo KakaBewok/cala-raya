@@ -20,12 +20,12 @@ function FeaturesSection() {
     {
       icon: Heart,
       title: "Tema premium & elegan",
-      desc: "Pilihan desain yang stunning",
+      desc: "Pilihan desain yang stunning dan unik",
     },
     {
       icon: Image,
       title: "Galeri foto & video",
-      desc: "Tampilkan momen spesial",
+      desc: "Tampilkan momen spesial kamu",
     },
     {
       icon: UserCheck,
@@ -42,26 +42,34 @@ function FeaturesSection() {
       title: "Google Maps lokasi",
       desc: "Navigasi mudah ke lokasi",
     },
-    { icon: Music, title: "Musik custom", desc: "Background music pilihan" },
+    { icon: Music, title: "Musik custom", desc: "Kamu bebas pilih lagu" },
     {
       icon: MessageCircle,
-      title: "Kirim otomatis via WhatsApp",
-      desc: "Distribusi cepat & mudah",
+      title: "Praktis Sebarkan Undangan",
+      desc: "Cepat & mudah via link atau media sosial",
     },
   ];
 
   const websiteFeatures = [
-    { icon: Layout, title: "Landing Page", desc: "Halaman utama yang menarik" },
+    {
+      icon: Layout,
+      title: "Landing Page",
+      desc: "Desain yang modern & informatif",
+    },
     {
       icon: Briefcase,
       title: "Company Profile",
       desc: "Profil perusahaan profesional",
     },
-    { icon: ShoppingCart, title: "E-Commerce", desc: "Toko online lengkap" },
+    {
+      icon: ShoppingCart,
+      title: "Online Shop",
+      desc: "Jualan online jadi lebih mudah",
+    },
     {
       icon: Globe,
       title: "Custom Web App",
-      desc: "Aplikasi web sesuai kebutuhan",
+      desc: "Aplikasi web sesuai kebutuhan kamu",
     },
     {
       icon: BarChart,
@@ -112,15 +120,15 @@ function FeaturesSection() {
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-400 rounded-full mb-4">
                 <Heart className="w-4 h-4 fill-current" />
                 <span className="text-sm font-medium">
-                  Untuk Momen Spesial Anda
+                  Untuk Momen Spesial Kamu
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
                 Undangan Digital Modern
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                Undangan digital siap pakai, elegan, dan mudah dibagikan kepada
-                tamu.
+                Undangan digital siap pakai, elegan, dan praktis untuk
+                dibagikan.
               </p>
             </motion.div>
           </div>
@@ -197,10 +205,11 @@ function FeaturesSection() {
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-                Website Profesional Untuk Bisnis Anda
+                Website Untuk Bisnis Kamu
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                Dibangun menggunakan teknologi modern: Laravel, React, Next.js.
+                Dibangun menggunakan teknologi modern seperti Laravel, React,
+                Next.js.
               </p>
             </motion.div>
           </div>
@@ -248,7 +257,7 @@ function FeaturesSection() {
             className="text-center mt-12"
           >
             <button className="px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors shadow-lg shadow-slate-900/20 dark:shadow-white/10">
-              Konsultasi Gratis
+              Konsultasi Sekarang
             </button>
           </motion.div>
         </div>
