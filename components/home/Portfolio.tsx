@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Heart, Globe, Eye } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -8,10 +9,12 @@ export default function Portfolio() {
   const portfolioItems = [
     {
       id: 1,
-      title: "Wedding Invitation - Andi & Siti",
+      title: "Wedding Invitation - Syafik & Bella",
       category: "invitation",
       type: "Undangan Pernikahan",
       gradient: "from-rose-400 via-pink-400 to-purple-400",
+      previewImage: "/assets/images/portfolio/netflix-bella-syafik.png",
+      url: "https://calaraya.vercel.app/bella-syafik?id=OkfVBm",
       icon: Heart,
     },
     {
@@ -20,14 +23,18 @@ export default function Portfolio() {
       category: "website",
       type: "Company Profile",
       gradient: "from-blue-400 via-cyan-400 to-teal-400",
+      previewImage: "/portfolio/wedding-andi-siti.png",
+      url: "",
       icon: Globe,
     },
     {
       id: 3,
-      title: "Birthday Invitation - Sweet 17",
+      title: "Wedding Invitation - Ihksan & Tasya",
       category: "invitation",
-      type: "Undangan Ulang Tahun",
+      type: "Undangan Pernikahan",
       gradient: "from-amber-400 via-orange-400 to-red-400",
+      previewImage: "/assets/images/portfolio/maroon-ihksan-tasya.png",
+      url: "https://calaraya.vercel.app/ihksan-tasya?id=n4cBkO",
       icon: Heart,
     },
     {
@@ -36,6 +43,8 @@ export default function Portfolio() {
       category: "website",
       type: "Toko Online",
       gradient: "from-purple-400 via-violet-400 to-indigo-400",
+      previewImage: "/portfolio/wedding-andi-siti.png",
+      url: "",
       icon: Globe,
     },
     {
@@ -44,6 +53,8 @@ export default function Portfolio() {
       category: "invitation",
       type: "Undangan Pernikahan",
       gradient: "from-emerald-400 via-green-400 to-teal-400",
+      previewImage: "/portfolio/wedding-andi-siti.png",
+      url: "",
       icon: Heart,
     },
     {
@@ -52,6 +63,8 @@ export default function Portfolio() {
       category: "website",
       type: "Landing Page",
       gradient: "from-slate-400 via-gray-400 to-zinc-400",
+      previewImage: "/portfolio/wedding-andi-siti.png",
+      url: "",
       icon: Globe,
     },
   ];
@@ -151,29 +164,26 @@ export default function Portfolio() {
               className="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-2xl hover:shadow-slate-900/10 dark:hover:shadow-black/30 transition-all duration-500"
             >
               {/* Image Placeholder with Gradient */}
+              {/* Image Placeholder with Gradient */}
               <div
                 className={`relative h-64 bg-gradient-to-br ${item.gradient} overflow-hidden`}
               >
-                {/* Overlay Pattern */}
-                <div className="absolute inset-0 opacity-20">
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-                      backgroundSize: "32px 32px",
-                    }}
-                  ></div>
-                </div>
+                {/* Preview Image */}
+                <Image
+                  src={item.previewImage}
+                  alt={item.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  width={400}
+                  height={256}
+                />
 
-                {/* Icon */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
-                    <item.icon className="w-10 h-10 text-white" />
-                  </div>
-                </div>
+                {/* Gradient Overlay */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-20`}
+                ></div>
 
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/60 transition-all duration-500 flex items-center justify-center">
+                <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/70 transition-all duration-500 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
                     <button className="px-6 py-3 bg-white text-slate-900 rounded-full font-semibold flex items-center gap-2 hover:bg-slate-100 transition-colors">
                       <ExternalLink className="w-4 h-4" />

@@ -2,14 +2,13 @@
 
 import Hero from "@/components/home/Hero";
 import Portfolio from "@/components/home/Portfolio";
-import WhyUs from "@/components/home/WhyUs";
-import Pricing from "@/components/home/Pricing";
 import Testimonials from "@/components/home/Testimonials";
 import Faq from "@/components/home/Faq";
 import Footer from "@/components/home/Footer";
 import Navbar from "@/components/home/Navbar";
 import WhatsAppFloating from "@/components/home/WhatsAppFloating";
 import FeatureSection from "@/components/home/FeatureSection";
+import ThemesSection from "@/components/home/ThemeSection";
 
 export default function Home() {
   return (
@@ -17,9 +16,10 @@ export default function Home() {
       <Navbar />
       <Hero />
       <FeatureSection />
+      <ThemesSection />
       <Portfolio />
-      <WhyUs />
-      <Pricing />
+      {/* <WhyUs />
+      <Pricing /> */}
       <Testimonials />
       <Faq />
       <Footer />
