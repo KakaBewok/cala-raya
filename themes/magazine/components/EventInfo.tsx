@@ -62,7 +62,7 @@ const EventInfo = () => {
               className="p-6 w-full flex flex-col justify-center items-center"
               key={index}
             >
-              <h1
+              {/* <h1
                 className={`
                 px-5
                 pb-3
@@ -74,7 +74,26 @@ const EventInfo = () => {
             `}
               >
                 {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
-              </h1>
+              </h1> */}
+              <div className="mb-5 px-5">
+                <div className="w-fit border-b-1 border-neutral-700 pb-3">
+                  <h1
+                    className={`
+                      text-2xl font-medium text-neutral-700 text-center
+                      ${remineFares.className}
+                    `}
+                  >
+                    {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
+                  </h1>
+                  {rundown.description && (
+                    <p
+                      className={`${poppins.className} text-[10px] font-light text-neutral-700 text-center whitespace-nowrap`}
+                    >
+                      {rundown.description}
+                    </p>
+                  )}
+                </div>
+              </div>
               <p
                 className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
               >
@@ -123,7 +142,7 @@ const EventInfo = () => {
           </p>
 
           <p
-            className={`${poppins.className} text-[10px] font-light mb-6 text-neutral-500 text-center`}
+            className={`${poppins.className} text-[10px] font-light mb-6 text-neutral-700 text-center`}
           >
             {data?.location_detail || "-"}
           </p>
