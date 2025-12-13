@@ -1,113 +1,130 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
-import { roboto } from "@/fonts/fonts";
+import { Menu, X, Sun, Moon, Heart } from "lucide-react";
 
-export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
-  const menuItems = [
-    { href: "/", label: "Home" },
-    { href: "#undangan", label: "Undangan" },
-    { href: "#website", label: "Website" },
-    { href: "#portfolio", label: "Portfolio" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#faq", label: "FAQ" },
+  const navLinks = [
+    { name: "Home", href: "#home" },
+    { name: "Tema", href: "#themes" },
+    { name: "Portfolio", href: "#portfolio" },
+    { name: "Why Us", href: "#why-us" },
+    { name: "Review", href: "#reviews" },
+    { name: "FAQ", href: "#faq" },
   ];
 
-  const closeMenu = () => setMenuOpen(false);
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    if (newTheme) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
+
+  // Close mobile menu when clicking outside or on link
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
 
   return (
-    <nav
-      className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-md bg-white/70 shadow-xs dark:bg-slate-900/80`}
-    >
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/">
-          <h1
-            className={`${roboto.className} font-bold text-xl md:text-2xl lg:text-3xl text-green-800 dark:text-slate-50 tracking-wide`}
-          >
-            Calaraya❤️
-          </h1>
-        </Link>
+    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo - Left */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <Heart className="w-6 h-6 text-rose-500 fill-current" />
+            <span className="text-xl font-bold text-slate-900 dark:text-white">
+              Calaraya
+            </span>
+          </div>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex md:space-x-4 lg:space-x-8 text-sm font-medium items-center">
-          {menuItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-gray-700 dark:text-slate-50 hover:text-green-800 dark:hover:text-slate-300 transition duration-400 font-semibold"
+          {/* Desktop Menu - Center */}
+          <div className="hidden md:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium whitespace-nowrap"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          {/* Desktop Right - Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
             >
-              {item.label}
-            </a>
-          ))}
+              {isDark ? (
+                <Sun className="w-5 h-5 text-slate-600 dark:text-slate-300" />
+              ) : (
+                <Moon className="w-5 h-5 text-slate-600" />
+              )}
+            </button>
+            <button className="px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors whitespace-nowrap">
+              Order Now
+            </button>
+          </div>
 
-          <ThemeToggle />
+          {/* Mobile Menu Button - Only visible on mobile */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800"
+            >
+              {isDark ? (
+                <Sun className="w-5 h-5 text-slate-600 dark:text-slate-300" />
+              ) : (
+                <Moon className="w-5 h-5 text-slate-600" />
+              )}
+            </button>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800"
+            >
+              {isOpen ? (
+                <X className="w-6 h-6 text-slate-600 dark:text-slate-300" />
+              ) : (
+                <Menu className="w-6 h-6 text-slate-600 dark:text-slate-300" />
+              )}
+            </button>
+          </div>
         </div>
 
-        {/* Desktop CTA */}
-        <a
-          href="#order"
-          className="dark:bg-transparent dark:border-2 dark:border-green-400 dark:text-green-400 hidden md:block bg-green-800 hover:bg-green-900 text-white py-2 px-4 rounded-xs transition duration-400 shadow-sm font-semibold"
+        {/* Mobile Menu - Only visible on mobile when opened */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
         >
-          Login
-        </a>
-
-        {/* Mobile Hamburger Icon */}
-        <button
-          className="md:hidden flex flex-col justify-center items-center space-y-1"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          <span
-            className={`block h-0.5 w-6 bg-gray-800 dark:bg-white transition-all duration-300 ${
-              menuOpen ? "rotate-45 translate-y-1.5" : ""
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-gray-800 dark:bg-white transition-all duration-300 ${
-              menuOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-gray-800 dark:bg-white transition-all duration-300 ${
-              menuOpen ? "-rotate-45 -translate-y-1.5" : ""
-            }`}
-          />
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden bg-white backdrop-blur-lg shadow-lg transition-all duration-300 overflow-hidden dark:bg-slate-800/70 ${
-          menuOpen ? "max-h-96" : "max-h-0"
-        }`}
-      >
-        <div className="flex flex-col px-6 py-4 space-y-4 text-sm font-medium">
-          {menuItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={closeMenu}
-              className="dark:hover:text-slate-300 dark:text-slate-50 text-gray-800 hover:text-green-800 transition duration-400"
-            >
-              {item.label}
-            </a>
-          ))}
-
-          <ThemeToggle />
-
-          <a
-            href="#order"
-            onClick={closeMenu}
-            className="dark:bg-transparent dark:border-2 dark:border-green-400 dark:text-green-400 bg-green-800 hover:bg-green-900 text-white text-center py-2 rounded-xs duration-400 transition shadow-sm"
-          >
-            Login
-          </a>
+          <div className="py-4 border-t border-slate-200 dark:border-slate-700">
+            <div className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={handleLinkClick}
+                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
+                >
+                  {link.name}
+                </a>
+              ))}
+              <button className="px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold">
+                Order Now
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
   );
 }
+
+export default Navbar;
