@@ -111,7 +111,7 @@ const HorizontalGallery = () => {
         <p
           className={`-ml-[25vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_one_nickname.toLowerCase()}
+          {data?.host_two_nickname.toLowerCase()}
         </p>
       </div>
       {/* right */}
@@ -123,7 +123,7 @@ const HorizontalGallery = () => {
         <p
           className={`-mr-[26vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_two_nickname.toLowerCase()}
+          {data?.host_one_nickname.toLowerCase()}
         </p>
       </div>
 
@@ -142,7 +142,7 @@ const HorizontalGallery = () => {
             <X size={20} />
           </>
         ) : (
-          <span className="text-xs">Buka Gallery</span>
+          <span className="text-xs">Buka Galeri</span>
         )}
       </Button>
 
