@@ -5,4 +5,5 @@ export type ThemeName =
   | "magazine"
   | "maroon"
   | "maroon_custom"
+  | "maroon_monochrome"
   | "stylishBold";
