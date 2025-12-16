@@ -49,8 +49,8 @@ const Cover = () => {
         <Image
           src={findImage(data, "cover")}
           alt="Cover photo"
-          // fill
-          sizes="100vw"
+          fill
+          unoptimized
           className="object-cover object-center z-0"
           priority
         />

@@ -33,10 +33,10 @@ export default function OpeningScreen({
           <Image
             src={findImage(data, "hero")}
             alt="Hero background"
-            // fill
-            sizes="100vw"
-            priority
+            fill
+            unoptimized
             className="object-cover object-center z-0"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
 

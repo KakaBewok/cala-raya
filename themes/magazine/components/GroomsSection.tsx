@@ -50,10 +50,9 @@ export default function GroomsSection() {
         <Image
           src={findImage(data, "grooms")}
           alt="Grooms"
-          // fill
-          sizes="100vw"
+          fill
+          unoptimized
           className="object-cover object-center"
-          priority
         />
       </motion.div>
 
