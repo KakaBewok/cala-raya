@@ -52,8 +52,6 @@ const Cover = () => {
           fill
           className="object-cover object-center z-0"
           priority
-          quality={93}
-          unoptimized
         />
       </motion.div>
 
