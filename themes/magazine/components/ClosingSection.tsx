@@ -30,24 +30,24 @@ const ClosingSection = () => {
                 {" "}
                 <Link
                   href={createSocialMediaLink(
-                    data?.host_one_social_media || ""
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  @{data?.host_one_social_media}
-                </Link>
-              </span>{" "}
-              |{" "}
-              <span className="border-b-1 border-neutral-200 pb-1">
-                <Link
-                  href={createSocialMediaLink(
                     data?.host_two_social_media || ""
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   @{data?.host_two_social_media}
+                </Link>
+              </span>{" "}
+              |{" "}
+              <span className="border-b-1 border-neutral-200 pb-1">
+                <Link
+                  href={createSocialMediaLink(
+                    data?.host_one_social_media || ""
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @{data?.host_one_social_media}
                 </Link>
               </span>
             </p>
