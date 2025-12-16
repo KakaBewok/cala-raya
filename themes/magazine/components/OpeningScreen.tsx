@@ -36,6 +36,8 @@ export default function OpeningScreen({
             fill
             priority
             className="object-cover object-center z-0"
+            quality={99}
+            unoptimized
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/55 z-10 pointer-events-none" />
 

@@ -53,6 +53,8 @@ export default function BrideSection() {
           fill
           className="object-cover object-center"
           priority
+          quality={99}
+          unoptimized
         />
       </motion.div>
 

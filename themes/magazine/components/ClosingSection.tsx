@@ -77,6 +77,8 @@ const ClosingSection = () => {
             width={80}
             height={80}
             style={{ filter: "invert(7%) brightness(0.3)" }}
+            quality={99}
+            unoptimized
           />
         </div>
       </div>
