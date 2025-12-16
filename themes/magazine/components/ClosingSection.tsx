@@ -15,6 +15,7 @@ const ClosingSection = () => {
           alt="Closing image"
           width={800}
           height={600}
+          quality={100}
           className="w-full h-auto object-cover object-center"
         />
 
@@ -65,9 +66,9 @@ const ClosingSection = () => {
           <p
             className={`${remineFares.className} text-9xl font-bold text-gray-200 opacity-50 transform -rotate-45 select-none`}
           >
-            {data?.host_one_nickname.toLocaleLowerCase()}
-            <br />
             {data?.host_two_nickname.toLocaleLowerCase()}
+            <br />
+            {data?.host_one_nickname.toLocaleLowerCase()}
           </p>
         </div>
         <div className="text-center flex justify-center items-center">

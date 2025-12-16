@@ -34,7 +34,7 @@ export default function OpeningScreen({
             src={findImage(data, "hero")}
             alt="Hero background"
             fill
-            unoptimized
+            quality={100}
             className="object-cover object-center z-0"
             priority
           />
