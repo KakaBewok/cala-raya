@@ -53,7 +53,7 @@ export default function GroomsSection() {
           fill
           className="object-cover object-center"
           priority
-          quality={99}
+          quality={93}
           unoptimized
         />
       </motion.div>
