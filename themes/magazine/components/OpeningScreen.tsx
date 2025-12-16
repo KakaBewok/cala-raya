@@ -33,7 +33,8 @@ export default function OpeningScreen({
           <Image
             src={findImage(data, "hero")}
             alt="Hero background"
-            fill
+            // fill
+            sizes="100vw"
             priority
             className="object-cover object-center z-0"
           />

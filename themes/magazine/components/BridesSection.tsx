@@ -50,7 +50,8 @@ export default function BrideSection() {
         <Image
           src={findImage(data, "brides")}
           alt="Bride"
-          fill
+          // fill
+          sizes="100vw"
           className="object-cover object-center"
           priority
         />
