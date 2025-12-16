@@ -20,7 +20,7 @@ const ClosingSection = () => {
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-black/20 to-black/40"></div>
-        {data?.host_one_social_media && data?.host_two_social_media && (
+        {data?.host_two_social_media && data?.host_one_social_media && (
           <div
             className={`${poppins.className} absolute right-0 top-0  text-neutral-200 p-6 text-right`}
             data-aos="fade-up"
