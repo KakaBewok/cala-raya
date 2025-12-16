@@ -2,15 +2,13 @@
 
 import { useState } from "react";
 import MainPage from "./components/MainPage";
-// import OpeningScreen from "./components/OpeningScreen";
-import OpeningScreen2 from "./components/OpeningScreen2";
-
+import OpeningScreen from "./components/OpeningScreen";
 export default function InvitationPage() {
   const [isOpenInvitation, setIsOpenInvitation] = useState<boolean>(false);
 
   return (
     <>
-      <OpeningScreen2
+      <OpeningScreen
         isOpenInvitation={isOpenInvitation}
         setIsOpenInvitation={setIsOpenInvitation}
       />
