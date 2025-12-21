@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { Heart, Layout } from "lucide-react";
 import { portfolios } from "@/data/data";
+import Image from "next/image";
 
 function Portfolio() {
   const tabs = [
@@ -69,17 +70,19 @@ function Portfolio() {
               className="group relative bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all"
             >
               <div className="relative h-40 md:h-60 overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                {/* Overlay Button */}
-                <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/80 transition-all flex items-center justify-center">
-                  <button className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-white text-slate-900 rounded-full font-semibold text-xs transition-all hover:bg-slate-100">
-                    Lihat Detail
-                  </button>
-                </div>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer"
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </a>
                 {/* Type Tag */}
                 <div className="absolute top-2 left-2">
                   <span className="px-2 py-1 bg-white/90 dark:bg-slate-900/90 text-slate-900 dark:text-white text-[10px] font-semibold rounded-full shadow-sm">
