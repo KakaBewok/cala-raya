@@ -238,79 +238,136 @@ const reviews = [
   },
 ];
 
+// const portfolioProjects = [
+//   {
+//     title: "Qatia Rent",
+//     description:
+//       "A web application for renting clothes and admin panel to manage the clothes & transactions.",
+//     imageUrl:
+//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765989761/personal/web-porto/qatia_tiulwx.png",
+//     techStack: ["Laravel", "React", "MySQL", "Tailwind CSS"],
+//     previewUrl: "https://qatiarent.com/",
+//   },
+//   {
+//     title: "E-Invitation Netflix",
+//     description: "A modern e-invitation with a Netflix-inspired theme",
+//     imageUrl:
+//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992495/personal/web-porto/netflix_jmoiic.png",
+//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
+//     previewUrl: "https://calaraya.vercel.app/bella-syafik?id=OkfVBm",
+//   },
+//   {
+//     title: "E-Invitation Floral",
+//     description: "A beautiful e-invitation with a floral-inspired theme",
+//     imageUrl:
+//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992923/personal/web-porto/floral_lund0v.png",
+//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
+//     previewUrl: "https://calaraya.vercel.app/ilham-rosi?id=O9IPp",
+//   },
+//   {
+//     title: "E-Invitation Magazine",
+//     description: "A stylish e-invitation with a magazine-inspired theme",
+//     imageUrl:
+//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765993975/personal/web-porto/magazine_yt4whr.png",
+//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
+//     previewUrl: "https://calaraya.vercel.app/rahma-jalal?id=Gku6G",
+//   },
+//   {
+//     title: "E-Invitation Maroon",
+//     description: "An Elegant e-invitation with a maroon-inspired theme",
+//     imageUrl:
+//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994308/personal/web-porto/maroon_aohj7a.png",
+//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
+//     previewUrl: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
+//   },
+//   {
+//     title: "E-Invitation Stylish Bold",
+//     description: "A modern e-invitation with a stylish bold-inspired theme",
+//     imageUrl:
+//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994579/personal/web-porto/stylishbold_armbt3.png",
+//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
+//     previewUrl: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
+//   },
+//   {
+//     title: "E-Invitation Monochrome",
+//     description: "A modern e-invitation with a monochrome-inspired theme",
+//     imageUrl:
+//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1766313919/personal/web-porto/nadhar_rginzu.png",
+//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
+//     previewUrl: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
+//   },
+// ];
+
 const allThemes = [
   {
-    name: "Elegant Rose",
-    type: "Undangan Digital", // Kategori Utama: Undangan
-    category: "Pernikahan",
-    price: "Rp 299.000",
+    name: "Rental Website",
+    type: "Website",
+    category: "Website Application",
+    price: "Rp 2000.000",
     image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765989761/personal/web-porto/qatia_tiulwx.png",
+    previewUrl: "https://qatiarent.com/",
+    features: ["Admin Page", "Manajemen Produk", "Transaksi Online"],
+  },
+  {
+    name: "Netflix",
+    type: "Undangan Digital",
+    category: "Wedding",
+    price: "Rp 50.000",
+    image:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992495/personal/web-porto/netflix_jmoiic.png",
+    previewUrl: "https://calaraya.vercel.app/bella-syafik?id=OkfVBm",
     features: ["Musik", "RSVP", "Galeri"],
   },
   {
-    name: "Modern Minimal",
+    name: "Floral",
     type: "Undangan Digital",
-    category: "Pernikahan",
-    price: "Rp 349.000",
+    category: "Wedding",
+    price: "Rp 50.000",
     image:
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500&q=80",
-    features: ["Video BG", "Instagram", "Timer"],
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992923/personal/web-porto/floral_lund0v.png",
+    previewUrl: "https://calaraya.vercel.app/ilham-rosi?id=O9IPp",
+    features: ["Musik", "RSVP", "Galeri"],
   },
   {
-    name: "Rustic Garden",
+    name: "Magazine",
     type: "Undangan Digital",
-    category: "Pernikahan",
-    price: "Rp 299.000",
+    category: "Wedding",
+    price: "Rp 50.000",
     image:
-      "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=500&q=80",
-    features: ["Animasi", "Maps", "Guestbook"],
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765993975/personal/web-porto/magazine_yt4whr.png",
+    previewUrl: "https://calaraya.vercel.app/rahma-jalal?id=Gku6G",
+    features: ["Musik", "RSVP", "Galeri"],
   },
   {
-    name: "Sweet Birthday",
+    name: "Maroon",
     type: "Undangan Digital",
-    category: "Ulang Tahun",
-    price: "Rp 199.000",
+    category: "Wedding",
+    price: "Rp 50.000",
     image:
-      "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&q=80",
-    features: ["Confetti", "Wishlist", "Kolase"],
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994308/personal/web-porto/maroon_aohj7a.png",
+    previewUrl: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
+    features: ["Musik", "RSVP", "Galeri"],
   },
   {
-    name: "Luxury Gold",
+    name: "Stylish Bold",
     type: "Undangan Digital",
-    category: "Pernikahan",
-    price: "Rp 449.000",
+    category: "Wedding",
+    price: "Rp 50.000",
     image:
-      "https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=500&q=80",
-    features: ["Parallax", "QR Code", "Kado"],
-  },
-  // --- Kategori Website Lainnya ---
-  {
-    name: "Corporate Pro",
-    type: "Website Lain", // Kategori Utama: Website Lain
-    category: "Landing Page",
-    price: "Rp 599.000",
-    image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80",
-    features: ["SEO Ready", "Contact Form", "Portofolio"],
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994579/personal/web-porto/stylishbold_armbt3.png",
+    previewUrl: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
+    features: ["Musik", "RSVP", "Galeri"],
   },
   {
-    name: "E-Commerce Basic",
-    type: "Website Lain",
-    category: "Toko Online",
-    price: "Rp 899.000",
+    name: "Monochrome",
+    type: "Undangan Digital",
+    category: "Wedding",
+    price: "Rp 50.000",
     image:
-      "https://images.unsplash.com/photo-1526178611142-d6a7493a54b4?w=500&q=80",
-    features: ["Keranjang", "Pembayaran", "Inventori"],
-  },
-  {
-    name: "CRM Lite",
-    type: "Website Lain",
-    category: "Sistem Lainnya",
-    price: "Rp 1.500.000",
-    image:
-      "https://images.unsplash.com/photo-1556761175-59424e8e578c?w=500&q=80",
-    features: ["User Dashboard", "Data Report", "Auth"],
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766313919/personal/web-porto/nadhar_rginzu.png",
+    previewUrl: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
+    features: ["Musik", "RSVP", "Galeri"],
   },
 ];
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Heart, Layout } from "lucide-react";
+import { Eye, Heart, Layout } from "lucide-react";
 import { portfolios } from "@/data/data";
 import Image from "next/image";
 
@@ -114,9 +114,9 @@ function Portfolio() {
           <div className="w-full flex justify-center items-center">
             <button
               onClick={() => loadMore()}
-              className="mt-6 mx-auto px-6 py-2 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
+              className="hover cursor-pointer dark:bg-gray-50 dark:text-gray-900 flex gap-2 items-center mt-6 mx-auto px-6 py-2 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
             >
-              Show All
+              Show All <Eye />
             </button>
           </div>
         )}

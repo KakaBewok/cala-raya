@@ -3,11 +3,12 @@
 import React, { useState, useMemo } from "react";
 import { Eye, Heart, ShoppingCart, Layout, Grid } from "lucide-react"; // Import icon baru
 import { allThemes } from "@/data/data";
+import Image from "next/image";
 
 function Themes() {
   const tabs = [
     { id: "Undangan Digital", label: "Undangan Digital", icon: Heart },
-    { id: "Website Lain", label: "Website Lain", icon: Layout },
+    { id: "Website", label: "Website", icon: Layout },
   ];
 
   const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -76,18 +77,12 @@ function Themes() {
               className="group bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all"
             >
               <div className="relative h-40 md:h-60 overflow-hidden">
-                <img
+                <Image
                   src={theme.image}
                   alt={theme.name}
+                  fill
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                {/* Overlay Preview Button */}
-                <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/60 transition-all flex items-center justify-center">
-                  <button className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-white text-slate-900 rounded-full font-semibold flex items-center gap-2 transition-all text-sm">
-                    <Eye className="w-3 h-3" />
-                    Preview
-                  </button>
-                </div>
               </div>
               <div className="p-3">
                 <div className="mb-2">
@@ -123,13 +118,21 @@ function Themes() {
                   )}
                 </div>
                 <div className="flex gap-1.5">
-                  <button className="flex-1 px-2 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-xs">
+                  <a
+                    href={"#"}
+                    className="cursor-pointer flex-1 px-2 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-xs"
+                  >
                     <Heart className="w-3 h-3" />
                     Pesan
-                  </button>
-                  <button className="px-2 py-2 border-2 border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 rounded-lg font-semibold hover:border-slate-300 dark:hover:border-slate-500 transition-colors">
+                  </a>
+                  <a
+                    href={theme.previewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer px-2 py-2 border-2 border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 rounded-lg font-semibold hover:border-slate-300 dark:hover:border-slate-500 transition-colors"
+                  >
                     <Eye className="w-4 h-4" />
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
