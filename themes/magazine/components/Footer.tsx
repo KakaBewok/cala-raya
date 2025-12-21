@@ -4,7 +4,7 @@ import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 const CONTACT_PERSON = process.env.NEXT_PUBLIC_CONTACT_PERSON!;
 
 export default function Footer() {
-  const message = `Halo admin Calaraya Project, aku tertarik untuk bikin undangan digital. Boleh dibantu prosesnya? Terima kasih 🙏`;
+  const message = `Halo admin Calaraya Project, aku tertarik untuk bikin undangan digital. Boleh dibantu prosesnya?`;
   return (
     <footer className="w-full bg-neutral-700 text-white p-5 flex justify-between items-start z-50">
       <div className="flex items-center gap-3">

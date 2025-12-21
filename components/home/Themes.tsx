@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Eye, Heart, ShoppingCart, Layout, Grid } from "lucide-react"; // Import icon baru
+import { Eye, Heart, Layout, Grid, ShoppingCart } from "lucide-react"; // Import icon baru
 import { allThemes } from "@/data/data";
 import Image from "next/image";
 
@@ -81,12 +81,12 @@ function Themes() {
                   src={theme.image}
                   alt={theme.name}
                   fill
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <div className="p-3">
+              <div className="p-2 md:p-3">
                 <div className="mb-2">
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate">
+                  <h3 className="text-md md:text-lg font-bold text-slate-900 dark:text-white truncate">
                     {theme.name}
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center">
@@ -94,35 +94,38 @@ function Themes() {
                     {theme.category}
                   </p>
                 </div>
-                <div className="text-left mb-2">
-                  <div className="text-sm font-bold text-slate-900 dark:text-white">
-                    {theme.price}
+                <div className="text-left mb-3 min-h-[40px] flex items-center">
+                  <div>
+                    <p className="text-[10px] text-slate-500 dark:text-slate-400 mb-0.5">
+                      Mulai dari
+                    </p>
+                    <p className="text-sm md:text-base font-bold text-slate-900 dark:text-white break-words leading-tight">
+                      {theme.price}
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-1 mb-3 overflow-auto scrollbar-hide">
-                  {theme.features
-                    .slice(0, theme.features.length > 3 ? 2 : 3)
-                    .map((f, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[10px] px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded whitespace-nowrap"
-                      >
-                        {f}
-                      </span>
-                    ))}
-
-                  {theme.features.length > 3 && (
-                    <span className="text-[10px] px-1.5 py-0.5 bg-sky-100 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 font-bold rounded">
-                      +{theme.features.length - 3}
+                  {theme.features.map((f, idx) => (
+                    <span
+                      key={idx}
+                      className="text-[10px] px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded whitespace-nowrap"
+                    >
+                      {f}
                     </span>
-                  )}
+                  ))}
                 </div>
                 <div className="flex gap-1.5">
                   <a
-                    href={"#"}
-                    className="cursor-pointer flex-1 px-2 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 text-xs"
+                    href={`https://wa.me/6289607937642?text=${encodeURIComponent(
+                      `Halo admin Calaraya Project, aku tertarik untuk bikin ` +
+                        `${theme.type} ${theme.name}` +
+                        `. Boleh dibantu prosesnya?`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer flex-1 px-1 py-0.5 md:px-2 md:py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors flex items-center justify-center gap-2 text-xs md:text-sm"
                   >
-                    <Heart className="w-3 h-3" />
+                    <ShoppingCart className="w-3.5 h-3.5" />
                     Pesan
                   </a>
                   <a

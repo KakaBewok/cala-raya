@@ -238,77 +238,34 @@ const reviews = [
   },
 ];
 
-// const portfolioProjects = [
-//   {
-//     title: "Qatia Rent",
-//     description:
-//       "A web application for renting clothes and admin panel to manage the clothes & transactions.",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765989761/personal/web-porto/qatia_tiulwx.png",
-//     techStack: ["Laravel", "React", "MySQL", "Tailwind CSS"],
-//     previewUrl: "https://qatiarent.com/",
-//   },
-//   {
-//     title: "E-Invitation Netflix",
-//     description: "A modern e-invitation with a Netflix-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992495/personal/web-porto/netflix_jmoiic.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/bella-syafik?id=OkfVBm",
-//   },
-//   {
-//     title: "E-Invitation Floral",
-//     description: "A beautiful e-invitation with a floral-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992923/personal/web-porto/floral_lund0v.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/ilham-rosi?id=O9IPp",
-//   },
-//   {
-//     title: "E-Invitation Magazine",
-//     description: "A stylish e-invitation with a magazine-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765993975/personal/web-porto/magazine_yt4whr.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/rahma-jalal?id=Gku6G",
-//   },
-//   {
-//     title: "E-Invitation Maroon",
-//     description: "An Elegant e-invitation with a maroon-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994308/personal/web-porto/maroon_aohj7a.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
-//   },
-//   {
-//     title: "E-Invitation Stylish Bold",
-//     description: "A modern e-invitation with a stylish bold-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994579/personal/web-porto/stylishbold_armbt3.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
-//   },
-//   {
-//     title: "E-Invitation Monochrome",
-//     description: "A modern e-invitation with a monochrome-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1766313919/personal/web-porto/nadhar_rginzu.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
-//   },
-// ];
-
 const allThemes = [
   {
     name: "Rental Website",
     type: "Website",
     category: "Website Application",
-    price: "Rp 2000.000",
+    price: "Rp 2.000.000",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765989761/personal/web-porto/qatia_tiulwx.png",
     previewUrl: "https://qatiarent.com/",
-    features: ["Admin Page", "Manajemen Produk", "Transaksi Online"],
+    features: [
+      "Customer Page",
+      "Dashboard",
+      "Admin Page",
+      "Manajemen Produk",
+      "Manajemen Transaksi",
+    ],
   },
+  {
+    name: "Custom Website",
+    type: "Website",
+    category: "Custom Website",
+    price: "Rp 1.000.000",
+    image:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766328476/personal/web-porto/b6417ac5-6b4f-4b73-8c5f-6d0fd1e48249_a7lpa6.webp",
+    previewUrl: "#",
+    features: ["Custom Feature"],
+  },
+
   {
     name: "Netflix",
     type: "Undangan Digital",
@@ -317,7 +274,15 @@ const allThemes = [
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992495/personal/web-porto/netflix_jmoiic.png",
     previewUrl: "https://calaraya.vercel.app/bella-syafik?id=OkfVBm",
-    features: ["Musik", "RSVP", "Galeri"],
+    features: [
+      "Auto Scroll",
+      "RSVP",
+      "Galeri",
+      "Custom Music",
+      "Story",
+      "Gift Info",
+      "Google Maps",
+    ],
   },
   {
     name: "Floral",
@@ -327,7 +292,14 @@ const allThemes = [
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992923/personal/web-porto/floral_lund0v.png",
     previewUrl: "https://calaraya.vercel.app/ilham-rosi?id=O9IPp",
-    features: ["Musik", "RSVP", "Galeri"],
+    features: [
+      "RSVP",
+      "Galeri",
+      "Custom Music",
+      "Calendar",
+      "Google Maps",
+      "Gift Info",
+    ],
   },
   {
     name: "Magazine",
@@ -337,7 +309,14 @@ const allThemes = [
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765993975/personal/web-porto/magazine_yt4whr.png",
     previewUrl: "https://calaraya.vercel.app/rahma-jalal?id=Gku6G",
-    features: ["Musik", "RSVP", "Galeri"],
+    features: [
+      "RSVP",
+      "Galeri",
+      "Custom Music",
+      "Calendar",
+      "Google Maps",
+      "Gift Info",
+    ],
   },
   {
     name: "Maroon",
@@ -347,7 +326,14 @@ const allThemes = [
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994308/personal/web-porto/maroon_aohj7a.png",
     previewUrl: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
-    features: ["Musik", "RSVP", "Galeri"],
+    features: [
+      "RSVP",
+      "Galeri",
+      "Custom Music",
+      "Calendar",
+      "Google Maps",
+      "Gift Info",
+    ],
   },
   {
     name: "Stylish Bold",
@@ -357,7 +343,14 @@ const allThemes = [
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994579/personal/web-porto/stylishbold_armbt3.png",
     previewUrl: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
-    features: ["Musik", "RSVP", "Galeri"],
+    features: [
+      "RSVP",
+      "Galeri",
+      "Custom Music",
+      "Calendar",
+      "Google Maps",
+      "Gift Info",
+    ],
   },
   {
     name: "Monochrome",
@@ -367,7 +360,14 @@ const allThemes = [
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1766313919/personal/web-porto/nadhar_rginzu.png",
     previewUrl: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
-    features: ["Musik", "RSVP", "Galeri"],
+    features: [
+      "RSVP",
+      "Galeri",
+      "Custom Music",
+      "Calendar",
+      "Google Maps",
+      "Gift Info",
+    ],
   },
 ];
 
