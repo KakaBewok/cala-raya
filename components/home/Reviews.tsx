@@ -1,58 +1,11 @@
 "use client";
 
+import { reviews } from "@/data/data";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
 function Reviews() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  const reviews = [
-    {
-      name: "Sarah Abdullah",
-      rating: 5,
-      comment:
-        "Pelayanan sangat memuaskan! Undangan digital yang dibuat sangat cantik dan sesuai harapan. Responsif dan cepat dalam revisi.",
-      image: "https://i.pravatar.cc/150?img=1",
-      chatImage:
-        "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
-    },
-    {
-      name: "Budi Santoso",
-      rating: 5,
-      comment:
-        "Website company profile yang dibuat sangat profesional. Tim sangat membantu dari awal hingga akhir project. Recommended!",
-      image: "https://i.pravatar.cc/150?img=12",
-      chatImage:
-        "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
-    },
-    {
-      name: "Dewi Lestari",
-      rating: 5,
-      comment:
-        "Harga terjangkau dengan kualitas premium. Undangan pernikahan kami jadi sangat berkesan. Terima kasih!",
-      image: "https://i.pravatar.cc/150?img=5",
-      chatImage:
-        "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
-    },
-    {
-      name: "Ahmad Rifai",
-      rating: 5,
-      comment:
-        "Proses cepat dan hasil memuaskan. Tim sangat kooperatif dan detail oriented. Akan order lagi untuk project berikutnya!",
-      image: "https://i.pravatar.cc/150?img=8",
-      chatImage:
-        "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
-    },
-    {
-      name: "Siti Nurhaliza",
-      rating: 5,
-      comment:
-        "Undangan digital untuk acara aqiqah anak saya sangat indah. Tamu-tamu pada memuji designnya. Sukses terus!",
-      image: "https://i.pravatar.cc/150?img=9",
-      chatImage:
-        "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
-    },
-  ];
 
   // Auto slide every 4 seconds
   useEffect(() => {
@@ -63,7 +16,7 @@ function Reviews() {
     }, 4000);
 
     return () => clearInterval(timer);
-  }, [reviews.length]);
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex: number) =>

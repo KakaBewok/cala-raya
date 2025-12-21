@@ -2,19 +2,11 @@
 
 import { useState } from "react";
 import { Menu, X, Sun, Moon, Heart } from "lucide-react";
+import { navLinks } from "@/data/data";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
-
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Tema", href: "#themes" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Why Us", href: "#why-us" },
-    { name: "Review", href: "#reviews" },
-    { name: "FAQ", href: "#faq" },
-  ];
 
   const toggleTheme = () => {
     const newTheme = !isDark;

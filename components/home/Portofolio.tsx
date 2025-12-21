@@ -2,72 +2,25 @@
 
 import React, { useState, useMemo } from "react";
 import { Heart, Layout } from "lucide-react";
+import { portfolios } from "@/data/data";
 
 function Portfolio() {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const portfolios = [
-    {
-      title: "Wedding - Andi & Siti",
-      type: "Undangan Digital", // Kategori 1
-      image:
-        "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-    },
-    {
-      title: "Company Profile - PT Maju",
-      type: "Website & Sistem", // Kategori 2
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80",
-    },
-    {
-      title: "Birthday - Sweet 17",
-      type: "Undangan Digital",
-      image:
-        "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80",
-    },
-    {
-      title: "E-Commerce Fashion",
-      type: "Website & Sistem",
-      image:
-        "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80",
-    },
-    {
-      title: "Wedding - Budi & Ani",
-      type: "Undangan Digital",
-      image:
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80",
-    },
-    {
-      title: "Landing Page Startup",
-      type: "Website & Sistem",
-      image:
-        "https://images.unsplash.com/photo-1517292987719-0369a794ec0f?w=600&q=80",
-    },
-    {
-      title: "Aqiqah - Baby Zahra",
-      type: "Undangan Digital",
-      image:
-        "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80",
-    },
-    {
-      title: "Restaurant Website",
-      type: "Website & Sistem",
-      image:
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80",
-    },
-  ];
-
-  // Hanya Dua Tab Pilihan Utama
   const tabs = [
     { id: "Undangan Digital", label: "Undangan Digital", icon: Heart },
     { id: "Website & Sistem", label: "Website & Sistem", icon: Layout },
   ];
 
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+  const [activeTab, setActiveTab] = useState<string>(tabs[0].id);
+  const [visibleCount, setVisibleCount] = useState<number>(8);
 
   // Filter portofolio berdasarkan tab yang aktif
   const filteredPortfolios = useMemo(() => {
-    return portfolios.filter((item) => item.type === activeTab);
-  }, [activeTab, portfolios]);
+    return portfolios.filter((item) => item.product === activeTab);
+  }, [activeTab]);
+
+  const loadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + 8, filteredPortfolios.length));
+  };
 
   return (
     <section id="portfolio" className="py-24 bg-slate-50 dark:bg-slate-900">
@@ -109,13 +62,13 @@ function Portfolio() {
         {/* --- End Komponen Tabs Filter --- */}
 
         {/* Tampilan Portofolio yang Difilter */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-          {filteredPortfolios.map((item, i) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {filteredPortfolios.slice(0, visibleCount).map((item, i) => (
             <div
               key={i}
               className="group relative bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all"
             >
-              <div className="relative h-40 overflow-hidden">
+              <div className="relative h-40 md:h-60 overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -138,8 +91,8 @@ function Portfolio() {
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate">
                   {item.title}
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {item.type}
+                <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                  {item.description}
                 </p>
               </div>
             </div>
@@ -154,8 +107,19 @@ function Portfolio() {
             </div>
           )}
         </div>
+        {visibleCount < filteredPortfolios.length && (
+          <div className="w-full flex justify-center items-center">
+            <button
+              onClick={() => loadMore()}
+              className="mt-6 mx-auto px-6 py-2 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
+            >
+              Show All
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
 }
+
 export default Portfolio;

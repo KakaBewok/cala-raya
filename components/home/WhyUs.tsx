@@ -1,60 +1,7 @@
-import { Check, Eye, Heart, Phone, Star } from "lucide-react";
+import { features } from "@/data/data";
+import { Heart, Phone, Star } from "lucide-react";
 
 function WhyUs() {
-  const features = [
-    {
-      icon: "⚡",
-      title: "Proses Cepat",
-      description:
-        "Undangan digital jadi dalam 1-2 hari kerja. Website selesai dalam 1-2 minggu.",
-      IconComponent: Star,
-    },
-    {
-      icon: "💎",
-      title: "Desain Premium",
-      description:
-        "Tema elegan dan modern yang dibuat oleh designer profesional.",
-      IconComponent: Heart,
-    },
-    {
-      icon: "🔄",
-      title: "Revisi Unlimited",
-      description: "Revisi sepuasnya hingga hasil sesuai keinginan Anda.",
-      IconComponent: Check,
-    },
-    {
-      icon: "💰",
-      title: "Harga Terjangkau",
-      description: "Harga mulai dari 199rb untuk undangan digital.",
-      IconComponent: Star,
-    },
-    {
-      icon: "📱",
-      title: "Responsive Design",
-      description: "Tampilan sempurna di semua device (HP, tablet, desktop).",
-      IconComponent: Eye,
-    },
-    {
-      icon: "🎯",
-      title: "Custom Request",
-      description: "Kami bisa buatkan tema custom sesuai keinginan Anda.",
-      IconComponent: Heart,
-    },
-    {
-      icon: "🛠️",
-      title: "After Sales Support",
-      description:
-        "Garansi maintenance 30 hari gratis. Support 24/7 via WhatsApp.",
-      IconComponent: Check,
-    },
-    {
-      icon: "⚙️",
-      title: "Fitur Lengkap",
-      description: "RSVP, Google Maps, Gallery, Music, Video, Countdown Timer.",
-      IconComponent: Star,
-    },
-  ];
-
   return (
     <section id="why-us" className="py-24 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4">
@@ -74,7 +21,7 @@ function WhyUs() {
 
         {/* Features Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {features.map((feature, i) => (
+          {features.map((feature, i: number) => (
             <div
               key={i}
               className="group bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700 hover:shadow-lg hover:border-emerald-300 dark:hover:border-emerald-500 transition-all duration-300"

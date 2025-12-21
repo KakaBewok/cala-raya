@@ -1,29 +1,11 @@
 "use client";
 
+import { faqs } from "@/data/data";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 function FAQ() {
   const [openIndex, setOpenIndex] = useState<number>(0);
-
-  const faqs = [
-    {
-      q: "Berapa lama pembuatan undangan digital?",
-      a: "Proses pembuatan undangan digital memakan waktu 1-2 hari kerja setelah semua data diterima lengkap.",
-    },
-    {
-      q: "Apakah bisa revisi?",
-      a: "Tentu bisa! Revisi disesuaikan dengan paket yang Anda pilih. Paket Basic 2x revisi, Premium 5x revisi, Ultimate unlimited.",
-    },
-    {
-      q: "Website pakai teknologi apa?",
-      a: "Kami menggunakan teknologi modern seperti Next.js, React, dan Tailwind CSS untuk website yang cepat dan responsive.",
-    },
-    {
-      q: "Bagaimana cara pembayaran?",
-      a: "Pembayaran via transfer bank, e-wallet, atau QRIS. Sistem DP 50% di awal, pelunasan 50% setelah project selesai.",
-    },
-  ];
 
   return (
     <section id="faq" className="py-24 bg-slate-50 dark:bg-slate-900">

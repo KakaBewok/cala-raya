@@ -1,20 +1,7 @@
-import {
-  Facebook,
-  Heart,
-  Instagram,
-  Mail,
-  MapPin,
-  Phone,
-  Twitter,
-} from "lucide-react";
+import { socialMedia } from "@/data/data";
+import { Heart, Mail, MapPin, Phone } from "lucide-react";
 
 function Footer() {
-  const socialMedia = [
-    { icon: Instagram, href: "#" },
-    { icon: Facebook, href: "#" },
-    { icon: Twitter, href: "#" },
-  ];
-
   return (
     <footer className="bg-slate-900 dark:bg-slate-950 text-white pt-16 pb-8">
       <div className="max-w-6xl mx-auto px-4">
@@ -54,7 +41,7 @@ function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Follow Us</h3>
             <div className="flex gap-3">
-              {socialMedia.map((social, i) => (
+              {socialMedia.map((social, i: number) => (
                 <a
                   key={i}
                   href={social.href}
