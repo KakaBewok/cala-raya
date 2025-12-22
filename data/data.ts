@@ -1,4 +1,14 @@
-import { Check, Eye, Heart, Instagram, Star } from "lucide-react";
+import {
+  Check,
+  Eye,
+  Globe,
+  Heart,
+  Instagram,
+  ShoppingCart,
+  Smartphone,
+  Star,
+  Zap,
+} from "lucide-react";
 
 const faqs = [
   {
@@ -240,33 +250,6 @@ const reviews = [
 
 const allThemes = [
   {
-    name: "Rental Website",
-    type: "Website",
-    category: "Website Application",
-    price: "Rp 2.000.000",
-    image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765989761/personal/web-porto/qatia_tiulwx.png",
-    previewUrl: "https://qatiarent.com/",
-    features: [
-      "Customer Page",
-      "Dashboard",
-      "Admin Page",
-      "Manajemen Produk",
-      "Manajemen Transaksi",
-    ],
-  },
-  {
-    name: "Custom Website",
-    type: "Website",
-    category: "Custom Website",
-    price: "Rp 1.000.000",
-    image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766328476/personal/web-porto/b6417ac5-6b4f-4b73-8c5f-6d0fd1e48249_a7lpa6.webp",
-    previewUrl: "#",
-    features: ["Custom Feature"],
-  },
-
-  {
     name: "Netflix",
     type: "Undangan Digital",
     category: "Wedding",
@@ -371,6 +354,65 @@ const allThemes = [
   },
 ];
 
+const websiteServices = [
+  {
+    icon: Globe,
+    title: "Company Profile",
+    description:
+      "Website profesional untuk memperkenalkan perusahaan Anda dengan desain modern dan responsif",
+    features: [
+      "Responsive Design",
+      "CMS Admin Panel",
+      "SEO Optimized",
+      "Fast Loading",
+    ],
+    priceStart: "3.000.000",
+    popular: false,
+  },
+  {
+    icon: ShoppingCart,
+    title: "E-Commerce / Toko Online",
+    description:
+      "Platform jualan online lengkap dengan payment gateway dan sistem manajemen produk",
+    features: [
+      "Payment Gateway",
+      "Product Management",
+      "Order Tracking",
+      "Multi User",
+    ],
+    priceStart: "5.000.000",
+    popular: true,
+  },
+  {
+    icon: Zap,
+    title: "Landing Page",
+    description:
+      "Website satu halaman untuk campaign marketing atau launching produk baru",
+    features: [
+      "Conversion Focused",
+      "Fast Performance",
+      "Mobile Optimized",
+      "Analytics",
+    ],
+    priceStart: "1.500.000",
+    popular: false,
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile Application",
+    description:
+      "Aplikasi mobile untuk iOS dan Android dengan fitur sesuai kebutuhan bisnis",
+    features: [
+      "Cross Platform",
+      "Push Notification",
+      "API Integration",
+      "Cloud Storage",
+    ],
+    priceStart: "15.000.000",
+    popular: false,
+  },
+];
+
 const features = [
   {
     icon: "⚡",
@@ -433,56 +475,5 @@ export {
   reviews,
   allThemes,
   features,
+  websiteServices,
 };
-
-// const portfolioProjects = [
-//   {
-//     title: "Qatia Rent",
-//     description:
-//       "A web application for renting clothes and admin panel to manage the clothes & transactions.",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765989761/personal/web-porto/qatia_tiulwx.png",
-//     techStack: ["Laravel", "React", "MySQL", "Tailwind CSS"],
-//     previewUrl: "https://qatiarent.com/",
-//   },
-//   {
-//     title: "E-Invitation Netflix",
-//     description: "A modern e-invitation with a Netflix-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992495/personal/web-porto/netflix_jmoiic.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/bella-syafik?id=OkfVBm",
-//   },
-//   {
-//     title: "E-Invitation Floral",
-//     description: "A beautiful e-invitation with a floral-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992923/personal/web-porto/floral_lund0v.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/ilham-rosi?id=O9IPp",
-//   },
-//   {
-//     title: "E-Invitation Magazine",
-//     description: "A stylish e-invitation with a magazine-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765993975/personal/web-porto/magazine_yt4whr.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/rahma-jalal?id=Gku6G",
-//   },
-//   {
-//     title: "E-Invitation Maroon",
-//     description: "An Elegant e-invitation with a maroon-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994308/personal/web-porto/maroon_aohj7a.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
-//   },
-//   {
-//     title: "E-Invitation Stylish Bold",
-//     description: "A modern e-invitation with a stylish bold-inspired theme",
-//     imageUrl:
-//       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994579/personal/web-porto/stylishbold_armbt3.png",
-//     techStack: ["Next.js", "Typescript", "Supabase", "Tailwind CSS"],
-//     previewUrl: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
-//   },
-// ];

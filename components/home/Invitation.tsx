@@ -1,36 +1,11 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { Eye, Heart, Layout, Grid, ShoppingCart } from "lucide-react"; // Import icon baru
+import React from "react";
+import { Eye, ShoppingCart } from "lucide-react"; // Import icon baru
 import { allThemes } from "@/data/data";
 import Image from "next/image";
 
-function Themes() {
-  const tabs = [
-    { id: "Undangan Digital", label: "Undangan Digital", icon: Heart },
-    { id: "Website", label: "Website", icon: Layout },
-  ];
-
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
-
-  // Filter tema berdasarkan tab yang aktif
-  const filteredThemes = useMemo(() => {
-    return allThemes.filter((theme) => theme.type === activeTab);
-  }, [activeTab]);
-
-  const getCategoryIcon = (category: unknown) => {
-    switch (category) {
-      case "Toko Online":
-        return <ShoppingCart className="w-3 h-3 mr-1" />;
-      case "Landing Page":
-        return <Layout className="w-3 h-3 mr-1" />;
-      case "Sistem Lainnya":
-        return <Grid className="w-3 h-3 mr-1" />;
-      default:
-        return null;
-    }
-  };
-
+function Invitation() {
   return (
     <section id="themes" className="py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4">
@@ -43,35 +18,9 @@ function Themes() {
           </p>
         </div>
 
-        {/* --- Komponen Tabs --- */}
-        <div className="flex justify-center mb-10">
-          <div className="flex border border-slate-200 dark:border-slate-700 rounded-xl p-1 bg-slate-50 dark:bg-slate-800 shadow-sm">
-            {tabs.map((tab) => {
-              const isActive = activeTab === tab.id;
-              const IconComponent = tab.icon;
-
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
-                    isActive
-                      ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                  }`}
-                >
-                  <IconComponent className="w-4 h-4" />
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        {/* --- End Komponen Tabs --- */}
-
         {/* Tampilan Tema */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {filteredThemes.map((theme, i) => (
+          {allThemes.map((theme, i) => (
             <div
               key={i}
               className="group bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all"
@@ -90,7 +39,6 @@ function Themes() {
                     {theme.name}
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center">
-                    {getCategoryIcon(theme.category)}
                     {theme.category}
                   </p>
                 </div>
@@ -142,11 +90,10 @@ function Themes() {
           ))}
 
           {/* Pesan jika tidak ada tema di tab yang dipilih */}
-          {filteredThemes.length === 0 && (
+          {allThemes.length === 0 && (
             <div className="col-span-full text-center py-10">
               <p className="text-slate-500 dark:text-slate-400">
-                Belum ada tema untuk kategori &quot;{activeTab}&quot;. Segera
-                hadir!
+                Belum ada tema undangan. Segera hadir!
               </p>
             </div>
           )}
@@ -156,4 +103,4 @@ function Themes() {
   );
 }
 
-export default Themes;
+export default Invitation;

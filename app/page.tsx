@@ -2,17 +2,19 @@ import FAQ from "@/components/home/Faq";
 import Footer from "@/components/home/Footer";
 import Hero from "@/components/home/Hero";
 import Navbar from "@/components/home/Navbar";
-import Portfolio from "@/components/home/Portofolio";
+import Portfolio from "@/components/home/Portfolio";
 import Reviews from "@/components/home/Reviews";
-import Themes from "@/components/home/Themes";
+import Invitation from "@/components/home/Invitation";
 import WhyUs from "@/components/home/WhyUs";
+import Website from "@/components/home/Website";
 
 export default function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors">
       <Navbar />
       <Hero />
-      <Themes />
+      <Invitation />
+      <Website />
       <Portfolio />
       <WhyUs />
       <Reviews />
