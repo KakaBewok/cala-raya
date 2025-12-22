@@ -1,5 +1,5 @@
 import { features } from "@/data/data";
-import { Heart, Phone, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 function WhyUs() {
   return (
@@ -40,28 +40,6 @@ function WhyUs() {
               </p>
             </div>
           ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-12 text-center">
-          <div className="inline-block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 shadow-lg max-w-2xl">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-              Siap Membuat Undangan atau Website Impian Anda?
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">
-              Konsultasi gratis! Tim kami siap membantu mewujudkan ide Anda
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
-                <Heart className="w-4 h-4" />
-                Mulai Project
-              </button>
-              <button className="px-6 py-3 border-2 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg font-semibold hover:border-slate-300 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
-                <Phone className="w-4 h-4" />
-                Hubungi Kami
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>

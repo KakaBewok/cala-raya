@@ -20,21 +20,21 @@ const Website = () => {
           return (
             <div
               key={i}
-              className={`relative bg-white dark:bg-slate-800 rounded-xl md:rounded-2xl p-4 md:p-6 border-2 transition-all hover:shadow-2xl group ${
+              className={`relative bg-white dark:bg-slate-800 rounded-lg md:rounded-lg p-4 md:p-6 border-2 transition-all hover:shadow-xl hover:shadow-blue-300 group ${
                 service.popular
-                  ? "border-purple-500 dark:border-purple-400"
+                  ? "border-cyan-500 dark:border-cyan-600 border-3"
                   : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
               }`}
             >
               {service.popular && (
-                <div className="absolute -top-2 left-2 md:left-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-semibold">
+                <div className="absolute -top-2 left-2 md:left-4 bg-gradient-to-r from-blue-500 to-green-500 text-white px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-semibold">
                   Popular
                 </div>
               )}
 
               {/* Icon */}
               <div className="flex justify-center mb-3 md:mb-4">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
               </div>
@@ -81,7 +81,7 @@ const Website = () => {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full px-3 py-2 md:px-4 md:py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg md:rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all flex items-center justify-center gap-1.5 md:gap-2 shadow-lg text-xs md:text-sm"
+                className="w-full px-3 py-2 md:px-4 md:py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg md:rounded-xl font-semibold hover:from-blue-600 hover:to-green-600 transition-colors flex items-center justify-center gap-1.5 md:gap-2 shadow-lg text-xs md:text-sm duration-300"
               >
                 Konsultasi
                 <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />

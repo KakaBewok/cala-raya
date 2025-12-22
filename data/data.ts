@@ -218,49 +218,84 @@ const portfolios = [
 
 const reviews = [
   {
-    name: "Sarah Abdullah",
+    name: "Qatia Rent",
     rating: 5,
+    product: "Website",
+    type: "Rental Website",
     comment:
-      "Pelayanan sangat memuaskan! Undangan digital yang dibuat sangat cantik dan sesuai harapan. Responsif dan cepat dalam revisi.",
-    image: "https://i.pravatar.cc/150?img=1",
-    chatImage:
-      "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
+      "Semuanya oke banget dan bikin happy apalagi tampilannya elegan. Ga sabar buat launching....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766417110/personal/web-porto/testimonials/6.qatia_xjpjms.png",
   },
   {
-    name: "Budi Santoso",
+    name: "Andres & Agnalya",
     rating: 5,
+    product: "Undangan Digital",
+    type: "Netflix",
     comment:
-      "Website company profile yang dibuat sangat profesional. Tim sangat membantu dari awal hingga akhir project. Recommended!",
-    image: "https://i.pravatar.cc/150?img=12",
-    chatImage:
-      "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
+      "Halo ka! Undangan digitalnya bagus banget, temen2ku pada bilang beda dari yang lain temanya. Suka bgtttt!....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766417109/personal/web-porto/testimonials/1.agnal_fix_sjdsgs.png",
   },
   {
-    name: "Dewi Lestari",
+    name: "Bella & Syafik",
     rating: 5,
+    product: "Undangan Digital",
+    type: "Netflix",
     comment:
-      "Harga terjangkau dengan kualitas premium. Undangan pernikahan kami jadi sangat berkesan. Terima kasih!",
-    image: "https://i.pravatar.cc/150?img=5",
-    chatImage:
-      "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
+      "Wedding invitationnya lucu & unik, semua sistemnya juga sangat memudahkan, gak ribet, sat set....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766417109/personal/web-porto/testimonials/2.bella_dqml6p.png",
   },
   {
-    name: "Ahmad Rifai",
+    name: "Ferdy & Irma",
     rating: 5,
+    product: "Undangan Digital",
+    type: "Magazine",
     comment:
-      "Proses cepat dan hasil memuaskan. Tim sangat kooperatif dan detail oriented. Akan order lagi untuk project berikutnya!",
-    image: "https://i.pravatar.cc/150?img=8",
-    chatImage:
-      "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
+      "Kak gemes banget, mau nangis. Aku seneng soalnya templatenya simple dan aku banget....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766417109/personal/web-porto/testimonials/3.ferdy_irma_fix_chyntn.png",
   },
   {
-    name: "Siti Nurhaliza",
+    name: "Reigiya & Amar",
     rating: 5,
+    product: "Undangan Digital",
+    type: "Maroon",
     comment:
-      "Undangan digital untuk acara aqiqah anak saya sangat indah. Tamu-tamu pada memuji designnya. Sukses terus!",
-    image: "https://i.pravatar.cc/150?img=9",
-    chatImage:
-      "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=80",
+      "Hasilnya bagus banget gemesss, sesuai kemauan aku, kaka juga ramah banget dan sabar....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766417109/personal/web-porto/testimonials/4.giya_a_buk4y3.png",
+  },
+  {
+    name: "Nadiah & Haris",
+    rating: 5,
+    product: "Undangan Digital",
+    type: "Monochrome",
+    comment:
+      "Masyaallah kak, aku & calon suami suka bgt. Lucu Puollll!!! Konsepnya sesuai selera kami....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766417111/personal/web-porto/testimonials/5.nadiah_rrztlh.png",
+  },
+  {
+    name: "Rahma & Jalal",
+    rating: 5,
+    product: "Undangan Digital",
+    type: "Magazine",
+    comment:
+      "Undangan digital dr calaraya bagus banget dan sesuai sama yg kita mau....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766417113/personal/web-porto/testimonials/7.rahma_ldwunt.png",
+  },
+  {
+    name: "Tasya & Ikhsan",
+    rating: 5,
+    product: "Undangan Digital",
+    type: "Maroon",
+    comment:
+      "Masyaallah untuk respon admin sangat baik dan cepat, selalu sigap dengan komen klien....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766417113/personal/web-porto/testimonials/8.tasya_pfewuh.png",
   },
 ];
 
