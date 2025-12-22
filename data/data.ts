@@ -4,34 +4,50 @@ import {
   Globe,
   Heart,
   Instagram,
+  MessageCircle,
   ShoppingCart,
   Smartphone,
   Star,
   Zap,
 } from "lucide-react";
 
-const faqs = [
+const contact = {
+  email: "calarayaproject@gmail.com",
+  phone: "6289607937642",
+  address: "Bogor, Indonesia",
+};
+
+const socialMedia = [
+  { icon: Instagram, href: "https://www.instagram.com/calarayaproject" },
   {
-    q: "Berapa lama pembuatan undangan digital?",
-    a: "Pembuatan undangan digital memakan waktu 1-2 hari kerja setelah semua data diterima lengkap.",
-  },
-  {
-    q: "Apakah bisa revisi?",
-    a: "Tentu bisa! Revisi disesuaikan dengan paket yang Anda pilih. Paket Basic 2x revisi, Premium 5x revisi, Ultimate unlimited.",
-  },
-  {
-    q: "Website pakai teknologi apa?",
-    a: "Kami menggunakan teknologi modern seperti Next.js, React, dan Tailwind CSS untuk website yang cepat dan responsive.",
-  },
-  {
-    q: "Bagaimana cara pembayaran?",
-    a: "Pembayaran via transfer bank, e-wallet, atau QRIS. Sistem DP 50% di awal, pelunasan 50% setelah project selesai.",
+    icon: MessageCircle,
+    href: `https://wa.me/${contact.phone}?text=${encodeURIComponent(
+      "Halo admin Calaraya Project, aku tertarik untuk bikin Undangan/Website. Boleh dibantu prosesnya?"
+    )}`,
   },
 ];
 
-const socialMedia = [
-  { icon: Instagram, href: "#" },
-  // { icon: Whatsapp, href: "#" },
+const faqs = [
+  {
+    q: "Berapa lama pembuatan undangan digital?",
+    a: "Pembuatan undangan digital memakan waktu paling lama 1 hari kerja setelah semua data diterima lengkap.",
+  },
+  {
+    q: "Berapa lama pembuatan website?",
+    a: "Pembuatan website memakan waktu 1-2 minggu tergantung kompleksitas fitur dan jumlah halaman yang diinginkan.",
+  },
+  {
+    q: "Apakah bisa revisi?",
+    a: "Bisa, kami menyediakan revisi 4x untuk undangan digital dan menyesuaikan untuk revisi website hingga hasil sesuai keinginan Anda.",
+  },
+  {
+    q: "Website pakai teknologi apa?",
+    a: "Kami menggunakan teknologi modern seperti Next.js, React, Laravel dan Tailwind CSS untuk website yang cepat dan responsive.",
+  },
+  {
+    q: "Bagaimana cara pembayaran?",
+    a: "Pembayaran via transfer bank, E-Wallet GoPay, ShopeePay dan OVO. Sistem DP 50% di awal, pelunasan 50% setelah project selesai.",
+  },
 ];
 
 const navLinks = [
@@ -468,6 +484,7 @@ const features = [
 ];
 
 export {
+  contact,
   faqs,
   socialMedia,
   navLinks,

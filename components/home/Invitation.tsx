@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Eye, ShoppingCart } from "lucide-react"; // Import icon baru
-import { allThemes } from "@/data/data";
+import { allThemes, contact } from "@/data/data";
 import Image from "next/image";
 
 function Invitation() {
@@ -64,7 +64,9 @@ function Invitation() {
                 </div>
                 <div className="flex gap-1.5">
                   <a
-                    href={`https://wa.me/6289607937642?text=${encodeURIComponent(
+                    href={`https://wa.me/${
+                      contact.phone
+                    }?text=${encodeURIComponent(
                       `Halo admin Calaraya Project, aku tertarik untuk bikin ` +
                         `${theme.type} ${theme.name}` +
                         `. Boleh dibantu prosesnya?`
