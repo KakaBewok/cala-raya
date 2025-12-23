@@ -55,7 +55,7 @@ function Reviews() {
           }}
         >
           <CarouselContent className="-ml-2 md:-ml-4">
-            {reviews.map((review, i) => (
+            {reviews.map((review, i: number) => (
               <CarouselItem
                 key={i}
                 className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 h-full shadow-lg shadow-slate-500/10 ml-0 md:ml-2"
@@ -74,7 +74,7 @@ function Reviews() {
                   </div>
 
                   {/* Profile */}
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="mb-2">
                     <div className="flex flex-col gap-1">
                       <h4 className="text-lg md:text-xl font-semibold text-slate-900 dark:text-white">
                         {review.name}

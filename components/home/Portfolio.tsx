@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Eye, Heart, Layout } from "lucide-react";
+import { ExternalLink, Eye, Heart, Layout } from "lucide-react";
 import { portfolios } from "@/data/data";
 import Image from "next/image";
 
@@ -65,40 +65,38 @@ function Portfolio() {
         {/* Tampilan Portofolio yang Difilter */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {filteredPortfolios.slice(0, visibleCount).map((item, i) => (
-            <div
+            <a
               key={i}
-              className="group relative bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all"
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative bg-white dark:bg-slate-800 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 hover:shadow-2xl transition-all h-48 md:h-64"
             >
-              <div className="relative h-40 md:h-60 overflow-hidden">
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer"
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </a>
+              <div className="relative w-full h-full overflow-hidden">
+                <Image
+                  fill
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
                 {/* Type Tag */}
                 <div className="absolute top-2 left-2">
                   <span className="px-2 py-1 bg-white/90 dark:bg-slate-900/90 text-slate-900 dark:text-white text-[10px] font-semibold rounded-full shadow-sm">
                     {item.type}
                   </span>
                 </div>
+                {/* Always Visible Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex flex-col justify-end p-4">
+                  <h3 className="text-white/90 text-sm md:text-base font-bold  mb-1">
+                    {item.title}
+                  </h3>
+                </div>
+                {/* External Link Icon */}
+                <div className="absolute top-2 right-2 w-8 h-8 bg-white/90 dark:bg-slate-900/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ExternalLink className="w-4 h-4 text-slate-900 dark:text-white" />
+                </div>
               </div>
-              <div className="p-3">
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                  {item.description}
-                </p>
-              </div>
-            </div>
+            </a>
           ))}
 
           {/* Pesan jika tidak ada portofolio di tab yang dipilih */}

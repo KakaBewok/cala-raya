@@ -1,14 +1,18 @@
 import {
-  Check,
-  Eye,
+  Figma,
   Globe,
-  Heart,
+  Headset,
   Instagram,
+  ListChecks,
   MessageCircle,
+  MonitorSmartphone,
+  Settings2,
   ShoppingCart,
   Smartphone,
-  Star,
+  SquarePen,
+  Wallet,
   Zap,
+  ZapIcon,
 } from "lucide-react";
 
 const contact = {
@@ -466,55 +470,47 @@ const websiteServices = [
 
 const features = [
   {
-    icon: "⚡",
     title: "Proses Cepat",
     description:
-      "Undangan digital jadi dalam 1-2 hari kerja. Website selesai dalam 1-2 minggu.",
-    IconComponent: Star,
+      "Undangan digital jadi dalam 1 hari kerja. Website selesai dalam 1-2 minggu.",
+    IconComponent: ZapIcon,
   },
   {
-    icon: "💎",
     title: "Desain Premium",
     description:
-      "Tema elegan dan modern yang dibuat oleh designer profesional.",
-    IconComponent: Heart,
+      "Desain elegan dan modern yang dibuat oleh desainer profesional.",
+    IconComponent: Figma,
   },
   {
-    icon: "🔄",
-    title: "Revisi Unlimited",
-    description: "Revisi sepuasnya hingga hasil sesuai keinginan Anda.",
-    IconComponent: Check,
+    title: "Revisi Fleksibel",
+    description:
+      "Fleksibel dalam revisi agar hasil akhir benar-benar sesuai harapan Anda.",
+    IconComponent: SquarePen,
   },
   {
-    icon: "💰",
     title: "Harga Terjangkau",
-    description: "Harga mulai dari 199rb untuk undangan digital.",
-    IconComponent: Star,
+    description: "Harga yang ramah di kantong dengan kualitas tetap terjaga.",
+    IconComponent: Wallet,
   },
   {
-    icon: "📱",
     title: "Responsive Design",
     description: "Tampilan sempurna di semua device (HP, tablet, desktop).",
-    IconComponent: Eye,
+    IconComponent: MonitorSmartphone,
   },
   {
-    icon: "🎯",
     title: "Custom Request",
-    description: "Kami bisa buatkan tema custom sesuai keinginan Anda.",
-    IconComponent: Heart,
+    description: "Kami dapat menyesuaikan solusi sesuai dengan kebutuhan Anda.",
+    IconComponent: Settings2,
   },
   {
-    icon: "🛠️",
     title: "After Sales Support",
-    description:
-      "Garansi maintenance 30 hari gratis. Support 24/7 via WhatsApp.",
-    IconComponent: Check,
+    description: "Dukungan dan maintenance setelah proyek selesai.",
+    IconComponent: Headset,
   },
   {
-    icon: "⚙️",
     title: "Fitur Lengkap",
-    description: "RSVP, Google Maps, Gallery, Music, Video, Countdown Timer.",
-    IconComponent: Star,
+    description: "Fitur fleksibel yang disesuaikan dengan kebutuhan proyek.",
+    IconComponent: ListChecks,
   },
 ];
 
