@@ -22,21 +22,23 @@ function Portfolio() {
   };
 
   return (
-    <section id="portfolio" className="py-24 bg-slate-50 dark:bg-slate-900">
+    <section
+      id="portfolio"
+      className="py-12 md:py-24 bg-slate-50 dark:bg-slate-900"
+    >
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Portfolio Kami
           </h2>
           <p className="text-sm md:text-lg text-slate-600 dark:text-slate-400">
-            Beberapa project yang telah kami selesaikan untuk klien-klien
-            spesial
+            Beberapa project yang telah kami selesaikan
           </p>
         </div>
 
         {/* tabs */}
         <div className="flex justify-center mb-10">
-          <div className="flex border border-slate-200 dark:border-slate-700 rounded-xl p-1 bg-white dark:bg-slate-800 shadow-lg">
+          <div className="flex border border-slate-200 dark:border-slate-700 rounded-lg p-1 bg-white dark:bg-slate-800 shadow-lg">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               const IconComponent = tab.icon;
@@ -105,10 +107,10 @@ function Portfolio() {
           )}
         </div>
         {visibleCount < filteredPortfolios.length && (
-          <div className="w-full flex justify-center items-center">
+          <div className="w-full flex justify-center items-center mt-8 md:mt-13">
             <button
               onClick={() => loadMore()}
-              className="hover cursor-pointer dark:bg-gray-50 dark:text-gray-900 flex gap-2 items-center mt-6 mx-auto px-6 py-2 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
+              className="cursor-pointer dark:bg-gray-50 dark:text-gray-900 flex gap-2 items-center mx-auto px-6 py-2 bg-slate-900 text-white rounded-md font-semibold hover:bg-slate-800 transition-colors"
             >
               Show more <Eye />
             </button>
