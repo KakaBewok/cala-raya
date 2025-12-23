@@ -68,14 +68,14 @@ const portfolios = [
     title: "Qatia Rent",
     description:
       "Website penyewaan pakaian dengan halaman admin untuk mengelola pakaian & transaksi",
-    product: "Website & Sistem",
+    product: "Website",
     type: "Rental Website",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765989761/personal/web-porto/qatia_tiulwx.png",
     url: "https://qatiarent.com/",
   },
   {
-    title: "Dinna & Hudha's Wedding",
+    title: "Dinna & Hudha",
     description: "Undangan Digital bertema Stylish Bold yang modern dan elegan",
     product: "Undangan Digital",
     type: "Stylish Bold",
@@ -84,7 +84,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
   },
   {
-    title: "Reigiya & Amar's Wedding",
+    title: "Reigiya & Amar",
     description: "Undangan Digital bertema Maroon yang elegan dan berkelas",
     product: "Undangan Digital",
     type: "Maroon",
@@ -93,7 +93,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
   },
   {
-    title: "Rahma & Jalal's Wedding",
+    title: "Rahma & Jalal",
     description: "Undangan Digital bertema Magazine yang modern dan unik",
     product: "Undangan Digital",
     type: "Magazine",
@@ -102,7 +102,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/rahma-jalal?id=Gku6G",
   },
   {
-    title: "Ilham & Rosi's Wedding",
+    title: "Ilham & Rosi",
     description: "Undangan Digital bertema Floral yang cantik dan romantis",
     product: "Undangan Digital",
     type: "Floral",
@@ -111,7 +111,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/ilham-rosi?id=O9IPp",
   },
   {
-    title: "Bella & Syafik's Wedding",
+    title: "Bella & Syafik",
     description: "Undangan Digital bertema Netflix yang unik",
     product: "Undangan Digital",
     type: "Netflix",
@@ -120,7 +120,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/bella-syafik?id=OkfVBm",
   },
   {
-    title: "Agung & Dessy's Wedding",
+    title: "Agung & Dessy",
     description: "Undangan Digital bertema Netflix yang unik",
     product: "Undangan Digital",
     type: "Netflix",
@@ -129,7 +129,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/agung-dessy?id=m6u1M",
   },
   {
-    title: "Andres & Agnalya's Wedding",
+    title: "Andres & Agnalya",
     description: "Undangan Digital bertema Netflix yang unik",
     product: "Undangan Digital",
     type: "Netflix",
@@ -138,7 +138,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/andres-agnalya?id=mrfBW",
   },
   {
-    title: "Ferdy & Irma's Wedding",
+    title: "Ferdy & Irma",
     description: "Undangan Digital bertema Magazine yang unik",
     product: "Undangan Digital",
     type: "Magazine",
@@ -147,7 +147,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/ferdy-irma?id=BMCXM",
   },
   {
-    title: "Naomi & Rayhan's Wedding",
+    title: "Naomi & Rayhan",
     description: "Undangan Digital bertema Magazine yang unik",
     product: "Undangan Digital",
     type: "Magazine",
@@ -156,7 +156,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/naomi-rayhan?id=k5HWZ",
   },
   {
-    title: "Choirul & Amanda's Wedding",
+    title: "Choirul & Amanda",
     description: "Undangan Digital bertema Magazine yang unik",
     product: "Undangan Digital",
     type: "Magazine",
@@ -165,7 +165,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/choirul-amanda?id=y6tle",
   },
   {
-    title: "Yogi & Nova's Wedding",
+    title: "Yogi & Nova",
     description: "Undangan Digital bertema Magazine yang unik",
     product: "Undangan Digital",
     type: "Magazine",
@@ -174,7 +174,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/yogi-nova?id=A5FBX",
   },
   {
-    title: "Riko & Shelly's Wedding",
+    title: "Riko & Shelly",
     description: "Undangan Digital bertema Magazine yang unik",
     product: "Undangan Digital",
     type: "Magazine",
@@ -183,7 +183,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/riko-shelly?id=lyhwL",
   },
   {
-    title: "Nadiah & Haris's Wedding",
+    title: "Nadiah & Haris",
     description: "Undangan Digital bertema Monochrome yang simpel dan modern",
     product: "Undangan Digital",
     type: "Monochrome",
@@ -192,7 +192,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
   },
   {
-    title: "Ikhsan & Tasya's Wedding",
+    title: "Ikhsan & Tasya",
     description: "Undangan Digital bertema Maroon yang elegan dan berkelas",
     product: "Undangan Digital",
     type: "Maroon",
@@ -201,7 +201,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/ihksan-tasya?id=n4cBkO",
   },
   {
-    title: "Shamil & Sarah's Wedding",
+    title: "Shamil & Sarah",
     description: "Undangan Digital bertema Maroon yang elegan dan berkelas",
     product: "Undangan Digital",
     type: "Maroon Custom",
@@ -210,7 +210,7 @@ const portfolios = [
     url: "https://calaraya.vercel.app/sarah-shamil?id=3otO5E",
   },
   {
-    title: "Ridho & Sasa's Wedding",
+    title: "Ridho & Sasa",
     description: "Undangan Digital bertema Magazine yang unik",
     product: "Undangan Digital",
     type: "Magazine",
