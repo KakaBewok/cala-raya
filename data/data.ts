@@ -34,15 +34,15 @@ const socialMedia = [
 const faqs = [
   {
     q: "Berapa lama pembuatan undangan digital?",
-    a: "Pembuatan undangan digital memakan waktu paling lama 1 hari kerja setelah semua data diterima lengkap.",
+    a: "Pembuatan undangan digital memakan waktu 1 hari kerja setelah semua data diterima lengkap.",
   },
   {
     q: "Berapa lama pembuatan website?",
-    a: "Pembuatan website memakan waktu 1-2 minggu tergantung kompleksitas fitur dan jumlah halaman yang diinginkan.",
+    a: "Pembuatan website paling cepat memakan waktu 1-2 minggu tergantung kompleksitas fitur dan jumlah halaman yang diinginkan.",
   },
   {
     q: "Apakah bisa revisi?",
-    a: "Bisa, kami menyediakan revisi 4x untuk undangan digital dan menyesuaikan untuk revisi website hingga hasil sesuai keinginan Anda.",
+    a: "Bisa, kami menyediakan unlimited revisi untuk undangan digital dan menyesuaikan untuk revisi website hingga hasil sesuai keinginan.",
   },
   {
     q: "Website pakai teknologi apa?",
@@ -50,7 +50,19 @@ const faqs = [
   },
   {
     q: "Bagaimana cara pembayaran?",
-    a: "Pembayaran via transfer bank, E-Wallet GoPay, ShopeePay dan OVO. Sistem DP 50% di awal, pelunasan 50% setelah project selesai.",
+    a: "Pembayaran via transfer bank, GoPay, ShopeePay dan OVO. Sistem DP 50% di awal, pelunasan 50% setelah project selesai.",
+  },
+  {
+    q: "Bagaimana cara menyebarkan undangan?",
+    a: "Undangan dibagikan melalui halaman admin yang kami sediakan. Anda akan mendapatkan akun khusus untuk mengelola dan membagikan link undangan kepada tamu.",
+  },
+  {
+    q: "Berapa lama masa berlaku undangan?",
+    a: "Undangan berlaku selamanya dan dapat diakses kapan saja tanpa batas waktu.",
+  },
+  {
+    q: "Apakah ada batasan jumlah tamu undangan?",
+    a: "Tidak ada batasan jumlah tamu. Anda dapat mengundang tamu sebanyak yang dibutuhkan tanpa pembatasan.",
   },
 ];
 

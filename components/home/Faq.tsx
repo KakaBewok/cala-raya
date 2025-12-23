@@ -19,7 +19,7 @@ function FAQ() {
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-2 md:space-y-3">
           {faqs.map((faq, i: number) => (
             <div
               key={i}

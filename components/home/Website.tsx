@@ -20,7 +20,7 @@ const Website = () => {
           return (
             <div
               key={i}
-              className={`relative bg-white dark:bg-slate-800 rounded-lg md:rounded-lg p-4 md:p-6 border-2 transition-all hover:shadow-xl hover:shadow-blue-300 group ${
+              className={`relative bg-white dark:bg-slate-800 rounded-lg p-4 md:p-6 border-2 transition-all hover:shadow-lg hover:shadow-blue-300 group ${
                 service.popular
                   ? "border-cyan-500 dark:border-cyan-600 border-3"
                   : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
