@@ -45,7 +45,7 @@ const Website = () => {
               </h3>
 
               {/* Description */}
-              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-3 md:mb-4 text-center line-clamp-2 md:line-clamp-3 min-h-[32px] md:min-h-[60px]">
+              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-3 md:mb-4 text-center line-clamp-4 md:line-clamp-3 min-h-[32px] md:min-h-[60px]">
                 {service.description}
               </p>
 
@@ -67,7 +67,7 @@ const Website = () => {
                   Mulai dari
                 </p>
                 <p className="text-lg md:text-2xl font-bold text-slate-900 dark:text-white">
-                  Rp {service.priceStart.split(".")[0]}jt
+                  {service.priceStart}
                 </p>
                 <p className="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400">
                   *harga disesuaikan
