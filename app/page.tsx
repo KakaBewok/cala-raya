@@ -14,10 +14,10 @@ export default function App() {
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors">
       <Navbar />
       <Hero />
+      <WhyUs />
       <Invitation />
       <Website />
       <Portfolio />
-      <WhyUs />
       <Reviews />
       <FAQ />
       <Footer />

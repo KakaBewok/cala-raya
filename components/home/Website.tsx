@@ -6,10 +6,10 @@ const Website = () => {
     <section className="px-3 md:px-10 lg:px-20 py-12 md:py-24">
       <div className="text-center mb-12">
         <h2 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-          Pembuatan <br /> Web & Aplikasi
+          Website & Aplikasi
         </h2>
         <p className="text-sm md:text-lg text-slate-600 dark:text-slate-400">
-          Solusi digital custom sesuai kebutuhan bisnis Anda
+          Solusi digital custom sesuai kebutuhan bisnis
         </p>
       </div>
 
