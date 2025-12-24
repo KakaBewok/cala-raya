@@ -15,9 +15,11 @@ import {
   ZapIcon,
 } from "lucide-react";
 
+const CONTACT_PERSON = process.env.NEXT_PUBLIC_CONTACT_PERSON!;
+
 const contact = {
   email: "calarayaproject@gmail.com",
-  phone: "6289607937642",
+  phone: CONTACT_PERSON,
   address: "Bogor, Indonesia",
 };
 
@@ -423,6 +425,19 @@ const allThemes = [
 
 const websiteServices = [
   {
+    icon: PanelsTopLeft,
+    title: "Landing Page",
+    description: "Halaman khusus untuk mendukung promosi dan penjualan",
+    features: [
+      "Desain fokus konversi",
+      "Performa cepat",
+      "Optimal di perangkat mobile",
+      "Statistik pengunjung",
+    ],
+    priceStart: "Rp 300rb",
+    popular: false,
+  },
+  {
     icon: Building2,
     title: "Company Profile",
     description:
@@ -452,21 +467,8 @@ const websiteServices = [
     popular: true,
   },
   {
-    icon: PanelsTopLeft,
-    title: "Landing Page",
-    description: "Halaman khusus untuk mendukung promosi dan penjualan",
-    features: [
-      "Desain fokus konversi",
-      "Performa cepat",
-      "Optimal di perangkat mobile",
-      "Statistik pengunjung",
-    ],
-    priceStart: "Rp 300rb",
-    popular: false,
-  },
-  {
     icon: Smartphone,
-    title: "Mobile Application",
+    title: "Mobile Apps",
     description:
       "Aplikasi mobile untuk mempermudah operasional dan layanan bisnis",
     features: [
@@ -526,6 +528,7 @@ const features = [
 ];
 
 export {
+  CONTACT_PERSON,
   contact,
   faqs,
   socialMedia,

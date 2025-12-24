@@ -1,20 +1,20 @@
-import { websiteServices } from "@/data/data";
+import { CONTACT_PERSON, websiteServices } from "@/data/data";
 import { ArrowRight, Check } from "lucide-react";
 
 const Website = () => {
   return (
-    <section className="px-4 md:px-10">
+    <section className="px-3 md:px-10 lg:px-20 py-12 md:py-24">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-          Jasa Pembuatan Website & Aplikasi
+        <h2 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+          Pembuatan <br /> Web & Aplikasi
         </h2>
-        <p className="text-slate-600 dark:text-slate-400">
+        <p className="text-sm md:text-lg text-slate-600 dark:text-slate-400">
           Solusi digital custom sesuai kebutuhan bisnis Anda
         </p>
       </div>
 
-      {/* Grid: 2 columns on mobile, 4 columns on md+ */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+      {/* Grids */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
         {websiteServices.map((service, i) => {
           const Icon = service.icon;
           return (
@@ -27,14 +27,14 @@ const Website = () => {
               }`}
             >
               {service.popular && (
-                <div className="absolute -top-2 left-2 md:left-4 bg-gradient-to-r from-blue-500 to-green-500 text-white px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-semibold">
+                <div className="absolute -top-3 left-2 md:left-4 bg-gradient-to-r from-blue-500 to-green-500 text-white px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-semibold">
                   Popular
                 </div>
               )}
 
               {/* Icon */}
               <div className="flex justify-center mb-3 md:mb-4">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-bl from-blue-500 to-green-500 rounded-lg md:rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
               </div>
@@ -45,7 +45,7 @@ const Website = () => {
               </h3>
 
               {/* Description */}
-              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-3 md:mb-4 text-center line-clamp-4 md:line-clamp-3 min-h-[32px] md:min-h-[60px]">
+              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-5 md:mb-4 text-center line-clamp-4 md:line-clamp-3 min-h-[32px] md:min-h-[60px]">
                 {service.description}
               </p>
 
@@ -66,7 +66,7 @@ const Website = () => {
                 <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 mb-0.5">
                   Mulai dari
                 </p>
-                <p className="text-lg md:text-2xl font-bold text-slate-900 dark:text-white">
+                <p className="text-lg md:text-2xl font-bold text-slate-900 dark:text-white mb-0.5">
                   {service.priceStart}
                 </p>
                 <p className="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400">
@@ -76,12 +76,12 @@ const Website = () => {
 
               {/* CTA Button */}
               <a
-                href={`https://wa.me/6289607937642?text=${encodeURIComponent(
-                  `Halo admin Calaraya Project, saya tertarik dengan jasa ${service.title}. Boleh konsultasi untuk diskusi detail proyeknya?`
+                href={`https://wa.me/${CONTACT_PERSON}?text=${encodeURIComponent(
+                  `Halo admin Calaraya Project, saya tertarik dengan jasa pembuatan ${service.title}. Boleh konsultasi untuk diskusi detail proyeknya?`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full px-3 py-2 md:px-4 md:py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg md:rounded-xl font-semibold hover:from-blue-600 hover:to-green-600 transition-colors flex items-center justify-center gap-1.5 md:gap-2 shadow-lg text-xs md:text-sm duration-300"
+                className="w-full px-3 py-2 md:px-4 md:py-3 bg-gradient-to-tr from-blue-500 to-green-500 text-white rounded-md md:rounded-lg font-semibold hover:from-blue-600 hover:to-green-600 transition-colors flex items-center justify-center gap-1.5 md:gap-2 shadow-lg text-xs md:text-sm duration-300"
               >
                 Konsultasi
                 <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />

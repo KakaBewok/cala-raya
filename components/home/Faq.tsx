@@ -23,7 +23,7 @@ function FAQ() {
           {faqs.map((faq, i: number) => (
             <div
               key={i}
-              className={`bg-white dark:bg-slate-800 rounded-md overflow-hidden border-2 transition-all ${
+              className={`bg-white dark:bg-slate-800 rounded-md overflow-hidden border-2 transition-all w-full md:w-3/4 mx-auto ${
                 openIndex === i
                   ? "border-emerald-400"
                   : "border-slate-200 dark:border-slate-700"
@@ -31,9 +31,9 @@ function FAQ() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-                className="cursor-pointer w-full px-4 md:px-6 py-3 md:py-5 flex items-center justify-between text-left"
+                className="cursor-pointer w-full px-4 md:px-5 py-3 md:py-4 flex items-center justify-between text-left"
               >
-                <span className="text-sm md:text-lg font-semibold text-slate-900 dark:text-white pr-4">
+                <span className="text-sm md:text-md font-semibold text-slate-900 dark:text-white pr-4">
                   {faq.q}
                 </span>
                 <ChevronDown
@@ -43,9 +43,9 @@ function FAQ() {
                 />
               </button>
               {openIndex === i && (
-                <div className="px-4 md:px-6 pb-5">
+                <div className="px-4 md:px-5 pb-5">
                   <div className="pt-2 md:pt-4 border-t border-slate-100 dark:border-slate-700">
-                    <p className="text-sm md:text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
+                    <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
