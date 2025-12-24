@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Eye, MessageCircle } from "lucide-react";
 import { allThemes, CONTACT_PERSON } from "@/data/data";
@@ -7,7 +5,7 @@ import Image from "next/image";
 
 function Invitation() {
   return (
-    <section id="themes" className="py-24 bg-white dark:bg-slate-900">
+    <section id="themes" className="py-12 md:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
@@ -18,7 +16,7 @@ function Invitation() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {allThemes.map((theme, i) => (
             <div
               key={i}
@@ -39,7 +37,7 @@ function Invitation() {
                 )}
 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 md:p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 md:p-4">
                   <div className="flex gap-1 mb-1.5 md:mb-3 overflow-x-auto scrollbar-hide">
                     {theme.features.map((f, idx) => (
                       <span
@@ -76,7 +74,7 @@ function Invitation() {
                         href={theme.previewUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="cursor-pointer px-2 py-2 border-2 border-slate-50 dark:border-slate-600 text-slate-600 dark:text-slate-300 rounded-md font-semibold hover:border-slate-300 dark:hover:border-slate-500 transition-colors"
+                        className="cursor-pointer px-2 py-2 border-2 border-slate-50 text-slate-600 dark:text-slate-300 rounded-md font-semibold hover:border-slate-300 dark:hover:border-slate-500 transition-colors"
                       >
                         <Eye className="w-3.5 md:w-5 h-3.5 md:h-5 text-white" />
                       </a>

@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 
 const Website = () => {
   return (
-    <section className="px-3 md:px-10 lg:px-20 py-12 md:py-24">
+    <section id="website" className="px-3 md:px-10 lg:px-20 py-12 md:py-24">
       <div className="text-center mb-12">
         <h2 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
           Website & Aplikasi

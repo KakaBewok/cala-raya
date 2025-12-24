@@ -70,9 +70,10 @@ const faqs = [
 
 const navLinks = [
   { name: "Home", href: "#home" },
-  { name: "Tema", href: "#themes" },
-  { name: "Portfolio", href: "#portfolio" },
   { name: "Why Us", href: "#why-us" },
+  { name: "Tema", href: "#themes" },
+  { name: "Website", href: "#website" },
+  { name: "Portfolio", href: "#portfolio" },
   { name: "Review", href: "#reviews" },
   { name: "FAQ", href: "#faq" },
 ];
@@ -340,7 +341,7 @@ const allThemes = [
     name: "Floral",
     type: "Undangan Digital",
     category: "Wedding",
-    price: "Rp 50.000",
+    price: "Rp 70.000",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992923/personal/web-porto/floral_lund0v.png",
     previewUrl: "https://calaraya.vercel.app/ilham-rosi?id=O9IPp",
@@ -357,7 +358,7 @@ const allThemes = [
     name: "Magazine",
     type: "Undangan Digital",
     category: "Wedding",
-    price: "Rp 50.000",
+    price: "Rp 70.000",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765993975/personal/web-porto/magazine_yt4whr.png",
     previewUrl: "https://calaraya.vercel.app/rahma-jalal?id=Gku6G",
@@ -374,7 +375,7 @@ const allThemes = [
     name: "Maroon",
     type: "Undangan Digital",
     category: "Wedding",
-    price: "Rp 50.000",
+    price: "Rp 70.000",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994308/personal/web-porto/maroon_aohj7a.png",
     previewUrl: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
@@ -388,13 +389,13 @@ const allThemes = [
     ],
   },
   {
-    name: "Stylish Bold",
+    name: "Monochrome",
     type: "Undangan Digital",
     category: "Wedding",
-    price: "Rp 50.000",
+    price: "Rp 70.000",
     image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994579/personal/web-porto/stylishbold_armbt3.png",
-    previewUrl: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766313919/personal/web-porto/nadhar_rginzu.png",
+    previewUrl: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
     features: [
       "RSVP",
       "Galeri",
@@ -405,13 +406,13 @@ const allThemes = [
     ],
   },
   {
-    name: "Monochrome",
+    name: "Stylish Bold",
     type: "Undangan Digital",
     category: "Wedding",
-    price: "Rp 50.000",
+    price: "Rp 100.000",
     image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766313919/personal/web-porto/nadhar_rginzu.png",
-    previewUrl: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994579/personal/web-porto/stylishbold_armbt3.png",
+    previewUrl: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
     features: [
       "RSVP",
       "Galeri",
