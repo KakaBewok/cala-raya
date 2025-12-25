@@ -24,11 +24,12 @@ function Invitation() {
             >
               <div className="relative h-80">
                 <Image
-                  width={100}
-                  height={100}
+                  fill
                   src={theme.image}
                   alt={theme.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
 
                 {theme.name && (
@@ -43,7 +44,7 @@ function Invitation() {
                     {theme.features.map((f, idx) => (
                       <span
                         key={idx}
-                        className="text-[10px] md:text-xs px-2 py-1 bg-white/30 backdrop-blur text-white rounded whitespace-nowrap"
+                        className="text-[10px] md:text-xs px-2 py-1 bg-white/50 text-white rounded whitespace-nowrap"
                       >
                         {f}
                       </span>
