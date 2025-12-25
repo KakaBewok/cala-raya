@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Menu, X, Sun, Moon, Heart } from "lucide-react";
-import { navLinks } from "@/data/data";
+import { CONTACT_PERSON, navLinks } from "@/data/data";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,9 +60,16 @@ function Navbar() {
                 <Moon className="w-5 h-5 text-slate-600" />
               )}
             </button>
-            <button className="px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors whitespace-nowrap">
+            <a
+              href={`https://wa.me/${CONTACT_PERSON}?text=${encodeURIComponent(
+                "Halo, saya ingin bertanya tentang jasa pembuatan Undangan Digital/Website"
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors whitespace-nowrap"
+            >
               Order Now
-            </button>
+            </a>
           </div>
 
           {/* Mobile Menu Button - Only visible on mobile */}
@@ -108,9 +115,16 @@ function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <button className="px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold">
+              <a
+                href={`https://wa.me/${CONTACT_PERSON}?text=${encodeURIComponent(
+                  "Halo, saya ingin bertanya tentang jasa pembuatan Undangan Digital/Website"
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold"
+              >
                 Order Now
-              </button>
+              </a>
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { CONTACT_PERSON } from "@/data/data";
 import { Heart } from "lucide-react";
 
 function Hero() {
@@ -28,19 +29,28 @@ function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors shadow-lg">
+            <a
+              href={`https://wa.me/${CONTACT_PERSON}?text=${encodeURIComponent(
+                "Halo, saya ingin bertanya tentang jasa pembuatan Undangan Digital/Website"
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors shadow-lg"
+            >
               Mulai Sekarang
-            </button>
-            <button className="px-8 py-4 border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white rounded-xl font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+            </a>
+            <a
+              href="#portfolio"
+              className="px-8 py-4 border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white rounded-xl font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            >
               Lihat Portfolio
-            </button>
+            </a>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mt-16">
+          <div className="flex items-center justify-center gap-8 max-w-2xl mx-auto mt-16">
             {[
-              { number: "500+", label: "Project Selesai" },
-              { number: "98%", label: "Kepuasan Klien" },
+              { number: "100%", label: "Kepuasan Klien" },
               { number: "24/7", label: "Support" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
