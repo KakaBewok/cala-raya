@@ -29,7 +29,7 @@ function Hero() {
               rel="noopener noreferrer"
               className="px-5 md:px-8 py-3 md:py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors shadow-lg"
             >
-              Mulai Sekarang
+              Mulai Diskusi
             </a>
             <a
               href="#portfolio"

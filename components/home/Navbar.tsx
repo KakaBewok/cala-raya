@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Sun, Moon, MailIcon } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { CONTACT_PERSON, navLinks } from "@/data/data";
+import Image from "next/image";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -28,9 +29,14 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo - Left */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <MailIcon className="w-6 h-6 text-green-700 dark:text-green-600" />
-            <span className="text-xl font-bold text-slate-900 dark:text-white">
+          <div className="flex items-center gap-1 flex-shrink-0">
+            <Image
+              alt="Logo"
+              src="https://res.cloudinary.com/dk16ng09n/image/upload/v1766687461/personal/web-porto/ChatGPT_Image_Dec_26_2025_01_29_22_AM_os33rl.webp"
+              width={50}
+              height={50}
+            />
+            <span className="text-lg md:text-xl font-bold text-slate-900 dark:text-white">
               Calaraya
             </span>
           </div>
@@ -137,7 +143,7 @@ function Navbar() {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-center px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold"
+                className="text-center px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-md font-semibold"
               >
                 Konsultasi
               </a>

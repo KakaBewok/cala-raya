@@ -4,7 +4,6 @@ import {
   Headset,
   Instagram,
   ListChecks,
-  MessageCircle,
   MonitorSmartphone,
   PanelsTopLeft,
   Settings2,
@@ -20,17 +19,17 @@ const CONTACT_PERSON = process.env.NEXT_PUBLIC_CONTACT_PERSON!;
 const contact = {
   email: "calarayaproject@gmail.com",
   phone: CONTACT_PERSON,
-  address: "Bogor, Indonesia",
+  address: "Tangerang Selatan, Indonesia",
 };
 
 const socialMedia = [
   { icon: Instagram, href: "https://www.instagram.com/calarayaproject" },
-  {
-    icon: MessageCircle,
-    href: `https://wa.me/${contact.phone}?text=${encodeURIComponent(
-      "Halo admin Calaraya Project, aku tertarik untuk bikin Undangan/Website. Boleh dibantu prosesnya?"
-    )}`,
-  },
+  // {
+  //   icon: MessageCircle,
+  //   href: `https://wa.me/${contact.phone}?text=${encodeURIComponent(
+  //     "Halo admin Calaraya Project, aku tertarik untuk bikin Undangan/Website. Boleh dibantu prosesnya?"
+  //   )}`,
+  // },
 ];
 
 const faqs = [

@@ -1,16 +1,21 @@
 import { contact, socialMedia } from "@/data/data";
-import { Mail, MailIcon, MapPin, MessageCircle } from "lucide-react";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
+import Image from "next/image";
 
 function Footer() {
   return (
     <footer className="bg-slate-900 dark:bg-slate-950 text-white pt-10 pb-8">
       <div className="max-w-6xl mx-auto px-4">
-        {/* <div className="flex md:items-center justify-between flex-col md:flex-row gap-5 mb-8"> */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 place-content-between mb-8">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <MailIcon className="w-7 h-7 text-green-700" />
+              <Image
+                alt="Logo"
+                src="https://res.cloudinary.com/dk16ng09n/image/upload/v1766687461/personal/web-porto/ChatGPT_Image_Dec_26_2025_01_29_22_AM_os33rl.webp"
+                width={53}
+                height={53}
+              />
               <span className="text-xl font-bold">Calaraya</span>
             </div>
             <p className="text-slate-400 text-sm mb-4 max-w-sm">
@@ -58,7 +63,7 @@ function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-800 text-center text-slate-400 text-sm">
-          <p>© 2024 Calaraya. All rights reserved.</p>
+          <p>© 2025 Calaraya. All rights reserved.</p>
         </div>
       </div>
     </footer>
