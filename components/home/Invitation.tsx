@@ -44,7 +44,7 @@ function Invitation() {
                     {theme.features.map((f, idx) => (
                       <span
                         key={idx}
-                        className="text-[10px] md:text-xs px-2 py-1 bg-white/50 text-white rounded whitespace-nowrap"
+                        className="text-[10px] md:text-xs px-2 py-1 bg-white/70 text-slate-800 rounded whitespace-nowrap"
                       >
                         {f}
                       </span>
