@@ -341,7 +341,7 @@ const allThemes = [
     name: "Floral",
     type: "Undangan Digital",
     category: "Wedding",
-    price: "Rp 70.000",
+    price: "Rp 80.000",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992923/personal/web-porto/floral_lund0v.png",
     previewUrl: "https://calaraya.vercel.app/ilham-rosi?id=O9IPp",
@@ -358,7 +358,7 @@ const allThemes = [
     name: "Magazine",
     type: "Undangan Digital",
     category: "Wedding",
-    price: "Rp 70.000",
+    price: "Rp 80.000",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765993975/personal/web-porto/magazine_yt4whr.png",
     previewUrl: "https://calaraya.vercel.app/rahma-jalal?id=Gku6G",
@@ -375,7 +375,7 @@ const allThemes = [
     name: "Maroon",
     type: "Undangan Digital",
     category: "Wedding",
-    price: "Rp 70.000",
+    price: "Rp 80.000",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994308/personal/web-porto/maroon_aohj7a.png",
     previewUrl: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
@@ -392,7 +392,7 @@ const allThemes = [
     name: "Monochrome",
     type: "Undangan Digital",
     category: "Wedding",
-    price: "Rp 70.000",
+    price: "Rp 80.000",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1766313919/personal/web-porto/nadhar_rginzu.png",
     previewUrl: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
@@ -450,7 +450,7 @@ const websiteServices = [
       "Performa cepat",
       "CMS Admin Panel",
     ],
-    priceStart: "Rp 400rb",
+    priceStart: "Rp 350rb",
     popular: false,
   },
   {
@@ -464,7 +464,7 @@ const websiteServices = [
       "Pelacakan pesanan",
       "Multi pengguna/admin",
     ],
-    priceStart: "Rp 2.5jt",
+    priceStart: "Rp 2jt",
     popular: true,
   },
   {
@@ -477,7 +477,7 @@ const websiteServices = [
       "Notifikasi aplikasi ",
       "Tampilan mudah digunakan ",
     ],
-    priceStart: "Rp 3jt",
+    priceStart: "Rp 2.5jt",
     popular: false,
   },
 ];

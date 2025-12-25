@@ -24,7 +24,9 @@ function Invitation() {
             >
               <div className="relative h-80">
                 <Image
-                  fill
+                  width={100}
+                  height={100}
+                  unoptimized
                   src={theme.image}
                   alt={theme.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
