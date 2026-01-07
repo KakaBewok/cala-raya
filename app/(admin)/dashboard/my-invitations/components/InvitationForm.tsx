@@ -10,7 +10,7 @@ import {
   imageType,
   THEME_CONFIG,
 } from "../schema/FormSchema";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import InvitationData from "@/types/invitation-data";
 import CloudinaryButton from "./CloudinaryButton";
 import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core";
@@ -38,7 +38,7 @@ export function InvitationForm({
   invitationData,
   onSuccess,
 }: InvitationFormProps) {
-  const router = useRouter();
+  // const router = useRouter();
   const isEditMode = !!invitationData;
   const [activeTab, setActiveTab] = useState<string>("basic");
   // const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -1482,7 +1482,7 @@ export function InvitationForm({
       </div>
 
       {/* Submit Button */}
-      <div className="mt-8 flex gap-4">
+      {/* <div className="mt-8 flex gap-4">
         <button
           type="submit"
           disabled={isSubmitting}
@@ -1501,7 +1501,7 @@ export function InvitationForm({
         >
           Cancel
         </button>
-      </div>
+      </div> */}
     </form>
   );
 }
