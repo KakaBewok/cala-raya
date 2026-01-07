@@ -84,7 +84,7 @@ export function InvitationForm({
 
   const sortedImages = (images || [])
     .sort((a, b) => (a.order_number ?? 0) - (b.order_number ?? 0))
-    .map((img: Image) => ({
+    .map((img) => ({
       ...img,
       type: img.type as ImageType,
     }));
@@ -151,35 +151,35 @@ export function InvitationForm({
     name: "images",
   });
 
-  const {
-    fields: rundownFields,
-    append: appendRundown,
-    remove: removeRundown,
-    move: moveRundown,
-  } = useFieldArray({
-    control,
-    name: "rundowns",
-  });
+  // const {
+  //   fields: rundownFields,
+  //   append: appendRundown,
+  //   remove: removeRundown,
+  //   move: moveRundown,
+  // } = useFieldArray({
+  //   control,
+  //   name: "rundowns",
+  // });
 
-  const {
-    fields: giftFields,
-    append: appendGift,
-    remove: removeGift,
-    move: moveGift,
-  } = useFieldArray({
-    control,
-    name: "gift_infos",
-  });
+  // const {
+  //   fields: giftFields,
+  //   append: appendGift,
+  //   remove: removeGift,
+  //   move: moveGift,
+  // } = useFieldArray({
+  //   control,
+  //   name: "gift_infos",
+  // });
 
-  const {
-    fields: storyFields,
-    append: appendStory,
-    remove: removeStory,
-    move: moveStory,
-  } = useFieldArray({
-    control,
-    name: "stories",
-  });
+  // const {
+  //   fields: storyFields,
+  //   append: appendStory,
+  //   remove: removeStory,
+  //   move: moveStory,
+  // } = useFieldArray({
+  //   control,
+  //   name: "stories",
+  // });
 
   function normalizeOrder(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -234,17 +234,17 @@ export function InvitationForm({
   //cp --- //
 
   // RUNDOWN
-  const syncRundownOrder = () => {
-    const rundowns = form.getValues("rundowns");
-    rundowns.forEach((_, idx) => {
-      form.setValue(`rundowns.${idx}.order_number`, idx);
-    });
-  };
+  // const syncRundownOrder = () => {
+  //   const rundowns = form.getValues("rundowns");
+  //   rundowns.forEach((_, idx) => {
+  //     form.setValue(`rundowns.${idx}.order_number`, idx);
+  //   });
+  // };
 
-  const moveRundownItem = (from: number, to: number) => {
-    moveRundown(from, to);
-    setTimeout(syncRundownOrder, 0);
-  };
+  // const moveRundownItem = (from: number, to: number) => {
+  //   moveRundown(from, to);
+  //   setTimeout(syncRundownOrder, 0);
+  // };
 
   // GIFT INFO
   // const syncGiftOrder = () => {
@@ -937,17 +937,17 @@ export function InvitationForm({
                 {" "}
                 Rundown * (At least 1 required){" "}
               </h2>{" "}
-              <button
+              {/* <button
                 type="button"
                 onClick={() => appendRundown(getDefaultRundown())}
                 className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
               >
                 {" "}
                 + Add Rundown{" "}
-              </button>{" "}
+              </button>{" "} */}
             </div>
 
-            {rundownFields
+            {/* {rundownFields
               .map((field, idx) => ({
                 field,
                 idx,
@@ -1146,7 +1146,7 @@ export function InvitationForm({
                     </div>
                   </div>
                 </div>
-              ))}
+              ))} */}
 
             {form.formState.errors.rundowns && (
               <p className="text-red-500 text-sm">
@@ -1167,7 +1167,7 @@ export function InvitationForm({
                 <h3 className="text-lg font-semibold">
                   Gift Information (Optional)
                 </h3>
-                <button
+                {/* <button
                   type="button"
                   onClick={() =>
                     appendGift({
@@ -1180,7 +1180,7 @@ export function InvitationForm({
                   className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
                 >
                   + Add Gift Info
-                </button>
+                </button> */}
               </div>
 
               {/* {giftFields
@@ -1314,7 +1314,7 @@ export function InvitationForm({
             <div className="border rounded-lg p-4">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-semibold">Stories (Optional)</h3>
-                <button
+                {/* <button
                   type="button"
                   onClick={() =>
                     appendStory({
@@ -1327,7 +1327,7 @@ export function InvitationForm({
                   className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
                 >
                   + Add Story
-                </button>
+                </button> */}
               </div>
 
               {/* {storyFields
