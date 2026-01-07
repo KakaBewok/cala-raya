@@ -24,12 +24,6 @@ const contact = {
 
 const socialMedia = [
   { icon: Instagram, href: "https://www.instagram.com/calarayaproject" },
-  // {
-  //   icon: MessageCircle,
-  //   href: `https://wa.me/${contact.phone}?text=${encodeURIComponent(
-  //     "Halo admin Calaraya Project, aku tertarik untuk bikin Undangan/Website. Boleh dibantu prosesnya?"
-  //   )}`,
-  // },
 ];
 
 const faqs = [
@@ -314,6 +308,16 @@ const reviews = [
       "Masyaallah untuk respon admin sangat baik dan cepat, selalu sigap dengan komen klien....",
     reviewImage:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1766417113/personal/web-porto/testimonials/8.tasya_pfewuh.png",
+  },
+  {
+    name: "Ridho & Sasa",
+    rating: 5,
+    product: "Undangan Digital",
+    type: "Magazine",
+    comment:
+      "Designya aku suka simple & minimalist, semua detailed request ku ditampung dan dikerjakan dengan ramah dan sabar ....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1767068847/personal/web-porto/testimonials/WhatsApp_Image_2025-12-30_at_11.24.16_AM_a8u0tu.jpg",
   },
 ];
 

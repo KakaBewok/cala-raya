@@ -23,7 +23,7 @@ const DarkModeSwitcher = ({ className }: { className?: string }) => {
             className="absolute top-0 z-50 w-full h-full m-0 opacity-0 cursor-pointer"
           />
           <span
-            className={`absolute top-1/2 left-[3px] flex h-6 w-6 -translate-y-1/2 translate-x-0 items-center justify-center rounded-full bg-white shadow-switcher duration-75 ease-linear ${
+            className={`absolute top-1/2 left-[3px] flex h-6 w-6 -translate-y-1/2 translate-x-0 items-center justify-center rounded-full bg-white shadow-switcher duration-200 ease-linear ${
               colorMode === "dark" && "!right-[3px] !translate-x-full"
             }`}
           >

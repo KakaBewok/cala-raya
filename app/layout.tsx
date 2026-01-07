@@ -3,13 +3,14 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import "./globals.css";
 import { Providers } from "./Providers";
+import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Cala Raya Project",
-  description: "Digital Invitation & Website Creation Service.",
+  title: "Calaraya Project",
+  description: "Digital Invitation & Website",
   openGraph: {
-    title: "Cala Raya Project",
-    description: "Digital Invitation & Website Creation Service.",
+    title: "Calaraya Project",
+    description: "Digital Invitation & Website",
     url: "https://calaraya.vercel.app/",
     images: [
       {
@@ -34,6 +35,12 @@ export default function RootLayout({
         <Providers>
           <Suspense>{children}</Suspense>
         </Providers>
+
+        {/* Cloudinary Upload Widget */}
+        <Script
+          src="https://upload-widget.cloudinary.com/global/all.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
