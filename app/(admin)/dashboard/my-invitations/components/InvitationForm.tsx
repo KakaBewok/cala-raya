@@ -275,26 +275,27 @@ export function InvitationForm({
   // Submit Handler - CREATE or UPDATE
   const onSubmit = async (data: InvitationFormData) => {
     setIsSubmitting(true);
-    const supabase = createClient();
+    // const supabase = createClient();
+    console.log(data);
+    // try {
+    //   if (isEditMode) {
+    //     await updateInvitation(supabase, invitationData.id, data);
+    //   } else {
+    //     await createInvitation(supabase, data);
+    //   }
 
-    try {
-      if (isEditMode) {
-        await updateInvitation(supabase, invitationData.id, data);
-      } else {
-        await createInvitation(supabase, data);
-      }
-
-      onSuccess?.();
-      router.push("/dashboard/my-invitations");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert(`Failed to ${isEditMode ? "update" : "create"} invitation`);
-    } finally {
-      setIsSubmitting(false);
-    }
+    //   onSuccess?.();
+    //   router.push("/dashboard/my-invitations");
+    // } catch (error) {
+    //   console.error("Error submitting form:", error);
+    //   alert(`Failed to ${isEditMode ? "update" : "create"} invitation`);
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
   };
 
   // CREATE - Insert new invitation and all related data
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const createInvitation = async (supabase: any, data: InvitationFormData) => {
     // 1. Insert main invitation
     const { data: invitation, error: invitationError } = await supabase
@@ -308,14 +309,7 @@ export function InvitationForm({
         host_two_nickname: data.host_two_nickname,
         host_two_additional_info: data.host_two_additional_info,
         host_two_social_media: data.host_two_social_media,
-        event_title: data.event_title,
-        event_date: data.event_date,
-        event_type: data.event_type,
-        location: data.location,
-        location_detail: data.location_detail,
-        location_url: data.location_url,
         hashtag: data.hashtag,
-        message: data.message,
       })
       .select()
       .single();
@@ -394,14 +388,7 @@ export function InvitationForm({
         host_two_nickname: data.host_two_nickname,
         host_two_additional_info: data.host_two_additional_info,
         host_two_social_media: data.host_two_social_media,
-        event_title: data.event_title,
-        event_date: data.event_date,
-        event_type: data.event_type,
-        location: data.location,
-        location_detail: data.location_detail,
-        location_url: data.location_url,
         hashtag: data.hashtag,
-        message: data.message,
       })
       .eq("id", invitationId);
 
@@ -421,7 +408,6 @@ export function InvitationForm({
         data.images.map((img, idx) => ({
           invitation_id: invitationId,
           url: img.url,
-          caption: img.caption,
           type: img.type,
           order_number: img.order_number ?? idx,
         }))
