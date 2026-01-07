@@ -247,211 +247,211 @@ export function InvitationForm({
   };
 
   // GIFT INFO
-  const syncGiftOrder = () => {
-    const gifts = form.getValues("gift_infos");
-    gifts?.forEach((_, idx) => {
-      form.setValue(`gift_infos.${idx}.order_number`, idx);
-    });
-  };
+  // const syncGiftOrder = () => {
+  //   const gifts = form.getValues("gift_infos");
+  //   gifts?.forEach((_, idx) => {
+  //     form.setValue(`gift_infos.${idx}.order_number`, idx);
+  //   });
+  // };
 
-  const moveGiftItem = (from: number, to: number) => {
-    moveGift(from, to);
-    setTimeout(syncGiftOrder, 0);
-  };
+  // const moveGiftItem = (from: number, to: number) => {
+  //   moveGift(from, to);
+  //   setTimeout(syncGiftOrder, 0);
+  // };
 
   // STORY
-  const syncStoryOrder = () => {
-    const stories = form.getValues("stories");
-    stories?.forEach((_, idx) => {
-      form.setValue(`stories.${idx}.order_number`, idx);
-    });
-  };
+  // const syncStoryOrder = () => {
+  //   const stories = form.getValues("stories");
+  //   stories?.forEach((_, idx) => {
+  //     form.setValue(`stories.${idx}.order_number`, idx);
+  //   });
+  // };
 
-  const moveStoryItem = (from: number, to: number) => {
-    moveStory(from, to);
-    setTimeout(syncStoryOrder, 0);
-  };
+  // const moveStoryItem = (from: number, to: number) => {
+  //   moveStory(from, to);
+  //   setTimeout(syncStoryOrder, 0);
+  // };
 
   // Submit Handler - CREATE or UPDATE
-  const onSubmit = async (data: InvitationFormData) => {
-    setIsSubmitting(true);
-    // const supabase = createClient();
-    console.log(data);
-    // try {
-    //   if (isEditMode) {
-    //     await updateInvitation(supabase, invitationData.id, data);
-    //   } else {
-    //     await createInvitation(supabase, data);
-    //   }
+  // const onSubmit = async (data: InvitationFormData) => {
+  //   setIsSubmitting(true);
+  //   // const supabase = createClient();
+  //   console.log(data);
+  //   // try {
+  //   //   if (isEditMode) {
+  //   //     await updateInvitation(supabase, invitationData.id, data);
+  //   //   } else {
+  //   //     await createInvitation(supabase, data);
+  //   //   }
 
-    //   onSuccess?.();
-    //   router.push("/dashboard/my-invitations");
-    // } catch (error) {
-    //   console.error("Error submitting form:", error);
-    //   alert(`Failed to ${isEditMode ? "update" : "create"} invitation`);
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
-  };
+  //   //   onSuccess?.();
+  //   //   router.push("/dashboard/my-invitations");
+  //   // } catch (error) {
+  //   //   console.error("Error submitting form:", error);
+  //   //   alert(`Failed to ${isEditMode ? "update" : "create"} invitation`);
+  //   // } finally {
+  //   //   setIsSubmitting(false);
+  //   // }
+  // };
 
   // CREATE - Insert new invitation and all related data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const createInvitation = async (supabase: any, data: InvitationFormData) => {
-    // 1. Insert main invitation
-    const { data: invitation, error: invitationError } = await supabase
-      .from("invitations")
-      .insert({
-        host_one_name: data.host_one_name,
-        host_one_nickname: data.host_one_nickname,
-        host_one_additional_info: data.host_one_additional_info,
-        host_one_social_media: data.host_one_social_media,
-        host_two_name: data.host_two_name,
-        host_two_nickname: data.host_two_nickname,
-        host_two_additional_info: data.host_two_additional_info,
-        host_two_social_media: data.host_two_social_media,
-        hashtag: data.hashtag,
-      })
-      .select()
-      .single();
+  // const createInvitation = async (supabase: any, data: InvitationFormData) => {
+  //   // 1. Insert main invitation
+  //   const { data: invitation, error: invitationError } = await supabase
+  //     .from("invitations")
+  //     .insert({
+  //       host_one_name: data.host_one_name,
+  //       host_one_nickname: data.host_one_nickname,
+  //       host_one_additional_info: data.host_one_additional_info,
+  //       host_one_social_media: data.host_one_social_media,
+  //       host_two_name: data.host_two_name,
+  //       host_two_nickname: data.host_two_nickname,
+  //       host_two_additional_info: data.host_two_additional_info,
+  //       host_two_social_media: data.host_two_social_media,
+  //       hashtag: data.hashtag,
+  //     })
+  //     .select()
+  //     .single();
 
-    if (invitationError) throw invitationError;
+  //   if (invitationError) throw invitationError;
 
-    const invitationId = invitation.id;
+  //   const invitationId = invitation.id;
 
-    // 2. Insert music
-    await supabase.from("music").insert({
-      invitation_id: invitationId,
-      ...data.music,
-    });
+  //   // 2. Insert music
+  //   await supabase.from("music").insert({
+  //     invitation_id: invitationId,
+  //     ...data.music,
+  //   });
 
-    // 3. Insert images
-    if (data.images.length > 0) {
-      await supabase.from("images").insert(
-        data.images.map((img, idx) => ({
-          invitation_id: invitationId,
-          url: img.url,
-          caption: img.caption,
-          type: img.type,
-          order_number: img.order_number ?? idx,
-        }))
-      );
-    }
+  //   // 3. Insert images
+  //   if (data.images.length > 0) {
+  //     await supabase.from("images").insert(
+  //       data.images.map((img, idx) => ({
+  //         invitation_id: invitationId,
+  //         url: img.url,
+  //         caption: img.caption,
+  //         type: img.type,
+  //         order_number: img.order_number ?? idx,
+  //       }))
+  //     );
+  //   }
 
-    // 4. Insert rundowns
-    if (data.rundowns.length > 0) {
-      await supabase.from("rundowns").insert(
-        data.rundowns.map((rundown, idx) => ({
-          invitation_id: invitationId,
-          ...rundown,
-          order_number: rundown.order_number ?? idx,
-        }))
-      );
-    }
+  //   // 4. Insert rundowns
+  //   if (data.rundowns.length > 0) {
+  //     await supabase.from("rundowns").insert(
+  //       data.rundowns.map((rundown, idx) => ({
+  //         invitation_id: invitationId,
+  //         ...rundown,
+  //         order_number: rundown.order_number ?? idx,
+  //       }))
+  //     );
+  //   }
 
-    // 5. Insert gift infos (optional)
-    if (data.gift_infos && data.gift_infos.length > 0) {
-      await supabase.from("gift_infos").insert(
-        data.gift_infos.map((gift) => ({
-          invitation_id: invitationId,
-          ...gift,
-        }))
-      );
-    }
+  //   // 5. Insert gift infos (optional)
+  //   if (data.gift_infos && data.gift_infos.length > 0) {
+  //     await supabase.from("gift_infos").insert(
+  //       data.gift_infos.map((gift) => ({
+  //         invitation_id: invitationId,
+  //         ...gift,
+  //       }))
+  //     );
+  //   }
 
-    // 6. Insert stories (optional)
-    if (data.stories && data.stories.length > 0) {
-      await supabase.from("stories").insert(
-        data.stories.map((story, idx) => ({
-          invitation_id: invitationId,
-          ...story,
-          order_number: story.order_number ?? idx,
-        }))
-      );
-    }
-  };
+  //   // 6. Insert stories (optional)
+  //   if (data.stories && data.stories.length > 0) {
+  //     await supabase.from("stories").insert(
+  //       data.stories.map((story, idx) => ({
+  //         invitation_id: invitationId,
+  //         ...story,
+  //         order_number: story.order_number ?? idx,
+  //       }))
+  //     );
+  //   }
+  // };
 
   // UPDATE - Update invitation and all related data
-  const updateInvitation = async (
-    supabase: any,
-    invitationId: number,
-    data: InvitationFormData
-  ) => {
-    // 1. Update main invitation
-    await supabase
-      .from("invitations")
-      .update({
-        host_one_name: data.host_one_name,
-        host_one_nickname: data.host_one_nickname,
-        host_one_additional_info: data.host_one_additional_info,
-        host_one_social_media: data.host_one_social_media,
-        host_two_name: data.host_two_name,
-        host_two_nickname: data.host_two_nickname,
-        host_two_additional_info: data.host_two_additional_info,
-        host_two_social_media: data.host_two_social_media,
-        hashtag: data.hashtag,
-      })
-      .eq("id", invitationId);
+  // const updateInvitation = async (
+  //   supabase: any,
+  //   invitationId: number,
+  //   data: InvitationFormData
+  // ) => {
+  //   // 1. Update main invitation
+  //   await supabase
+  //     .from("invitations")
+  //     .update({
+  //       host_one_name: data.host_one_name,
+  //       host_one_nickname: data.host_one_nickname,
+  //       host_one_additional_info: data.host_one_additional_info,
+  //       host_one_social_media: data.host_one_social_media,
+  //       host_two_name: data.host_two_name,
+  //       host_two_nickname: data.host_two_nickname,
+  //       host_two_additional_info: data.host_two_additional_info,
+  //       host_two_social_media: data.host_two_social_media,
+  //       hashtag: data.hashtag,
+  //     })
+  //     .eq("id", invitationId);
 
-    // 2. Update music (upsert)
-    await supabase
-      .from("music")
-      .upsert({
-        invitation_id: invitationId,
-        ...data.music,
-      })
-      .eq("invitation_id", invitationId);
+  //   // 2. Update music (upsert)
+  //   await supabase
+  //     .from("music")
+  //     .upsert({
+  //       invitation_id: invitationId,
+  //       ...data.music,
+  //     })
+  //     .eq("invitation_id", invitationId);
 
-    // 3. Update images (delete & re-insert for simplicity)
-    await supabase.from("images").delete().eq("invitation_id", invitationId);
-    if (data.images.length > 0) {
-      await supabase.from("images").insert(
-        data.images.map((img, idx) => ({
-          invitation_id: invitationId,
-          url: img.url,
-          type: img.type,
-          order_number: img.order_number ?? idx,
-        }))
-      );
-    }
+  //   // 3. Update images (delete & re-insert for simplicity)
+  //   await supabase.from("images").delete().eq("invitation_id", invitationId);
+  //   if (data.images.length > 0) {
+  //     await supabase.from("images").insert(
+  //       data.images.map((img, idx) => ({
+  //         invitation_id: invitationId,
+  //         url: img.url,
+  //         type: img.type,
+  //         order_number: img.order_number ?? idx,
+  //       }))
+  //     );
+  //   }
 
-    // 4. Update rundowns (delete & re-insert)
-    await supabase.from("rundowns").delete().eq("invitation_id", invitationId);
-    if (data.rundowns.length > 0) {
-      await supabase.from("rundowns").insert(
-        data.rundowns.map((rundown, idx) => ({
-          invitation_id: invitationId,
-          ...rundown,
-          order_number: rundown.order_number ?? idx,
-        }))
-      );
-    }
+  //   // 4. Update rundowns (delete & re-insert)
+  //   await supabase.from("rundowns").delete().eq("invitation_id", invitationId);
+  //   if (data.rundowns.length > 0) {
+  //     await supabase.from("rundowns").insert(
+  //       data.rundowns.map((rundown, idx) => ({
+  //         invitation_id: invitationId,
+  //         ...rundown,
+  //         order_number: rundown.order_number ?? idx,
+  //       }))
+  //     );
+  //   }
 
-    // 5. Update gift infos (delete & re-insert)
-    await supabase
-      .from("gift_infos")
-      .delete()
-      .eq("invitation_id", invitationId);
-    if (data.gift_infos && data.gift_infos.length > 0) {
-      await supabase.from("gift_infos").insert(
-        data.gift_infos.map((gift) => ({
-          invitation_id: invitationId,
-          ...gift,
-        }))
-      );
-    }
+  //   // 5. Update gift infos (delete & re-insert)
+  //   await supabase
+  //     .from("gift_infos")
+  //     .delete()
+  //     .eq("invitation_id", invitationId);
+  //   if (data.gift_infos && data.gift_infos.length > 0) {
+  //     await supabase.from("gift_infos").insert(
+  //       data.gift_infos.map((gift) => ({
+  //         invitation_id: invitationId,
+  //         ...gift,
+  //       }))
+  //     );
+  //   }
 
-    // 6. Update stories (delete & re-insert)
-    await supabase.from("stories").delete().eq("invitation_id", invitationId);
-    if (data.stories && data.stories.length > 0) {
-      await supabase.from("stories").insert(
-        data.stories.map((story, idx) => ({
-          invitation_id: invitationId,
-          ...story,
-          order_number: story.order_number ?? idx,
-        }))
-      );
-    }
-  };
+  //   // 6. Update stories (delete & re-insert)
+  //   await supabase.from("stories").delete().eq("invitation_id", invitationId);
+  //   if (data.stories && data.stories.length > 0) {
+  //     await supabase.from("stories").insert(
+  //       data.stories.map((story, idx) => ({
+  //         invitation_id: invitationId,
+  //         ...story,
+  //         order_number: story.order_number ?? idx,
+  //       }))
+  //     );
+  //   }
+  // };
 
   //cp ---//
 
@@ -477,7 +477,7 @@ export function InvitationForm({
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(() => alert("submitted"))}
       className="w-full max-w-5xl mx-auto p-3 md:p-6 bg-white/30 rounded-md dark:bg-slate-700/30"
     >
       <h1 className="text-red-500 font-semibold text-center my-4">
@@ -1183,7 +1183,7 @@ export function InvitationForm({
                 </button>
               </div>
 
-              {giftFields
+              {/* {giftFields
                 .map((field, idx) => ({
                   field,
                   idx,
@@ -1307,7 +1307,7 @@ export function InvitationForm({
                       </div>
                     </div>
                   </div>
-                ))}
+                ))} */}
             </div>
 
             {/* Story Section */}
@@ -1330,7 +1330,7 @@ export function InvitationForm({
                 </button>
               </div>
 
-              {storyFields
+              {/* {storyFields
                 .map((field, idx) => ({
                   field,
                   idx,
@@ -1471,7 +1471,7 @@ export function InvitationForm({
                       </div>
                     </div>
                   </div>
-                ))}
+                ))} */}
             </div>
           </div>
         )}
