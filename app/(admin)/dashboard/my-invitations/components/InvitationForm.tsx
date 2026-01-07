@@ -41,7 +41,7 @@ export function InvitationForm({
   const router = useRouter();
   const isEditMode = !!invitationData;
   const [activeTab, setActiveTab] = useState<string>("basic");
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  // const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const {
     host_one_name,
@@ -60,6 +60,10 @@ export function InvitationForm({
     gift_infos,
     stories,
   } = invitationData || {};
+
+  const submitForm = () => {
+    onSuccess?.();
+  };
 
   function getDefaultRundown() {
     return {
@@ -477,7 +481,7 @@ export function InvitationForm({
 
   return (
     <form
-      onSubmit={handleSubmit(() => alert("submitted"))}
+      onSubmit={handleSubmit(() => submitForm())}
       className="w-full max-w-5xl mx-auto p-3 md:p-6 bg-white/30 rounded-md dark:bg-slate-700/30"
     >
       <h1 className="text-red-500 font-semibold text-center my-4">
