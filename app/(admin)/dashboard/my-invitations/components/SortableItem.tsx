@@ -23,7 +23,7 @@ export function SortableItem({
     zIndex: isDragging ? 50 : "auto",
     opacity: isDragging ? 0.7 : 1,
     cursor: isDragging ? "grabbing" : "grab",
-    touchAction: "none",
+    touchAction: isDragging ? "none" : "auto",
   };
 
   return (

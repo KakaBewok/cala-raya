@@ -17,9 +17,10 @@ import {
   DndContext,
   closestCenter,
   DragEndEvent,
-  PointerSensor,
   useSensor,
   useSensors,
+  MouseSensor,
+  TouchSensor,
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -243,9 +244,11 @@ export function InvitationForm({
   };
 
   const sensors = useSensors(
-    useSensor(PointerSensor, {
+    useSensor(MouseSensor),
+    useSensor(TouchSensor, {
       activationConstraint: {
-        distance: 8,
+        delay: 250,
+        tolerance: 5,
       },
     })
   );
