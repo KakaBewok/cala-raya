@@ -13,7 +13,14 @@ import {
 // import { useRouter } from "next/navigation";
 import InvitationData from "@/types/invitation-data";
 import CloudinaryButton from "./CloudinaryButton";
-import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core";
+import {
+  DndContext,
+  closestCenter,
+  DragEndEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import {
   SortableContext,
   rectSortingStrategy,
@@ -234,6 +241,14 @@ export function InvitationForm({
     // sync images order_number
     setTimeout(() => normalizeOrder(form, "images", "gallery"), 10);
   };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    })
+  );
 
   //cp --- //
 
@@ -843,6 +858,7 @@ export function InvitationForm({
                     />
                   </div>
                   <DndContext
+                    sensors={sensors}
                     collisionDetection={closestCenter}
                     onDragEnd={handleDragEnd}
                     modifiers={modifiers}
