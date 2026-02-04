@@ -24,6 +24,7 @@ import {
 } from "@dnd-kit/core";
 import {
   SortableContext,
+  horizontalListSortingStrategy,
   rectSortingStrategy,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
@@ -597,125 +598,6 @@ export function InvitationForm({
           </div>
         )}
 
-        {/* EVENT INFO TAB */}
-        {/* {(activeTab === "event" || window.innerWidth < 768) && (
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold">Event Information</h2>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Event Title *
-                </label>
-                <input
-                  {...form.register("event_title")}
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-                {form.formState.errors.event_title && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {form.formState.errors.event_title.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Event Type *
-                </label>
-                <input
-                  {...form.register("event_type")}
-                  className="w-full px-4 py-2 border rounded-lg"
-                  placeholder="Wedding, Birthday, etc."
-                />
-                {form.formState.errors.event_type && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {form.formState.errors.event_type.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Event Date *
-                </label>
-                <input
-                  type="date"
-                  {...form.register("event_date")}
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-                {form.formState.errors.event_date && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {form.formState.errors.event_date.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Hashtag
-                </label>
-                <input
-                  {...form.register("hashtag")}
-                  className="w-full px-4 py-2 border rounded-lg"
-                  placeholder="#MyEvent2024"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-2">
-                  Location *
-                </label>
-                <input
-                  {...form.register("location")}
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-                {form.formState.errors.location && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {form.formState.errors.location.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Location Detail
-                </label>
-                <input
-                  {...form.register("location_detail")}
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Location URL
-                </label>
-                <input
-                  {...form.register("location_url")}
-                  className="w-full px-4 py-2 border rounded-lg"
-                  placeholder="https://maps.google.com/..."
-                />
-                {form.formState.errors.location_url && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {form.formState.errors.location_url.message}
-                  </p>
-                )}
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-2">
-                  Message
-                </label>
-                <textarea
-                  {...form.register("message")}
-                  className="w-full px-4 py-2 border rounded-lg"
-                  rows={4}
-                />
-              </div>
-            </div>
-          </div>
-        )} */}
-
         {/* MEDIA TAB */}
         {(activeTab === "media" || window.innerWidth < 768) && (
           <div className="space-y-8">
@@ -904,7 +786,6 @@ export function InvitationForm({
                                     quality={75}
                                   />
 
-                                  {/* Overlay */}
                                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-black/10 to-black/30 group-hover:bg-black/20 transition-all duration-400">
                                     <button
                                       type="button"

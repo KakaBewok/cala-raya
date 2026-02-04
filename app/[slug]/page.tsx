@@ -44,7 +44,7 @@ export default function InvitationPage() {
             guests (*),
             stories (*),
             rsvps (*)
-          `
+          `,
           )
           .eq("slug", slug)
           .eq("id", invId)
@@ -71,7 +71,7 @@ export default function InvitationPage() {
     if (!invitationData || !guestId) return;
 
     const guestData = invitationData.guests?.find(
-      (item) => item.id.toString() === guestId.toString()
+      (item) => item.id.toString() === guestId.toString(),
     );
     setGuest(guestData || null);
   }, [invitationData, guestId, setGuest]);

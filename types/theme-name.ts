@@ -3,6 +3,7 @@ export type ThemeName =
   | "netflix"
   | "floral"
   | "magazine"
+  | "magazine_custom"
   | "maroon"
   | "maroon_custom"
   | "maroon_monochrome"
