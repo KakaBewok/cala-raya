@@ -11,7 +11,7 @@ import FloatingWhatsapp from "@/components/home/FloatingWhatsapp";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
       <Navbar />
       <Hero />
       <WhyUs />

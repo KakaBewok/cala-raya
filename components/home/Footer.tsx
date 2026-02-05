@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Footer() {
   return (
-    <footer className="bg-slate-900 dark:bg-slate-950 text-white pt-10 pb-8">
+    <footer className="bg-slate-900 dark:bg-slate-950 text-white pt-10 pb-8 border-t-4 border-slate-900 dark:border-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 place-content-between mb-8">
           {/* Brand */}
@@ -16,9 +16,9 @@ function Footer() {
                 width={53}
                 height={53}
               />
-              <span className="text-xl font-bold">Calaraya</span>
+              <span className="text-xl font-black uppercase">Calaraya</span>
             </div>
-            <p className="text-slate-400 text-sm mb-4 max-w-sm">
+            <p className="text-slate-400 text-sm mb-4 max-w-sm font-bold">
               Undangan digital dan website profesional dengan pendekatan desain
               yang modern dan fungsional
             </p>
@@ -30,8 +30,8 @@ function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-4">Kontak</h3>
-            <div className="space-y-3 text-sm text-slate-400">
+            <h3 className="font-black mb-4 uppercase">Kontak</h3>
+            <div className="space-y-3 text-sm text-slate-400 font-bold">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
                 <span>{contact.email}</span>
@@ -45,7 +45,7 @@ function Footer() {
 
           {/* Social */}
           <div>
-            <h3 className="font-semibold mb-4">Follow Us</h3>
+            <h3 className="font-black mb-4 uppercase">Follow Us</h3>
             <div className="flex gap-3">
               {socialMedia.map((social, i: number) => (
                 <a
@@ -53,9 +53,9 @@ function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-all"
+                  className="w-10 h-10 bg-white hover:bg-yellow-400 border-3 border-white flex items-center justify-center"
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-5 h-5 text-slate-900" />
                 </a>
               ))}
             </div>

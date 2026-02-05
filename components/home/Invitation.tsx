@@ -8,10 +8,10 @@ function Invitation() {
     <section id="themes" className="py-12 md:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+          <h2 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 uppercase">
             Tema Undangan
           </h2>
-          <p className="text-sm md:text-lg text-slate-600 dark:text-slate-400">
+          <p className="text-sm md:text-lg text-slate-900 dark:text-white font-bold">
             Koleksi tema elegan untuk berbagai kebutuhan acara
           </p>
         </div>
@@ -20,7 +20,7 @@ function Invitation() {
           {allThemes.map((theme, i) => (
             <div
               key={i}
-              className="group relative bg-slate-900 dark:bg-slate-950 rounded-md overflow-hidden transition-transform duration-300"
+              className="group relative bg-slate-900 dark:bg-slate-950 border-4 border-slate-900 dark:border-white overflow-hidden"
             >
               <div className="relative h-80">
                 <Image
@@ -33,18 +33,18 @@ function Invitation() {
                 />
 
                 {theme.name && (
-                  <div className="bg-slate-900/40 backdrop-blur-sm absolute top-0 left-0 text-white md:px-2.5 px-2 md:py-1.5 py-1 md:text-sm text-xs font-semibold rounded-br-md">
+                  <div className="z-10 bg-yellow-400 border-3 border-slate-900 absolute top-0 left-0 text-slate-900 px-3 md:px-3 py-1.5 md:py-2.5 text-xs md:text-sm font-black uppercase">
                     {theme.name}
                   </div>
                 )}
 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 md:p-4">
+                <div className="absolute inset-0 bg-slate-900/50 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 md:p-4">
                   <div className="flex gap-1 mb-1.5 md:mb-3 overflow-x-auto scrollbar-hide">
                     {theme.features.map((f, idx) => (
                       <span
                         key={idx}
-                        className="text-[10px] md:text-xs px-2 py-1 bg-white/70 text-slate-800 font-semibold rounded whitespace-nowrap"
+                        className="text-[8px] md:text-xs px-2 py-1 bg-yellow-400 text-slate-900 font-black border-2 border-slate-900 uppercase whitespace-nowrap"
                       >
                         {f}
                       </span>
@@ -53,8 +53,8 @@ function Invitation() {
 
                   <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-1.5 md:gap-3">
                     <div className="flex-shrink-0">
-                      <p className="text-white/60 text-xs">Mulai dari</p>
-                      <p className="text-white font-bold text-base md:text-lg">
+                      <p className="text-white text-xs font-bold uppercase">Mulai dari</p>
+                      <p className="text-white font-black text-base md:text-lg">
                         {theme.price}
                       </p>
                     </div>
@@ -67,8 +67,7 @@ function Invitation() {
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        // className="cursor-pointer flex-1 md:px-2 md:py-2 border md:border-2 border-green-500 rounded-sm font-semibold flex items-center justify-center gap-2 text-xs md:text-sm"
-                        className="cursor-pointer flex-1 md:px-2 md:py-2 bg-green-500 rounded-sm font-semibold flex items-center justify-center gap-2 text-xs md:text-sm"
+                        className="cursor-pointer flex-1 md:px-2 md:py-2 bg-green-500 border-3 border-white font-black flex items-center justify-center gap-2 text-xs md:text-sm uppercase"
                       >
                         <svg
                           className="w-3.5 md:w-5 h-3.5 md:h-5 text-white"
@@ -83,8 +82,7 @@ function Invitation() {
                         href={theme.previewUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        // className="cursor-pointer px-2 py-2 bg-white/40 backdrop-blur-sm rounded-md font-semibold"
-                        className="cursor-pointer px-2 py-2 border border-white rounded-md font-semibold"
+                        className="cursor-pointer px-2 py-2 border-3 border-white font-black"
                       >
                         <Eye className="w-3.5 md:w-5 h-3.5 md:h-5 text-white" />
                       </a>
@@ -97,7 +95,7 @@ function Invitation() {
 
           {allThemes.length === 0 && (
             <div className="col-span-full text-center py-10">
-              <p className="text-slate-500 dark:text-slate-400">
+              <p className="text-slate-900 dark:text-white font-bold">
                 Belum ada tema undangan. Segera hadir!
               </p>
             </div>

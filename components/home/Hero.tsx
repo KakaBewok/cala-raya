@@ -4,18 +4,18 @@ function Hero() {
   return (
     <section
       id="home"
-      className="py-24 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800"
+      className="py-24 bg-white dark:bg-slate-900"
     >
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6">
+          <h1 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 uppercase">
             Undangan Digital &<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-500">
+            <span className="inline-block text-slate-900 dark:text-white border-b-4 md:border-b-8 border-yellow-400 pb-1">
               Website Profesional
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8">
+          <p className="text-lg md:text-xl text-slate-900 dark:text-white font-bold max-w-2xl mx-auto mb-8">
             Undangan digital dan website profesional dengan pendekatan desain
             yang modern dan fungsional
           </p>
@@ -27,13 +27,13 @@ function Hero() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 md:px-8 py-3 md:py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors shadow-lg"
+              className="px-5 md:px-8 py-3 md:py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-4 border-slate-900 dark:border-white font-black hover:bg-white hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-white uppercase"
             >
               Mulai Diskusi
             </a>
             <a
               href="#portfolio"
-              className="px-5 md:px-8 py-3 md:py-4 border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white rounded-lg font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+              className="px-5 md:px-8 py-3 md:py-4 border-4 border-slate-900 dark:border-white text-slate-900 dark:text-white bg-white dark:bg-slate-900 font-black hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900 uppercase"
             >
               Lihat Portfolio
             </a>
@@ -45,11 +45,11 @@ function Hero() {
               { number: "100%", label: "Kepuasan Klien" },
               { number: "24/7", label: "Support" },
             ].map((stat, i: number) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl font-bold text-slate-900 dark:text-white mb-1">
+              <div key={i} className="text-center border-4 border-slate-900 dark:border-white bg-yellow-400 p-4">
+                <div className="text-3xl font-black text-slate-900 mb-1">
                   {stat.number}
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">
+                <div className="text-sm font-bold text-slate-900">
                   {stat.label}
                 </div>
               </div>

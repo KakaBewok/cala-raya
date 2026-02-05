@@ -33,13 +33,13 @@ function Reviews() {
   }, [api]);
 
   return (
-    <section id="reviews" className="py-12 md:py-24 bg-white dark:bg-slate-900">
+    <section id="reviews" className="py-12 md:py-24 bg-yellow-400">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2 md:mb-4">
+          <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-2 md:mb-4 uppercase">
             Apa Kata Mereka?
           </h2>
-          <p className="text-sm md:text-lg text-slate-600 dark:text-slate-400">
+          <p className="text-sm md:text-lg text-slate-900 font-bold">
             Pengalaman klien setelah pakai layanan kami
           </p>
         </div>
@@ -60,9 +60,9 @@ function Reviews() {
                 key={i}
                 className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 h-full shadow-lg shadow-slate-500/10 ml-0 md:ml-2"
               >
-                <div className="bg-white dark:bg-slate-900 p-4 h-full">
+                <div className="bg-white border-4 border-slate-900 p-4 h-full">
                   {/* Chat Screenshot */}
-                  <div className="mb-4 rounded-xs overflow-hidden">
+                  <div className="mb-4 overflow-hidden border-4 border-slate-900">
                     <Image
                       width={400}
                       height={128}
@@ -76,10 +76,10 @@ function Reviews() {
                   {/* Profile */}
                   <div className="mb-2">
                     <div className="flex flex-col gap-1">
-                      <h4 className="text-lg md:text-xl font-semibold text-slate-900 dark:text-white">
+                      <h4 className="text-lg md:text-xl font-black text-slate-900 uppercase">
                         {review.name}
                       </h4>
-                      <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mb-2">
+                      <p className="text-xs md:text-sm text-slate-900 font-bold mb-2">
                         {review.product} - {review.type}
                       </p>
                       <div className="flex gap-1">
@@ -94,7 +94,7 @@ function Reviews() {
                   </div>
 
                   {/* Comment */}
-                  <p className="italic text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed">
+                  <p className="italic text-slate-900 text-xs md:text-sm leading-relaxed font-bold">
                     &quot;{review.comment}&quot;
                   </p>
                 </div>
@@ -111,10 +111,10 @@ function Reviews() {
             <button
               key={index}
               onClick={() => api?.scrollTo(index)}
-              className={`h-1 md:h-2 w-1 md:w-2 rounded-full transition-all cursor-pointer ${
+              className={`h-1 md:h-2 w-1 md:w-2 transition-all cursor-pointer border-2 border-slate-900 ${
                 index === current
-                  ? "bg-slate-900 dark:bg-white w-2 md:w-4"
-                  : "bg-slate-300 dark:bg-slate-600"
+                  ? "bg-slate-900 w-2 md:w-4"
+                  : "bg-white"
               }`}
             />
           ))}

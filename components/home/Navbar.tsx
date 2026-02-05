@@ -25,7 +25,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md ">
+    <nav className="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b-4 border-slate-900 dark:border-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo - Left */}
@@ -47,7 +47,7 @@ function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium whitespace-nowrap"
+                className="text-slate-900 dark:text-white font-bold whitespace-nowrap hover:underline decoration-4 underline-offset-4"
               >
                 {link.name}
               </a>
@@ -58,12 +58,12 @@ function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+              className="p-2 border-3 border-slate-900 dark:border-white bg-white dark:bg-slate-900 hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900"
             >
               {isDark ? (
-                <Sun className="w-5 h-5 text-slate-600 dark:text-slate-300" />
+                <Sun className="w-5 h-5" />
               ) : (
-                <Moon className="w-5 h-5 text-slate-600" />
+                <Moon className="w-5 h-5" />
               )}
             </button>
             <a
@@ -72,7 +72,7 @@ function Navbar() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors whitespace-nowrap"
+              className="px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-3 border-slate-900 dark:border-white font-bold hover:bg-white hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-white whitespace-nowrap"
             >
               Konsultasi
             </a>
@@ -82,23 +82,23 @@ function Navbar() {
           <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800"
+              className="p-2 border-3 border-slate-900 dark:border-white bg-white dark:bg-slate-900"
             >
               {isDark ? (
-                <Sun className="w-5 h-5 text-slate-600 dark:text-slate-300" />
+                <Sun className="w-5 h-5 text-slate-900 dark:text-white" />
               ) : (
-                <Moon className="w-5 h-5 text-slate-600" />
+                <Moon className="w-5 h-5 text-slate-900" />
               )}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="relative p-2 rounded-lg bg-slate-100 dark:bg-slate-800"
+              className="relative p-2 border-3 border-slate-900 dark:border-white bg-white dark:bg-slate-900"
             >
               {/* Menu icon */}
               <Menu
                 className={`
                   absolute inset-0 m-auto w-6 h-6
-                  text-slate-600 dark:text-slate-300
+                  text-slate-900 dark:text-white
                   transition-all duration-200 ease-out
                   ${isOpen ? "opacity-0 scale-75" : "opacity-100 scale-100"}
                 `}
@@ -108,7 +108,7 @@ function Navbar() {
               <X
                 className={`
                   absolute inset-0 m-auto w-6 h-6
-                  text-slate-600 dark:text-slate-300
+                  text-slate-900 dark:text-white
                   transition-all duration-200 ease-out
                   ${isOpen ? "opacity-100 scale-100" : "opacity-0 scale-75"}
                 `}
@@ -125,14 +125,14 @@ function Navbar() {
             isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="py-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="py-4 border-t-3 border-slate-900 dark:border-white">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={handleLinkClick}
-                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
+                  className="text-slate-900 dark:text-white font-bold hover:underline decoration-3"
                 >
                   {link.name}
                 </a>
@@ -143,7 +143,7 @@ function Navbar() {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-center px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-md font-semibold"
+                className="text-center px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-3 border-slate-900 dark:border-white font-bold"
               >
                 Konsultasi
               </a>
