@@ -75,8 +75,8 @@ const portfolios = [
   {
     title: "Qatia Rent",
     description:
-      "Website penyewaan pakaian dengan halaman admin untuk mengelola pakaian & transaksi",
-    product: "Website",
+      "Admin Page - Order Form - Email Notification - Product Management - Dashboard",
+    product: "Website", 
     type: "Rental Website",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765989761/personal/web-porto/qatia_tiulwx.png",
@@ -84,7 +84,7 @@ const portfolios = [
   },
   {
     title: "Dinna & Hudha",
-    description: "Undangan Digital bertema Stylish Bold yang modern dan elegan",
+    description: "",
     product: "Undangan Digital",
     type: "Stylish Bold",
     image:
@@ -93,7 +93,7 @@ const portfolios = [
   },
   {
     title: "Reigiya & Amar",
-    description: "Undangan Digital bertema Maroon yang elegan dan berkelas",
+    description: "",
     product: "Undangan Digital",
     type: "Maroon",
     image:
@@ -102,7 +102,7 @@ const portfolios = [
   },
   {
     title: "Rahma & Jalal",
-    description: "Undangan Digital bertema Magazine yang modern dan unik",
+    description: "",
     product: "Undangan Digital",
     type: "Magazine",
     image:
@@ -111,7 +111,7 @@ const portfolios = [
   },
   {
     title: "Ilham & Rosi",
-    description: "Undangan Digital bertema Floral yang cantik dan romantis",
+    description: "",
     product: "Undangan Digital",
     type: "Floral",
     image:
@@ -120,7 +120,7 @@ const portfolios = [
   },
   {
     title: "Bella & Syafik",
-    description: "Undangan Digital bertema Netflix yang unik",
+    description: "",
     product: "Undangan Digital",
     type: "Netflix",
     image:
@@ -129,7 +129,7 @@ const portfolios = [
   },
   {
     title: "Agung & Dessy",
-    description: "Undangan Digital bertema Netflix yang unik",
+    description: "",
     product: "Undangan Digital",
     type: "Netflix",
     image:
@@ -138,7 +138,7 @@ const portfolios = [
   },
   {
     title: "Andres & Agnalya",
-    description: "Undangan Digital bertema Netflix yang unik",
+    description: "",
     product: "Undangan Digital",
     type: "Netflix",
     image:
@@ -147,7 +147,7 @@ const portfolios = [
   },
   {
     title: "Ferdy & Irma",
-    description: "Undangan Digital bertema Magazine yang unik",
+    description: "",
     product: "Undangan Digital",
     type: "Magazine",
     image:
@@ -156,7 +156,7 @@ const portfolios = [
   },
   {
     title: "Naomi & Rayhan",
-    description: "Undangan Digital bertema Magazine yang unik",
+    description: "",
     product: "Undangan Digital",
     type: "Magazine",
     image:
@@ -165,7 +165,7 @@ const portfolios = [
   },
   {
     title: "Choirul & Amanda",
-    description: "Undangan Digital bertema Magazine yang unik",
+    description: "",
     product: "Undangan Digital",
     type: "Magazine",
     image:
@@ -174,7 +174,7 @@ const portfolios = [
   },
   {
     title: "Yogi & Nova",
-    description: "Undangan Digital bertema Magazine yang unik",
+    description: "",
     product: "Undangan Digital",
     type: "Magazine",
     image:
@@ -183,7 +183,7 @@ const portfolios = [
   },
   {
     title: "Riko & Shelly",
-    description: "Undangan Digital bertema Magazine yang unik",
+    description: "",
     product: "Undangan Digital",
     type: "Magazine",
     image:
@@ -192,7 +192,7 @@ const portfolios = [
   },
   {
     title: "Nadiah & Haris",
-    description: "Undangan Digital bertema Monochrome yang simpel dan modern",
+    description: "",
     product: "Undangan Digital",
     type: "Monochrome",
     image:
@@ -201,7 +201,7 @@ const portfolios = [
   },
   {
     title: "Ikhsan & Tasya",
-    description: "Undangan Digital bertema Maroon yang elegan dan berkelas",
+    description: "",
     product: "Undangan Digital",
     type: "Maroon",
     image:
@@ -210,7 +210,7 @@ const portfolios = [
   },
   {
     title: "Shamil & Sarah",
-    description: "Undangan Digital bertema Maroon yang elegan dan berkelas",
+    description: "",
     product: "Undangan Digital",
     type: "Maroon Custom",
     image:
@@ -219,7 +219,7 @@ const portfolios = [
   },
   {
     title: "Ridho & Sasa",
-    description: "Undangan Digital bertema Magazine yang unik",
+    description: "",
     product: "Undangan Digital",
     type: "Magazine",
     image:

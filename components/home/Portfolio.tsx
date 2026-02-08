@@ -85,11 +85,17 @@ function Portfolio() {
                   </span>
                 </div>
                 {/* Always Visible Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 flex flex-col justify-end p-2 md:p-3">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/80 flex flex-col justify-end p-2 md:p-3">
                   <h3 className="text-white text-sm md:text-base font-black uppercase">
                     {item.title}
                   </h3>
+                  <div className="text-[10px] lg:text-xs font-medium capitalize text-slate-200">
+                    {item.description && (
+                      <p>{item.description}</p>
+                    )}
+                  </div>
                 </div>
+                
                 {/* External Link Icon */}
                 <div className="absolute top-2 right-2 w-8 h-8 bg-yellow-400 border-3 border-slate-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <ExternalLink className="w-4 h-4 text-slate-900" />

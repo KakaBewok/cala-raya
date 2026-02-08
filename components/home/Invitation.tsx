@@ -39,7 +39,7 @@ function Invitation() {
                 )}
 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-slate-900/50 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 md:p-4">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/80 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 md:p-4">
                   <div className="flex gap-1 mb-1.5 md:mb-3 overflow-x-auto scrollbar-hide">
                     {theme.features.map((f, idx) => (
                       <span
