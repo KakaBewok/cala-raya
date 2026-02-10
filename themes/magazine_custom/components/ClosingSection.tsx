@@ -52,9 +52,9 @@ const ClosingSection = () => {
               </span>
             </p>
             <p className="text-xs font-medium mt-4">
-              Bagikan hari bahagia di Instagram
+              Share the joy on Instagram 
               <br />
-              dan tag kami
+              and tag us!
             </p>
           </div>
         )}

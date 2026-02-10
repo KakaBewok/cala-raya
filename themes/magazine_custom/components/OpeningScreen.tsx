@@ -62,14 +62,14 @@ export default function OpeningScreen({
               transition={{ duration: 1, delay: 1 }}
               className={`gap-5 max-w-48 absolute left-7 bottom-32 tracking-wider ${poppins.className} flex flex-col items-start justify-start`}
             >
-              <p className="text-sm">Halo,</p>
+              <p className="text-sm">Hello,</p>
               <p className="text-3xl leading-relaxed">{guest?.name}</p>
               <Button
                 size="sm"
                 onClick={handleClick}
                 className="mt-5 text-xs bg-transparent rounded-none border border-white cursor-pointer hover:bg-transparent"
               >
-                Buka Undangan
+                Open Invitation
               </Button>
             </motion.div>
           </div>

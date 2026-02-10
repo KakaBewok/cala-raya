@@ -52,7 +52,7 @@ const EventInfo = () => {
         priority
       />
       <div
-        className="z-20 h-auto bg-orange-50 flex flex-col justify-start items-center py-6"
+        className="z-20 h-auto bg-white flex flex-col justify-start items-center py-6"
         data-aos="fade-up"
       >
         {data?.rundowns
@@ -117,7 +117,7 @@ const EventInfo = () => {
                 rel="noopener noreferrer"
                 className={`${poppins.className} text-xs font-medium underline text-neutral-700`}
               >
-                Tambah ke Kalender
+                Add to Calendar
               </Link>
             </div>
           ))}
@@ -133,7 +133,7 @@ const EventInfo = () => {
                 ${remineFares.className}
             `}
           >
-            LOKASI
+            LOCATION
           </h1>
           <p
             className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700 text-center`}
@@ -151,7 +151,7 @@ const EventInfo = () => {
             href={data?.location_url || "#"}
             className="py-2 px-4 text-xs bg-transparent rounded-none border border-neutral-700 text-neutral-700 cursor-pointer hover:bg-transparent"
           >
-            LIHAT LOKASI
+            VIEW LOCATION
           </Link>
         </div>
       </div>

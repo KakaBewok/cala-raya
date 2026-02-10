@@ -79,7 +79,7 @@ const RSVP = () => {
   return (
     <div className="w-full" data-aos="zoom-in">
       {/* form */}
-      <section className="bg-[#f8f3ea] px-6 py-10 w-full flex flex-col items-center">
+      <section className="bg-white px-6 py-10 w-full flex flex-col items-center">
         <h2
           className={`${remineFares.className} text-4xl font-light tracking-wide text-neutral-800 mb-2`}
         >
@@ -93,14 +93,14 @@ const RSVP = () => {
             <label
               className={`${remineFares.className} block text-base tracking-wide text-neutral-700 font-medium mb-2`}
             >
-              nama
+              name
             </label>
             <input
               name="guest"
               value={form.guest}
               onChange={handleChange}
               placeholder="Your name"
-              className="text-xs w-full bg-white px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
+              className="text-xs w-full bg-[#f4f3f3] px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
               required
             />
           </div>
@@ -110,15 +110,15 @@ const RSVP = () => {
             <label
               className={`${remineFares.className} block text-base tracking-wide text-neutral-700 font-medium mb-2`}
             >
-              ucapan
+              message
             </label>
             <textarea
               name="message"
               value={form.message}
               onChange={handleChange}
-              placeholder="Ucapan untuk pengantin"
+              placeholder="Your message"
               rows={4}
-              className="text-xs w-full bg-white px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
+              className="text-xs w-full bg-[#f4f3f3] px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
               required
             />
           </div>
@@ -128,20 +128,20 @@ const RSVP = () => {
             <label
               className={`${remineFares.className} block text-base tracking-wide text-neutral-700 font-medium mb-2`}
             >
-              konfirmasi kehadiran
+              attending
             </label>
             <select
               name="attending"
               value={form.attending}
               onChange={handleChange}
-              className="cursor-pointer text-xs text-neutral-700 w-full px-4 py-3 bg-white appearance-none focus:outline-none focus:ring-1 focus:ring-neutral-400"
+              className="cursor-pointer text-xs text-neutral-700 w-full px-4 py-3 bg-[#f4f3f3] appearance-none focus:outline-none focus:ring-1 focus:ring-neutral-400"
               required
             >
-              <option value="">Pilih</option>
-              <option value="1">1 Orang</option>
-              <option value="2">2 Orang</option>
-              <option value="3">Lebih dari 2 orang</option>
-              <option value="0">Tidak Hadir</option>
+              <option value="">Select</option>
+              <option value="1">1 Person</option>
+              <option value="2">2 Person</option>
+              <option value="3">More than 2 person</option>
+              <option value="0">Not Attending</option>
             </select>
           </div>
 
@@ -150,16 +150,16 @@ const RSVP = () => {
             type="submit"
             className="cursor-pointer w-full bg-neutral-700 text-white py-2 text-xs tracking-wide hover:bg-neutral-800 transition"
           >
-            Kirim
+            Send
           </button>
         </form>
       </section>
       {/* RSVP message */}
-      <section className="w-full py-10 px-6 bg-[#f9f4ec] text-neutral-700">
+      <section className="w-full py-10 px-6 bg-white text-neutral-700">
         <h2
           className={`${remineFares.className} z-10 text-4xl font-medium text-center mb-2 tracking-wide relative`}
         >
-          <span>ucapan & doa</span>
+          <span>wishes & prayers</span>
           <span className="block border-b border-neutral-700 w-28 mx-auto mt-2"></span>
         </h2>
 
@@ -167,7 +167,7 @@ const RSVP = () => {
           {data.map((item, index) => (
             <div
               key={index}
-              className="bg-[#f1ebdd] px-6 py-4 rounded-sm text-xs text-center"
+              className="bg-[#f4f3f3] px-6 py-4 rounded-sm text-xs text-center"
             >
               <p className="font-bold mb-3">{item.guest_name}</p>
               <p className="font-medium">{item.message}</p>

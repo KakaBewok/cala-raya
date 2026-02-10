@@ -44,7 +44,7 @@ export default function GroomsSection() {
   return (
     <section
       ref={animationRef}
-      className="relative w-full min-h-screen bg-[#fdfaf6] flex items-center justify-center overflow-hidden"
+      className="relative w-full min-h-screen bg-white flex items-center justify-center overflow-hidden"
     >
       <motion.div style={{ clipPath }} className="absolute inset-0 z-20">
         <Image
@@ -56,7 +56,7 @@ export default function GroomsSection() {
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/20 z-30 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/50 z-30 pointer-events-none" />
 
       <motion.div className="absolute top-14 left-14 z-10 text-left">
         <p

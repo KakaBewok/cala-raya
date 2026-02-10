@@ -43,7 +43,7 @@ const Cover = () => {
   return (
     <section
       ref={animationRef}
-      className="relative w-full h-screen bg-[#fdfaf6] flex items-center justify-center overflow-hidden"
+      className="relative w-full h-screen bg-white flex items-center justify-center overflow-hidden"
     >
       <motion.div style={{ clipPath, filter }} className="absolute inset-0">
         <Image
@@ -58,7 +58,7 @@ const Cover = () => {
 
       {/* Content box */}
       <div className="absolute z-20 h-screen flex flex-col justify-around items-center text-white">
-        <p className={`${didot.className} text-xs`}>The Intimate Wedding of</p>
+        <p className={`${didot.className} text-xs`}>The Wedding of</p>
 
         <h1
           className={`${remineFares.className} font-medium text-4xl text-left`}

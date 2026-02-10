@@ -101,7 +101,7 @@ const HorizontalGallery = () => {
   }, [images]);
 
   return (
-    <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden">
+    <div className="relative w-full h-screen bg-white overflow-hidden">
       {/* left */}
       <div
         className={`flex justify-center items-center absolute top-0 left-0 w-1/2 h-full z-30 transition-transform duration-1000 ease-in-out ${
@@ -142,7 +142,7 @@ const HorizontalGallery = () => {
             <X size={20} />
           </>
         ) : (
-          <span className="text-xs">Buka Galeri</span>
+          <span className="text-xs">Open Gallery</span>
         )}
       </Button>
 
