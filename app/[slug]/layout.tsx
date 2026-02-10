@@ -27,7 +27,7 @@ export async function generateMetadata({
       openGraph: {
         title: "Undangan tidak ditemukan",
         description: "Silakan periksa kembali link undangan Anda.",
-        url: `https://calaraya.vercel.app/${slug}`,
+        url: `${process.env.NEXT_PUBLIC_APP_URL_PROD!}/${slug}`,
       },
     };
   }
@@ -36,7 +36,7 @@ export async function generateMetadata({
     (image) => image.type === "preview"
   );
   const previewImage =
-    previewImageObj?.url ?? "https://calaraya.vercel.app/og-image.jpg";
+    previewImageObj?.url ?? `${process.env.NEXT_PUBLIC_APP_URL_PROD!}/og-image.jpg`;
 
   return {
     title: `${invitation?.host_one_nickname} ❤️ ${invitation?.host_two_nickname}`,
@@ -44,7 +44,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${invitation?.event_title}`,
       description: `${formatDate(invitation?.event_date, true)}`,
-      url: `https://calaraya.vercel.app/${slug}`,
+      url: `${process.env.NEXT_PUBLIC_APP_URL_PROD!}/${slug}`,
       images: [
         {
           url: previewImage,
