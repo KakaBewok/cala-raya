@@ -74,6 +74,8 @@ export const rundownSchema = z.object({
   start_time: z.string().min(1, "Start time is required"),
   end_time: z.string().optional(),
   time_zone: z.string().min(1, "Time zone is required"),
+  description: z.string().optional(),
+  image_url: z.string().optional(),
   order_number: z.number(),
 });
 
@@ -113,6 +115,16 @@ export const invitationFormSchema = z.object({
 
   // Etc.
   hashtag: z.string().optional(),
+
+  // Event Details
+  event_title: z.string().min(1, "Event title is required"),
+  event_date: z.string().min(1, "Event date is required"),
+  event_type: z.string().min(1, "Event type is required"),
+  location: z.string().min(1, "Location is required"),
+  location_url: z.string().url("Please provide a valid URL").optional().or(z.literal("")),
+  location_detail: z.string().optional(),
+  message: z.string().optional(),
+
 
   // Theme (Required)
   themes: themeSchema,

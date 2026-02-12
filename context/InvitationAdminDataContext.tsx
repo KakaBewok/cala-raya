@@ -7,6 +7,8 @@ import React, { createContext, ReactNode, useEffect, useState } from "react";
 export interface InvitationAdminContextType {
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
+  sidebarCollapsed: boolean;
+  setSidebarCollapsed: (collapsed: boolean) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
   invitationAdminData: InvitationData[];
@@ -28,9 +30,23 @@ export const InvitationAdminProvider: React.FC<
   const { status } = useSession();
   const [loading, setLoading] = useState<boolean>(false);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
   const [invitationAdminData, setInvitationAdminData] = useState<
     InvitationData[]
   >([]);
+
+  // Load collapsed state from local storage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem("sidebar-collapsed");
+    if (stored !== null) {
+      setSidebarCollapsed(stored === "true");
+    }
+  }, []);
+
+  // Save collapsed state to local storage when it changes
+  useEffect(() => {
+    localStorage.setItem("sidebar-collapsed", sidebarCollapsed.toString());
+  }, [sidebarCollapsed]);
 
   const fetchInvitations = async () => {
     if (status !== "authenticated") return;
@@ -57,6 +73,8 @@ export const InvitationAdminProvider: React.FC<
       value={{
         sidebarOpen,
         setSidebarOpen,
+        sidebarCollapsed,
+        setSidebarCollapsed,
         loading,
         setLoading,
         invitationAdminData,

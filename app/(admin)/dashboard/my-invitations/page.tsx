@@ -27,12 +27,19 @@ const InvitationPage = () => {
 
   return (
     <div className="space-y-12">
-      <div>
-        <h1 className="text-2xl font-bold">
-          My Invitation{" "}
-          <span className="text-red-500">(UNDER MANTAINANCE)</span>
-        </h1>
-        <p className="text-gray-500">Manage your invitations here</p>
+      <div className="flex justify-between items-end">
+        <div>
+          <h1 className="text-2xl font-bold italic">
+            My Invitation
+          </h1>
+          <p className="text-gray-500">Manage your digital invitations here</p>
+        </div>
+        <a
+          href="/dashboard/my-invitations/create"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-xl font-bold shadow-lg shadow-indigo-100 dark:shadow-none transition-all active:scale-95"
+        >
+          + Create New
+        </a>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

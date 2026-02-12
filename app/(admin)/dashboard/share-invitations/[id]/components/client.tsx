@@ -5,14 +5,24 @@ import { DataTable } from "@/components/dashboard/DataTable";
 import { EditMessageModal } from "@/components/dashboard/EditMessageModal";
 import { ExcelUploadModal } from "@/components/dashboard/ExcelUploadModal";
 import { GuestInputModal } from "@/components/dashboard/GuestInputModal";
-import Heading from "@/components/dashboard/Heading";
 import { TooltipHover } from "@/components/Tooltip";
 import { Button } from "@/components/ui/button";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
 import InvitationData from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
-import { Plus, SquarePen, Upload } from "lucide-react";
+import { encode } from "@/utils/hash";
+import { 
+  Plus, 
+  Upload, 
+  MessageSquare, 
+  Copy, 
+  Check, 
+  ExternalLink,
+  Users,
+  Calendar,
+  Link as LinkIcon
+} from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { columns } from "./columns";
@@ -34,16 +44,13 @@ export const GuestClient: React.FC<GuestClientProps> = ({
     refetchInvitations,
   } = useInvitationAdmin();
   const [ids, setIds] = useState<number[]>([]);
-  const [bulkDeleteModalOpen, setBulkDeleteModalOpen] =
-    useState<boolean>(false);
-  const [guestInputModalOpen, setGuestInputModalOpen] =
-    useState<boolean>(false);
-  const [excelUploadModalOpen, setExcelUploadModalOpen] =
-    useState<boolean>(false);
-  const [editMessageModalOpen, setEditMessageModalOpen] =
-    useState<boolean>(false);
+  const [bulkDeleteModalOpen, setBulkDeleteModalOpen] = useState<boolean>(false);
+  const [guestInputModalOpen, setGuestInputModalOpen] = useState<boolean>(false);
+  const [excelUploadModalOpen, setExcelUploadModalOpen] = useState<boolean>(false);
+  const [editMessageModalOpen, setEditMessageModalOpen] = useState<boolean>(false);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
+  const [linkCopied, setLinkCopied] = useState<boolean>(false);
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
 
@@ -52,6 +59,37 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       ? formatDate(selectedInvitation.event_date)
       : ""
   }`;
+
+  // Generate base invitation URL
+  const generateBaseUrl = () => {
+    if (!selectedInvitation?.id) return null;
+    return `${selectedInvitation?.web_url}/${selectedInvitation?.slug}`;
+  };
+
+  const handleCopyLink = () => {
+    const url = generateBaseUrl();
+    if (!url) {
+      toast.error("Unable to generate invitation link");
+      return;
+    }
+
+    navigator.clipboard.writeText(url);
+    toast.success("Invitation link copied!", {
+      position: "top-center",
+    });
+
+    setLinkCopied(true);
+    setTimeout(() => {
+      setLinkCopied(false);
+    }, 3000);
+  };
+
+  const handleOpenPreview = () => {
+    const url = generateBaseUrl();
+    if (url) {
+      window.open(url, "_blank");
+    }
+  };
 
   const handleBulkDelete = async (e?: React.MouseEvent<HTMLButtonElement>) => {
     e?.stopPropagation();
@@ -188,58 +226,167 @@ export const GuestClient: React.FC<GuestClientProps> = ({
 
   return (
     <>
-      <div className="flex items-center justify-between">
-        <div className="flex flex-col md:flex-col items-start md:items-start gap-4">
-          <Heading
-            title={`Guests List (${guestData?.length ?? 0})`}
-            description={`${
-              selectedInvitation ? `${description}` : "Loading..."
-            }`}
-            additionalInfo={`${selectedInvitation?.additional_info ?? ``}`}
-          />
-        </div>
-        <div className="flex flex-col md:flex-row items-center md:items-center gap-3 md:gap-5">
-          {invitations.length > 1 && (
-            <ChangeInvitationButton url="/dashboard/share-invitations" />
-          )}
-          <div className="flex items-center gap-2">
-            <TooltipHover message="Upload Guests List">
-              <Button
-                onClick={() => setExcelUploadModalOpen(true)}
-                variant="outline"
-                className="dark:bg-slate-200 hover:dark:bg-slate-300 cursor-pointer"
-              >
-                <Upload className="w-4 h-4 dark:text-slate-900" />
-              </Button>
-            </TooltipHover>
-            <TooltipHover message="Input Guests">
-              <Button
-                onClick={() => setGuestInputModalOpen(true)}
-                variant="outline"
-                className="dark:bg-slate-200 hover:dark:bg-slate-300 cursor-pointer"
-              >
-                <Plus className="w-4 h-4 dark:text-slate-900" />
-              </Button>
-            </TooltipHover>
+      <div className="space-y-6">
+        {/* Header Section */}
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border shadow-sm overflow-hidden">
+          <div className="p-6 md:p-8">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+              {/* Invitation Info */}
+              <div className="space-y-1">
+                <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                  {bridesAndGrooms}
+                </h1>
+                <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                  <Calendar className="w-4 h-4" />
+                  <span>
+                    {selectedInvitation?.event_date
+                      ? formatDate(selectedInvitation.event_date)
+                      : "No date set"}
+                  </span>
+                </div>
+                {selectedInvitation?.additional_info && (
+                  <p className="text-sm text-slate-500 dark:text-slate-500 mt-2">
+                    {selectedInvitation.additional_info}
+                  </p>
+                )}
+              </div>
+
+              {/* Change Invitation Button */}
+              {invitations.length > 1 && (
+                <div className="lg:self-start">
+                  <ChangeInvitationButton url="/dashboard/share-invitations" />
+                </div>
+              )}
+            </div>
+
+            {/* Invitation Link Section */}
+            {/* <div className="mt-6 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
+              <div className="flex items-center gap-2 mb-3">
+                <LinkIcon className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  Invitation Link
+                </span>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 truncate font-mono">
+                    {generateBaseUrl() || "Generating link..."}
+                  </p>
+                </div>
+                
+                <div className="flex gap-2">
+                  <TooltipHover message="Copy Link">
+                    <Button
+                      onClick={handleCopyLink}
+                      variant="outline"
+                      className="flex items-center gap-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    >
+                      {linkCopied ? (
+                        <Check className="w-4 h-4 text-green-600" />
+                      ) : (
+                        <Copy className="w-4 h-4" />
+                      )}
+                      <span className="hidden sm:inline">
+                        {linkCopied ? "Copied" : "Copy"}
+                      </span>
+                    </Button>
+                  </TooltipHover>
+                  
+                  <TooltipHover message="Open Preview">
+                    <Button
+                      onClick={handleOpenPreview}
+                      variant="outline"
+                      className="flex items-center gap-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span className="hidden sm:inline">Preview</span>
+                    </Button>
+                  </TooltipHover>
+                </div>
+              </div>
+            </div> */}
           </div>
-          <TooltipHover message="Create Template Message">
-            <Button
-              onClick={() => setEditMessageModalOpen(true)}
-              className="dark:bg-green-600 dark:hover:bg-green-500 cursor-pointer bg-green-600 hover:bg-green-500 text-white "
-            >
-              <span className="text-xs md:text-sm">Message</span>
-              <SquarePen className="w-4 h-4 dark:text-slate-50" />
-            </Button>
-          </TooltipHover>
+        </div>
+
+        {/* Guest Management Section */}
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border shadow-sm overflow-hidden">
+          <div className="p-6 border-b border-slate-200 dark:border-slate-800">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              {/* Guest Count */}
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg">
+                  <Users className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                    Guest List
+                  </h2>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    {guestData?.length ?? 0} {guestData?.length === 1 ? "guest" : "guests"} registered
+                  </p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3">
+                <TooltipHover message="Upload Excel File">
+                  <Button
+                    onClick={() => setExcelUploadModalOpen(true)}
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2"
+                  >
+                    <Upload className="w-4 h-4" />
+                    <span className="hidden sm:inline">Upload</span>
+                  </Button>
+                </TooltipHover>
+
+                <TooltipHover message="Add Guest Manually">
+                  <Button
+                    onClick={() => setGuestInputModalOpen(true)}
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span className="hidden sm:inline">Add Guest</span>
+                  </Button>
+                </TooltipHover>
+
+                <TooltipHover message="Edit Message Template">
+                  <Button
+                    onClick={() => setEditMessageModalOpen(true)}
+                    size="sm"
+                    className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Message Template</span>
+                  </Button>
+                </TooltipHover>
+              </div>
+            </div>
+          </div>
+
+          {/* Data Table */}
+          <div className="p-6">
+            <DataTable
+              onDelete={openDeleteModal}
+              searchKey="name"
+              columns={columns}
+              data={guestData}
+            />
+          </div>
         </div>
       </div>
 
+      {/* Modals */}
       <AlertModal
         isOpen={bulkDeleteModalOpen}
         onClose={() => setBulkDeleteModalOpen(false)}
         onConfirm={handleBulkDelete}
         loading={loadingDelete}
-        description="All data under this guests will also be deleted."
+        description="All data under these guests will also be deleted."
       />
       <EditMessageModal
         isOpen={editMessageModalOpen}
@@ -259,12 +406,6 @@ export const GuestClient: React.FC<GuestClientProps> = ({
         onClose={() => setExcelUploadModalOpen(false)}
         onUpload={handleUpload}
         loading={isUploading}
-      />
-      <DataTable
-        onDelete={openDeleteModal}
-        searchKey="name"
-        columns={columns}
-        data={guestData}
       />
     </>
   );

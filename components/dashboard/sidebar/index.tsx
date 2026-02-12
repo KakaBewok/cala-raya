@@ -6,210 +6,100 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import NavLink from "./NavLink";
 import SidebarLinkGroup from "./SidebarLinkGroup";
-import { CheckCircle } from "lucide-react";
+import { 
+  CheckCircle, 
+  LayoutDashboard, 
+  Mail, 
+  Share2, 
+  ChevronLeft, 
+  ChevronRight,
+  BarChart3
+} from "lucide-react";
 
 const Sidebar = () => {
   const pathname = usePathname();
-  const { sidebarOpen, setSidebarOpen } = useInvitationAdmin();
+  const { 
+    sidebarOpen, 
+    setSidebarOpen, 
+    sidebarCollapsed, 
+    setSidebarCollapsed 
+  } = useInvitationAdmin();
   const trigger = useRef<HTMLButtonElement>(null);
   const sidebar = useRef<HTMLElement>(null);
   const [mounted, setMounted] = useState(false);
-
-  const [sidebarExpanded, setSidebarExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    const stored = localStorage.getItem("sidebar-expanded");
-    setSidebarExpanded(stored === "true");
-  }, []);
-
-  // close on click outside
-  useEffect(() => {
-    const clickHandler = ({ target }: MouseEvent) => {
-      if (!sidebar.current || !trigger.current) return;
-      if (
-        !sidebarOpen ||
-        sidebar.current.contains(target as Node) ||
-        trigger.current.contains(target as Node)
-      )
-        return;
-      setSidebarOpen(false);
-    };
-    document.addEventListener("click", clickHandler);
-    return () => document.removeEventListener("click", clickHandler);
-  });
-
-  // close if the esc key is pressed
-  useEffect(() => {
-    const keyHandler = ({ keyCode }: KeyboardEvent) => {
-      if (!sidebarOpen || keyCode !== 27) return;
-      setSidebarOpen(false);
-    };
-    document.addEventListener("keydown", keyHandler);
-    return () => document.removeEventListener("keydown", keyHandler);
-  });
-
-  useEffect(() => {
-    localStorage.setItem("sidebar-expanded", sidebarExpanded.toString());
-    if (sidebarExpanded) {
-      document.querySelector("body")?.classList.add("sidebar-expanded");
+    if (sidebarCollapsed) {
+      document.body.classList.add("sidebar-collapsed");
     } else {
-      document.querySelector("body")?.classList.remove("sidebar-expanded");
+      document.body.classList.remove("sidebar-collapsed");
     }
-  }, [sidebarExpanded]);
+  }, [sidebarCollapsed]);
 
   if (!mounted) return null;
 
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-neutral-800 duration-300 ease-linear lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-50 flex h-screen flex-col overflow-y-hidden bg-slate-900 border-r border-slate-800 transition-all duration-300 ease-in-out lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
-      }`}
+      } ${sidebarCollapsed ? "w-20" : "w-72"}`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className="flex items-center justify-between gap-2 px-6 py-6 lg:py-7">
-        <div className="w-full">
+      <div className={`flex items-center justify-between gap-2 px-6 py-6 lg:py-7 ${sidebarCollapsed ? "justify-center px-2" : ""}`}>
+        <div className={`transition-opacity duration-300 ${sidebarCollapsed ? "opacity-0 w-0 hidden" : "opacity-100"}`}>
           <Link href="/dashboard" className="flex items-center gap-1">
-            <h1 className="text-2xl font-extrabold text-slate-50">
-              Cala Raya 💌
+            <h1 className="text-xl font-black text-white italic tracking-tighter">
+              CALA RAYA
+              <span className="text-indigo-500 not-italic ml-1">.</span>
             </h1>
           </Link>
         </div>
 
         <button
+          onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+          className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white transition-colors"
+        >
+          {sidebarCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+        </button>
+
+        <button
           ref={trigger}
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          aria-controls="sidebar"
-          aria-expanded={sidebarOpen}
-          className="block lg:hidden text-slate-300"
+          className="block lg:hidden text-slate-300 hover:text-white"
         >
-          <svg
-            className="fill-current"
-            width="20"
-            height="18"
-            viewBox="0 0 20 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19 8.175H2.98748L9.36248 1.6875C9.69998 1.35 9.69998 0.825 9.36248 0.4875C9.02498 0.15 8.49998 0.15 8.16248 0.4875L0.399976 8.3625C0.0624756 8.7 0.0624756 9.225 0.399976 9.5625L8.16248 17.4375C8.31248 17.5875 8.53748 17.7 8.76248 17.7C8.98748 17.7 9.17498 17.625 9.36248 17.475C9.69998 17.1375 9.69998 16.6125 9.36248 16.275L3.02498 9.8625H19C19.45 9.8625 19.825 9.4875 19.825 9.0375C19.825 8.55 19.45 8.175 19 8.175Z"
-              fill=""
-            />
-          </svg>
+          <ChevronLeft className="rotate-180" />
         </button>
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
 
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="px-4 py-4 mt-5 lg:mt-9 lg:px-6">
-          {/* <!-- Menu Group --> */}
+        <nav className={`px-4 py-4 mt-5 lg:mt-9 ${sidebarCollapsed ? "px-2" : "lg:px-6"}`}>
           <div>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-slate-300">
-              MENU
-            </h3>
+            {!sidebarCollapsed && (
+              <h3 className="mb-4 ml-4 text-xs font-bold text-slate-500 uppercase tracking-widest">
+                Management
+              </h3>
+            )}
 
             <ul className="flex flex-col gap-2 mb-6">
-              {/* <!-- Menu Item Dashboard --> */}
-              <SidebarLinkGroup activeCondition={sidebarExpanded}>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <button
-                        className={
-                          "group w-full relative flex items-center gap-3 rounded-sm py-2 px-4 font-medium text-slate-300 duration-200 ease-in-out hover:bg-neutral-700"
-                        }
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleClick();
-                          setSidebarExpanded(!open);
-                        }}
-                      >
-                        <svg
-                          className="fill-current"
-                          width="18"
-                          height="18"
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M6.10322 0.956299H2.53135C1.5751 0.956299 0.787598 1.7438 0.787598 2.70005V6.27192C0.787598 7.22817 1.5751 8.01567 2.53135 8.01567H6.10322C7.05947 8.01567 7.84697 7.22817 7.84697 6.27192V2.72817C7.8751 1.7438 7.0876 0.956299 6.10322 0.956299ZM6.60947 6.30005C6.60947 6.5813 6.38447 6.8063 6.10322 6.8063H2.53135C2.2501 6.8063 2.0251 6.5813 2.0251 6.30005V2.72817C2.0251 2.44692 2.2501 2.22192 2.53135 2.22192H6.10322C6.38447 2.22192 6.60947 2.44692 6.60947 2.72817V6.30005Z"
-                            fill=""
-                          />
-                          <path
-                            d="M15.4689 0.956299H11.8971C10.9408 0.956299 10.1533 1.7438 10.1533 2.70005V6.27192C10.1533 7.22817 10.9408 8.01567 11.8971 8.01567H15.4689C16.4252 8.01567 17.2127 7.22817 17.2127 6.27192V2.72817C17.2127 1.7438 16.4252 0.956299 15.4689 0.956299ZM15.9752 6.30005C15.9752 6.5813 15.7502 6.8063 15.4689 6.8063H11.8971C11.6158 6.8063 11.3908 6.5813 11.3908 6.30005V2.72817C11.3908 2.44692 11.6158 2.22192 11.8971 2.22192H15.4689C15.7502 2.22192 15.9752 2.44692 15.9752 2.72817V6.30005Z"
-                            fill=""
-                          />
-                          <path
-                            d="M6.10322 9.92822H2.53135C1.5751 9.92822 0.787598 10.7157 0.787598 11.672V15.2438C0.787598 16.2001 1.5751 16.9876 2.53135 16.9876H6.10322C7.05947 16.9876 7.84697 16.2001 7.84697 15.2438V11.7001C7.8751 10.7157 7.0876 9.92822 6.10322 9.92822ZM6.60947 15.272C6.60947 15.5532 6.38447 15.7782 6.10322 15.7782H2.53135C2.2501 15.7782 2.0251 15.5532 2.0251 15.272V11.7001C2.0251 11.4188 2.2501 11.1938 2.53135 11.1938H6.10322C6.38447 11.1938 6.60947 11.4188 6.60947 11.7001V15.272Z"
-                            fill=""
-                          />
-                          <path
-                            d="M15.4689 9.92822H11.8971C10.9408 9.92822 10.1533 10.7157 10.1533 11.672V15.2438C10.1533 16.2001 10.9408 16.9876 11.8971 16.9876H15.4689C16.4252 16.9876 17.2127 16.2001 17.2127 15.2438V11.7001C17.2127 10.7157 16.4252 9.92822 15.4689 9.92822ZM15.9752 15.272C15.9752 15.5532 15.7502 15.7782 15.4689 15.7782H11.8971C11.6158 15.7782 11.3908 15.5532 11.3908 15.272V11.7001C11.3908 11.4188 11.6158 11.1938 11.8971 11.1938H15.4689C15.7502 11.1938 15.9752 11.4188 15.9752 11.7001V15.272Z"
-                            fill=""
-                          />
-                        </svg>
-                        Dashboard
-                        <svg
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
-                            open && "rotate-180"
-                          }`}
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M4.41107 6.9107C4.73651 6.58527 5.26414 6.58527 5.58958 6.9107L10.0003 11.3214L14.4111 6.91071C14.7365 6.58527 15.2641 6.58527 15.5896 6.91071C15.915 7.23614 15.915 7.76378 15.5896 8.08922L10.5896 13.0892C10.2641 13.4147 9.73651 13.4147 9.41107 13.0892L4.41107 8.08922C4.08563 7.76378 4.08563 7.23614 4.41107 6.9107Z"
-                            fill=""
-                          />
-                        </svg>
-                      </button>
-                      {/* <!-- Dropdown Menu Start --> */}
-                      <div
-                        className={`translate transform overflow-hidden ${
-                          !open && "hidden"
-                        }`}
-                      >
-                        <ul className="mt-4 mb-5 pl-7">
-                          <li>
-                            <NavLink
-                              url="dashboard"
-                              href="dashboard"
-                              active={pathname === "/dashboard"}
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="fill-current"
-                                width="18"
-                                height="18"
-                                viewBox="0 0 21 27"
-                                fill="none"
-                              >
-                                <path
-                                  fill="#F8F8FE"
-                                  d="M5,12a1,1,0,0,0-1,1v8a1,1,0,0,0,2,0V13A1,1,0,0,0,5,12ZM10,2A1,1,0,0,0,9,3V21a1,1,0,0,0,2,0V3A1,1,0,0,0,10,2ZM20,16a1,1,0,0,0-1,1v4a1,1,0,0,0,2,0V17A1,1,0,0,0,20,16ZM15,8a1,1,0,0,0-1,1V21a1,1,0,0,0,2,0V9A1,1,0,0,0,15,8Z"
-                                ></path>
-                              </svg>
-                              Report
-                            </NavLink>
-                          </li>
-                        </ul>
-                      </div>
-                      {/* <!-- Dropdown Menu End --> */}
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-              {/* <!-- Menu Item Dashboard --> */}
+              <li>
+                <NavLink
+                  url="/dashboard"
+                  active={pathname === "/dashboard"}
+                >
+                  <LayoutDashboard 
+                    size={20} 
+                    className={pathname === "/dashboard" ? "text-indigo-500" : "text-slate-400 group-hover:text-white"} 
+                  />
+                  {!sidebarCollapsed && <span>Dashboard</span>}
+                </NavLink>
+              </li>
 
               {/* <!-- Invitations --> */}
               <li>
@@ -217,23 +107,11 @@ const Sidebar = () => {
                   url="/dashboard/my-invitations"
                   active={pathname.startsWith("/dashboard/my-invitations")}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-mails-icon lucide-mails"
-                  >
-                    <rect width="16" height="13" x="6" y="4" rx="2" />
-                    <path d="m22 7-7.1 3.78c-.57.3-1.23.3-1.8 0L6 7" />
-                    <path d="M2 8v11c0 1.1.9 2 2 2h14" />
-                  </svg>
-                  My Invitations
+                  <Mail 
+                    size={20} 
+                    className={pathname.startsWith("/dashboard/my-invitations") ? "text-indigo-500" : "text-slate-400 group-hover:text-white"} 
+                  />
+                  {!sidebarCollapsed && <span>My Invitations</span>}
                 </NavLink>
               </li>
               {/* <!-- Invitations --> */}
@@ -244,25 +122,11 @@ const Sidebar = () => {
                   url="/dashboard/share-invitations"
                   active={pathname.startsWith("/dashboard/share-invitations")}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-share2-icon lucide-share-2"
-                  >
-                    <circle cx="18" cy="5" r="3" />
-                    <circle cx="6" cy="12" r="3" />
-                    <circle cx="18" cy="19" r="3" />
-                    <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
-                    <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
-                  </svg>
-                  Share Invitations
+                  <Share2 
+                    size={20} 
+                    className={pathname.startsWith("/dashboard/share-invitations") ? "text-indigo-500" : "text-slate-400 group-hover:text-white"} 
+                  />
+                  {!sidebarCollapsed && <span>Share Invitations</span>}
                 </NavLink>
               </li>
               {/* <!-- Share Invitations --> */}
@@ -273,10 +137,31 @@ const Sidebar = () => {
                   url="/dashboard/rsvp"
                   active={pathname.startsWith("/dashboard/rsvp")}
                 >
-                  <CheckCircle className="w-5 h-5" />
-                  RSVP
+                  <CheckCircle 
+                    size={20} 
+                    className={pathname.startsWith("/dashboard/rsvp") ? "text-indigo-500" : "text-slate-400 group-hover:text-white"} 
+                  />
+                  {!sidebarCollapsed && <span>RSVP</span>}
                 </NavLink>
               </li>
+
+              {!sidebarCollapsed && (
+                <li className="mt-8">
+                  <h3 className="mb-4 ml-4 text-xs font-bold text-slate-500 uppercase tracking-widest">
+                    Analytics
+                  </h3>
+                  <NavLink
+                    url="/dashboard/analytics"
+                    active={pathname.startsWith("/dashboard/analytics")}
+                  >
+                    <BarChart3 
+                      size={20} 
+                      className={pathname.startsWith("/dashboard/analytics") ? "text-indigo-500" : "text-slate-400 group-hover:text-white"} 
+                    />
+                    <span>Report</span>
+                  </NavLink>
+                </li>
+              )}
               {/* <!-- RSVP --> */}
             </ul>
           </div>
