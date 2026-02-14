@@ -1,7 +1,6 @@
 "use client";
 
 import Loading from "@/components/Loading";
-import db from "@/configs/db-config";
 import { themeMap } from "@/configs/theme-map";
 import { useInvitation } from "@/hooks/use-invitation";
 import { ThemeName } from "@/types/theme-name";
@@ -9,6 +8,7 @@ import { decode } from "@/utils/hash";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { getPublicInvitation } from "./actions";
 
 export default function InvitationPage() {
   const { invitationData, setInvitationData, setGuest } = useInvitation();
@@ -30,28 +30,11 @@ export default function InvitationPage() {
       }
 
       try {
-        const { data, error } = await db
-          .from("invitations")
-          .select(
-            `
-            *,
-            themes (*),
-            music (*),
-            videos (*),
-            images (*),
-            gift_infos (*),
-            rundowns (*),
-            guests (*),
-            stories (*),
-            rsvps (*)
-          `,
-          )
-          .eq("slug", slug)
-          .eq("id", invId)
-          .single();
+        // ✅ Using server action instead of direct database call
+        const { data, error } = await getPublicInvitation(slug, parseInt(invId.toString()));
 
-        if (error) {
-          toast.error("Invitation not found.");
+        if (error || !data) {
+          toast.error(error || "Invitation not found.");
         } else {
           setInvitationData(data);
         }
@@ -91,3 +74,4 @@ export default function InvitationPage() {
 
   return <ThemeComponent />;
 }
+

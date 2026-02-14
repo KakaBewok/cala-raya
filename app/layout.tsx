@@ -11,10 +11,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Calaraya Project",
     description: "Digital Invitation & Website",
-    url: "https://calaraya.vercel.app/",
+    url: `${process.env.NEXT_PUBLIC_APP_URL_PROD!}`,
     images: [
       {
-        url: "https://calaraya.vercel.app/og-image.jpg",
+        url: `${process.env.NEXT_PUBLIC_APP_URL_PROD!}/og-image.jpg`,
         width: 1200,
         height: 630,
       },
