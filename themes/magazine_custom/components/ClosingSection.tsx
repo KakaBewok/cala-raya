@@ -75,8 +75,8 @@ const ClosingSection = () => {
           <Image
             src={findImage(data, "initial")}
             alt="Initial"
-            width={80}
-            height={80}
+            width={120}
+            height={120}
             style={{ filter: "invert(7%) brightness(0.3)" }}
           />
         </div>
