@@ -53,6 +53,12 @@ export async function generateMetadata({
         },
       ],
     },
+    twitter: {
+    card: 'summary_large_image',
+    title: `${invitation?.event_title}`,
+    description: `${formatDate(invitation?.event_date, true)}`,
+    images: [previewImage], 
+  },
   };
 }
 
