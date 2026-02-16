@@ -22,7 +22,7 @@ interface SectionProps {
 export default function MusicSection({ form }: SectionProps) {
   const { watch, setValue, register, formState: { errors } } = form;
   const [musicLibrary, setMusicLibrary] = useState<MusicType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [selectionMode, setSelectionMode] = useState<"library" | "upload">("library");
 
   const currentUrl = watch("music.url");
@@ -57,9 +57,9 @@ export default function MusicSection({ form }: SectionProps) {
         <button
           type="button"
           onClick={() => setSelectionMode("library")}
-          className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all flex items-center justify-center gap-2 ${
+          className={`flex-1 py-3 px-4 rounded-md border-1 transition-all flex items-center justify-center gap-2 ${
             selectionMode === "library"
-              ? "border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900/20"
+              ? "border-blue-400 bg-blue-50 text-blue-700 dark:bg-blue-900/20"
               : "border-gray-200 dark:border-slate-800 hover:border-gray-300"
           }`}
         >
@@ -69,31 +69,31 @@ export default function MusicSection({ form }: SectionProps) {
         <button
           type="button"
           onClick={() => setSelectionMode("upload")}
-          className={`flex-1 py-3 px-4 rounded-lg border-2 transition-all flex items-center justify-center gap-2 ${
+          className={`flex-1 py-3 px-4 rounded-md border-1 transition-all flex items-center justify-center gap-2 ${
             selectionMode === "upload"
-              ? "border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900/20"
+              ? "border-blue-400 bg-blue-50 text-blue-700 dark:bg-blue-900/20"
               : "border-gray-200 dark:border-slate-800 hover:border-gray-300"
           }`}
         >
           <Upload className="w-5 h-5" />
-          <span>Upload Custom Song</span>
+          <span>Upload Custom Music</span>
         </button>
       </div>
 
-      <div className="p-6 border rounded-xl bg-white dark:bg-slate-900 shadow-sm space-y-6">
+      <div className="p-6 border rounded-md bg-white dark:bg-slate-900 shadow-sm space-y-6">
         {selectionMode === "library" ? (
           <div className="space-y-4">
             <label className="block text-sm font-semibold">Select Background Music</label>
             <Select onValueChange={handleLibrarySelect} value={currentUrl}>
-              <SelectTrigger className="w-full h-12">
-                <SelectValue placeholder={loading ? "Loading music..." : "Select a song"} />
+              <SelectTrigger className="w-full h-12 py-6">
+                <SelectValue placeholder={loading ? "Loading music..." : "Select a music"} />
               </SelectTrigger>
               <SelectContent>
                 {musicLibrary.map((song) => (
-                  <SelectItem key={song.id} value={song.url}>
+                  <SelectItem key={song.id} value={song.url} className="cursor-pointer">
                     <div className="flex flex-col items-start">
                       <span className="font-medium">{song.title}</span>
-                      <span className="text-xs text-gray-500">{song.artist}</span>
+                      <span className="text-xs text-gray-500 ">{song.artist}</span>
                     </div>
                   </SelectItem>
                 ))}
@@ -104,7 +104,7 @@ export default function MusicSection({ form }: SectionProps) {
           <div className="grid md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
               <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
-                Upload Song (MP3/WAV/OGG)
+                Upload Music (MP3/WAV/OGG)
               </label>
               <div className="flex gap-2">
                 <input
@@ -137,7 +137,7 @@ export default function MusicSection({ form }: SectionProps) {
             />
             <FormInput
               label="Artist"
-              placeholder="e.g. John Doe"
+              placeholder="e.g. Jen Maliq"
               error={errors.music?.artist}
               {...register("music.artist")}
             />

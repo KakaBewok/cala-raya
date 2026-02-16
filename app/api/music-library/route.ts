@@ -3,15 +3,13 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    // Try to fetch from music_libraries table (fallback to hardcoded if not exists)
     const { data: music, error } = await db
-      .from("music_libraries")
+      .from("music")
       .select("*")
-      .order("title", { ascending: true });
+      .order("created_at", { ascending: false });
 
     if (error) {
       console.warn("Could not fetch from music_libraries, using fallback:", error.message);
-      // Fallback music library
       const fallbackMusic = [
         { id: 1, title: "A Thousand Years", artist: "Christina Perri", url: "https://res.cloudinary.com/dz7qsz9qy/video/upload/v1707534567/wedding/a-thousand-years.mp3" },
         { id: 2, title: "Can't Help Falling in Love", artist: "Elvis Presley", url: "https://res.cloudinary.com/dz7qsz9qy/video/upload/v1707534567/wedding/cant-help-falling-in-love.mp3" },
