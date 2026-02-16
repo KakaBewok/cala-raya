@@ -14,19 +14,23 @@ export async function PATCH(req: Request) {
   if (!invitationId || !template) {
     return NextResponse.json(
       { error: "Missing invitationId or template" },
-      { status: 500 }
+      { status: 400 }
     );
   }
 
-  const { error } = await db
+  let query = db
     .from("invitations")
     .update({ message_template: template })
-    .eq("user_id", session.user.id)
     .eq("id", invitationId);
+
+  if (session.user.role !== "ADMIN") {
+    query = query.eq("user_id", session.user.id);
+  }
+
+  const { error } = await query;
 
   if (error) {
     logger.error({ error_message: error.message });
-    console.error("Update template error:", error);
     return NextResponse.json(
       { error: "Failed to update template" },
       { status: 500 }
