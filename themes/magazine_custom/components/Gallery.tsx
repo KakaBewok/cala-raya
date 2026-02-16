@@ -111,7 +111,7 @@ const HorizontalGallery = () => {
         <p
           className={`-ml-[25vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_two_nickname.toLowerCase()}
+          {data?.host_one_nickname.toLowerCase()}
         </p>
       </div>
       {/* right */}
@@ -123,7 +123,7 @@ const HorizontalGallery = () => {
         <p
           className={`-mr-[26vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_one_nickname.toLowerCase()}
+          {data?.host_two_nickname.toLowerCase()}
         </p>
       </div>
 
@@ -235,8 +235,8 @@ const HorizontalGallery = () => {
                       <h1
                         className={`${remineFares.className} text-4xl font-medium text-white`}
                       >
-                        {data?.host_two_nickname.toLocaleLowerCase()} <br /> &{" "}
-                        {data?.host_one_nickname.toLocaleLowerCase()}
+                        {data?.host_one_nickname.toLocaleLowerCase()} <br /> &{" "}
+                        {data?.host_two_nickname.toLocaleLowerCase()}
                       </h1>
                     </div>
                   </div>

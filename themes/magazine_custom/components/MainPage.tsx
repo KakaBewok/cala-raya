@@ -36,8 +36,8 @@ export default function MainPage({
     <main className="max-w-md mx-auto z-10 flex flex-col items-center justify-center">
       <Cover />
       <Bismillah />
-      <BridesSection />
       <GroomsSection />
+      <BridesSection />
       <EventInfo />
       <Gallery />
       {Array.isArray(data?.videos) &&

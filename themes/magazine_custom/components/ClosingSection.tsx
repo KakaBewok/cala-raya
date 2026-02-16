@@ -63,13 +63,13 @@ const ClosingSection = () => {
       <div className="relative py-14 overflow-hidden">
         {/* Watermark */}
         <div className="absolute inset-0 flex justify-center items-center">
-          <p
-            className={`${remineFares.className} text-9xl font-bold text-gray-200 opacity-50 transform -rotate-45 select-none`}
+          <div
+            className={`${remineFares.className} text-center text-9xl font-bold text-gray-200 opacity-45 transform -rotate-50 select-none`}
           >
-            {data?.host_two_nickname.toLocaleLowerCase()}
-            <br />
-            {data?.host_one_nickname.toLocaleLowerCase()}
-          </p>
+            <p className="mb-7">{data?.host_one_nickname.toLocaleLowerCase()}</p>
+            {/* <br /> */}
+            <p>{data?.host_two_nickname.toLocaleLowerCase()}</p>
+          </div>
         </div>
         <div className="text-center flex justify-center items-center">
           <Image
