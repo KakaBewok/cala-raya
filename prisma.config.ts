@@ -1,0 +1,10 @@
+import path from "node:path";
+import { defineConfig } from "prisma/config";
+
+export default defineConfig({
+  schema: path.join(__dirname, "prisma", "schema.prisma"),
+  datasource: {
+    // Uses DIRECT_URL for introspection/migrations (no pgbouncer)
+    url: process.env["DIRECT_URL"] || process.env["DATABASE_URL"],
+  },
+});
