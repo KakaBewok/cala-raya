@@ -140,7 +140,6 @@ const RSVP = () => {
               <option value="">Select</option>
               <option value="1">1 Person</option>
               <option value="2">2 Person</option>
-              <option value="3">More than 2 person</option>
               <option value="0">Not Attending</option>
             </select>
           </div>
