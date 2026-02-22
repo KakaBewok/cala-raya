@@ -11,6 +11,7 @@ import {
   ImageType,
   SECTION_LIMITS,
 } from "@/app/(admin)/dashboard/my-invitations/schema/FormSchema";
+import { cloudinaryService } from "./CloudinaryService";
 
 /**
  * Invitation Service
@@ -114,8 +115,11 @@ export class InvitationService {
       // 1. Override 7 event fields with server defaults
       this.applyEventDefaults(data);
 
-      // 2. Enforce empty strings for removed rundown fields (description, event_image)
+      // 2. Sanitize rundown fields
       this.sanitizeRundowns(data);
+
+      // 2.5 Server-side file size validation (Failsafe)
+      await this.validateFileSizes(data);
 
       // 3. Validate business rules (theme, images, section limits)
       this.validateInvitationData(data);
@@ -141,19 +145,29 @@ export class InvitationService {
     data: UpdateInvitationDTO
   ): Promise<InvitationData> {
     try {
-      // Check if invitation exists
+      // 1. Check if invitation exists
       const existing = await this.invitationRepository.findById(id);
       if (!existing) {
         throw new Error("Invitation not found");
       }
 
-      // Enforce empty strings for removed rundown fields
+      // 2. Sanitize rundown fields
       this.sanitizeRundowns(data);
 
-      return await this.invitationRepository.update(id, data);
+      // 2.5 Server-side file size validation (Failsafe)
+      await this.validateFileSizes(data);
+
+      // 3. Perform update
+      const updated = await this.invitationRepository.update(id, data);
+
+      // 4. Cleanup Cloudinary assets that were replaced
+      this.cleanupReplacedAssets(existing, data);
+
+      return updated;
     } catch (error: any) {
       console.error("Error updating invitation:", error);
-      throw new Error("Failed to update invitation");
+      if (error.message === "Invitation not found") throw error;
+      throw new Error(error.message || "Failed to update invitation");
     }
   }
 
@@ -176,14 +190,99 @@ export class InvitationService {
         throw new Error("Unauthorized to delete this invitation");
       }
 
-      // 3. Perform delete
-      return await this.invitationRepository.delete(id);
+      // 3. Perform database delete
+      const success = await this.invitationRepository.delete(id);
+
+      // 4. If DB delete successful, cleanup ALL Cloudinary assets
+      if (success) {
+        this.cleanupAllAssets(existing);
+      }
+
+      return success;
     } catch (error: any) {
       console.error("Error deleting invitation:", error);
       if (error.message === "Invitation not found" || error.message === "Unauthorized to delete this invitation") {
         throw error;
       }
       throw new Error("Failed to delete invitation");
+    }
+  }
+
+  /**
+   * Cleanup Cloudinary assets that are replaced during an update
+   */
+  private async cleanupReplacedAssets(existing: InvitationData, updated: UpdateInvitationDTO) {
+    const publicIdsToDelete: { id: string; type: string }[] = [];
+
+    // Check images
+    if (updated.images !== undefined) {
+      const existingImgIds = existing.images?.map(img => img.public_id).filter(Boolean) || [];
+      const updatedImgIds = updated.images?.map(img => img.public_id).filter(Boolean) || [];
+      
+      const toDelete = existingImgIds.filter(id => !updatedImgIds.includes(id as string));
+      toDelete.forEach(id => publicIdsToDelete.push({ id: id as string, type: "image" }));
+    }
+
+    // Check music
+    if (updated.music !== undefined) {
+      if (existing.music?.public_id && existing.music.public_id !== updated.music.public_id) {
+        publicIdsToDelete.push({ id: existing.music.public_id, type: existing.music.resource_type || "video" });
+      }
+    }
+
+    // Check rundown images
+    if (updated.rundowns !== undefined) {
+      const existingRundownIds = existing.rundowns?.map(r => r.public_id).filter(Boolean) || [];
+      const updatedRundownIds = updated.rundowns?.map(r => r.public_id).filter(Boolean) || [];
+
+      const toDelete = existingRundownIds.filter(id => !updatedRundownIds.includes(id as string));
+      toDelete.forEach(id => publicIdsToDelete.push({ id: id as string, type: "image" }));
+    }
+
+    // Check story images
+    if (updated.stories !== undefined) {
+      const existingStoryIds = existing.stories?.map(s => s.public_id).filter(Boolean) || [];
+      const updatedStoryIds = updated.stories?.map(s => s.public_id).filter(Boolean) || [];
+
+      const toDelete = existingStoryIds.filter(id => !updatedStoryIds.includes(id as string));
+      toDelete.forEach(id => publicIdsToDelete.push({ id: id as string, type: "image" }));
+    }
+
+    // Perform deletions
+    for (const asset of publicIdsToDelete) {
+      cloudinaryService.deleteFile(asset.id, asset.type);
+    }
+  }
+
+  /**
+   * Cleanup ALL Cloudinary assets associated with an invitation
+   */
+  private async cleanupAllAssets(invitation: InvitationData) {
+    const assets: { id: string; type: string }[] = [];
+
+    // Images
+    invitation.images?.forEach(img => {
+      if (img.public_id) assets.push({ id: img.public_id, type: img.resource_type || "image" });
+    });
+
+    // Music
+    if (invitation.music?.public_id) {
+      assets.push({ id: invitation.music.public_id, type: invitation.music.resource_type || "video" });
+    }
+
+    // Rundowns
+    invitation.rundowns?.forEach(r => {
+      if (r.public_id) assets.push({ id: r.public_id, type: r.resource_type || "image" });
+    });
+
+    // Stories
+    invitation.stories?.forEach(s => {
+      if (s.public_id) assets.push({ id: s.public_id, type: s.resource_type || "image" });
+    });
+
+    // Batch delete if possible, but for simplicity and safety across types, we delete individually
+    for (const asset of assets) {
+      cloudinaryService.deleteFile(asset.id, asset.type);
     }
   }
 
@@ -215,7 +314,6 @@ export class InvitationService {
    * Get paginated guests for an invitation
    */
   async getPaginatedGuests(invitationId: number, page: number, pageSize: number) {
-    // Note: We don't perform ownership check here, API layer should do it
     return await this.guestRepository.findByInvitationIdPaginated(invitationId, page, pageSize);
   }
 
@@ -223,7 +321,6 @@ export class InvitationService {
    * Get paginated RSVPs for an invitation
    */
   async getPaginatedRSVPs(invitationId: number, page: number, pageSize: number) {
-    // Note: We don't perform ownership check here, API layer should do it
     return await this.rsvpRepository.findByInvitationIdPaginated(invitationId, page, pageSize);
   }
 
@@ -236,11 +333,10 @@ export class InvitationService {
 
   /**
    * Override 7 event fields with backend defaults.
-   * No matter what the client sends, these are always replaced.
    */
   private applyEventDefaults(data: CreateInvitationDTO): void {
     data.event_title = `The Wedding of ${data.host_one_nickname} & ${data.host_two_nickname} ❤️`;
-    data.event_date = new Date().toISOString(); // Prisma DateTime requires valid ISO-8601
+    data.event_date = new Date().toISOString(); 
     data.event_type = "wedding";
     data.location = "";
     data.location_url = "";
@@ -257,20 +353,21 @@ export class InvitationService {
         ...r,
         description: "",
         image_url: "",
+        public_id: "",
+        resource_type: "",
       }));
     }
   }
 
   /**
    * Private method for business logic validation.
-   * Validates host data, section limits, image types/counts per theme, and story rules.
    */
   private validateInvitationData(data: CreateInvitationDTO): void {
     if (!data.host_one_name || !data.host_two_name) {
       throw new Error("Host names are required");
     }
 
-    // ── Section limit enforcement ──
+    // Section limit enforcement
     if (data.rundowns && data.rundowns.length > SECTION_LIMITS.rundowns) {
       throw new Error(`Maximum ${SECTION_LIMITS.rundowns} rundown entries allowed, but ${data.rundowns.length} were provided.`);
     }
@@ -283,7 +380,7 @@ export class InvitationService {
       throw new Error(`Maximum ${SECTION_LIMITS.stories} story entries allowed, but ${data.stories.length} were provided.`);
     }
 
-    // ── Theme-aware image validation ──
+    // Theme-aware image validation
     const themeName = data.theme_name || "default";
     const allowedTypes = getImageTypesForTheme(themeName);
 
@@ -308,11 +405,48 @@ export class InvitationService {
       }
     }
 
-    // ── Theme-aware story validation ──
+    // Theme-aware story validation
     const features = getThemeFeatures(themeName);
     if (!features.stories && data.stories && data.stories.length > 0) {
-      // Strip stories silently — theme doesn't support them
       data.stories = [];
+    }
+  }
+
+  /**
+   * Server-side failsafe to ensure no oversized files are saved
+   */
+  private async validateFileSizes(data: CreateInvitationDTO | UpdateInvitationDTO): Promise<void> {
+    const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2MB
+    const MAX_MUSIC_SIZE = 10 * 1024 * 1024; // 10MB
+
+    // Check main gallery images
+    if (data.images && Array.isArray(data.images)) {
+      for (const img of data.images) {
+        if (img.public_id) {
+          const isValid = await cloudinaryService.verifyFileSize(img.public_id, "image", MAX_IMAGE_SIZE);
+          if (!isValid) throw new Error(`Image ${img.public_id} exceeds 2MB limit.`);
+        }
+      }
+    }
+
+    // Check music
+    if (data.music && data.music.public_id && data.music.url) {
+      const isValid = await cloudinaryService.verifyFileSize(
+        data.music.public_id, 
+        data.music.resource_type || "video", 
+        MAX_MUSIC_SIZE
+      );
+      if (!isValid) throw new Error("Music file exceeds 10MB limit.");
+    }
+
+    // Check story images
+    if (data.stories && Array.isArray(data.stories)) {
+      for (const story of data.stories) {
+        if (story.public_id) {
+          const isValid = await cloudinaryService.verifyFileSize(story.public_id, "image", MAX_IMAGE_SIZE);
+          if (!isValid) throw new Error(`Story image exceeds 2MB limit.`);
+        }
+      }
     }
   }
 
@@ -347,17 +481,11 @@ export class InvitationService {
     }
   }
 
-  // ══════════════════════════════════════════════════════════
-  //  DEFAULT GUEST ("Calaraya") — for preview functionality
-  // ══════════════════════════════════════════════════════════
-
   /**
-   * Ensure a default "Calaraya" guest exists for the invitation.
-   * Idempotent: safe to call multiple times.
+   * Ensure a default "Calaraya" guest exists
    */
   async ensureDefaultGuest(invitationId: number): Promise<Guest> {
     try {
-      // Check if Calaraya already exists
       const existing = await this.guestRepository.findByNameAndInvitationId(
         invitationId,
         InvitationService.DEFAULT_GUEST_NAME
@@ -367,22 +495,18 @@ export class InvitationService {
         return existing;
       }
 
-      // Create the default guest
       return await this.guestRepository.create({
         invitation_id: invitationId,
         name: InvitationService.DEFAULT_GUEST_NAME,
       });
     } catch (error: any) {
       console.error("Error ensuring default guest:", error);
-      // Don't throw — this is a convenience feature, not critical
-      // Return a minimal guest object so the calling code doesn't break
       throw new Error("Failed to ensure default guest");
     }
   }
 
   /**
-   * Get the default preview guest ("Calaraya") for an invitation.
-   * Creates it if it doesn't exist yet.
+   * Get the default preview guest
    */
   async getPreviewGuest(invitationId: number): Promise<Guest> {
     return this.ensureDefaultGuest(invitationId);
@@ -401,5 +525,4 @@ export interface InvitationStatistics {
   responseRate: number;
 }
 
-// Export singleton instance for convenience
 export const invitationService = new InvitationService();

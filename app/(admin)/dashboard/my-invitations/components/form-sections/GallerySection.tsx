@@ -27,9 +27,10 @@ import { Trash2, GripVertical, Image as ImageIcon, Check, AlertCircle } from "lu
 
 interface SectionProps {
   form: UseFormReturn<InvitationFormData>;
+  folder: string;
 }
 
-export default function GallerySection({ form }: SectionProps) {
+export default function GallerySection({ form, folder }: SectionProps) {
   const { control, watch, setValue, trigger } = form;
 
   const {
@@ -124,10 +125,12 @@ export default function GallerySection({ form }: SectionProps) {
               {!hasReachedLimit && (
                 <CloudinaryButton
                   type="image"
-                  folder="user_photos"
-                  onSuccess={(url) => {
+                  folder={folder}
+                  onSuccess={(data) => {
                     appendImage({
-                      url,
+                      url: data.url,
+                      public_id: data.public_id,
+                      resource_type: data.resource_type,
                       type: type as any,
                       order_number: typeImages.length,
                     });

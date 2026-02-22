@@ -24,6 +24,7 @@ import {
 import { useSession } from "next-auth/react";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import toast from "react-hot-toast";
+import { slugify } from "@/lib/utils";
 
 // Sections
 import CoupleSection from "./form-sections/CoupleSection";
@@ -69,11 +70,15 @@ export function InvitationForm({
           music: invitationData.music ? { 
             title: invitationData.music.title || "", 
             artist: invitationData.music.artist || "", 
-            url: invitationData.music.url || "" 
+            url: invitationData.music.url || "",
+            public_id: invitationData.music.public_id || undefined,
+            resource_type: invitationData.music.resource_type || undefined,
           } : { title: "", artist: "", url: "" },
           images: (invitationData.images || []).map((img) => ({
             url: img.url,
             type: img.type as any,
+            public_id: img.public_id || undefined,
+            resource_type: img.resource_type || undefined,
             order_number: img.order_number ? Number(img.order_number) : undefined,
           })),
           rundowns: (invitationData.rundowns || []).map((r) => ({
@@ -85,6 +90,9 @@ export function InvitationForm({
             start_time: r.start_time,
             end_time: r.end_time || undefined,
             time_zone: r.time_zone,
+            image_url: r.image_url || undefined,
+            public_id: r.public_id || undefined,
+            resource_type: r.resource_type || undefined,
             order_number: r.order_number,
           })),
           gift_infos: (invitationData.gift_infos || []).map((g) => ({
@@ -97,6 +105,8 @@ export function InvitationForm({
             title: s.title,
             content: s.content,
             image_url: s.image_url,
+            public_id: s.public_id || undefined,
+            resource_type: s.resource_type || undefined,
             story_date: s.story_date,
             order_number: s.order_number,
           })),
@@ -125,6 +135,7 @@ export function InvitationForm({
 
   const {
     handleSubmit,
+    watch,
     formState: { errors },
   } = form;
 
@@ -149,7 +160,7 @@ export function InvitationForm({
         throw new Error(errData.error || "Failed to save invitation");
       }
 
-      const result = await response.json();
+      // const result = await response.json();
       onSuccess?.();
       
       // Refresh list to show new/updated data
@@ -269,13 +280,23 @@ export function InvitationForm({
           {/* Tab Content */}
           <div className="p-6 md:p-8 min-h-[500px] transition-all duration-300 ease-in-out">
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-             
-              {activeTab === "couple" && <CoupleSection form={form} />}
-              {activeTab === "rundown" && <RundownSection form={form} />}
-              {activeTab === "gallery" && <GallerySection form={form} />}
-              {activeTab === "music" && <MusicSection form={form} />}
-              {activeTab === "additional" && <AdditionalSection form={form} />}
-                {activeTab === "settings" && <SettingsSection form={form} userRole={userRole} />}
+              {/* Calculate dynamic folder for Cloudinary uploads */}
+              {(() => {
+                const hostOne = watch("host_one_nickname") || "host1";
+                const hostTwo = watch("host_two_nickname") || "host2";
+                const mediaFolder = `invitation_media/${slugify(hostOne)}-${slugify(hostTwo)}`;
+
+                return (
+                  <>
+                    {activeTab === "couple" && <CoupleSection form={form} />}
+                    {activeTab === "rundown" && <RundownSection form={form} folder={mediaFolder} />}
+                    {activeTab === "gallery" && <GallerySection form={form} folder={mediaFolder} />}
+                    {activeTab === "music" && <MusicSection form={form} folder={mediaFolder} />}
+                    {activeTab === "additional" && <AdditionalSection form={form} folder={mediaFolder} />}
+                    {activeTab === "settings" && <SettingsSection form={form} userRole={userRole} />}
+                  </>
+                );
+              })()}
             </div>
           </div>
 

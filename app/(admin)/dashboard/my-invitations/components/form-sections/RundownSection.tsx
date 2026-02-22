@@ -4,16 +4,15 @@ import React from "react";
 import { useFieldArray, UseFormReturn } from "react-hook-form";
 import { InvitationFormData, SECTION_LIMITS } from "../../schema/FormSchema";
 import FormInput from "../FormInput";
-import { Trash2, Plus, GripVertical, Clock, MapPin, ExternalLink, AlertTriangle } from "lucide-react";
-import CloudinaryButton from "../CloudinaryButton";
-import Image from "next/image";
+import { Trash2, Plus, GripVertical, Clock, AlertTriangle } from "lucide-react";
 
 interface SectionProps {
   form: UseFormReturn<InvitationFormData>;
+  folder: string;
 }
 
-export default function RundownSection({ form }: SectionProps) {
-  const { control, register, formState: { errors }, setValue, watch } = form;
+export default function RundownSection({ form, folder }: SectionProps) {
+  const { control, register, formState: { errors }, watch } = form;
 
   const {
     fields: rundownFields,
@@ -36,6 +35,9 @@ export default function RundownSection({ form }: SectionProps) {
       end_time: "",
       time_zone: "Asia/Jakarta",
       order_number: rundownFields.length,
+      image_url: "",
+      public_id: "",
+      resource_type: "",
     });
   };
 
@@ -107,7 +109,7 @@ export default function RundownSection({ form }: SectionProps) {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 gap-6">
               <FormInput
                 label="Event Title"
                 placeholder="e.g. Akad Nikah"
@@ -163,14 +165,14 @@ export default function RundownSection({ form }: SectionProps) {
                 {...register(`rundowns.${idx}.time_zone`)}
               />
 
-              <div className="md:col-span-2 lg:col-span-3">
+              <div className="md:col-span-2">
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
                   Location Detail
                 </label>
                 <textarea
                   {...register(`rundowns.${idx}.location_detail`)}
                   placeholder="e.g. Jl. Raya Sudirman No. 123, Gedung Serbaguna Lt. 2"
-                  rows={3}
+                  rows={2}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all resize-none"
                 />
                 {errors.rundowns?.[idx]?.location_detail && (

@@ -10,9 +10,10 @@ import Image from "next/image";
 
 interface SectionProps {
   form: UseFormReturn<InvitationFormData>;
+  folder: string;
 }
 
-export default function AdditionalSection({ form }: SectionProps) {
+export default function AdditionalSection({ form, folder }: SectionProps) {
   const { control, register, formState: { errors }, setValue, watch } = form;
 
   // Derive theme feature flags
@@ -207,8 +208,12 @@ export default function AdditionalSection({ form }: SectionProps) {
                       <CloudinaryButton
                         type="image"
                         label="Upload"
-                        folder="love_story"
-                        onSuccess={(url) => setValue(`stories.${idx}.image_url`, url, { shouldDirty: true, shouldValidate: true })}
+                        folder={folder}
+                        onSuccess={(data) => {
+                          setValue(`stories.${idx}.image_url`, data.url, { shouldDirty: true, shouldValidate: true });
+                          setValue(`stories.${idx}.public_id`, data.public_id, { shouldDirty: true });
+                          setValue(`stories.${idx}.resource_type`, data.resource_type, { shouldDirty: true });
+                        }}
                         className="bg-slate-800 text-white px-4 py-2 rounded-md text-sm hover:bg-slate-700"
                       />
                     </div>
@@ -216,7 +221,7 @@ export default function AdditionalSection({ form }: SectionProps) {
                     {watch(`stories.${idx}.image_url`) && (
                       <div className="relative aspect-video rounded-lg overflow-hidden border shadow-inner bg-slate-100">
                         <Image
-                          src={watch(`stories.${idx}.image_url`)}
+                          src={watch(`stories.${idx}.image_url`) || "/placeholder-image.png"}
                           alt="Story"
                           fill
                           className="object-cover"

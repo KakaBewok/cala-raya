@@ -109,14 +109,18 @@ export const themeSchema = z.object({
 });
 
 export const musicSchema = z.object({
-  title: z.string().optional(),
-  artist: z.string().optional(),
-  url: z.string().url("Please provide a valid music URL"),
+  title: z.string().optional().or(z.literal("")),
+  artist: z.string().optional().or(z.literal("")),
+  url: z.string().url("Please provide a valid music URL").optional().or(z.literal("")),
+  public_id: z.string().optional().or(z.literal("")),
+  resource_type: z.string().optional().or(z.literal("")),
 });
 
 export const imageSchema = z.object({
   url: z.string().url("Please provide a valid image URL"),
   type: z.enum(imageType),
+  public_id: z.string().optional(),
+  resource_type: z.string().optional(),
   order_number: z.number().optional(),
 });
 
@@ -133,6 +137,9 @@ export const rundownSchema = z.object({
   start_time: z.string().min(1, "Start time is required"),
   end_time: z.string().optional(),
   time_zone: z.string().min(1, "Time zone is required"),
+  image_url: z.string().optional().or(z.literal("")),
+  public_id: z.string().optional().or(z.literal("")),
+  resource_type: z.string().optional().or(z.literal("")),
   order_number: z.number(),
 });
 
@@ -147,6 +154,8 @@ export const storySchema = z.object({
   title: z.string().min(1, "Title is required"),
   content: z.string().min(1, "Content is required"),
   image_url: z.string().url("Please provide a valid image URL"),
+  public_id: z.string().optional(),
+  resource_type: z.string().optional(),
   story_date: z.string().min(1, "Date is required"),
   order_number: z.number(),
 });

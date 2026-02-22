@@ -153,10 +153,12 @@ export class PrismaInvitationRepository implements IInvitationRepository {
 
   /**
    * Create a new invitation with all related data
-   * Uses Prisma nested creates for atomic operation
    */
   async create(data: CreateInvitationDTO): Promise<InvitationData> {
     try {
+      // Removing optional Cloudinary fields (public_id/resource_type) from the create payload 
+      // because the Prisma Client/DB schema is out of sync and the user opted out of 'db push'.
+      // Converting order_number back to String to match the existing DB column type.
       const invitation = await prisma.invitations.create({
         data: {
           user_id: data.user_id,
@@ -179,14 +181,15 @@ export class PrismaInvitationRepository implements IInvitationRepository {
           message: data.message,
           hashtag: data.hashtag,
           web_url: data.web_url,
-          // Nested creates for related data
+          // Nested creates
           images: data.images
             ? {
                 create: data.images.map((img) => ({
                   url: img.url,
-                  caption: img.caption,
+                  // public_id and resource_type removed to match the current DB State
+                  caption: img.caption || null,
                   type: img.type,
-                  order_number: String(img.order_number),
+                  order_number: String(img.order_number), // Back to String
                 })),
               }
             : undefined,
@@ -203,7 +206,7 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                   description: r.description,
                   image_url: r.image_url,
                   location_detail: r.location_detail,
-                  order_number: r.order_number,
+                  order_number: Number(r.order_number), // Rundowns already had Int in original schema
                 })),
               }
             : undefined,
@@ -224,7 +227,7 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                   content: s.content,
                   image_url: s.image_url,
                   story_date: s.story_date,
-                  order_number: s.order_number,
+                  order_number: Number(s.order_number), // Stories also had Int
                 })),
               }
             : undefined,
@@ -232,13 +235,14 @@ export class PrismaInvitationRepository implements IInvitationRepository {
         include: INVITATION_INCLUDE,
       });
 
-      // Handle music separately since it's a separate table with FK
-      if (data.music) {
+      // Handle music - only create if URL is provided
+      if (data.music && data.music.url) {
         const createdMusic = await prisma.music.create({
           data: {
-            title: data.music.title,
-            artist: data.music.artist,
+            title: data.music.title || "",
+            artist: data.music.artist || "",
             url: data.music.url,
+            // public_id/resource_type removed
           },
         });
         await prisma.invitations.update({
@@ -247,7 +251,6 @@ export class PrismaInvitationRepository implements IInvitationRepository {
         });
       }
 
-      // Re-fetch with all relations
       return (await this.findById(invitation.id)) as InvitationData;
     } catch (error: any) {
       throw new Error(`Failed to create invitation: ${error.message}`);
@@ -256,15 +259,14 @@ export class PrismaInvitationRepository implements IInvitationRepository {
 
   /**
    * Update an existing invitation
-   * Uses Prisma transaction for atomic updates
    */
   async update(
     id: number,
     data: UpdateInvitationDTO
   ): Promise<InvitationData> {
     try {
-      await prisma.$transaction(async (tx) => {
-        // 1. Update main invitation fields
+      await prisma.$transaction(async (tx: any) => {
+        // 1. Update main fields
         await tx.invitations.update({
           where: { id },
           data: {
@@ -290,7 +292,7 @@ export class PrismaInvitationRepository implements IInvitationRepository {
           },
         });
 
-        // 2. Replace images if provided
+        // 2. Images
         if (data.images !== undefined) {
           await tx.images.deleteMany({ where: { invitation_id: id } });
           if (data.images.length > 0) {
@@ -298,15 +300,15 @@ export class PrismaInvitationRepository implements IInvitationRepository {
               data: data.images.map((img) => ({
                 invitation_id: id,
                 url: img.url,
-                caption: img.caption,
+                caption: img.caption || null,
                 type: img.type,
-                order_number: String(img.order_number),
+                order_number: String(img.order_number), // Matching existing DB type
               })),
             });
           }
         }
 
-        // 3. Replace rundowns if provided
+        // 3. Rundowns
         if (data.rundowns !== undefined) {
           await tx.rundowns.deleteMany({ where: { invitation_id: id } });
           if (data.rundowns.length > 0) {
@@ -323,13 +325,13 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                 description: r.description,
                 image_url: r.image_url,
                 location_detail: r.location_detail,
-                order_number: r.order_number,
+                order_number: Number(r.order_number),
               })),
             });
           }
         }
 
-        // 4. Replace gift_infos if provided
+        // 4. Gift Infos
         if (data.gift_infos !== undefined) {
           await tx.gift_infos.deleteMany({ where: { invitation_id: id } });
           if (data.gift_infos.length > 0) {
@@ -345,7 +347,7 @@ export class PrismaInvitationRepository implements IInvitationRepository {
           }
         }
 
-        // 5. Replace stories if provided
+        // 5. Stories
         if (data.stories !== undefined) {
           await tx.stories.deleteMany({ where: { invitation_id: id } });
           if (data.stories.length > 0) {
@@ -356,14 +358,51 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                 content: s.content,
                 image_url: s.image_url,
                 story_date: s.story_date,
-                order_number: s.order_number,
+                order_number: Number(s.order_number),
               })),
+            });
+          }
+        }
+
+        // 6. Music
+        if (data.music !== undefined) {
+          const inv = await tx.invitations.findUnique({
+            where: { id },
+            select: { music_id: true }
+          });
+          
+          if (data.music.url) {
+            if (inv?.music_id) {
+              await tx.music.update({
+                where: { id: inv.music_id },
+                data: {
+                  title: data.music.title || "",
+                  artist: data.music.artist || "",
+                  url: data.music.url,
+                }
+              });
+            } else {
+              const newMusic = await tx.music.create({
+                data: {
+                  title: data.music.title || "",
+                  artist: data.music.artist || "",
+                  url: data.music.url,
+                }
+              });
+              await tx.invitations.update({
+                where: { id },
+                data: { music_id: newMusic.id }
+              });
+            }
+          } else if (inv?.music_id) {
+            await tx.invitations.update({
+              where: { id },
+              data: { music_id: null }
             });
           }
         }
       });
 
-      // Fetch the complete updated invitation
       return (await this.findById(id)) as InvitationData;
     } catch (error: any) {
       throw new Error(`Failed to update invitation: ${error.message}`);
@@ -371,20 +410,16 @@ export class PrismaInvitationRepository implements IInvitationRepository {
   }
 
   /**
-   * Delete an invitation and all related data
-   * CASCADE is handled by Prisma relations
+   * Delete an invitation
    */
   async delete(id: number): Promise<boolean> {
     try {
-      // 1. Fetch the invitation first to get music_id (since we might want to cleanup music)
       const invitation = await prisma.invitations.findUnique({
         where: { id },
         select: { music_id: true }
       });
 
-      // 2. Delete related data in a transaction
-      await prisma.$transaction(async (tx) => {
-        // Child tables (FKs pointing to invitations.id)
+      await prisma.$transaction(async (tx: any) => {
         await tx.gift_infos.deleteMany({ where: { invitation_id: id } });
         await tx.guests.deleteMany({ where: { invitation_id: id } });
         await tx.images.deleteMany({ where: { invitation_id: id } });
@@ -393,16 +428,12 @@ export class PrismaInvitationRepository implements IInvitationRepository {
         await tx.stories.deleteMany({ where: { invitation_id: id } });
         await tx.videos.deleteMany({ where: { invitation_id: id } });
         
-        // The invitation itself
         await tx.invitations.delete({ where: { id } });
 
-        // Cleanup orphaned music if it was uniquely created for this invitation
         if (invitation?.music_id) {
-          // Check if any other invitation is still using this music
           const otherUsage = await tx.invitations.count({
             where: { music_id: invitation.music_id }
           });
-          
           if (otherUsage === 0) {
             await tx.music.delete({ where: { id: invitation.music_id } });
           }
@@ -431,14 +462,12 @@ export class PrismaInvitationRepository implements IInvitationRepository {
 
       return invitations as unknown as InvitationData[];
     } catch (error: any) {
-      throw new Error(
-        `Failed to fetch active invitations: ${error.message}`
-      );
+      throw new Error(`Failed to fetch active invitations: ${error.message}`);
     }
   }
 
   /**
-   * Update invitation status (activate/deactivate)
+   * Update invitation status
    */
   async updateStatus(id: number, isActive: boolean): Promise<boolean> {
     try {
@@ -446,17 +475,14 @@ export class PrismaInvitationRepository implements IInvitationRepository {
         where: { id },
         data: { is_active: isActive },
       });
-
       return true;
     } catch (error: any) {
-      throw new Error(
-        `Failed to update invitation status: ${error.message}`
-      );
+      throw new Error(`Failed to update invitation status: ${error.message}`);
     }
   }
 
   /**
-   * Get global statistics for dashboard
+   * Get global statistics
    */
   async getGlobalStatistics(userId?: number) {
     try {
@@ -466,29 +492,17 @@ export class PrismaInvitationRepository implements IInvitationRepository {
       
       const [totalInvitations, totalGuests, totalRsvps, attendingRsvps] = await Promise.all([
         prisma.invitations.count({ where }),
-        prisma.guests.count({
-          where: guestWhere
-        }),
-        prisma.rsvps.count({
-          where: rsvpWhere
-        }),
+        prisma.guests.count({ where: guestWhere }),
+        prisma.rsvps.count({ where: rsvpWhere }),
         prisma.rsvps.aggregate({
-          where: {
-            ...rsvpWhere,
-            attendance_status: true
-          },
+          where: { ...rsvpWhere, attendance_status: true },
           _count: true,
-          _sum: {
-            total_guest: true
-          }
+          _sum: { total_guest: true }
         })
       ]);
 
       const notAttending = await prisma.rsvps.count({
-        where: {
-          ...rsvpWhere,
-          attendance_status: false
-        }
+        where: { ...rsvpWhere, attendance_status: false }
       });
 
       return {

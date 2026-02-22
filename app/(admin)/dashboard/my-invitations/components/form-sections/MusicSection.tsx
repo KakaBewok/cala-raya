@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { InvitationFormData } from "../../schema/FormSchema";
 import FormInput from "../FormInput";
@@ -17,37 +17,63 @@ import { Music as MusicType } from "@/types/invitation-data";
 
 interface SectionProps {
   form: UseFormReturn<InvitationFormData>;
+  folder: string;
 }
 
-export default function MusicSection({ form }: SectionProps) {
+export default function MusicSection({ form, folder }: SectionProps) {
   const { watch, setValue, register, formState: { errors } } = form;
-  const [musicLibrary, setMusicLibrary] = useState<MusicType[]>([]);
+  const [rawMusicLibrary, setRawMusicLibrary] = useState<MusicType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectionMode, setSelectionMode] = useState<"library" | "upload">("library");
 
   const currentUrl = watch("music.url");
 
+  // Deduplicate music library by URL to prevent duplicate key errors
+  const musicLibrary = useMemo(() => {
+    const seen = new Set();
+    return rawMusicLibrary.filter((m) => {
+      if (!m.url || seen.has(m.url)) return false;
+      seen.add(m.url);
+      return true;
+    });
+  }, [rawMusicLibrary]);
+
   useEffect(() => {
     fetch("/api/music-library")
       .then((res) => res.json())
       .then((data) => {
-        setMusicLibrary(data.music || []);
+        const music = data.music || [];
+        setRawMusicLibrary(music);
+        
         // If current music URL matched one in library, set mode to library
-        if (currentUrl && data.music?.some((m: MusicType) => m.url === currentUrl)) {
+        if (currentUrl && music.some((m: MusicType) => m.url === currentUrl)) {
           setSelectionMode("library");
         } else if (currentUrl) {
           setSelectionMode("upload");
         }
       })
+      .catch((err) => console.error("Failed to fetch music library:", err))
       .finally(() => setLoading(false));
   }, []);
 
   const handleLibrarySelect = (url: string) => {
+    // If selecting the placeholder/empty option
+    if (!url) {
+      setValue("music.url", "", { shouldDirty: true, shouldValidate: true });
+      setValue("music.title", "", { shouldDirty: true });
+      setValue("music.artist", "", { shouldDirty: true });
+      setValue("music.public_id", "", { shouldDirty: true });
+      setValue("music.resource_type", "", { shouldDirty: true });
+      return;
+    }
+
     const selected = musicLibrary.find((m) => m.url === url);
     if (selected) {
       setValue("music.url", selected.url, { shouldDirty: true, shouldValidate: true });
-      setValue("music.title", selected.title, { shouldDirty: true });
-      setValue("music.artist", selected.artist, { shouldDirty: true });
+      setValue("music.title", selected.title || "", { shouldDirty: true });
+      setValue("music.artist", selected.artist || "", { shouldDirty: true });
+      setValue("music.public_id", selected.public_id || "", { shouldDirty: true });
+      setValue("music.resource_type", selected.resource_type || "video", { shouldDirty: true });
     }
   };
 
@@ -84,13 +110,17 @@ export default function MusicSection({ form }: SectionProps) {
         {selectionMode === "library" ? (
           <div className="space-y-4">
             <label className="block text-sm font-semibold">Select Background Music</label>
-            <Select onValueChange={handleLibrarySelect} value={currentUrl}>
+            <Select onValueChange={handleLibrarySelect} value={currentUrl || undefined}>
               <SelectTrigger className="w-full h-12 py-6">
                 <SelectValue placeholder={loading ? "Loading music..." : "Select a music"} />
               </SelectTrigger>
               <SelectContent>
-                {musicLibrary.map((song) => (
-                  <SelectItem key={song.id} value={song.url} className="cursor-pointer">
+                {musicLibrary.map((song, idx) => (
+                  <SelectItem 
+                    key={`song-${song.id || idx}-${song.public_id || 'new'}`} 
+                    value={song.url} 
+                    className="cursor-pointer"
+                  >
                     <div className="flex flex-col items-start">
                       <span className="font-medium">{song.title}</span>
                       <span className="text-xs text-gray-500 ">{song.artist}</span>
@@ -99,6 +129,9 @@ export default function MusicSection({ form }: SectionProps) {
                 ))}
               </SelectContent>
             </Select>
+            {errors.music?.url && (
+              <p className="text-red-500 text-sm mt-1">{errors.music.url.message}</p>
+            )}
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-4">
@@ -109,17 +142,19 @@ export default function MusicSection({ form }: SectionProps) {
               <div className="flex gap-2">
                 <input
                   {...register("music.url")}
-                  className="flex-1 px-4 py-2 border rounded-md bg-gray-50 dark:bg-slate-950 cursor-not-allowed"
+                  className="flex-1 px-4 py-2 border rounded-md bg-gray-50 dark:bg-slate-950 cursor-not-allowed text-xs"
                   readOnly
                   placeholder="No file uploaded"
                 />
                 <CloudinaryButton
                   type="music"
                   label="Upload"
-                  folder="soundtracks"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors"
-                  onSuccess={(url) => {
-                    setValue("music.url", url, { shouldDirty: true, shouldValidate: true });
+                  folder={folder}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors whitespace-nowrap"
+                  onSuccess={(data) => {
+                    setValue("music.url", data.url, { shouldDirty: true, shouldValidate: true });
+                    setValue("music.public_id", data.public_id, { shouldDirty: true });
+                    setValue("music.resource_type", data.resource_type, { shouldDirty: true });
                   }}
                   isMultiple={false}
                 />
@@ -160,9 +195,11 @@ export default function MusicSection({ form }: SectionProps) {
               <button
                 type="button"
                 onClick={() => {
-                  setValue("music.url", "");
+                  setValue("music.url", "", { shouldDirty: true, shouldValidate: true });
                   setValue("music.title", "");
                   setValue("music.artist", "");
+                  setValue("music.public_id", "");
+                  setValue("music.resource_type", "");
                 }}
                 className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full transition-colors"
                 title="Remove Music"
