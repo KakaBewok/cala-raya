@@ -14,7 +14,6 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Heart, 
-  Calendar, 
   Clock, 
   Image as ImageIcon, 
   Music, 
@@ -23,10 +22,11 @@ import {
   AlertTriangle
 } from "lucide-react";
 import { useSession } from "next-auth/react";
+import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
+import toast from "react-hot-toast";
 
 // Sections
 import CoupleSection from "./form-sections/CoupleSection";
-import EventDetailsSection from "./form-sections/EventDetailsSection";
 import RundownSection from "./form-sections/RundownSection";
 import GallerySection from "./form-sections/GallerySection";
 import MusicSection from "./form-sections/MusicSection";
@@ -42,6 +42,7 @@ export function InvitationForm({
   invitationData,
   onSuccess,
 }: InvitationFormProps) {
+  const { refetchInvitations, setCurrentPage } = useInvitationAdmin();
   const router = useRouter();
   const { data: session } = useSession();
   const userRole = session?.user?.role || "USER";
@@ -63,14 +64,8 @@ export function InvitationForm({
           host_two_additional_info: invitationData.host_two_additional_info || "",
           host_two_social_media: invitationData.host_two_social_media || "",
           hashtag: invitationData.hashtag || "",
-          event_title: invitationData.event_title || "",
-          event_date: invitationData.event_date || "",
-          event_type: invitationData.event_type || "Wedding Reception",
-          location: invitationData.location || "",
-          location_url: invitationData.location_url || "",
-          location_detail: invitationData.location_detail || "",
-          message: invitationData.message || "",
           themes: invitationData.themes || { name: "default" },
+          web_url: process.env.NEXT_PUBLIC_APP_URL_PROD!,
           music: invitationData.music ? { 
             title: invitationData.music.title || "", 
             artist: invitationData.music.artist || "", 
@@ -79,7 +74,7 @@ export function InvitationForm({
           images: (invitationData.images || []).map((img) => ({
             url: img.url,
             type: img.type as any,
-            order_number: img.order_number || undefined,
+            order_number: img.order_number ? Number(img.order_number) : undefined,
           })),
           rundowns: (invitationData.rundowns || []).map((r) => ({
             title: r.title,
@@ -105,6 +100,8 @@ export function InvitationForm({
             story_date: s.story_date,
             order_number: s.order_number,
           })),
+          // Pre-fill user_id so admin doesn't have to re-select the owner
+          user_id: invitationData.user_id ?? invitationData.user?.id ?? undefined,
         }
       : {
           host_one_name: "",
@@ -116,14 +113,8 @@ export function InvitationForm({
           host_two_additional_info: "",
           host_two_social_media: "",
           hashtag: "",
-          event_title: "",
-          event_date: new Date().toISOString().split('T')[0],
-          event_type: "Wedding Reception",
-          location: "",
-          location_url: "",
-          location_detail: "",
-          message: "Together with our families, we invite you to celebrate our wedding.",
           themes: { name: "default" },
+          web_url: `${process.env.NEXT_PUBLIC_APP_URL_PROD!}`,
           music: { title: "", artist: "", url: "" },
           images: [],
           rundowns: [],
@@ -140,6 +131,10 @@ export function InvitationForm({
   const onSubmit = async (data: InvitationFormData) => {
     setIsSubmitting(true);
     try {
+      if (isEditMode && !invitationData?.id) {
+        throw new Error("Unable to save: Invitation ID is missing.");
+      }
+
       const url = isEditMode ? `/api/invitations/${invitationData.id}` : "/api/invitations";
       const method = isEditMode ? "PUT" : "POST";
       
@@ -157,14 +152,22 @@ export function InvitationForm({
       const result = await response.json();
       onSuccess?.();
       
-      if (!isEditMode && result.invitation?.id) {
-        router.push(`/dashboard/my-invitations/${result.invitation.id}/edit`);
+      // Refresh list to show new/updated data
+      await refetchInvitations();
+      
+      if (!isEditMode) {
+        toast.success("Invitation published successfully!");
+        setCurrentPage(1); // Go to first page to see the newest
       } else {
-        alert("Invitation saved successfully!");
+        toast.success("Changes saved successfully");
       }
+      
+      // Always redirect to list after success (both create and edit)
+      router.push("/dashboard/my-invitations");
+      
     } catch (error: any) {
       console.error("Error saving invitation:", error);
-      alert(error.message || "An error occurred while saving.");
+      toast.error(error.message || "An error occurred while saving.");
     } finally {
       setIsSubmitting(false);
     }
@@ -172,7 +175,6 @@ export function InvitationForm({
 
   const tabs = [
     { id: "couple", label: "Couple", icon: <Heart className="w-4 h-4" /> },
-    { id: "details", label: "Event Details", icon: <Calendar className="w-4 h-4" /> },
     { id: "rundown", label: "Rundown", icon: <Clock className="w-4 h-4" /> },
     { id: "gallery", label: "Gallery", icon: <ImageIcon className="w-4 h-4" /> },
     { id: "music", label: "Music", icon: <Music className="w-4 h-4" /> },
@@ -188,10 +190,6 @@ export function InvitationForm({
       case "couple":
         return errorKeys.some(key => 
           key.startsWith("host_one_") || key.startsWith("host_two_")
-        );
-      case "details":
-        return errorKeys.some(key => 
-          ["event_title", "event_date", "event_type", "location", "location_url", "location_detail", "message"].includes(key)
         );
       case "rundown":
         return errorKeys.includes("rundowns");
@@ -271,13 +269,13 @@ export function InvitationForm({
           {/* Tab Content */}
           <div className="p-6 md:p-8 min-h-[500px] transition-all duration-300 ease-in-out">
             <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+             
               {activeTab === "couple" && <CoupleSection form={form} />}
-              {activeTab === "details" && <EventDetailsSection form={form} />}
               {activeTab === "rundown" && <RundownSection form={form} />}
               {activeTab === "gallery" && <GallerySection form={form} />}
               {activeTab === "music" && <MusicSection form={form} />}
               {activeTab === "additional" && <AdditionalSection form={form} />}
-              {activeTab === "settings" && <SettingsSection form={form} userRole={userRole} />}
+                {activeTab === "settings" && <SettingsSection form={form} userRole={userRole} />}
             </div>
           </div>
 
@@ -310,34 +308,55 @@ export function InvitationForm({
             </div>
 
             <div className="flex gap-3">
-              {currentIndex < tabs.length - 1 ? (
-                <button
-                  type="button"
-                  onClick={nextTab}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-slate-800 dark:bg-slate-700 text-white rounded-xl font-semibold hover:bg-slate-900 dark:hover:bg-slate-600 transition-all shadow-md active:scale-95"
-                >
-                  <span className="hidden sm:inline">Next</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-                ) : (
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex items-center gap-2 px-10 py-2.5 bg-indigo-600 text-white rounded-xl font-black hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 dark:shadow-none disabled:opacity-50 active:scale-95"
-                  >
-                    {isSubmitting ? (
-                      "Saving Invitation..."
-                    ) : (
-                      <>
-                        <Save className="w-4 h-4" />
-                        {isEditMode ? "Save All Changes" : "Publish Invitation"}
-                      </>
-                    )}
-                  </button>
-                )}
-              </div>
+              <button
+                type="button"
+                onClick={nextTab}
+                disabled={currentIndex === tabs.length - 1}
+                className="flex items-center gap-2 px-6 py-2.5 bg-slate-800 dark:bg-slate-700 text-white rounded-xl font-semibold hover:bg-slate-900 dark:hover:bg-slate-600 transition-all shadow-md active:scale-95 disabled:opacity-30"
+              >
+                <span className="hidden sm:inline">Next</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
+        </div>
+
+        {/* Global Action Footer - Sticky for Desktop, Persistent for Mobile */}
+        <div className="sticky bottom-6 mt-10 z-30">
+          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4 max-w-4xl mx-auto ring-1 ring-slate-900/5 dark:ring-white/5">
+            <div className="flex items-center gap-3">
+              <div className="bg-indigo-100 dark:bg-indigo-900/40 p-2 rounded-lg text-indigo-600 dark:text-indigo-400">
+                <Sparkles className="w-5 h-5 animate-pulse" />
+              </div>
+              <div className="hidden sm:block">
+                <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Status</p>
+                <p className="text-sm font-black text-slate-700 dark:text-slate-300">
+                  {isEditMode ? "Editing Invitation" : "New Invitation"}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex w-full md:w-auto gap-3">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="flex-1 md:flex-none flex items-center justify-center gap-2 px-10 py-3 bg-indigo-600 text-white rounded-xl font-black hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 dark:shadow-none disabled:opacity-50 active:scale-95 group"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Processing...</span>
+                  </>
+                ) : (
+                  <>
+                    <Save className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <span>{isEditMode ? "Save All Changes" : "Publish Invitation"}</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
           
           {/* Validation Error Summary */}
           {Object.keys(errors).length > 0 && (

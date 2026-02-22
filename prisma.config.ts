@@ -1,10 +1,13 @@
-import path from "node:path";
-import { defineConfig } from "prisma/config";
+import "dotenv/config";
+import { defineConfig, env } from "prisma/config";
 
 export default defineConfig({
-  schema: path.join(__dirname, "prisma", "schema.prisma"),
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+    seed: "tsx prisma/seed.ts",
+  },
   datasource: {
-    // Uses DIRECT_URL for introspection/migrations (no pgbouncer)
-    url: process.env["DIRECT_URL"] || process.env["DATABASE_URL"],
+    url: env("DATABASE_URL"),
   },
 });

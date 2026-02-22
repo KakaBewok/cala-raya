@@ -145,23 +145,6 @@ const Sidebar = () => {
                 </NavLink>
               </li>
 
-              {!sidebarCollapsed && (
-                <li className="mt-8">
-                  <h3 className="mb-4 ml-4 text-xs font-bold text-slate-500 uppercase tracking-widest">
-                    Analytics
-                  </h3>
-                  <NavLink
-                    url="/dashboard/analytics"
-                    active={pathname.startsWith("/dashboard/analytics")}
-                  >
-                    <BarChart3 
-                      size={20} 
-                      className={pathname.startsWith("/dashboard/analytics") ? "text-indigo-500" : "text-slate-400 group-hover:text-white"} 
-                    />
-                    <span>Report</span>
-                  </NavLink>
-                </li>
-              )}
               {/* <!-- RSVP --> */}
             </ul>
           </div>

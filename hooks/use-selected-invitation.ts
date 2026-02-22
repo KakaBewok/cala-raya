@@ -1,12 +1,16 @@
+import { useCallback } from "react";
+
 export function useSelectedInvitation() {
-  const getInvitationId = () => {
+  const getInvitationId = useCallback(() => {
     const id = localStorage.getItem("selectedInvitationId");
     return id ? parseInt(id) : null;
-  };
-  const setInvitationId = (id: number) =>
-    localStorage.setItem("selectedInvitationId", id.toString());
-  const removeInvitationId = () =>
-    localStorage.removeItem("selectedInvitationId");
+  }, []);
+
+  const setInvitationId = useCallback((id: number) =>
+    localStorage.setItem("selectedInvitationId", id.toString()), []);
+
+  const removeInvitationId = useCallback(() =>
+    localStorage.removeItem("selectedInvitationId"), []);
 
   return { getInvitationId, setInvitationId, removeInvitationId };
 }

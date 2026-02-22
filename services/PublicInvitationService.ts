@@ -1,6 +1,6 @@
 import { IPublicInvitationRepository, InvitationMetadata } from "@/repositories/interfaces/IPublicInvitationRepository";
 import InvitationData from "@/types/invitation-data";
-import { SupabasePublicInvitationRepository } from "@/repositories/supabase/SupabasePublicInvitationRepository";
+import RepositoryFactory from "@/repositories/RepositoryFactory";
 
 /**
  * Public Invitation Service
@@ -10,7 +10,7 @@ export class PublicInvitationService {
   private repository: IPublicInvitationRepository;
 
   constructor(repository?: IPublicInvitationRepository) {
-    this.repository = repository || new SupabasePublicInvitationRepository();
+    this.repository = repository || RepositoryFactory.getPublicInvitationRepository();
   }
 
   /**

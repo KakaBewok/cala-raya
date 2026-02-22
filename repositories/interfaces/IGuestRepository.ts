@@ -62,6 +62,21 @@ export interface IGuestRepository {
    * @returns Promise with matching guests
    */
   searchByName(invitationId: number, searchTerm: string): Promise<Guest[]>;
+
+  /**
+   * Find guests for a specific invitation with pagination
+   * @param invitationId - The invitation ID
+   * @param page - Current page
+   * @param pageSize - Items per page
+   * @returns Promise with paginated guest data and total count
+   */
+  findByInvitationIdPaginated(
+    invitationId: number,
+    page: number,
+    pageSize: number
+  ): Promise<{ data: Guest[]; total: number }>;
+
+  findByNameAndInvitationId(invitationId: number, name: string): Promise<Guest | null>;
 }
 
 /**

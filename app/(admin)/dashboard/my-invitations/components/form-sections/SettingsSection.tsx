@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { InvitationFormData } from "../../schema/FormSchema";
 import FormInput from "../FormInput";
-import { Settings, Layout, Info, ShieldCheck, Lock } from "lucide-react";
+import { Settings, Layout, Info, ShieldCheck, Lock, Users } from "lucide-react";
 import Image from "next/image";
 import {
   Select,
@@ -14,6 +14,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Theme } from "@/types/invitation-data";
+
+interface UserListItem {
+  id: number;
+  name: string | null;
+  email: string | null;
+  role: string | null;
+}
 
 interface SectionProps {
   form: UseFormReturn<InvitationFormData>;
@@ -28,6 +35,11 @@ export default function SettingsSection({ form, userRole }: SectionProps) {
   const [themes, setThemes] = useState<Theme[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // ── ADMIN: User list for assignment ──
+  const [users, setUsers] = useState<UserListItem[]>([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
+  const selectedUserId = watch("user_id");
+
   useEffect(() => {
     fetch("/api/themes")
       .then(res => res.json())
@@ -36,6 +48,22 @@ export default function SettingsSection({ form, userRole }: SectionProps) {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  // Fetch user list only when user is admin
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    setLoadingUsers(true);
+    fetch("/api/users/list")
+      .then(res => res.json())
+      .then(data => {
+        setUsers(data.users || []);
+      })
+      .catch(() => {
+        setUsers([]);
+      })
+      .finally(() => setLoadingUsers(false));
+  }, [isAdmin]);
 
   // Simplified previews for the UI
   const themePreviews: Record<string, string> = {
@@ -50,8 +78,73 @@ export default function SettingsSection({ form, userRole }: SectionProps) {
     setValue("themes.name", themeName, { shouldDirty: true, shouldValidate: true });
   };
 
+  const handleUserChange = (userId: string) => {
+    setValue("user_id", Number(userId), { shouldDirty: true, shouldValidate: true });
+  };
+
   return (
     <div className="space-y-8">
+      {/* ── ADMIN: User Assignment Section ── */}
+      {isAdmin && (
+        <div className="space-y-6">
+          <div className="flex justify-between items-center border-b pb-4">
+            <div className="flex items-center gap-3">
+              <Users className="w-6 h-6 text-emerald-600" />
+              <h3 className="text-xl font-bold">Assign to User</h3>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs font-bold">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              ADMIN ONLY
+            </div>
+          </div>
+
+          <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-200 dark:border-emerald-900/30 p-4 rounded-xl flex gap-4 items-start animate-in fade-in duration-500">
+            <Info className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+            <div className="text-sm text-emerald-800 dark:text-emerald-400">
+              <p className="font-bold">User Assignment</p>
+              <p>Select which user will own this invitation. If not selected, the invitation will be assigned to you.</p>
+            </div>
+          </div>
+
+          <div className="space-y-2 max-w-md animate-in slide-in-from-top-2 duration-500">
+            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
+              Select User
+            </label>
+            <Select 
+              onValueChange={handleUserChange} 
+              value={selectedUserId ? String(selectedUserId) : undefined}
+            >
+              <SelectTrigger className="w-full h-12 bg-white dark:bg-slate-950 border-2 focus:ring-emerald-500">
+                <SelectValue placeholder={loadingUsers ? "Loading users..." : "Select a user (optional)"} />
+              </SelectTrigger>
+              <SelectContent>
+                {users.map((user) => (
+                  <SelectItem key={user.id} value={String(user.id)}>
+                    <div className="flex items-center gap-3">
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                        {(user.name || "?")[0].toUpperCase()}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-medium">{user.name || "Unnamed"}</span>
+                        <span className="text-xs text-slate-500">{user.email}</span>
+                      </div>
+                      {user.role === "ADMIN" && (
+                        <span className="ml-auto bg-indigo-600 text-[10px] text-white px-1.5 py-0.5 rounded font-black">
+                          ADMIN
+                        </span>
+                      )}
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-slate-500">
+              Leave empty to assign the invitation to yourself.
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="space-y-6">
         <div className="flex items-center gap-3 border-b pb-4">
           <Settings className="w-6 h-6 text-slate-600" />

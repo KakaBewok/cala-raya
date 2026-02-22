@@ -13,11 +13,34 @@ import InvitationData, {
  */
 export interface IInvitationRepository {
   /**
+   * Find ALL invitations (admin only)
+   * @returns Promise with array of all invitations
+   */
+  findAll(): Promise<InvitationData[]>;
+
+  /**
    * Find all invitations for a specific user
    * @param userId - The ID of the user
    * @returns Promise with array of invitations
    */
   findByUserId(userId: number): Promise<InvitationData[]>;
+  
+  /**
+   * Find ALL invitations paginated (admin only)
+   * @param page - Current page
+   * @param pageSize - Items per page
+   * @returns Promise with paginated results and total count
+   */
+  findAllPaginated(page: number, pageSize: number): Promise<{ data: InvitationData[]; total: number }>;
+
+  /**
+   * Find paginated invitations for a specific user
+   * @param userId - The ID of the user
+   * @param page - Current page
+   * @param pageSize - Items per page
+   * @returns Promise with paginated results and total count
+   */
+  findByUserIdPaginated(userId: number, page: number, pageSize: number): Promise<{ data: InvitationData[]; total: number }>;
 
   /**
    * Find a single invitation by ID
@@ -62,6 +85,20 @@ export interface IInvitationRepository {
    * @returns Promise with boolean indicating success
    */
   updateStatus(id: number, isActive: boolean): Promise<boolean>;
+
+  /**
+   * Get global statistics for dashboard
+   * @param userId - Optional user ID for user-specific stats
+   * @returns Promise with statistics data
+   */
+  getGlobalStatistics(userId?: number): Promise<{
+    totalInvitations: number;
+    totalGuests: number;
+    totalRsvps: number;
+    attending: number;
+    notAttending: number;
+    totalGuestsAttending: number;
+  }>;
 }
 
 /**
@@ -91,6 +128,9 @@ export interface CreateInvitationDTO {
   // User and theme
   user_id: number;
   theme_id: number;
+  theme_name?: string; // used for server-side validation of images/stories
+  slug?: string;
+  web_url?: string;
 
   // Related data
   music?: Omit<Music, "id">;

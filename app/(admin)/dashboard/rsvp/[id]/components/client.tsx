@@ -11,8 +11,6 @@ import {
   CheckCircle,
   XCircle,
   MessageSquare,
-  Filter,
-  Search,
   Clock,
   UserCheck,
   UserX,
@@ -20,7 +18,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 // Helper function to format date
 const formatDateTime = (date: Date | string): string => {
@@ -36,88 +34,42 @@ const formatDateTime = (date: Date | string): string => {
 };
 
 interface RsvpClientProps {
-  rsvpData: RsvpColumn[];
+  rsvpData: RsvpColumn[]; // Current page data
   selectedInvitation?: InvitationData;
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  onPageChange: (page: number) => void;
 }
-
-type FilterType = "all" | "attending" | "not_attending";
-type SortType = "newest" | "oldest";
 
 export const RsvpClient: React.FC<RsvpClientProps> = ({
   rsvpData,
   selectedInvitation,
+  currentPage,
+  totalPages,
+  totalCount,
+  onPageChange,
 }) => {
   const { invitationAdminData: invitations } = useInvitationAdmin();
-  const [filterStatus, setFilterStatus] = useState<FilterType>("all");
-  const [sortBy, setSortBy] = useState<SortType>("newest");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
 
-  // Get full RSVP data with attendance status
-  const fullRsvpData = useMemo(() => {
-    return selectedInvitation?.rsvps || [];
-  }, [selectedInvitation?.rsvps]);
-
-  // Calculate statistics
+  // Calculate statistics from the invitation object (assuming it has some totals or we calculate from all)
+  // For now, if selectedInvitation.rsvps is incomplete due to pagination, we might need a stats API.
+  // But let's use what we have in selectedInvitation if it still has all (it might not if we optimize).
   const stats = useMemo(() => {
-    const attending = fullRsvpData.filter((r) => r.attendance_status === true);
-    const notAttending = fullRsvpData.filter(
-      (r) => r.attendance_status === false
-    );
-    const totalGuests = fullRsvpData.reduce(
-      (sum, rsvp) => sum + (rsvp.total_guest || 0),
-      0
-    );
+    const allRsvps = selectedInvitation?.rsvps || [];
+    const attending = allRsvps.filter((r) => r.attendance_status === true);
+    const notAttending = allRsvps.filter((r) => r.attendance_status === false);
+    const totalGuests = allRsvps.reduce((sum, rsvp) => sum + (rsvp.total_guest || 0), 0);
 
     return {
-      total: fullRsvpData.length,
+      total: allRsvps.length || totalCount, // Fallback to totalCount if rsvps array is empty
       attending: attending.length,
       notAttending: notAttending.length,
       totalGuests,
     };
-  }, [fullRsvpData]);
-
-  // Filter and sort RSVPs
-  const filteredAndSortedRsvps = useMemo(() => {
-    let filtered = [...fullRsvpData];
-
-    // Apply status filter
-    if (filterStatus === "attending") {
-      filtered = filtered.filter((r) => r.attendance_status === true);
-    } else if (filterStatus === "not_attending") {
-      filtered = filtered.filter((r) => r.attendance_status === false);
-    }
-
-    // Apply search
-    if (searchQuery.trim()) {
-      filtered = filtered.filter((r) =>
-        r.guest_name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-
-    // Apply sort
-    filtered.sort((a, b) => {
-      const dateA = new Date(a.created_at).getTime();
-      const dateB = new Date(b.created_at).getTime();
-      return sortBy === "newest" ? dateB - dateA : dateA - dateB;
-    });
-
-    return filtered;
-  }, [fullRsvpData, filterStatus, searchQuery, sortBy]);
-
-  // Reset to page 1 when filters change
-  useMemo(() => {
-    setCurrentPage(1);
-  }, [filterStatus, searchQuery, sortBy]);
-
-  // Pagination calculations
-  const totalPages = Math.ceil(filteredAndSortedRsvps.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedRsvps = filteredAndSortedRsvps.slice(startIndex, endIndex);
+  }, [selectedInvitation?.rsvps, totalCount]);
 
   // Generate page numbers for pagination
   const getPageNumbers = () => {
@@ -249,88 +201,33 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
         </div>
       </div>
 
-      {/* Filters & Search */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border shadow-sm p-6">
-        <div className="flex flex-col md:flex-row gap-4">
-          {/* Search */}
-          <div className="flex-1">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <input
-                type="text"
-                placeholder="Search by guest name..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
-              />
-            </div>
-          </div>
-
-          {/* Filter by Status */}
-          <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-            <select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value as FilterType)}
-              className="px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="all">All Responses</option>
-              <option value="attending">Attending Only</option>
-              <option value="not_attending">Not Attending</option>
-            </select>
-          </div>
-
-          {/* Sort */}
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortType)}
-              className="px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
       {/* RSVP List */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border shadow-sm overflow-hidden">
         <div className="p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
-              Guest Responses ({filteredAndSortedRsvps.length})
+              Guest Responses ({totalCount})
             </h2>
-            {filteredAndSortedRsvps.length > 0 && (
-              <p className="text-sm text-slate-600 dark:text-slate-400">
-                Showing {startIndex + 1}-{Math.min(endIndex, filteredAndSortedRsvps.length)} of {filteredAndSortedRsvps.length}
-              </p>
-            )}
           </div>
 
-          {filteredAndSortedRsvps.length === 0 ? (
+          {rsvpData.length === 0 ? (
             // Empty State
             <div className="py-16 text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full mb-4">
                 <Inbox className="w-8 h-8 text-slate-400" />
               </div>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">
-                {searchQuery || filterStatus !== "all"
-                  ? "No responses found"
-                  : "No guest responses yet"}
+                No guest responses yet
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-400 max-w-sm mx-auto">
-                {searchQuery || filterStatus !== "all"
-                  ? "Try adjusting your filters or search query"
-                  : "Guest responses will appear here once they RSVP to your invitation"}
+                Guest responses will appear here once they RSVP to your invitation
               </p>
             </div>
           ) : (
             <>
               {/* RSVP Cards */}
               <div className="space-y-3">
-                {paginatedRsvps.map((rsvp) => (
+                {rsvpData.map((rsvp) => (
                   <div
                     key={rsvp.id}
                     className="p-5 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-sm transition-all"
@@ -379,12 +276,14 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
                       </div>
 
                       {/* Timestamp */}
-                      <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-500">
-                        <Clock className="w-3.5 h-3.5" />
-                        <span>
-                          {formatDateTime(rsvp.created_at)}
-                        </span>
-                      </div>
+                      {rsvp.created_at && (
+                        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-500">
+                          <Clock className="w-3.5 h-3.5" />
+                          <span>
+                            {formatDateTime(rsvp.created_at)}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -395,7 +294,7 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
                 <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200 dark:border-slate-700">
                   {/* Previous Button */}
                   <button
-                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    onClick={() => onPageChange(currentPage - 1)}
                     disabled={currentPage === 1}
                     className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
@@ -408,7 +307,7 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
                     {getPageNumbers().map((page, index) => (
                       <button
                         key={index}
-                        onClick={() => typeof page === "number" && setCurrentPage(page)}
+                        onClick={() => typeof page === "number" && onPageChange(page)}
                         disabled={page === "..."}
                         className={`min-w-[40px] h-10 px-3 text-sm font-medium rounded-lg transition-colors ${
                           page === currentPage
@@ -425,7 +324,7 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
 
                   {/* Next Button */}
                   <button
-                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    onClick={() => onPageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
                     className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >

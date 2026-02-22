@@ -9,7 +9,7 @@ export async function GET() {
       .order("created_at", { ascending: false });
 
     if (error) {
-      console.warn("Could not fetch from music_libraries, using fallback:", error.message);
+      console.warn("Could not fetch from music, using fallback: ", error.message);
       const fallbackMusic = [
         { id: 1, title: "A Thousand Years", artist: "Christina Perri", url: "https://res.cloudinary.com/dz7qsz9qy/video/upload/v1707534567/wedding/a-thousand-years.mp3" },
         { id: 2, title: "Can't Help Falling in Love", artist: "Elvis Presley", url: "https://res.cloudinary.com/dz7qsz9qy/video/upload/v1707534567/wedding/cant-help-falling-in-love.mp3" },

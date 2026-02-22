@@ -9,38 +9,57 @@ import { formatDate } from "@/utils/format-date";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import BadgeCorner from "@/components/BadgeCorner";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function SelectInvitationGrid() {
-  const { invitationAdminData: invitations } = useInvitationAdmin();
+  const { 
+    invitationAdminData: invitations, 
+    totalInvitations, 
+    currentPage, 
+    setCurrentPage, 
+    pageSize 
+  } = useInvitationAdmin();
   const { getInvitationId, setInvitationId } = useSelectedInvitation();
   const [shouldRender, setShouldRender] = useState<boolean>(false);
   const router = useRouter();
 
+  const totalPages = Math.ceil(totalInvitations / pageSize);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
   useEffect(() => {
-    if (invitations.length === 1) {
+    if (totalInvitations === 1 && invitations.length === 1) {
       const firstInvitation = invitations[0];
       router.replace(`/dashboard/rsvp/${firstInvitation.id}`);
       return;
     }
 
-    if (invitations.length > 1) {
+    if (totalInvitations > 1) {
       const id = getInvitationId();
       if (id) {
-        router.replace(`/dashboard/rsvp/${id}`);
-        return;
+        const exists = invitations.some(inv => inv.id === id);
+        if (exists) {
+          router.replace(`/dashboard/rsvp/${id}`);
+          return;
+        }
       }
     }
 
     setShouldRender(true);
-  }, [getInvitationId, invitations, router]);
+  }, [getInvitationId, invitations, totalInvitations, router]);
 
   if (!shouldRender) {
     return <GeneralLoading />;
   }
 
-  if (invitations.length === 0 || invitations === null) {
+  if (totalInvitations === 0) {
     return (
-      <div className="text-center text-gray-500">
+      <div className="text-center text-gray-500 py-20">
         You don’t have any invitations yet.
       </div>
     );
@@ -51,7 +70,7 @@ export default function SelectInvitationGrid() {
       <div>
         <h1 className="text-2xl font-bold">View RSVP Details</h1>
         <p className="text-gray-500">
-          Select an invitation to see who’s attending and read their messages
+          Select an invitation to see who’s attending and read their messages ({totalInvitations})
         </p>
       </div>
 
@@ -83,6 +102,46 @@ export default function SelectInvitationGrid() {
           </Card>
         ))}
       </div>
+
+      {/* Pagination UI */}
+      {totalPages > 1 && (
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-700 pt-6">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
+            Showing <span className="font-medium">{Math.min((currentPage - 1) * pageSize + 1, totalInvitations)}</span> to{" "}
+            <span className="font-medium">
+              {Math.min(currentPage * pageSize, totalInvitations)}
+            </span>{" "}
+            of <span className="font-medium">{totalInvitations}</span> invitations
+          </p>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50"
+            >
+              <ChevronLeft className="w-4 h-4 mr-1" />
+              Previous
+            </Button>
+            
+            <div className="hidden sm:flex items-center px-4 h-9 rounded-md bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+              PAGE {currentPage} / {totalPages}
+            </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50"
+            >
+              Next
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

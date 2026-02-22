@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useFieldArray, UseFormReturn } from "react-hook-form";
-import { InvitationFormData } from "../../schema/FormSchema";
+import { InvitationFormData, SECTION_LIMITS } from "../../schema/FormSchema";
 import FormInput from "../FormInput";
 import { Trash2, Plus, GripVertical, Clock, MapPin, ExternalLink, AlertTriangle } from "lucide-react";
 import CloudinaryButton from "../CloudinaryButton";
@@ -35,7 +35,6 @@ export default function RundownSection({ form }: SectionProps) {
       start_time: "",
       end_time: "",
       time_zone: "Asia/Jakarta",
-      description: "",
       order_number: rundownFields.length,
     });
   };
@@ -45,16 +44,23 @@ export default function RundownSection({ form }: SectionProps) {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-xl font-bold">Event Rundown</h2>
-          <p className="text-sm text-slate-500">Add segments for your wedding events (Ceremony, Reception, etc.)</p>
+          <p className="text-sm text-slate-500">
+            Add segments for your wedding events (Ceremony, Reception, etc.)
+            <span className="ml-2 font-semibold text-slate-700 dark:text-slate-300">
+              {rundownFields.length}/{SECTION_LIMITS.rundowns}
+            </span>
+          </p>
         </div>
-        <button
-          type="button"
-          onClick={addRundown}
-          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Add Event</span>
-        </button>
+        {rundownFields.length < SECTION_LIMITS.rundowns && (
+          <button
+            type="button"
+            onClick={addRundown}
+            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add Event</span>
+          </button>
+        )}
       </div>
 
       <div className="space-y-6">
@@ -158,51 +164,17 @@ export default function RundownSection({ form }: SectionProps) {
               />
 
               <div className="md:col-span-2 lg:col-span-3">
-                <label className="block text-sm font-semibold mb-2">Description / Notes</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                  Location Detail
+                </label>
                 <textarea
-                  {...register(`rundowns.${idx}.description`)}
-                  rows={2}
-                  className="w-full px-4 py-2 border rounded-md bg-white/70 dark:bg-slate-950 focus:outline-none focus:border-indigo-500"
-                  placeholder="Additional details about this event segment..."
+                  {...register(`rundowns.${idx}.location_detail`)}
+                  placeholder="e.g. Jl. Raya Sudirman No. 123, Gedung Serbaguna Lt. 2"
+                  rows={3}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all resize-none"
                 />
-              </div>
-
-              <div className="md:col-span-2 lg:col-span-3 flex flex-col md:flex-row gap-6 mt-2">
-                <div className="flex-1">
-                  <label className="block text-sm font-semibold mb-2">Event Image (Optional)</label>
-                  <div className="flex gap-2">
-                    <input
-                      {...register(`rundowns.${idx}.image_url`)}
-                      className="flex-1 px-4 py-2 border rounded-md bg-slate-50 dark:bg-slate-950 cursor-not-allowed text-xs"
-                      readOnly
-                      placeholder="No image selected"
-                    />
-                    <CloudinaryButton
-                      type="image"
-                      label="Upload"
-                      folder="event_rundown"
-                      onSuccess={(url) => setValue(`rundowns.${idx}.image_url`, url, { shouldDirty: true })}
-                      className="bg-slate-800 text-white px-4 py-2 rounded-md text-sm hover:bg-slate-700 transition-colors"
-                    />
-                  </div>
-                </div>
-                
-                {watch(`rundowns.${idx}.image_url` as any) && (
-                  <div className="relative w-32 h-20 rounded-lg overflow-hidden border shadow-sm self-end">
-                    <Image
-                      src={(watch(`rundowns.${idx}.image_url` as any) as string) || "/placeholder.png"}
-                      alt="Event"
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setValue(`rundowns.${idx}.image_url`, "", { shouldDirty: true })}
-                      className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 shadow-lg"
-                    >
-                      <Trash2 className="w-3 h-3" />
-                    </button>
-                  </div>
+                {errors.rundowns?.[idx]?.location_detail && (
+                  <p className="mt-1 text-xs text-red-500">{errors.rundowns?.[idx]?.location_detail?.message}</p>
                 )}
               </div>
             </div>

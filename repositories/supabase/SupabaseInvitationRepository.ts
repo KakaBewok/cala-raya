@@ -10,6 +10,29 @@ export class SupabaseInvitationRepository implements IInvitationRepository {
   private supabase = createSupabaseClient();
 
   /**
+   * Find ALL invitations across all users (admin only)
+   */
+  async findAll(): Promise<InvitationData[]> {
+    const { data, error } = await this.supabase
+      .from("invitations")
+      .select(`
+        *,
+        themes (*),
+        music (*),
+        images (*),
+        rundowns (*),
+        gift_infos (*),
+        stories (*),
+        guests (*),
+        rsvps (*)
+      `)
+      .order("updated_at", { ascending: false });
+
+    if (error) throw new Error(error.message);
+    return (data as unknown as InvitationData[]) || [];
+  }
+
+  /**
    * Find all invitations for a specific user with all related data
    */
   async findByUserId(userId: number): Promise<InvitationData[]> {

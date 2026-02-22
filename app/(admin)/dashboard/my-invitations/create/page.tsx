@@ -15,9 +15,7 @@ const CreateInvitationPage = () => {
       
       <InvitationForm
         onSuccess={() => {
-          // In a real scenario, we might want to redirect to the edit page of the newly created invitation
-          // For now, redirect to the list
-          router.push("/dashboard/my-invitations");
+          // Success behavior (redirect & toast) is now handled inside InvitationForm
         }}
       />
     </div>

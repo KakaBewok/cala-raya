@@ -1,5 +1,6 @@
 interface InvitationData {
   id: number;
+  user_id?: number;
   // grooms
   host_one_name: string;
   host_one_nickname: string;

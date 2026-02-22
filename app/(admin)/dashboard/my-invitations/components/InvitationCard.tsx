@@ -10,6 +10,8 @@ import { Trash2, Edit, Eye, Share2, Loader2 } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { encode } from "@/utils/hash";
+import { useSelectedInvitation } from "@/hooks/use-selected-invitation";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,21 +30,26 @@ interface InvitationCardProps {
 
 const InvitationCard = ({ invitation, onDelete }: InvitationCardProps) => {
   const router = useRouter();
+  const { getInvitationId, removeInvitationId } = useSelectedInvitation();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isPreviewing, setIsPreviewing] = useState(false);
 
   const handleDelete = async () => {
     setIsDeleting(true);
 
     try {
-      const res = await fetch(`/api/delete-invitation`, {
+      const res = await fetch(`/api/invitations/${invitation.id}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: invitation.id }),
       });
 
       if (!res.ok) {
         throw new Error("Failed to delete invitation");
+      }
+
+      // Clean up localStorage if the deleted invitation was the selected one
+      if (getInvitationId() === invitation.id) {
+        removeInvitationId();
       }
 
       toast.success("Invitation deleted successfully");
@@ -60,12 +67,32 @@ const InvitationCard = ({ invitation, onDelete }: InvitationCardProps) => {
     }
   };
 
-  const handleView = () => {
-    if (invitation.web_url && invitation.slug) {
-      const url = `${invitation.web_url}/${invitation.slug}`;
-      window.open(url, "_blank");
-    } else {
+  /**
+   * Preview using the default "Calaraya" guest.
+   * Fetches the guest ID from the API, encodes it into the URL token,
+   * and opens the invitation exactly as a real guest would see it.
+   */
+  const handleView = async () => {
+    if (!invitation.web_url || !invitation.slug) {
       toast.error("Invitation URL not available");
+      return;
+    }
+
+    setIsPreviewing(true);
+
+    try {
+      const res = await fetch(`/api/invitations/${invitation.id}/preview-guest`);
+      if (!res.ok) throw new Error("Failed to fetch preview guest");
+
+      const { guest } = await res.json();
+      const token = encode([invitation.id, guest.id]);
+      const url = `${invitation.web_url}/${invitation.slug}?id=${token}`;
+      window.open(url, "_blank");
+    } catch (error) {
+      console.error("Error generating preview URL:", error);
+      toast.error("Failed to generate preview link");
+    } finally {
+      setIsPreviewing(false);
     }
   };
 
@@ -125,10 +152,15 @@ const InvitationCard = ({ invitation, onDelete }: InvitationCardProps) => {
             variant="ghost"
             size="sm"
             onClick={handleView}
+            disabled={isPreviewing}
             className="h-8 px-3 text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800 transition-colors"
             title="Preview invitation"
           >
-            <Eye className="w-4 h-4" />
+            {isPreviewing ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Eye className="w-4 h-4" />
+            )}
           </Button>
 
           <Button

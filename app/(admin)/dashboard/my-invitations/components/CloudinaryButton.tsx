@@ -10,6 +10,7 @@ interface CloudinaryButtonProps {
   folder?: string;
   className?: string;
   isMultiple?: boolean;
+  maxFiles?: number;
 }
 
 const CloudinaryButton = ({
@@ -19,6 +20,7 @@ const CloudinaryButton = ({
   folder,
   className,
   isMultiple,
+  maxFiles,
 }: CloudinaryButtonProps) => {
   const handleSuccess = (result: CloudinaryUploadWidgetResults) => {
     if (
@@ -36,7 +38,7 @@ const CloudinaryButton = ({
       onSuccess={handleSuccess}
       options={{
         multiple: isMultiple,
-        maxFiles: 11,
+        maxFiles: maxFiles || 1,
         resourceType: type === "music" ? "video" : "image",
         folder: folder || (type === "music" ? "audio_files" : "image_files"),
         maxFileSize: 1000000, // 1mb

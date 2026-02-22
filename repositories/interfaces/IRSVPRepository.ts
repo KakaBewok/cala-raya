@@ -48,16 +48,23 @@ export interface IRSVPRepository {
    */
   getStatistics(invitationId: number): Promise<RSVPStatistics>;
 
-  /**
-   * Find RSVPs by attendance status
-   * @param invitationId - The invitation ID
-   * @param attendanceStatus - The attendance status
-   * @returns Promise with filtered RSVPs
-   */
   findByAttendanceStatus(
     invitationId: number,
     attendanceStatus: boolean
   ): Promise<RSVP[]>;
+
+  /**
+   * Find RSVPs for a specific invitation with pagination
+   * @param invitationId - The invitation ID
+   * @param page - Current page
+   * @param pageSize - Items per page
+   * @returns Promise with paginated RSVP data and total count
+   */
+  findByInvitationIdPaginated(
+    invitationId: number,
+    page: number,
+    pageSize: number
+  ): Promise<{ data: RSVP[]; total: number }>;
 }
 
 /**

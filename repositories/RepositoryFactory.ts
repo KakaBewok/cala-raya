@@ -1,32 +1,35 @@
 import { IInvitationRepository } from "@/repositories/interfaces/IInvitationRepository";
 import { IRSVPRepository } from "@/repositories/interfaces/IRSVPRepository";
 import { IGuestRepository } from "@/repositories/interfaces/IGuestRepository";
-import { SupabaseInvitationRepository } from "@/repositories/supabase/SupabaseInvitationRepository";
-import { SupabaseRSVPRepository } from "@/repositories/supabase/SupabaseRSVPRepository";
-import { SupabaseGuestRepository } from "@/repositories/supabase/SupabaseGuestRepository";
+import { IPublicInvitationRepository } from "@/repositories/interfaces/IPublicInvitationRepository";
+import { IUserRepository } from "@/repositories/interfaces/IUserRepository";
+import { PrismaInvitationRepository } from "@/repositories/prisma/PrismaInvitationRepository";
+import { PrismaRSVPRepository } from "@/repositories/prisma/PrismaRSVPRepository";
+import { PrismaGuestRepository } from "@/repositories/prisma/PrismaGuestRepository";
+import { PrismaPublicInvitationRepository } from "@/repositories/prisma/PrismaPublicInvitationRepository";
+import { PrismaUserRepository } from "@/repositories/prisma/PrismaUserRepository";
 
 /**
  * Repository Factory
  * Centralized factory for creating repository instances
- * This allows easy switching between different database implementations
+ * 
+ * Now using Prisma implementations for type-safe, efficient database access.
+ * To switch back to Supabase or another provider, simply change the
+ * implementation classes below.
  */
 class RepositoryFactory {
   private static invitationRepository: IInvitationRepository | null = null;
   private static rsvpRepository: IRSVPRepository | null = null;
   private static guestRepository: IGuestRepository | null = null;
+  private static publicInvitationRepository: IPublicInvitationRepository | null = null;
+  private static userRepository: IUserRepository | null = null;
 
   /**
    * Get Invitation Repository instance (Singleton pattern)
    */
   static getInvitationRepository(): IInvitationRepository {
     if (!this.invitationRepository) {
-      // Currently using Supabase implementation
-      // To switch to another database, just change this line:
-      this.invitationRepository = new SupabaseInvitationRepository();
-      
-      // Future example:
-      // this.invitationRepository = new PrismaInvitationRepository();
-      // this.invitationRepository = new FirebaseInvitationRepository();
+      this.invitationRepository = new PrismaInvitationRepository();
     }
     return this.invitationRepository;
   }
@@ -36,11 +39,7 @@ class RepositoryFactory {
    */
   static getRSVPRepository(): IRSVPRepository {
     if (!this.rsvpRepository) {
-      // Currently using Supabase implementation
-      this.rsvpRepository = new SupabaseRSVPRepository();
-      
-      // Future example:
-      // this.rsvpRepository = new PrismaRSVPRepository();
+      this.rsvpRepository = new PrismaRSVPRepository();
     }
     return this.rsvpRepository;
   }
@@ -50,13 +49,29 @@ class RepositoryFactory {
    */
   static getGuestRepository(): IGuestRepository {
     if (!this.guestRepository) {
-      // Currently using Supabase implementation
-      this.guestRepository = new SupabaseGuestRepository();
-      
-      // Future example:
-      // this.guestRepository = new PrismaGuestRepository();
+      this.guestRepository = new PrismaGuestRepository();
     }
     return this.guestRepository;
+  }
+
+  /**
+   * Get Public Invitation Repository instance (Singleton pattern)
+   */
+  static getPublicInvitationRepository(): IPublicInvitationRepository {
+    if (!this.publicInvitationRepository) {
+      this.publicInvitationRepository = new PrismaPublicInvitationRepository();
+    }
+    return this.publicInvitationRepository;
+  }
+
+  /**
+   * Get User Repository instance (Singleton pattern)
+   */
+  static getUserRepository(): IUserRepository {
+    if (!this.userRepository) {
+      this.userRepository = new PrismaUserRepository();
+    }
+    return this.userRepository;
   }
 
   /**
@@ -66,6 +81,8 @@ class RepositoryFactory {
     this.invitationRepository = null;
     this.rsvpRepository = null;
     this.guestRepository = null;
+    this.publicInvitationRepository = null;
+    this.userRepository = null;
   }
 }
 

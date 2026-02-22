@@ -11,17 +11,12 @@ import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
 import InvitationData from "@/types/invitation-data";
 import { formatDate } from "@/utils/format-date";
-import { encode } from "@/utils/hash";
 import { 
   Plus, 
   Upload, 
   MessageSquare, 
-  Copy, 
-  Check, 
-  ExternalLink,
   Users,
-  Calendar,
-  Link as LinkIcon
+  Calendar
 } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -31,11 +26,19 @@ import ChangeInvitationButton from "@/components/dashboard/ChangeInvitationButto
 interface GuestClientProps {
   guestData: GuestColumn[];
   selectedInvitation?: InvitationData;
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  onPageChange: (page: number) => void;
 }
 
 export const GuestClient: React.FC<GuestClientProps> = ({
   guestData,
   selectedInvitation,
+  currentPage,
+  totalPages,
+  totalCount,
+  onPageChange,
 }) => {
   const {
     loading,
@@ -50,46 +53,8 @@ export const GuestClient: React.FC<GuestClientProps> = ({
   const [editMessageModalOpen, setEditMessageModalOpen] = useState<boolean>(false);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
-  const [linkCopied, setLinkCopied] = useState<boolean>(false);
 
   const bridesAndGrooms = `${selectedInvitation?.host_one_nickname} & ${selectedInvitation?.host_two_nickname}`;
-
-  const description = `${bridesAndGrooms} - ${
-    selectedInvitation?.event_date
-      ? formatDate(selectedInvitation.event_date)
-      : ""
-  }`;
-
-  // Generate base invitation URL
-  const generateBaseUrl = () => {
-    if (!selectedInvitation?.id) return null;
-    return `${selectedInvitation?.web_url}/${selectedInvitation?.slug}`;
-  };
-
-  const handleCopyLink = () => {
-    const url = generateBaseUrl();
-    if (!url) {
-      toast.error("Unable to generate invitation link");
-      return;
-    }
-
-    navigator.clipboard.writeText(url);
-    toast.success("Invitation link copied!", {
-      position: "top-center",
-    });
-
-    setLinkCopied(true);
-    setTimeout(() => {
-      setLinkCopied(false);
-    }, 3000);
-  };
-
-  const handleOpenPreview = () => {
-    const url = generateBaseUrl();
-    if (url) {
-      window.open(url, "_blank");
-    }
-  };
 
   const handleBulkDelete = async (e?: React.MouseEvent<HTMLButtonElement>) => {
     e?.stopPropagation();
@@ -258,54 +223,6 @@ export const GuestClient: React.FC<GuestClientProps> = ({
                 </div>
               )}
             </div>
-
-            {/* Invitation Link Section */}
-            {/* <div className="mt-6 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
-              <div className="flex items-center gap-2 mb-3">
-                <LinkIcon className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                  Invitation Link
-                </span>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg">
-                  <p className="text-sm text-slate-600 dark:text-slate-400 truncate font-mono">
-                    {generateBaseUrl() || "Generating link..."}
-                  </p>
-                </div>
-                
-                <div className="flex gap-2">
-                  <TooltipHover message="Copy Link">
-                    <Button
-                      onClick={handleCopyLink}
-                      variant="outline"
-                      className="flex items-center gap-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800"
-                    >
-                      {linkCopied ? (
-                        <Check className="w-4 h-4 text-green-600" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                      <span className="hidden sm:inline">
-                        {linkCopied ? "Copied" : "Copy"}
-                      </span>
-                    </Button>
-                  </TooltipHover>
-                  
-                  <TooltipHover message="Open Preview">
-                    <Button
-                      onClick={handleOpenPreview}
-                      variant="outline"
-                      className="flex items-center gap-2 px-4 hover:bg-slate-100 dark:hover:bg-slate-800"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span className="hidden sm:inline">Preview</span>
-                    </Button>
-                  </TooltipHover>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
 
@@ -323,7 +240,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
                     Guest List
                   </h2>
                   <p className="text-sm text-slate-600 dark:text-slate-400">
-                    {guestData?.length ?? 0} {guestData?.length === 1 ? "guest" : "guests"} registered
+                    {totalCount} {totalCount === 1 ? "guest" : "guests"} registered
                   </p>
                 </div>
               </div>
@@ -375,6 +292,10 @@ export const GuestClient: React.FC<GuestClientProps> = ({
               searchKey="name"
               columns={columns}
               data={guestData}
+              serverSidePagination={true}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={onPageChange}
             />
           </div>
         </div>
