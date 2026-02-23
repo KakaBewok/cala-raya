@@ -111,7 +111,7 @@ export const themeSchema = z.object({
 export const musicSchema = z.object({
   title: z.string().optional().or(z.literal("")),
   artist: z.string().optional().or(z.literal("")),
-  url: z.string().url("Please provide a valid music URL").optional().or(z.literal("")),
+  url: z.string().url("Please provide a valid music URL").min(1, "Music selection is required"),
   public_id: z.string().optional().or(z.literal("")),
   resource_type: z.string().optional().or(z.literal("")),
 });

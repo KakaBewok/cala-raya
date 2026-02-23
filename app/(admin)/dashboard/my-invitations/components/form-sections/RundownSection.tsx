@@ -33,7 +33,7 @@ export default function RundownSection({ form, folder }: SectionProps) {
       date: "",
       start_time: "",
       end_time: "",
-      time_zone: "Asia/Jakarta",
+      time_zone: "WIB",
       order_number: rundownFields.length,
       image_url: "",
       public_id: "",
@@ -159,7 +159,7 @@ export default function RundownSection({ form, folder }: SectionProps) {
 
               <FormInput
                 label="Time Zone"
-                placeholder="Asia/Jakarta"
+                placeholder="WIB"
                 required
                 error={errors.rundowns?.[idx]?.time_zone}
                 {...register(`rundowns.${idx}.time_zone`)}

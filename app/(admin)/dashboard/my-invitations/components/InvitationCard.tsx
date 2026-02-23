@@ -108,7 +108,7 @@ const InvitationCard = ({ invitation, onDelete }: InvitationCardProps) => {
         )}
         
         {/* Status Badge */}
-        <div className="absolute top-4 right-4">
+        {/* <div className="absolute top-4 right-4">
           <span
             className={`text-xs font-medium px-2.5 py-1 rounded-full ${
               invitation.is_active
@@ -118,7 +118,7 @@ const InvitationCard = ({ invitation, onDelete }: InvitationCardProps) => {
           >
             {invitation.is_active ? "Active" : "Inactive"}
           </span>
-        </div>
+        </div> */}
 
         {/* Content */}
         <div className="mb-4 pr-20">
@@ -128,11 +128,6 @@ const InvitationCard = ({ invitation, onDelete }: InvitationCardProps) => {
           <p className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-1">
             {formatDate(invitation.event_date)}
           </p>
-          {invitation.event_title && (
-            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
-              {invitation.event_title}
-            </p>
-          )}
         </div>
 
         <Separator className="bg-slate-200 dark:bg-slate-700 my-3" />

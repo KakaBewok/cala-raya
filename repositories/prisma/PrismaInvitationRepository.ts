@@ -156,9 +156,6 @@ export class PrismaInvitationRepository implements IInvitationRepository {
    */
   async create(data: CreateInvitationDTO): Promise<InvitationData> {
     try {
-      // Removing optional Cloudinary fields (public_id/resource_type) from the create payload 
-      // because the Prisma Client/DB schema is out of sync and the user opted out of 'db push'.
-      // Converting order_number back to String to match the existing DB column type.
       const invitation = await prisma.invitations.create({
         data: {
           user_id: data.user_id,
@@ -186,10 +183,11 @@ export class PrismaInvitationRepository implements IInvitationRepository {
             ? {
                 create: data.images.map((img) => ({
                   url: img.url,
-                  // public_id and resource_type removed to match the current DB State
+                  public_id: img.public_id,
+                  resource_type: img.resource_type,
                   caption: img.caption || null,
                   type: img.type,
-                  order_number: String(img.order_number), // Back to String
+                  order_number: img.order_number !== undefined ? String(img.order_number) : null,
                 })),
               }
             : undefined,
@@ -205,8 +203,10 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                   time_zone: r.time_zone,
                   description: r.description,
                   image_url: r.image_url,
+                  public_id: r.public_id,
+                  resource_type: r.resource_type,
                   location_detail: r.location_detail,
-                  order_number: Number(r.order_number), // Rundowns already had Int in original schema
+                  order_number: r.order_number !== undefined ? Number(r.order_number) : null,
                 })),
               }
             : undefined,
@@ -226,8 +226,10 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                   title: s.title,
                   content: s.content,
                   image_url: s.image_url,
+                  public_id: s.public_id,
+                  resource_type: s.resource_type,
                   story_date: s.story_date,
-                  order_number: Number(s.order_number), // Stories also had Int
+                  order_number: s.order_number !== undefined ? Number(s.order_number) : null,
                 })),
               }
             : undefined,
@@ -242,7 +244,8 @@ export class PrismaInvitationRepository implements IInvitationRepository {
             title: data.music.title || "",
             artist: data.music.artist || "",
             url: data.music.url,
-            // public_id/resource_type removed
+            public_id: data.music.public_id,
+            resource_type: data.music.resource_type || "video",
           },
         });
         await prisma.invitations.update({
@@ -300,9 +303,11 @@ export class PrismaInvitationRepository implements IInvitationRepository {
               data: data.images.map((img) => ({
                 invitation_id: id,
                 url: img.url,
+                public_id: img.public_id,
+                resource_type: img.resource_type,
                 caption: img.caption || null,
                 type: img.type,
-                order_number: String(img.order_number), // Matching existing DB type
+                order_number: img.order_number !== undefined ? String(img.order_number) : null,
               })),
             });
           }
@@ -324,8 +329,10 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                 time_zone: r.time_zone,
                 description: r.description,
                 image_url: r.image_url,
+                public_id: r.public_id,
+                resource_type: r.resource_type,
                 location_detail: r.location_detail,
-                order_number: Number(r.order_number),
+                order_number: r.order_number !== undefined ? Number(r.order_number) : null,
               })),
             });
           }
@@ -357,8 +364,10 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                 title: s.title,
                 content: s.content,
                 image_url: s.image_url,
+                public_id: s.public_id,
+                resource_type: s.resource_type,
                 story_date: s.story_date,
-                order_number: Number(s.order_number),
+                order_number: s.order_number !== undefined ? Number(s.order_number) : null,
               })),
             });
           }
@@ -379,6 +388,8 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                   title: data.music.title || "",
                   artist: data.music.artist || "",
                   url: data.music.url,
+                  public_id: data.music.public_id,
+                  resource_type: data.music.resource_type || "video",
                 }
               });
             } else {
@@ -387,6 +398,8 @@ export class PrismaInvitationRepository implements IInvitationRepository {
                   title: data.music.title || "",
                   artist: data.music.artist || "",
                   url: data.music.url,
+                  public_id: data.music.public_id,
+                  resource_type: data.music.resource_type || "video",
                 }
               });
               await tx.invitations.update({

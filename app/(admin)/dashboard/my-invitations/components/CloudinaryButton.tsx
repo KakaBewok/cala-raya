@@ -65,7 +65,7 @@ const CloudinaryButton = ({
         multiple: isMultiple,
         maxFiles: maxFiles || 1,
         resourceType: type === "music" ? "video" : "image",
-        folder: folder || (type === "music" ? "audio_files" : "image_files"),
+        folder: folder || "invitation_media/uncategorized",
         maxFileSize: limit,
         clientAllowedFormats:
           type === "music"

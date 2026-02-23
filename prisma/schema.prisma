@@ -39,9 +39,11 @@ model images {
   url           String?      @db.VarChar(255)
   caption       String?      @db.VarChar(255)
   type          String?      @db.VarChar(50)
+  public_id     String?      @db.VarChar(255)
+  resource_type String?      @db.VarChar(50)
+  order_number  String?      @db.VarChar
   created_at    DateTime?    @default(now()) @db.Timestamp(6)
   updated_at    DateTime?    @default(now()) @db.Timestamp(6)
-  order_number  String?      @db.VarChar
   invitations   invitations? @relation(fields: [invitation_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
@@ -92,7 +94,9 @@ model music {
   id            Int           @id @default(autoincrement())
   title         String?       @db.VarChar(255)
   artist        String?       @db.VarChar(255)
-  url           String?       @db.VarChar(255)
+  url           String        @db.VarChar(255)
+  public_id     String?       @db.VarChar(255)
+  resource_type String?       @db.VarChar(50)
   created_at    DateTime?     @default(now()) @db.Timestamp(6)
   updated_at    DateTime?     @default(now()) @db.Timestamp(6)
   invitations   invitations[]
@@ -123,6 +127,8 @@ model rundowns {
   time_zone       String?      @db.VarChar(50)
   description     String?
   image_url       String?      @db.VarChar(255)
+  public_id       String?      @db.VarChar(255)
+  resource_type   String?      @db.VarChar(50)
   order_number    Int?
   created_at      DateTime?    @default(now()) @db.Timestamp(6)
   updated_at      DateTime?    @default(now()) @db.Timestamp(6)
@@ -136,6 +142,8 @@ model stories {
   title         String?      @db.VarChar(255)
   content       String?
   image_url     String?      @db.VarChar(255)
+  public_id     String?      @db.VarChar(255)
+  resource_type String?      @db.VarChar(50)
   story_date    DateTime?    @db.Date
   order_number  Int?
   created_at    DateTime?    @default(now()) @db.Timestamp(6)
@@ -172,6 +180,8 @@ model videos {
   title         String?      @db.VarChar(255)
   description   String?
   url           String?      @db.VarChar(255)
+  public_id     String?      @db.VarChar(255)
+  resource_type String?      @db.VarChar(50)
   thumbnail     String?      @db.VarChar(255)
   order_number  Int?
   created_at    DateTime?    @default(now()) @db.Timestamp(6)

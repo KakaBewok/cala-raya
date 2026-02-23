@@ -157,11 +157,12 @@ export class InvitationService {
       // 2.5 Server-side file size validation (Failsafe)
       await this.validateFileSizes(data);
 
-      // 3. Perform update
-      const updated = await this.invitationRepository.update(id, data);
+      // 3. Cleanup Cloudinary assets that will be orphaned by this update
+      // We do this BEFORE the DB update to align with USER request for deletion order
+      await this.cleanupReplacedAssets(existing, data);
 
-      // 4. Cleanup Cloudinary assets that were replaced
-      this.cleanupReplacedAssets(existing, data);
+      // 4. Perform update
+      const updated = await this.invitationRepository.update(id, data);
 
       return updated;
     } catch (error: any) {
@@ -190,13 +191,12 @@ export class InvitationService {
         throw new Error("Unauthorized to delete this invitation");
       }
 
-      // 3. Perform database delete
-      const success = await this.invitationRepository.delete(id);
+      // 3. Cleanup ALL Cloudinary assets BEFORE database record removal
+      // Per USER REVISION REQUEST Requirements: "Ensure deletion happens BEFORE database record removal"
+      await this.cleanupAllAssets(existing);
 
-      // 4. If DB delete successful, cleanup ALL Cloudinary assets
-      if (success) {
-        this.cleanupAllAssets(existing);
-      }
+      // 4. Perform database delete
+      const success = await this.invitationRepository.delete(id);
 
       return success;
     } catch (error: any) {
@@ -250,7 +250,7 @@ export class InvitationService {
 
     // Perform deletions
     for (const asset of publicIdsToDelete) {
-      cloudinaryService.deleteFile(asset.id, asset.type);
+      await cloudinaryService.deleteFile(asset.id, asset.type);
     }
   }
 
@@ -282,7 +282,7 @@ export class InvitationService {
 
     // Batch delete if possible, but for simplicity and safety across types, we delete individually
     for (const asset of assets) {
-      cloudinaryService.deleteFile(asset.id, asset.type);
+      await cloudinaryService.deleteFile(asset.id, asset.type);
     }
   }
 
@@ -353,8 +353,8 @@ export class InvitationService {
         ...r,
         description: "",
         image_url: "",
-        public_id: "",
-        resource_type: "",
+        public_id: r.public_id || "",
+        resource_type: r.resource_type || "",
       }));
     }
   }
@@ -476,8 +476,7 @@ export class InvitationService {
         responseRate: totalGuests > 0 ? (totalRsvps / totalGuests) * 100 : 0,
       };
     } catch (error: any) {
-      console.error("Error calculating statistics:", error);
-      throw new Error("Failed to calculate statistics");
+      throw new Error(`Failed to calculate statistics: ${error.message}`);
     }
   }
 
