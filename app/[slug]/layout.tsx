@@ -12,7 +12,7 @@ export async function generateMetadata({
   const { data, error } = await db
     .from("invitations")
     .select(
-      "host_one_nickname, host_two_nickname, event_title, slug, event_date, rundowns, images (*)"
+      "host_one_nickname, host_two_nickname, event_title, slug, event_date, rundowns (*), images (*)"
     )
     .eq("slug", slug)
     .limit(1);
