@@ -50,7 +50,7 @@ function Hero() {
           </div>
 
           {/* Minimal Stats */}
-          <div className="flex items-center justify-center gap-6 sm:gap-10 mt-14 md:mt-16 pt-8 border-t border-stone-100">
+          <div className="flex items-center justify-center md:justify-start gap-6 sm:gap-10 mt-14 md:mt-16 pt-8 border-t border-stone-100">
             {[
               { number: "100%", label: "Klien Puas" },
               { number: "24/7", label: "Support" },
