@@ -87,6 +87,7 @@ export default function OpeningScreen({
                       stroke="#EF4444"
                       strokeWidth="1"
                       vectorEffect="non-scaling-stroke"
+                      className="stroke-line-stylishb"
                     />
                   </svg>
                 </div>

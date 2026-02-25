@@ -26,7 +26,7 @@ const GiftInfo = ({
       >
         tanda
         <div
-          className={`${theSecret.className} mt-16 text-[44px] font-normal text-rose-700 leading-none`}
+          className={`${theSecret.className} mt-16 text-[44px] font-normal text-line-stylishb leading-none`}
         >
           kasih
         </div>
@@ -59,11 +59,12 @@ const GiftInfo = ({
               stroke="#EF4444"
               strokeWidth="1"
               vectorEffect="non-scaling-stroke"
+              className="stroke-line-stylishb"
             />
           </svg>
         </div>
         <span
-          className={`${nyghtSerif.className} relative z-10 font-nyght-serif text-rose-700`}
+          className={`${nyghtSerif.className} relative z-10 font-nyght-serif text-line-stylishb`}
         >
           Kirim Hadiah
         </span>

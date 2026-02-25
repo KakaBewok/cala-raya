@@ -36,7 +36,7 @@ const Cover = () => {
   return (
     <section
       ref={animationRef}
-      className="relative w-full h-screen bg-[#7A2422] flex items-center justify-center overflow-hidden"
+      className="relative w-full h-screen bg-primary-stylishb flex items-center justify-center overflow-hidden"
     >
       {/* couple image */}
       <motion.div

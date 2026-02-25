@@ -82,7 +82,7 @@ const ClosingSection = () => {
             </div>
           </div>
           <h1
-            className={`${theSecret.className} translate -rotate-[9deg] text-rose-800 font-script text-[80px] leading-none`}
+            className={`${theSecret.className} translate -rotate-[9deg] text-text-stylishb font-script text-[80px] leading-none`}
           >
             <span>save our date</span>
           </h1>

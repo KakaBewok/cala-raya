@@ -137,7 +137,7 @@ const HorizontalGallery = () => {
           <span>.</span>
           {year}
           <div
-            className={`${theSecret.className} flex flex-col absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 text-[64px] font-normal text-rose-700 leading-none`}
+            className={`${theSecret.className} flex flex-col absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 text-[64px] font-normal text-text-stylishb leading-none`}
           >
             <span>{data?.host_two_nickname}</span>
             <span className="translate-x-12">{data?.host_one_nickname}</span>
@@ -160,7 +160,7 @@ const HorizontalGallery = () => {
               />
             ))}
           <div
-            className={`cursor-pointer ${nyghtSerif.className} pointer-events-auto w-full h-full flex justify-center items-center relative aspect-square border border-rose-700 text-rose-700 font-medium font-nyght-serif rotate-[6deg] swing-left-fast`}
+            className={`cursor-pointer ${nyghtSerif.className} pointer-events-auto w-full h-full flex justify-center items-center relative aspect-square border border-line-stylishb text-line-stylishb font-medium font-nyght-serif rotate-[6deg] swing-left-fast`}
             onClick={toggleGallery}
           >
             <span>Buka Galeri</span>

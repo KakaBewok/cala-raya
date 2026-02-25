@@ -80,7 +80,7 @@ const RSVP = () => {
 
   return (
     <div>
-      <div className="py-20 bg-[#782523]">
+      <div className="py-20 bg-primary-stylishb">
         <div
           className={`${nyghtSerif.className} px-8 w-full max-w-md space-y-6  text-white`}
         >
@@ -225,7 +225,7 @@ const RSVP = () => {
           >
             ucapan
             <div
-              className={`${theSecret.className} mt-16 text-[44px] font-normal text-rose-700 leading-none`}
+              className={`${theSecret.className} mt-16 text-[44px] font-normal text-line-stylishb leading-none`}
             >
               doa
             </div>
@@ -274,7 +274,7 @@ const RSVP = () => {
               kini berdua
             </span>
             <span
-              className={`${theSecret.className} text-[44px] font-normal text-rose-700 leading-none`}
+              className={`${theSecret.className} text-[44px] font-normal text-line-stylishb leading-none`}
             >
               menuju serumah
             </span>

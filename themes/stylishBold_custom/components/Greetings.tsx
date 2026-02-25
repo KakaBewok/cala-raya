@@ -38,7 +38,7 @@ export default function Greetings() {
 
       {/* line */}
       <motion.div
-        className="z-0 border border-rose-700 absolute top-0 left-1/2 origin-top -translate-x-1/2"
+        className="z-0 border border-line-stylishb absolute top-0 left-1/2 origin-top -translate-x-1/2"
         ref={lineRef}
         style={{ height: lineHeight }}
       />

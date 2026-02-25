@@ -91,6 +91,7 @@ export default function BrideSection() {
                     stroke="#EF4444"
                     strokeWidth="1"
                     vectorEffect="non-scaling-stroke"
+                    className="stroke-line-stylishb"
                   />
                 </svg>
               </div>
@@ -109,7 +110,7 @@ export default function BrideSection() {
           <motion.div
             ref={lineRef}
             style={{ height: lineHeight }}
-            className="border border-rose-700 absolute origin-top top-full left-1/2 -translate-x-1/2"
+            className="border border-line-stylishb absolute origin-top top-full left-1/2 -translate-x-1/2"
           />
         </div>
       </div>

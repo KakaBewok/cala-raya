@@ -81,7 +81,7 @@ const EventInfo = () => {
         <motion.div
           ref={lineRef}
           style={{ height: lineHeight }}
-          className=" border border-rose-700 absolute top-[88px] right-0 origin-top"
+          className=" border border-line-stylishb absolute top-[88px] right-0 origin-top"
         />
       </div>
       {/* RIGHT SIDE */}
@@ -95,10 +95,10 @@ const EventInfo = () => {
               data-aos="fade-left"
             >
               <div
-                className={`${theSecret.className} text-rose-900 text-4xl font-medium`}
+                className={`${theSecret.className} text-text-stylishb text-4xl font-medium`}
               >
                 <p>{rundown.title}</p>
-                <div className="mt-2 w-14 h-[0.9px] bg-rose-900" />
+                <div className="mt-2 w-14 h-[0.9px] bg-text-stylishb" />
               </div>
               <div
                 className={`${nyghtSerif.className} flex flex-col gap-2 text-neutral-800`}
@@ -132,10 +132,10 @@ const EventInfo = () => {
           data-aos="fade-left"
         >
           <div
-            className={`${theSecret.className} text-4xl text-rose-800 font-medium`}
+            className={`${theSecret.className} text-4xl text-text-stylishb font-medium`}
           >
             <span>Lokasi</span>
-            <div className="mt-2 w-14 h-[0.9px] bg-rose-900" />
+            <div className="mt-2 w-14 h-[0.9px] bg-text-stylishb" />
           </div>
           <div
             className={`${nyghtSerif.className} flex flex-col gap-2 text-neutral-800`}
@@ -159,6 +159,7 @@ const EventInfo = () => {
                     stroke="#EF4444"
                     strokeWidth="1"
                     vectorEffect="non-scaling-stroke"
+                    className="stroke-line-stylishb"
                   />
                 </svg>
               </div>
