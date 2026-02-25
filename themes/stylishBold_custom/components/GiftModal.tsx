@@ -32,7 +32,7 @@ const GiftModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     // Latar belakang overlay
     <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-4 font-serif">
       {/* Konten Modal */}
-      <div className="bg-[#5D2323] text-white rounded-4xl p-8 md:p-10 w-full max-w-sm text-center relative">
+      <div className="bg-primary-stylishb text-white rounded-4xl p-8 md:p-10 w-full max-w-sm text-center relative">
         {/* Tombol Close (X) */}
         <button
           onClick={onClose}
