@@ -3,8 +3,8 @@ import Image from "next/image";
 
 const Bismillah = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-1 bg-[#ede0d1] py-10 px-10 text-center overflow-hidden">
-      <div className="border- border-red-500">
+    <div className="flex flex-col items-center justify-center gap-1 bg-secondary-stylishb py-10 px-10 text-center overflow-hidden">
+      <div>
         <Image
           src="/assets/images/magazine/bismillah.png"
           alt="Bismillah"

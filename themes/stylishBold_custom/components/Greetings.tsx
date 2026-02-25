@@ -27,7 +27,7 @@ export default function Greetings() {
   //text di grup
   return (
     <div
-      className={`${nyghtSerif.className} h-screen w-full bg-[#ede0d1] flex flex-col justify-between overflow-hidden relative`}
+      className={`${nyghtSerif.className} h-screen w-full bg-secondary-stylishb flex flex-col justify-between overflow-hidden relative`}
     >
       <div
         className="w-full text-left font-light text-[155px] overflow-visible p-0 transform absolute top-0 tracking-tighter"
@@ -44,7 +44,7 @@ export default function Greetings() {
       />
 
       {/* text */}
-      <div className="z-10 absolute top-1/2 left-1/2 origin-top -translate-x-1/2 -translate-y-1/2 bg-[#ede0d1] py-4">
+      <div className="z-10 absolute top-1/2 left-1/2 origin-top -translate-x-1/2 -translate-y-1/2 bg-secondary-stylishb py-4">
         <p
           className="text-xs font-light text-center leading-5 tracking-wider"
           data-aos="fade-left"

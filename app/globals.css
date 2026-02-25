@@ -29,10 +29,13 @@ html {
   --color-line-stylishb: oklch(51.4% 0.222 16.935);
   --color-text-stylishb: oklch(41% 0.159 10.272); */
 
-  --color-primary-stylishb: #7C7B2A;
-  --color-line-stylishb: #7C7B2A;
-  --color-text-stylishb: #7C7B2A;
-  /* --color-secondary-stylishb: #00ff00; */
+  --color-primary-stylishb: #557949;
+  --color-line-stylishb: #557949;
+  --color-text-stylishb: #557949;
+  --color-secondary-stylishb: #D2CBB6;
+
+  /* #ede0d1 default*/
+  /* #D2CBB6 green*/
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

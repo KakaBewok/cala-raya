@@ -17,7 +17,7 @@ const GiftInfo = ({
 
   return (
     <section
-      className="text-center bg-[#ede0d1] px-7 pt-10 pb-28 relative overflow-hidden"
+      className="text-center bg-secondary-stylishb px-7 pt-10 pb-28 relative overflow-hidden"
       data-aos="zoom-in"
     >
       <div

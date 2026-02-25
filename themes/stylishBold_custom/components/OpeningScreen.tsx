@@ -23,7 +23,7 @@ export default function OpeningScreen({
     <AnimatePresence>
       {!isOpenInvitation && (
         <motion.div
-          className={`bg-[#eedcc5] max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden`}
+          className={`bg-secondary-stylishb max-w-md mx-auto fixed inset-0 z-50 flex items-center justify-center origin-top overflow-hidden`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ y: "-100%" }}

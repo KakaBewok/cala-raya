@@ -218,7 +218,7 @@ const RSVP = () => {
       </div>
       <div>
         {/* messages */}
-        <div className="bg-[#ede0d1] py-3 overflow-hidden">
+        <div className="bg-secondary-stylishb py-3 overflow-hidden">
           <div
             data-aos="fade-left"
             className={`${nyghtSerif.className} text-[45px] text-slate-700 text-left z-30 tracking-wider pl-5 font-light flex justify-center items-center mt-8`}

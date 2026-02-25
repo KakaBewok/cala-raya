@@ -113,7 +113,7 @@ const HorizontalGallery = () => {
   }, [images]);
 
   return (
-    <div className="relative w-full h-screen bg-[#ede0d1] overflow-hidden">
+    <div className="relative w-full h-screen bg-secondary-stylishb overflow-hidden">
       <motion.div
         initial={{ opacity: 1, display: "flex" }}
         animate={

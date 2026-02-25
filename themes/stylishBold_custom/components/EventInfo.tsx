@@ -66,7 +66,7 @@ const EventInfo = () => {
   const year = String(eventDate.getFullYear()).slice(-2);
 
   return (
-    <section className="relative w-full h-screen bg-[#ede0d1] overflow-hidden flex justify-center items-center">
+    <section className="relative w-full h-screen bg-secondary-stylishb overflow-hidden flex justify-center items-center">
       {/* LEFT SIDE */}
       <div className="flex h-full flex-col items-center justify-center pl-6 pr-4 flex-shrink-0 relative overflow-hidden">
         <div

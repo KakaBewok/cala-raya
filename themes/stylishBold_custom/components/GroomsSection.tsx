@@ -49,7 +49,7 @@ export default function BrideSection() {
   return (
     <section
       ref={imageRef}
-      className="relative w-full min-h-screen bg-[#ede0d1] flex items-center justify-end overflow-hidden"
+      className="relative w-full min-h-screen bg-secondary-stylishb flex items-center justify-end overflow-hidden"
     >
       <motion.div style={{ clipPath }} className="absolute inset-0 z-20">
         <Image

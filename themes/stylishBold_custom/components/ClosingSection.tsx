@@ -14,7 +14,7 @@ const ClosingSection = () => {
   const year = String(eventDate.getFullYear()).slice(-2);
 
   return (
-    <section className="bg-[#ffffff]">
+    <section className="bg-secondary-stylishb">
       <div className="relative">
         <Image
           src={findImage(data, "closing")}
@@ -67,7 +67,7 @@ const ClosingSection = () => {
           )}
       </div>
 
-      <div className="bg-[#ede0d1] w-full max-w-lg aspect-square flex justify-center items-center relative overflow-hidden ">
+      <div className="bg-secondary-stylishb w-full max-w-lg aspect-square flex justify-center items-center relative overflow-hidden ">
         {/* Teks "Save Our Date" di Depan */}
         <div className="relative z-20">
           <div className="absolute right-0 bottom-0 flex justify-center items-center z-10">
