@@ -10,7 +10,7 @@ const GiftInfo = ({
 }) => {
   const { invitationData: data } = useInvitation();
 
-  const eventDate = new Date(data?.event_date ?? "");
+  const eventDate = new Date(data?.rundowns?.[0].date ?? "");
   const day = String(eventDate.getDate()).padStart(2, "0");
   const month = String(eventDate.getMonth() + 1).padStart(2, "0");
   const year = String(eventDate.getFullYear()).slice(-2);

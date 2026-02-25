@@ -59,7 +59,8 @@ const EventInfo = () => {
     stiffness: 100,
   });
 
-  const eventDate = new Date(data?.event_date ?? "");
+  const rundownData = data?.rundowns?.[0];
+  const eventDate = new Date(rundownData?.date ?? "");
   const day = String(eventDate.getDate()).padStart(2, "0");
   const month = String(eventDate.getMonth() + 1).padStart(2, "0");
   const year = String(eventDate.getFullYear()).slice(-2);
@@ -139,7 +140,8 @@ const EventInfo = () => {
           <div
             className={`${nyghtSerif.className} flex flex-col gap-2 text-neutral-800`}
           >
-            <div className="text-base font-normal">{data?.location}</div>
+            <div className="text-base font-normal mb-2">{rundownData?.location}</div>
+            <div className="text-xs font-light">{rundownData?.location_detail}</div>
             <div className="cursor-pointer relative inline-flex items-center justify-center font-light overflow-visible px-4 py-[10px] text-xs w-36">
               <div className="absolute inset-0 overflow-hidden w-36">
                 <svg
@@ -161,7 +163,7 @@ const EventInfo = () => {
                 </svg>
               </div>
               <Link
-                href={data?.location_url || "#"}
+                href={rundownData?.location_url || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative text-neutral-800"
