@@ -3,92 +3,94 @@ import { ArrowRight, Check } from "lucide-react";
 
 const Website = () => {
   return (
-    <section id="website" className="px-3 md:px-10 lg:px-20 py-12 md:py-24 bg-slate-50 dark:bg-slate-900">
-      <div className="text-center mb-12">
-        <h2 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 uppercase">
-          Website & Aplikasi
-        </h2>
-        <p className="text-sm md:text-lg text-slate-900 dark:text-white font-bold">
-          Solusi digital custom sesuai kebutuhan bisnis
-        </p>
-      </div>
+    <section id="website" className="py-20 md:py-28 bg-white">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        {/* Header */}
+        <div className="text-center mb-14 md:mb-16">
+          <p className="text-[12px] md:text-[13px] font-medium tracking-[0.2em] uppercase text-stone-400 mb-3">
+            Layanan Website
+          </p>
+          <h2 className="text-2xl md:text-[2rem] font-semibold text-stone-900 tracking-tight mb-4">
+            Website &amp; Aplikasi
+          </h2>
+          <p className="text-[15px] text-stone-500 max-w-md mx-auto leading-relaxed">
+            Solusi digital custom sesuai kebutuhan bisnis Anda dengan teknologi
+            modern
+          </p>
+        </div>
 
-      {/* Grids */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
-        {websiteServices.map((service, i) => {
-          const Icon = service.icon;
-          return (
-            <div
-              key={i}
-              className={`relative bg-white dark:bg-slate-800 border-4 p-4 md:p-6 group ${
-                service.popular
-                  ? "border-green-500 dark:border-green-400"
-                  : "border-slate-900 dark:border-white hover:border-yellow-400 dark:hover:border-yellow-400"
-              }`}
-            >
-              {service.popular && (
-                <div className="absolute -top-3 left-2 md:left-4 bg-green-500 border-3 border-slate-900 text-white px-2 md:px-3 py-0.5 md:py-1 text-[10px] md:text-xs font-black uppercase">
-                  Popular
-                </div>
-              )}
-
-              {/* Icon */}
-              <div className="flex justify-center mb-3 md:mb-4">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-900 dark:bg-white border-4 border-slate-900 dark:border-white flex items-center justify-center group-hover:bg-yellow-400 group-hover:border-yellow-400">
-                  <Icon className="w-6 h-6 md:w-8 md:h-8 text-white dark:text-slate-900 group-hover:text-slate-900" />
-                </div>
-              </div>
-
-              {/* Title */}
-              <h3 className="text-base md:text-xl font-black text-slate-900 dark:text-white mb-2 text-center min-h-[40px] md:min-h-[56px] flex items-center justify-center uppercase">
-                {service.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-xs md:text-sm text-slate-900 dark:text-white font-bold mb-5 md:mb-4 text-center line-clamp-4 md:line-clamp-3 min-h-[32px] md:min-h-[60px]">
-                {service.description}
-              </p>
-
-              {/* Features */}
-              <div className="space-y-1.5 md:space-y-2 mb-4 md:mb-6">
-                {service.features.slice(0, 4).map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-1.5 md:gap-2">
-                    <Check className="w-3 h-3 md:w-4 md:h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-[10px] md:text-xs text-slate-900 dark:text-white font-bold leading-tight">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Price */}
-              <div className="text-center mb-3 md:mb-4 py-2 md:py-3 bg-yellow-400 border-3 border-slate-900">
-                <p className="text-[10px] md:text-xs text-slate-900 font-black uppercase mb-0.5">
-                  Mulai dari
-                </p>
-                <p className="text-lg md:text-2xl font-black text-slate-900 mb-0.5">
-                  {service.priceStart}
-                </p>
-                <p className="text-[9px] md:text-[10px] text-slate-900 font-bold">
-                  *harga disesuaikan
-                </p>
-              </div>
-
-              {/* CTA Button */}
-              <a
-                href={`https://wa.me/${CONTACT_PERSON}?text=${encodeURIComponent(
-                  `Halo admin Calaraya Project, saya tertarik dengan jasa pembuatan ${service.title}. Boleh konsultasi untuk diskusi detail proyeknya?`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full px-3 py-2 md:px-4 md:py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-4 border-slate-900 dark:border-white font-black hover:bg-white hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-white flex items-center justify-center gap-1.5 md:gap-2 text-xs md:text-sm uppercase"
+        {/* Services Grid — 2 cols on mobile, 2 on sm, 4 on lg */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+          {websiteServices.map((service, i) => {
+            const Icon = service.icon;
+            return (
+              <div
+                key={i}
+                className={`relative bg-white rounded-xl p-3.5 sm:p-5 md:p-6 border transition-all duration-300 hover:shadow-md ${
+                  service.popular
+                    ? "border-stone-900 shadow-sm"
+                    : "border-stone-100 hover:border-stone-200"
+                }`}
               >
-                Konsultasi
-                <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
-              </a>
-            </div>
-          );
-        })}
+                {service.popular && (
+                  <div className="absolute -top-2.5 left-3 sm:left-5 px-2.5 py-0.5 bg-stone-900 text-white text-[9px] sm:text-[10px] font-medium rounded-full tracking-wider uppercase">
+                    Popular
+                  </div>
+                )}
+
+                {/* Icon */}
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-stone-50 border border-stone-100 flex items-center justify-center mb-3 sm:mb-4">
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-stone-500" />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-[13px] sm:text-[15px] font-semibold text-stone-800 mb-1.5 sm:mb-2">
+                  {service.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-[11px] sm:text-[13px] text-stone-400 leading-relaxed mb-3 sm:mb-5">
+                  {service.description}
+                </p>
+
+                {/* Features — show ALL */}
+                <div className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
+                  {service.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-1.5 sm:gap-2">
+                      <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-stone-400 flex-shrink-0 mt-0.5" />
+                      <span className="text-[10px] sm:text-[12px] md:text-[13px] text-stone-500 leading-snug">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Price */}
+                <div className="mb-3 sm:mb-4 pb-3 sm:pb-4 border-b border-stone-50">
+                  <p className="text-[10px] sm:text-[11px] text-stone-400 mb-0.5 tracking-wide">
+                    Mulai dari
+                  </p>
+                  <p className="text-base sm:text-xl font-semibold text-stone-900 tracking-tight">
+                    {service.priceStart}
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <a
+                  href={`https://wa.me/${CONTACT_PERSON}?text=${encodeURIComponent(
+                    `Halo admin Calaraya Project, saya tertarik dengan jasa pembuatan ${service.title}. Boleh konsultasi untuk diskusi detail proyeknya?`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2.5 bg-stone-50 text-stone-700 text-[11px] sm:text-[13px] font-medium rounded-lg hover:bg-stone-900 hover:text-white transition-all duration-200"
+                >
+                  Konsultasi
+                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                </a>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
