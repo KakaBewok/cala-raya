@@ -12,7 +12,7 @@ export async function generateMetadata({
   const { data, error } = await db
     .from("invitations")
     .select(
-      "host_one_nickname, host_two_nickname, event_title, slug, event_date, images (*)"
+      "host_one_nickname, host_two_nickname, event_title, slug, event_date, rundowns, images (*)"
     )
     .eq("slug", slug)
     .limit(1);
@@ -56,7 +56,7 @@ export async function generateMetadata({
     twitter: {
     card: 'summary_large_image',
     title: `${invitation?.event_title}`,
-    description: `${formatDate(invitation?.event_date, true)}`,
+    description: `${formatDate(invitation?.rundowns[0].date, true)}`,
     images: [previewImage], 
   },
   };
