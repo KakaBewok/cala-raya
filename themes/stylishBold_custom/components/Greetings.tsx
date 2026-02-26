@@ -22,18 +22,17 @@ export default function Greetings() {
     damping: 20,
     stiffness: 50,
   });
-  // -translate-y-[5rem]
-  // translate-y-[4.2rem]
-  //text di grup
+
   return (
     <div
       className={`${nyghtSerif.className} h-screen w-full bg-secondary-stylishb flex flex-col justify-between overflow-hidden relative`}
     >
+      {/* text-[155px] */}
       <div
-        className="w-full text-left font-light text-[155px] overflow-visible p-0 transform absolute top-0 tracking-tighter"
+        className="w-full text-left font-light text-[112px] overflow-visible p-0 transform absolute top-0 tracking-tighter"
         data-aos="fade-right"
       >
-        {data?.host_two_nickname.toLowerCase()}
+        {data?.host_two_nickname.toUpperCase()}
       </div>
 
       {/* line */}
@@ -55,10 +54,10 @@ export default function Greetings() {
       </div>
 
       <div
-        className="flex w-full text-right font-light text-[155px] overflow-visible p-0 transform absolute bottom-0 tracking-tighter"
+        className="flex w-full text-right font-light text-[130px] overflow-visible p-0 transform absolute bottom-0 tracking-tighter"
         data-aos="fade-left"
       >
-        {data?.host_one_nickname.toLowerCase()}
+        {data?.host_one_nickname.toUpperCase()}
       </div>
     </div>
   );

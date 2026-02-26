@@ -94,8 +94,9 @@ const EventInfo = () => {
               key={index}
               data-aos="fade-left"
             >
+              {/* ${theSecret.className} */}
               <div
-                className={`${theSecret.className} text-text-stylishb text-4xl font-medium`}
+                className={`${nyghtSerif.className} text-text-stylishb text-4xl font-medium`}
               >
                 <p>{rundown.title}</p>
                 <div className="mt-2 w-14 h-[0.9px] bg-text-stylishb" />
@@ -132,7 +133,7 @@ const EventInfo = () => {
           data-aos="fade-left"
         >
           <div
-            className={`${theSecret.className} text-4xl text-text-stylishb font-medium`}
+            className={`${nyghtSerif.className} text-4xl text-text-stylishb font-medium`}
           >
             <span>Lokasi</span>
             <div className="mt-2 w-14 h-[0.9px] bg-text-stylishb" />

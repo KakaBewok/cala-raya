@@ -64,8 +64,8 @@ const Cover = () => {
           <Image
             src={findImage(data, "initial-outline")}
             alt="initial bawah"
-            width={144}
-            height={144}
+            width={114}
+            height={114}
           />
         </div>
         <div className="flex justify-center items-center gap-2">
@@ -78,8 +78,8 @@ const Cover = () => {
           <Image
             src={findImage(data, "initial-outline")}
             alt="initial bawah"
-            width={110}
-            height={110}
+            width={173}
+            height={173}
           />
         </div>
         <div className="flex justify-center items-center gap-2">
@@ -92,16 +92,16 @@ const Cover = () => {
           <Image
             src={findImage(data, "initial-outline")}
             alt="initial bawah"
-            width={90}
-            height={90}
+            width={110}
+            height={110}
           />
         </div>
         <div className="flex justify-center items-center gap-2">
           <Image
             src={findImage(data, "initial-outline")}
             alt="intial bawah"
-            width={123}
-            height={123}
+            width={193}
+            height={193}
           />
           <Image
             src={findImage(data, "initial-outline")}
