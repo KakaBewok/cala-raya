@@ -271,7 +271,7 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
                         {rsvp.message && (
                           <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700">
                             <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                              "{rsvp.message}"
+                              {rsvp.message}
                             </p>
                           </div>
                         )}

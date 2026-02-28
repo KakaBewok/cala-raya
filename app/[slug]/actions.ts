@@ -28,11 +28,11 @@ export async function getPublicInvitation(
       data: invitation,
       error: null,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Server action error:", error);
     return {
       data: null,
-      error: error.message || "Failed to fetch invitation",
+      error: error instanceof Error ? error.message : "Failed to fetch invitation",
     };
   }
 }
@@ -57,11 +57,11 @@ export async function getInvitationBySlug(
       data: invitation,
       error: null,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Server action error:", error);
     return {
       data: null,
-      error: error.message || "Failed to fetch invitation",
+      error: error instanceof Error ? error.message : "Failed to fetch invitation",
     };
   }
 }

@@ -21,7 +21,7 @@ export async function GET() {
     }
 
     return NextResponse.json({ music });
-  } catch (err) {
-    return NextResponse.json({ music: [] }, { status: 500 });
+  } catch (err: unknown) {
+    return NextResponse.json({ music: err instanceof Error ? err.message : "An unexpected error occurred" }, { status: 500 });
   }
 }

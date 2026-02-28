@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { formatDate } from "@/utils/format-date";
+import InvitationData from "@/types/invitation-data";
 
 // Helper function to format date time
 const formatDateTime = (date: Date | string): string => {
@@ -205,7 +206,7 @@ const DashboardPage = () => {
             </div>
             <div className="divide-y divide-slate-100 dark:divide-slate-800">
               {recentRsvps.length > 0 ? (
-                recentRsvps.map((rsvp: any) => (
+                recentRsvps.map((rsvp) => (
                   <div key={rsvp.id} className="p-4 md:p-6 flex items-start gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
                       rsvp.attendance_status 
@@ -229,7 +230,7 @@ const DashboardPage = () => {
                       </p>
                       {rsvp.message && (
                         <p className="text-xs text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800 p-2.5 rounded-lg border border-slate-100 dark:border-slate-700 italic line-clamp-2">
-                          "{rsvp.message}"
+                          {rsvp.message}
                         </p>
                       )}
                     </div>
@@ -257,7 +258,7 @@ const DashboardPage = () => {
             </div>
             <div className="p-2 space-y-1">
               {activeInvitations.length > 0 ? (
-                activeInvitations.map((invitation: any) => (
+                activeInvitations.map((invitation: InvitationData) => (
                   <Link
                     key={invitation.id}
                     href={`/dashboard/my-invitations`}
@@ -278,11 +279,11 @@ const DashboardPage = () => {
                       <div className="flex gap-4">
                         <div className="flex items-center gap-1 text-[10px] text-slate-500 font-medium">
                           <Users className="w-3 h-3" />
-                          {(invitation as any).guests?.length || 0}
+                          {(invitation as InvitationData).guests?.length || 0}
                         </div>
                         <div className="flex items-center gap-1 text-[10px] text-slate-500 font-medium">
                           <MessageSquare className="w-3 h-3" />
-                          {(invitation as any).rsvps?.length || 0}
+                          {(invitation as InvitationData).rsvps?.length || 0}
                         </div>
                       </div>
                       <div className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -332,7 +333,14 @@ const DashboardPage = () => {
 };
 
 // Sub-component for individual stat cards
-const StatCard = ({ icon, label, value, trend, trendColor, bgColor }: any) => {
+const StatCard = ({ icon, label, value, trend, trendColor, bgColor }: {
+  icon: React.ReactNode;
+  label: string;
+  value: number;
+  trend: string;
+  trendColor: string;
+  bgColor: string;
+}) => {
   return (
     <div className="bg-white dark:bg-slate-900 rounded-2xl border shadow-sm p-4 md:p-6 transition-all hover:shadow-md">
       <div className="flex items-start justify-between mb-4">

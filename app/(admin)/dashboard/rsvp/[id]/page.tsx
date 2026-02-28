@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { RsvpClient } from "./components/client";
 import { RsvpColumn } from "@/types/rsvp-column";
-import InvitationData from "@/types/invitation-data";
+import InvitationData, { RSVP } from "@/types/invitation-data";
 import GeneralLoading from "@/components/GeneralLoading";
 import toast from "react-hot-toast";
 
@@ -41,7 +41,7 @@ const RsvpInvitationPage = () => {
         if (!res.ok) throw new Error("Failed to fetch rsvps");
         
         const data = await res.json();
-        const formatted = data.data.map((item: any) => ({
+        const formatted = data.data.map((item: RSVP) => ({
           id: item.id,
           guest_name: item.guest_name,
           total_guest: item.total_guest,

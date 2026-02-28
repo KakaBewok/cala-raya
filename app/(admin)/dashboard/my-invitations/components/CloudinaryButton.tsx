@@ -47,7 +47,7 @@ const CloudinaryButton = ({
     }
   };
 
-  const handleError = (error: any) => {
+  const handleError = (error: unknown) => {
     setIsPreparing(false);
     console.error("Cloudinary Widget Error:", error);
     toast.error("Cloudinary could not be initialized. Check your internet or configuration.");

@@ -10,8 +10,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { 
-  CheckCircle2, 
+import {
   Settings, 
   Users, 
   Send, 
@@ -158,9 +157,9 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({ isOpen, onClose })
                     ? `bg-gradient-to-br ${step.gradient} text-white shadow-lg` 
                     : "bg-slate-200 dark:bg-slate-700 text-slate-400"
                 }`}>
-                  {React.cloneElement(step.icon as React.ReactElement, { 
-                    className: `w-5 h-5 ${activeStep === index ? "text-white" : "group-hover:text-slate-600"}` 
-                  })}
+                 {React.cloneElement(step.icon as React.ReactElement<React.HTMLAttributes<HTMLElement>>, { 
+  className: `w-5 h-5 ${activeStep === index ? "text-white" : "group-hover:text-slate-600"}` 
+})}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className={`text-[11px] font-bold uppercase tracking-wider mb-0.5 ${activeStep === index ? "text-purple-600" : "text-slate-400"}`}>
@@ -188,7 +187,9 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({ isOpen, onClose })
               <div className="mb-8 md:mb-10 animate-in fade-in slide-in-from-top-4 duration-500">
                 <div className="flex items-center justify-between mb-6 md:hidden">
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${steps[activeStep].gradient} flex items-center justify-center shadow-xl shadow-purple-500/20`}>
-                    {React.cloneElement(steps[activeStep].icon as React.ReactElement, { className: "w-7 h-7 text-white" })}
+                   {React.cloneElement(steps[activeStep].icon as React.ReactElement<React.ComponentPropsWithoutRef<"svg">>, { 
+                      className: "w-7 h-7 text-white" 
+                    })}
                   </div>
                   <div className="text-right">
                     <span className={`text-4xl font-black opacity-10 ${steps[activeStep].iconColor}`}>0{activeStep + 1}</span>
@@ -196,7 +197,9 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({ isOpen, onClose })
                 </div>
 
                 <div className={`hidden md:flex w-16 h-16 rounded-2xl bg-gradient-to-br ${steps[activeStep].gradient} flex items-center justify-center mb-6 shadow-xl shadow-purple-500/20`}>
-                  {React.cloneElement(steps[activeStep].icon as React.ReactElement, { className: "w-8 h-8 text-white" })}
+                {React.cloneElement(steps[activeStep].icon as React.ReactElement<React.ComponentPropsWithoutRef<"svg">>, { 
+                    className: "w-8 h-8 text-white" 
+                })}
                 </div>
 
                 <h3 className="text-xl md:text-3xl font-extrabold text-slate-900 dark:text-slate-100 mb-2">{steps[activeStep].title}</h3>

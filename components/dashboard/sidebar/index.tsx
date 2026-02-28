@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import NavLink from "./NavLink";
-import SidebarLinkGroup from "./SidebarLinkGroup";
 import { 
   CheckCircle, 
   LayoutDashboard, 
@@ -13,7 +12,6 @@ import {
   Share2, 
   ChevronLeft, 
   ChevronRight,
-  BarChart3
 } from "lucide-react";
 
 const Sidebar = () => {

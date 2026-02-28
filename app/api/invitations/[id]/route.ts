@@ -38,9 +38,9 @@ export async function GET(
     }
 
     return NextResponse.json({ invitation }, { status: 200 });
-  } catch (err: any) {
-    logger.error({ error_message: err.message }, "Error fetching invitation");
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  } catch (err: unknown) {
+    logger.error({ error_message: err instanceof Error ? err.message : "Internal Server Error" }, "Error fetching invitation");
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Internal Server Error" }, { status: 500 });
   }
 }
 
@@ -147,17 +147,17 @@ export async function DELETE(
 
     logger.info({ invitationId, userId }, "Deleted invitation");
     return NextResponse.json({ success: true });
-  } catch (err: any) {
-    logger.error({ error_message: err.message }, "Error deleting invitation");
+  } catch (err: unknown) {
+    logger.error({ error_message: err instanceof Error ? err.message : "Internal Server Error" }, "Error deleting invitation");
     
-    if (err.message === "Invitation not found") {
+    if (err instanceof Error && err.message === "Invitation not found") {
       return NextResponse.json({ error: err.message }, { status: 404 });
     }
     
-    if (err.message === "Unauthorized to delete this invitation") {
+    if (err instanceof Error && err.message === "Unauthorized to delete this invitation") {
       return NextResponse.json({ error: err.message }, { status: 403 });
     }
 
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Internal Server Error" }, { status: 500 });
   }
 }

@@ -1,12 +1,11 @@
 "use client";
 
 import { GuestColumn } from "@/types/guest-column";
-import { Guest } from "@/types/invitation-data";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { GuestClient } from "./components/client";
 import { useSelectedInvitation } from "@/hooks/use-selected-invitation";
-import InvitationData from "@/types/invitation-data";
+import InvitationData, { Guest } from "@/types/invitation-data";
 import GeneralLoading from "@/components/GeneralLoading";
 import toast from "react-hot-toast";
 
@@ -54,7 +53,7 @@ const ShareInvitationPage = () => {
       if (!res.ok) throw new Error("Failed to fetch guests");
       
       const data = await res.json();
-      const formatted = data.data.map((item: any) => ({
+      const formatted = data.data.map((item: Guest) => ({
         id: item.id,
         name: item.name,
         phone_number: item.phone_number ?? "-",

@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   invitationFormSchema,
   InvitationFormData,
+  ImageType,
 } from "../schema/FormSchema";
 import InvitationData from "@/types/invitation-data";
 import { useRouter } from "next/navigation";
@@ -76,7 +77,7 @@ export function InvitationForm({
           } : { title: "", artist: "", url: "" },
           images: (invitationData.images || []).map((img) => ({
             url: img.url,
-            type: img.type as any,
+            type: img.type as ImageType,
             public_id: img.public_id || undefined,
             resource_type: img.resource_type || undefined,
             order_number: img.order_number ? Number(img.order_number) : undefined,
@@ -176,9 +177,10 @@ export function InvitationForm({
       // Always redirect to list after success (both create and edit)
       router.push("/dashboard/my-invitations");
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error saving invitation:", error);
-      toast.error(error.message || "An error occurred while saving.");
+      const err = error as Error;
+      toast.error(err.message || "An error occurred while saving.");
     } finally {
       setIsSubmitting(false);
     }
@@ -313,7 +315,7 @@ export function InvitationForm({
             </button>
 
             <div className="flex items-center gap-2">
-              {tabs.map((tab, idx) => (
+              {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
@@ -389,7 +391,7 @@ export function InvitationForm({
                 {Object.entries(errors).map(([key, error]) => (
                   <div key={key} className="text-xs text-red-600 dark:text-red-400 py-1 border-b border-red-100/50 dark:border-red-900/20 last:border-0 flex justify-between">
                     <span className="font-bold capitalize">{key.replace(/_/g, " ")}:</span>
-                    <span className="italic">{(error as any).message || "Invalid value"}</span>
+                    <span className="italic">{(error as Error).message || "Invalid value"}</span>
                   </div>
                 ))}
               </div>

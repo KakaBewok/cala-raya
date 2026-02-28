@@ -3,6 +3,7 @@
 import React from "react";
 import { useFieldArray, UseFormReturn } from "react-hook-form";
 import {
+  ImageType,
   InvitationFormData,
   getImageTypesForTheme,
   getMaxImagesForType,
@@ -131,7 +132,7 @@ export default function GallerySection({ form, folder }: SectionProps) {
                       url: data.url,
                       public_id: data.public_id,
                       resource_type: data.resource_type,
-                      type: type as any,
+                      type: type as ImageType,
                       order_number: typeImages.length,
                     });
                   }}

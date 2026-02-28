@@ -1,4 +1,4 @@
-import InvitationData from "@/types/invitation-data";
+import InvitationData, { Rundown, Image } from "@/types/invitation-data";
 
 /**
  * Metadata-specific invitation data
@@ -9,6 +9,12 @@ export interface InvitationMetadata {
   event_title: string;
   slug: string;
   event_date: string;
+  rundowns: Array<{
+    id: number;
+    title: string;
+    date: string;
+    location: string;
+  }>;
   images: Array<{
     id: number;
     url: string;

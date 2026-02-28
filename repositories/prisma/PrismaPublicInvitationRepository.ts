@@ -88,6 +88,14 @@ export class PrismaPublicInvitationRepository
           event_title: true,
           slug: true,
           event_date: true,
+          rundowns: {
+            select: {
+              id: true,
+              title: true,
+              date: true,
+              location: true,
+            },
+          },
           images: {
             select: {
               id: true,
@@ -108,6 +116,14 @@ export class PrismaPublicInvitationRepository
         event_date: invitation.event_date
           ? invitation.event_date.toISOString()
           : "",
+        rundowns: invitation.rundowns.map((rundown) => ({
+          id: rundown.id,
+          title: rundown.title ?? "",
+          date: rundown.date
+            ? rundown.date.toISOString()
+            : "",
+          location: rundown.location ?? "",
+        })),
         images: invitation.images.map((img) => ({
           id: img.id,
           url: img.url ?? "",

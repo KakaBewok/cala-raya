@@ -47,7 +47,7 @@ const EditInvitationPage = () => {
           Invitation not found
         </h2>
         <p className="text-slate-600 dark:text-slate-400 mt-2">
-          The invitation you are looking for does not exist or you don't have access.
+          The invitation you are looking for does not exist or you dont have access.
         </p>
       </div>
     );
