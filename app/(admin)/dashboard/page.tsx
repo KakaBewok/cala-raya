@@ -37,6 +37,9 @@ const DashboardPage = () => {
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
   const { invitationAdminData: invitations, globalStats } = useInvitationAdmin();
 
+  const userRole = session?.user?.role || "USER";
+  const isAdmin = userRole === "ADMIN";
+
   // Calculate accurate statistics from global database state
   const stats = useMemo(() => {
     if (globalStats) {
@@ -99,13 +102,17 @@ const DashboardPage = () => {
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <Link
-              href="/dashboard/my-invitations"
-              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-5 py-2.5 rounded-xl transition-all shadow-md shadow-purple-500/20 text-sm font-semibold"
-            >
-              <Plus className="w-4 h-4" />
-              New Invitation
-            </Link>
+            {
+              isAdmin && (
+                <Link
+                  href="/dashboard/my-invitations"
+                  className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-5 py-2.5 rounded-xl transition-all shadow-md shadow-purple-500/20 text-sm font-semibold"
+                >
+                  <Plus className="w-4 h-4" />
+                  New Invitation
+                </Link>
+              )
+            }
           </div>
         </div>
       </div>

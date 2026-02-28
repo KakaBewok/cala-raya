@@ -7,8 +7,13 @@ import InvitationCard from "./components/InvitationCard";
 import { Plus, FileText, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 
 const InvitationPage = () => {
+  const { data: session } = useSession();
+  const userRole = session?.user?.role || "USER";
+  const isAdmin = userRole === "ADMIN";
+
   const { 
     invitationAdminData: invitations, 
     refetchInvitations,
@@ -52,12 +57,16 @@ const InvitationPage = () => {
             Manage your digital invitations ({totalInvitations})
           </p>
         </div>
-        <Link href="/dashboard/my-invitations/create">
-          <Button className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95">
-            <Plus className="w-4 h-4 mr-2" />
-            Create New
-          </Button>
-        </Link>
+        {
+           isAdmin && (
+            <Link href="/dashboard/my-invitations/create">
+              <Button className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95">
+                <Plus className="w-4 h-4 mr-2" />
+                Create New
+              </Button>
+            </Link>
+           )
+        }
       </div>
 
       {/* Invitations Grid */}
