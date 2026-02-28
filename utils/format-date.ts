@@ -1,5 +1,5 @@
 export const formatDate = (
-  date: string | null,
+  date: string | Date | null | undefined,
   withDay?: boolean,
   locale: string = "id-ID"
 ) => {
