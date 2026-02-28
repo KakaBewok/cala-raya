@@ -9,8 +9,17 @@ export interface InvitationMetadata {
   event_title: string;
   slug: string;
   event_date: string;
-  rundowns: Rundown[];
-  images: Image[];
+  rundowns: Array<{
+    id: number;
+    title: string;
+    date: string;
+    location: string;
+  }>;
+  images: Array<{
+    id: number;
+    url: string;
+    type: string;
+  }>;
 }
 
 /**
