@@ -7,6 +7,7 @@ import { ExcelUploadModal } from "@/components/dashboard/ExcelUploadModal";
 import { GuestInputModal } from "@/components/dashboard/GuestInputModal";
 import { TooltipHover } from "@/components/Tooltip";
 import { Button } from "@/components/ui/button";
+import { GuestRefetchProvider } from "@/context/GuestRefetchContext";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
 import InvitationData from "@/types/invitation-data";
@@ -18,7 +19,7 @@ import {
   Users,
   Calendar
 } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { columns } from "./columns";
 import ChangeInvitationButton from "@/components/dashboard/ChangeInvitationButton";
@@ -30,6 +31,7 @@ interface GuestClientProps {
   totalPages: number;
   totalCount: number;
   onPageChange: (page: number) => void;
+  refetchGuests: () => Promise<void>;
 }
 
 export const GuestClient: React.FC<GuestClientProps> = ({
@@ -39,6 +41,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
   totalPages,
   totalCount,
   onPageChange,
+  refetchGuests,
 }) => {
   const {
     loading,
@@ -46,6 +49,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
     invitationAdminData: invitations,
     refetchInvitations,
   } = useInvitationAdmin();
+  const [isSubmittingGuest, setIsSubmittingGuest] = useState<boolean>(false);
   const [ids, setIds] = useState<number[]>([]);
   const [bulkDeleteModalOpen, setBulkDeleteModalOpen] = useState<boolean>(false);
   const [guestInputModalOpen, setGuestInputModalOpen] = useState<boolean>(false);
@@ -70,11 +74,13 @@ export const GuestClient: React.FC<GuestClientProps> = ({
         throw new Error("Failed to delete");
       }
 
+      await refetchGuests();
       refetchInvitations();
       toast.success("Guests deleted", {
         position: "top-center",
       });
 
+      setIds([]);
       setBulkDeleteModalOpen(false);
     } catch (error) {
       console.error("An error occurred: ", error);
@@ -106,6 +112,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       });
 
       if (response.ok) {
+        await refetchGuests();
         refetchInvitations();
         setExcelUploadModalOpen(false);
         toast.success("File uploaded successfully!");
@@ -128,6 +135,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
 
   const submitGuestInput = async (guestNames: string[]) => {
     try {
+      setIsSubmittingGuest(true);
       setLoading(true);
       const res = await fetch("/api/generate-message/manual-guest", {
         method: "POST",
@@ -142,6 +150,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
 
       if (!res.ok) throw new Error("Failed to add guests");
 
+      await refetchGuests();
       refetchInvitations();
       setGuestInputModalOpen(false);
 
@@ -154,6 +163,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
       });
       console.error(err);
     } finally {
+      setIsSubmittingGuest(false);
       setLoading(false);
     }
   };
@@ -177,6 +187,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
 
       if (!res.ok) throw new Error("Failed to save template");
 
+      await refetchGuests();
       refetchInvitations();
 
       toast.success("Template updated successfully!");
@@ -190,7 +201,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
   };
 
   return (
-    <>
+    <GuestRefetchProvider value={{ refetchGuests }}>
       <div className="space-y-6">
         {/* Header Section */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl border shadow-sm overflow-hidden">
@@ -320,7 +331,7 @@ export const GuestClient: React.FC<GuestClientProps> = ({
         isOpen={guestInputModalOpen}
         onClose={() => setGuestInputModalOpen(false)}
         onSubmit={submitGuestInput}
-        loading={loading}
+        loading={isSubmittingGuest || loading}
       />
       <ExcelUploadModal
         isOpen={excelUploadModalOpen}
@@ -328,6 +339,6 @@ export const GuestClient: React.FC<GuestClientProps> = ({
         onUpload={handleUpload}
         loading={isUploading}
       />
-    </>
+    </GuestRefetchProvider>
   );
 };

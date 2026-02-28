@@ -3,6 +3,7 @@
 import { AlertModal } from "@/components/dashboard/AlertModal";
 import { EditGuestModal } from "@/components/dashboard/EditGuestModal";
 import { Button } from "@/components/ui/button";
+import { useGuestRefetch } from "@/context/GuestRefetchContext";
 import { useInvitationAdmin } from "@/hooks/use-invitation-admin";
 import { GuestColumn } from "@/types/guest-column";
 import { GuestData } from "@/types/guest-data";
@@ -23,6 +24,7 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
     invitationAdminData: invitations,
     refetchInvitations,
   } = useInvitationAdmin();
+  const { refetchGuests } = useGuestRefetch();
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
@@ -47,6 +49,7 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
         throw new Error("Failed to delete");
       }
 
+      await refetchGuests();
       refetchInvitations();
       toast.success("Guest deleted", {
         position: "top-center",
@@ -72,6 +75,7 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
 
       if (!res.ok) throw new Error("Update failed");
 
+      await refetchGuests();
       refetchInvitations();
       setEditModalOpen(false);
       toast.success("Guest updated", {

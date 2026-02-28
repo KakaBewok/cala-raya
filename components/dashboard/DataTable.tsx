@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -68,6 +68,11 @@ export function DataTable<TData extends DataWithId, TValue>({
   const [rowSelection, setRowSelection] = useState({});
   const pageSizeOptions = ["5", "10", "20", "50"];
   const [pageSize, setPageSize] = useState<string>("10");
+
+  // Reset row selection when data changes (e.g., after delete, add, edit)
+  useEffect(() => {
+    setRowSelection({});
+  }, [data]);
 
   const handlePageSizeChange = (newSize: string) => {
     setPageSize(newSize);

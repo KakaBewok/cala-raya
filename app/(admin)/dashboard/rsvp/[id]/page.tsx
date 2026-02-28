@@ -46,6 +46,8 @@ const RsvpInvitationPage = () => {
           guest_name: item.guest_name,
           total_guest: item.total_guest,
           message: item.message,
+          attendance_status: item.attendance_status,
+          created_at: item.created_at,
         }));
         
         setRsvps(formatted);

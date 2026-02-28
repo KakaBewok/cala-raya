@@ -3,7 +3,7 @@
 import { GuestColumn } from "@/types/guest-column";
 import { Guest } from "@/types/invitation-data";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GuestClient } from "./components/client";
 import { useSelectedInvitation } from "@/hooks/use-selected-invitation";
 import InvitationData from "@/types/invitation-data";
@@ -46,37 +46,38 @@ const ShareInvitationPage = () => {
     fetchInvitation();
   }, [id, removeInvitationId, router]);
 
-  useEffect(() => {
-    const fetchGuests = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(`/api/invitations/${id}/guests?page=${page}&pageSize=${pageSize}`);
-        if (!res.ok) throw new Error("Failed to fetch guests");
-        
-        const data = await res.json();
-        const formatted = data.data.map((item: any) => ({
-          id: item.id,
-          name: item.name,
-          phone_number: item.phone_number ?? "-",
-          address: item.address ?? "-",
-          notes: item.notes ?? "-",
-        }));
-        
-        setGuests(formatted);
-        setTotalPages(data.totalPages);
-        setTotalGuests(data.totalCount);
-      } catch (err) {
-        console.error("Error:", err);
-        toast.error("Failed to load guests");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchGuests = useCallback(async (targetPage?: number) => {
+    const fetchPage = targetPage ?? page;
+    try {
+      setLoading(true);
+      const res = await fetch(`/api/invitations/${id}/guests?page=${fetchPage}&pageSize=${pageSize}`);
+      if (!res.ok) throw new Error("Failed to fetch guests");
+      
+      const data = await res.json();
+      const formatted = data.data.map((item: any) => ({
+        id: item.id,
+        name: item.name,
+        phone_number: item.phone_number ?? "-",
+        address: item.address ?? "-",
+        notes: item.notes ?? "-",
+      }));
+      
+      setGuests(formatted);
+      setTotalPages(data.totalPages);
+      setTotalGuests(data.totalCount);
+    } catch (err) {
+      console.error("Error:", err);
+      toast.error("Failed to load guests");
+    } finally {
+      setLoading(false);
+    }
+  }, [id, page, pageSize]);
 
+  useEffect(() => {
     if (id) {
       fetchGuests();
     }
-  }, [id, page]);
+  }, [id, page, fetchGuests]);
 
   if (loading && !selectedInvitation) return <GeneralLoading />;
 
@@ -100,6 +101,7 @@ const ShareInvitationPage = () => {
           totalPages={totalPages}
           totalCount={totalGuests}
           onPageChange={setPage}
+          refetchGuests={fetchGuests}
         />
       </div>
     </>

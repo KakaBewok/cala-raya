@@ -59,8 +59,8 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
   // But let's use what we have in selectedInvitation if it still has all (it might not if we optimize).
   const stats = useMemo(() => {
     const allRsvps = selectedInvitation?.rsvps || [];
-    const attending = allRsvps.filter((r) => r.attendance_status === true);
-    const notAttending = allRsvps.filter((r) => r.attendance_status === false);
+    const attending = allRsvps.filter((r) => (r.total_guest || 0) > 0);
+    const notAttending = allRsvps.filter((r) => !r.total_guest || r.total_guest === 0);
     const totalGuests = allRsvps.reduce((sum, rsvp) => sum + (rsvp.total_guest || 0), 0);
 
     return {
@@ -241,28 +241,30 @@ export const RsvpClient: React.FC<RsvpClientProps> = ({
                           </h3>
                           <span
                             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${
-                              rsvp.attendance_status
+                              rsvp.total_guest > 0
                                 ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-900/50"
                                 : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-900/50"
                             }`}
                           >
-                            {rsvp.attendance_status ? (
+                            {rsvp.total_guest > 0 ? (
                               <>
                                 <CheckCircle className="w-3 h-3" />
-                                Attending
+                                Hadir
                               </>
                             ) : (
                               <>
                                 <XCircle className="w-3 h-3" />
-                                Not Attending
+                                Tidak Hadir
                               </>
                             )}
                           </span>
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full text-xs font-medium">
-                            <Users className="w-3 h-3" />
-                            {rsvp.total_guest}{" "}
-                            {rsvp.total_guest === 1 ? "guest" : "guests"}
-                          </span>
+                          {rsvp.total_guest > 0 && (
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full text-xs font-medium">
+                              <Users className="w-3 h-3" />
+                              {rsvp.total_guest}{" "}
+                              {rsvp.total_guest === 1 ? "guest" : "guests"}
+                            </span>
+                          )}
                         </div>
 
                         {/* Message */}
