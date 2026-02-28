@@ -15,32 +15,32 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 function Reviews() {
-  const plugin = Autoplay({ delay: 2500, stopOnInteraction: false });
+  const plugin = Autoplay({ delay: 3000, stopOnInteraction: false });
 
   const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState<number>(0);
-  const [count, setCount] = useState<number>(0);
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!api) return;
-
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
   }, [api]);
 
   return (
-    <section id="reviews" className="py-12 md:py-24 bg-yellow-400">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-2 md:mb-4 uppercase">
+    <section id="reviews" className="py-20 md:py-28 bg-white overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        {/* Header */}
+        <div className="text-center mb-14 md:mb-16">
+          <p className="text-[12px] md:text-[13px] font-medium tracking-[0.2em] uppercase text-stone-400 mb-3">
+            Testimoni
+          </p>
+          <h2 className="text-2xl md:text-[2rem] font-semibold text-stone-900 tracking-tight mb-4">
             Apa Kata Mereka?
           </h2>
-          <p className="text-sm md:text-lg text-slate-900 font-bold">
-            Pengalaman klien setelah pakai layanan kami
+          <p className="text-[15px] text-stone-500 max-w-md mx-auto leading-relaxed">
+            Pengalaman klien setelah menggunakan layanan kami
           </p>
         </div>
 
@@ -49,53 +49,48 @@ function Reviews() {
           setApi={setApi}
           plugins={[plugin]}
           className="w-full"
-          opts={{
-            align: "start",
-            loop: true,
-          }}
+          opts={{ align: "start", loop: true }}
         >
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {reviews.map((review, i: number) => (
+          <CarouselContent className="-ml-3 md:-ml-4">
+            {reviews.map((review, i) => (
               <CarouselItem
                 key={i}
-                className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 h-full shadow-lg shadow-slate-500/10 ml-0 md:ml-2"
+                className="pl-3 md:pl-4 md:basis-1/2 lg:basis-1/3"
               >
-                <div className="bg-white border-4 border-slate-900 p-4 h-full">
+                <div className="bg-white rounded-xl border border-stone-100 p-5 h-full flex flex-col">
                   {/* Chat Screenshot */}
-                  <div className="mb-4 overflow-hidden border-4 border-slate-900">
+                  <div className="mb-4 rounded-lg overflow-hidden border border-stone-100 bg-stone-50">
                     <Image
                       width={400}
                       height={128}
                       src={review.reviewImage}
-                      alt="chat"
-                      className="w-full h-50 md:h-65 object-contain object-center"
+                      alt={`Review dari ${review.name}`}
+                      className="w-full h-48 md:h-56 object-contain object-center"
                       unoptimized
                     />
                   </div>
 
                   {/* Profile */}
-                  <div className="mb-2">
-                    <div className="flex flex-col gap-1">
-                      <h4 className="text-lg md:text-xl font-black text-slate-900 uppercase">
-                        {review.name}
-                      </h4>
-                      <p className="text-xs md:text-sm text-slate-900 font-bold mb-2">
-                        {review.product} - {review.type}
-                      </p>
-                      <div className="flex gap-1">
-                        {[...Array(review.rating)].map((_, idx) => (
-                          <Star
-                            key={idx}
-                            className="w-3 h-3 text-yellow-400 fill-current"
-                          />
-                        ))}
-                      </div>
+                  <div className="mb-3">
+                    <h4 className="text-[15px] font-semibold text-stone-800">
+                      {review.name}
+                    </h4>
+                    <p className="text-[12px] text-stone-400 mt-0.5">
+                      {review.product} — {review.type}
+                    </p>
+                    <div className="flex gap-0.5 mt-2">
+                      {[...Array(review.rating)].map((_, idx) => (
+                        <Star
+                          key={idx}
+                          className="w-3.5 h-3.5 text-amber-400 fill-current"
+                        />
+                      ))}
                     </div>
                   </div>
 
                   {/* Comment */}
-                  <p className="italic text-slate-900 text-xs md:text-sm leading-relaxed font-bold">
-                    &quot;{review.comment}&quot;
+                  <p className="text-[13px] text-stone-500 leading-relaxed mt-auto italic">
+                    &ldquo;{review.comment}&rdquo;
                   </p>
                 </div>
               </CarouselItem>
@@ -105,16 +100,16 @@ function Reviews() {
           <CarouselNext className="hidden lg:flex" />
         </Carousel>
 
-        {/* Dots Indicator */}
-        <div className="mt-7 md:mt-12 flex justify-center gap-1 md:gap-2">
+        {/* Dots */}
+        <div className="mt-8 md:mt-10 flex justify-center gap-1.5">
           {Array.from({ length: count }).map((_, index) => (
             <button
               key={index}
               onClick={() => api?.scrollTo(index)}
-              className={`h-1 md:h-2 w-1 md:w-2 transition-all cursor-pointer border-2 border-slate-900 ${
+              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                 index === current
-                  ? "bg-slate-900 w-2 md:w-4"
-                  : "bg-white"
+                  ? "bg-stone-900 w-6"
+                  : "bg-stone-200 w-1.5 hover:bg-stone-300"
               }`}
             />
           ))}

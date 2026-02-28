@@ -1,0 +1,487 @@
+/* ========================================
+   FONTS PREVIEW PAGE — Styles
+   ======================================== */
+
+.fonts-preview-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #1a1a2e 100%);
+    background-attachment: fixed;
+    color: #e4e4e7;
+    padding: 0 0 80px;
+}
+
+/* ── Hero / Header ── */
+.fonts-hero {
+    text-align: center;
+    padding: 64px 24px 40px;
+    position: relative;
+}
+
+.fonts-hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #7c3aed, transparent);
+}
+
+.fonts-hero h1 {
+    font-size: 2.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #c084fc 0%, #818cf8 40%, #67e8f9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 12px;
+    line-height: 1.15;
+}
+
+.fonts-hero p {
+    font-size: 1.05rem;
+    color: #a1a1aa;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.fonts-badge {
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-radius: 999px;
+    background: rgba(124, 58, 237, 0.15);
+    color: #c084fc;
+    border: 1px solid rgba(124, 58, 237, 0.3);
+}
+
+/* ── Sticky Input Bar ── */
+.fonts-input-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 16px 24px;
+    background: rgba(15, 15, 26, 0.85);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.fonts-input-bar.scrolled {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.fonts-input-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.fonts-input-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #a78bfa;
+    white-space: nowrap;
+}
+
+.fonts-input-field {
+    flex: 1;
+    padding: 12px 20px;
+    font-size: 1rem;
+    color: #e4e4e7;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.25s ease;
+    font-family: inherit;
+}
+
+.fonts-input-field::placeholder {
+    color: #71717a;
+}
+
+.fonts-input-field:focus {
+    border-color: #7c3aed;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.fonts-reset-btn {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #c084fc;
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+
+.fonts-reset-btn:hover {
+    background: rgba(124, 58, 237, 0.25);
+    border-color: rgba(124, 58, 237, 0.5);
+    transform: translateY(-1px);
+}
+
+.fonts-reset-btn:active {
+    transform: translateY(0);
+}
+
+/* ── Font Count ── */
+.fonts-count {
+    text-align: center;
+    padding: 28px 24px 8px;
+    font-size: 0.85rem;
+    color: #71717a;
+}
+
+.fonts-count span {
+    color: #a78bfa;
+    font-weight: 700;
+}
+
+/* ── Grid Layout ── */
+.fonts-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 24px;
+}
+
+@media (min-width: 768px) {
+    .fonts-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+        padding: 16px 32px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .fonts-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+        padding: 16px 48px;
+    }
+}
+
+/* ── Font Card ── */
+.font-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 28px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.font-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg,
+            rgba(124, 58, 237, 0.05) 0%,
+            transparent 50%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.font-card:hover {
+    border-color: rgba(124, 58, 237, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(124, 58, 237, 0.06);
+}
+
+.font-card:hover::before {
+    opacity: 1;
+}
+
+/* ── Card Header ── */
+.font-card-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+    z-index: 1;
+}
+
+.font-card-index {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #a78bfa;
+    background: rgba(124, 58, 237, 0.12);
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.font-card-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #f4f4f5;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+}
+
+.font-card-variable {
+    font-size: 0.78rem;
+    color: #67e8f9;
+    font-family: "Geist Mono", "SF Mono", "Fira Code", monospace;
+    background: rgba(103, 232, 249, 0.08);
+    padding: 3px 10px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+/* ── Card Body / Preview Sections ── */
+.font-card-body {
+    position: relative;
+    z-index: 1;
+}
+
+.font-preview-section {
+    margin-bottom: 20px;
+}
+
+.font-preview-section:last-child {
+    margin-bottom: 0;
+}
+
+.font-preview-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #71717a;
+    margin-bottom: 6px;
+}
+
+.font-preview-h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    color: #fafafa;
+    margin: 0;
+    word-break: break-word;
+    transition: all 0.2s ease;
+}
+
+.font-preview-h2 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    color: #d4d4d8;
+    margin: 0;
+    word-break: break-word;
+    transition: all 0.2s ease;
+}
+
+.font-preview-body {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #a1a1aa;
+    margin: 0;
+    word-break: break-word;
+    transition: all 0.2s ease;
+}
+
+.font-preview-alphabet {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: #71717a;
+    word-break: break-all;
+    letter-spacing: 0.05em;
+}
+
+.font-preview-numbers {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #71717a;
+    letter-spacing: 0.15em;
+}
+
+/* ── Custom Text Section ── */
+.font-preview-custom {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(124, 58, 237, 0.15);
+}
+
+.font-preview-custom-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #a78bfa;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.font-preview-custom-label::before {
+    content: "✦";
+    font-size: 0.55rem;
+}
+
+.font-preview-custom-text {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #e4e4e7;
+    margin: 0;
+    word-break: break-word;
+    transition: all 0.15s ease;
+}
+
+/* ── Responsive tweaks ── */
+@media (max-width: 767px) {
+    .fonts-hero {
+        padding: 48px 20px 32px;
+    }
+
+    .fonts-hero h1 {
+        font-size: 2rem;
+    }
+
+    .fonts-input-wrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .fonts-input-label {
+        text-align: center;
+    }
+
+    .fonts-reset-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .font-card {
+        padding: 24px;
+    }
+
+    .font-preview-h1 {
+        font-size: 1.6rem;
+    }
+
+    .font-preview-h2 {
+        font-size: 1.15rem;
+    }
+}
+
+/* ── Subtle animations ── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.font-card {
+    animation: fadeInUp 0.5s ease both;
+}
+
+.font-card:nth-child(1) {
+    animation-delay: 0.02s;
+}
+
+.font-card:nth-child(2) {
+    animation-delay: 0.06s;
+}
+
+.font-card:nth-child(3) {
+    animation-delay: 0.10s;
+}
+
+.font-card:nth-child(4) {
+    animation-delay: 0.14s;
+}
+
+.font-card:nth-child(5) {
+    animation-delay: 0.18s;
+}
+
+.font-card:nth-child(6) {
+    animation-delay: 0.22s;
+}
+
+.font-card:nth-child(7) {
+    animation-delay: 0.26s;
+}
+
+.font-card:nth-child(8) {
+    animation-delay: 0.30s;
+}
+
+.font-card:nth-child(9) {
+    animation-delay: 0.34s;
+}
+
+.font-card:nth-child(10) {
+    animation-delay: 0.38s;
+}
+
+.font-card:nth-child(11) {
+    animation-delay: 0.42s;
+}
+
+.font-card:nth-child(12) {
+    animation-delay: 0.46s;
+}
+
+.font-card:nth-child(13) {
+    animation-delay: 0.50s;
+}
+
+.font-card:nth-child(14) {
+    animation-delay: 0.54s;
+}
+
+.font-card:nth-child(15) {
+    animation-delay: 0.58s;
+}
+
+.font-card:nth-child(16) {
+    animation-delay: 0.62s;
+}
+
+.font-card:nth-child(17) {
+    animation-delay: 0.66s;
+}
+
+.font-card:nth-child(18) {
+    animation-delay: 0.70s;
+}
+
+.font-card:nth-child(19) {
+    animation-delay: 0.74s;
+}
+
+.font-card:nth-child(20) {
+    animation-delay: 0.78s;
+}

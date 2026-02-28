@@ -140,7 +140,6 @@ const RSVP = () => {
               <option value="">Select</option>
               <option value="1">1 Person</option>
               <option value="2">2 Person</option>
-              <option value="3">More than 2 person</option>
               <option value="0">Not Attending</option>
             </select>
           </div>
@@ -165,11 +164,32 @@ const RSVP = () => {
 
         <div className="mt-8 space-y-6 max-h-96 overflow-y-auto overflow-x-hidden scrollbar-hide">
           {data.map((item, index) => (
+            // <div
+            //   key={index}
+            //   className="bg-[#f4f3f3] px-6 py-4 rounded-sm text-xs text-center"
+            // >
+            //   <p className="font-bold mb-3">{item.guest_name}</p>
+            //   <p className="font-medium">{item.message}</p>
+            // </div>
             <div
               key={index}
               className="bg-[#f4f3f3] px-6 py-4 rounded-sm text-xs text-center"
             >
-              <p className="font-bold mb-3">{item.guest_name}</p>
+              {/* Bungkus Nama dan Icon dalam Flex Container agar sejajar horizontal */}
+              <div className="flex items-center justify-center gap-1 mb-2">
+                <p className="font-bold">{item.guest_name}</p>
+
+                {/* Logika Centang Biru */}
+                {item.guest_name.toLowerCase().includes("calaraya") && (
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="w-4 h-4 text-blue-500 fill-current flex-shrink-0 -p-0"
+                  >
+                    <path d="M22.5 12.5c0-1.58-.88-2.95-2.18-3.66.25-.83.4-1.7.4-2.6 0-3.03-2.47-5.5-5.5-5.5-.9 0-1.77.22-2.54.62C12.05 1.08 10.96.5 9.75.5 6.72.5 4.25 2.97 4.25 6c0 .9.22 1.77.62 2.54C3.58 9.32 3 10.41 3 11.62c0 1.21.58 2.3 1.5 3.08-.4 1.15-.62 2.39-.62 3.69 0 3.03 2.47 5.5 5.5 5.5.9 0 1.77-.22 2.54-.62.77.4 1.64.62 2.54.62 3.03 0 5.5-2.47 5.5-5.5 0-1.3-.22-2.54-.62-3.69.92-.78 1.5-1.87 1.5-3.08zM10 16.5l-3.5-3.5 1.41-1.41L10 13.67l6.09-6.09L17.5 9 10 16.5z" />
+                  </svg>
+                )}
+              </div>
+
               <p className="font-medium">{item.message}</p>
             </div>
           ))}

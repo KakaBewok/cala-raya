@@ -4,40 +4,45 @@ import Image from "next/image";
 
 function Footer() {
   return (
-    <footer className="bg-slate-900 dark:bg-slate-950 text-white pt-10 pb-8 border-t-4 border-slate-900 dark:border-white">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 place-content-between mb-8">
+    <footer className="bg-stone-900 text-white">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-16 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-12">
           {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
+          <div className="md:col-span-1">
+            <div className="flex items-center gap-2.5 mb-4">
               <Image
-                alt="Logo"
+                alt="Calaraya Logo"
                 src="https://res.cloudinary.com/dk16ng09n/image/upload/v1766687461/personal/web-porto/ChatGPT_Image_Dec_26_2025_01_29_22_AM_os33rl.webp"
-                width={53}
-                height={53}
+                width={36}
+                height={36}
+                className="rounded-full"
               />
-              <span className="text-xl font-black uppercase">Calaraya</span>
+              <span className="text-[16px] font-semibold tracking-wide">
+                Calaraya
+              </span>
             </div>
-            <p className="text-slate-400 text-sm mb-4 max-w-sm font-bold">
+            <p className="text-[13px] text-stone-400 leading-relaxed max-w-xs mb-5">
               Undangan digital dan website profesional dengan pendekatan desain
-              yang modern dan fungsional
+              modern, elegan, dan fungsional.
             </p>
-            <div className="flex items-center gap-2 text-slate-400 text-sm">
-              <MapPin className="w-4 h-4" />
+            <div className="flex items-center gap-2 text-stone-400 text-[13px]">
+              <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
               <span>{contact.address}</span>
             </div>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="font-black mb-4 uppercase">Kontak</h3>
-            <div className="space-y-3 text-sm text-slate-400 font-bold">
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
+            <h3 className="text-[13px] font-semibold tracking-wide mb-5 text-stone-300">
+              Kontak
+            </h3>
+            <div className="space-y-3 text-[13px] text-stone-400">
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>{contact.email}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <MessageCircle className="w-4 h-4" />
+              <div className="flex items-center gap-2.5">
+                <MessageCircle className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>+{contact.phone}</span>
               </div>
             </div>
@@ -45,25 +50,30 @@ function Footer() {
 
           {/* Social */}
           <div>
-            <h3 className="font-black mb-4 uppercase">Follow Us</h3>
-            <div className="flex gap-3">
-              {socialMedia.map((social, i: number) => (
+            <h3 className="text-[13px] font-semibold tracking-wide mb-5 text-stone-300">
+              Follow Us
+            </h3>
+            <div className="flex gap-2.5">
+              {socialMedia.map((social, i) => (
                 <a
                   key={i}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-white hover:bg-yellow-400 border-3 border-white flex items-center justify-center"
+                  className="w-9 h-9 bg-stone-800 hover:bg-stone-700 rounded-lg flex items-center justify-center transition-colors duration-200"
                 >
-                  <social.icon className="w-5 h-5 text-slate-900" />
+                  <social.icon className="w-4 h-4 text-stone-400" />
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-800 text-center text-slate-400 text-sm">
-          <p>© 2025 Calaraya. All rights reserved.</p>
+        {/* Bottom */}
+        <div className="pt-6 border-t border-stone-800 text-center">
+          <p className="text-[12px] text-stone-500 tracking-wide">
+            © {new Date().getFullYear()} Calaraya. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

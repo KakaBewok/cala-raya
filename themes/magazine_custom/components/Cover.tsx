@@ -63,8 +63,8 @@ const Cover = () => {
         <h1
           className={`${remineFares.className} font-medium text-4xl text-left`}
         >
-          {data?.host_two_nickname.toLocaleLowerCase()} <br />&{" "}
-          {data?.host_one_nickname.toLocaleLowerCase()}
+          {data?.host_one_nickname.toLocaleLowerCase()} <br />&{" "}
+          {data?.host_two_nickname.toLocaleLowerCase()}
         </h1>
 
         <p className={`${didot.className} text-xs leading-tight`}>

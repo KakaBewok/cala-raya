@@ -8,6 +8,7 @@ import StylishBoldPage from "@/themes/stylishBold/StylishBoldPage";
 import { ThemeName } from "@/types/theme-name";
 import MaroonMonochromePage from "@/themes/maroon_monochrome/MaroonMonochromePage";
 import MagazinePageCustom from "@/themes/magazine_custom/MagazinePageCustom";
+import StylishBoldPageCustom from "@/themes/stylishBold_custom/StylishBoldPageCustom";
 
 export const themeMap: Record<ThemeName, React.ComponentType> = {
   monochrome: MonochromePage,
@@ -19,4 +20,5 @@ export const themeMap: Record<ThemeName, React.ComponentType> = {
   maroon_custom: MaroonPageCustom,
   maroon_monochrome: MaroonMonochromePage,
   stylishBold: StylishBoldPage,
+  stylishBold_custom: StylishBoldPageCustom,
 };

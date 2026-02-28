@@ -5,54 +5,64 @@ import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number>(0);
+  const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="py-18 md:py-24 bg-white dark:bg-slate-900">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="text-center mb-7 md:mb-12">
-          <h2 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white mb-2 md:mb-4 uppercase">
+    <section id="faq" className="py-20 md:py-28 bg-[#FDFBF7]">
+      <div className="max-w-2xl mx-auto px-5 sm:px-8">
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-14">
+          <p className="text-[12px] md:text-[13px] font-medium tracking-[0.2em] uppercase text-stone-400 mb-3">
             FAQ
+          </p>
+          <h2 className="text-2xl md:text-[2rem] font-semibold text-stone-900 tracking-tight mb-4">
+            Pertanyaan Umum
           </h2>
-          <p className="text-sm md:text-lg text-slate-900 dark:text-white font-bold">
-            Pertanyaan yang sering ditanyakan
+          <p className="text-[15px] text-stone-500 leading-relaxed">
+            Temukan jawaban untuk pertanyaan yang sering ditanyakan
           </p>
         </div>
 
-        <div className="space-y-2 md:space-y-3">
-          {faqs.map((faq, i: number) => (
-            <div
-              key={i}
-              className={`bg-white dark:bg-slate-800 overflow-hidden border-4 w-full md:w-3/4 mx-auto ${
-                openIndex === i
-                  ? "border-yellow-400"
-                  : "border-slate-900 dark:border-white"
-              }`}
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-                className="cursor-pointer w-full px-4 md:px-5 py-3 md:py-4 flex items-center justify-between text-left"
+        {/* FAQ Items */}
+        <div className="space-y-2">
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <div
+                key={i}
+                className={`rounded-xl border transition-all duration-200 ${
+                  isOpen
+                    ? "border-stone-200 bg-white shadow-sm"
+                    : "border-stone-100 bg-white hover:border-stone-200"
+                }`}
               >
-                <span className="text-sm md:text-md font-black text-slate-900 dark:text-white pr-4 uppercase">
-                  {faq.q}
-                </span>
-                <ChevronDown
-                  className={`w-6 h-6 flex-shrink-0 text-slate-900 dark:text-white ${
-                    openIndex === i ? "rotate-180" : ""
+                <button
+                  onClick={() => setOpenIndex(isOpen ? -1 : i)}
+                  className="cursor-pointer w-full px-5 py-4 flex items-center justify-between text-left"
+                >
+                  <span className="text-[14px] md:text-[15px] font-medium text-stone-800 pr-4 leading-snug">
+                    {faq.q}
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 flex-shrink-0 text-stone-400 transition-transform duration-200 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
                   }`}
-                />
-              </button>
-              {openIndex === i && (
-                <div className="px-4 md:px-5 pb-5">
-                  <div className="pt-2 md:pt-4 border-t-3 border-slate-900 dark:border-white">
-                    <p className="text-xs md:text-sm text-slate-900 dark:text-white leading-relaxed font-bold">
+                >
+                  <div className="px-5 pb-4">
+                    <p className="text-[13px] text-stone-500 leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
