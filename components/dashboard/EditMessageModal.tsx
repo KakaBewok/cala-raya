@@ -40,23 +40,23 @@ export const EditMessageModal: React.FC<EditMessageModalProps> = ({
   loading,
   sampleData = {
     guest_name: "Fairuz Ummi",
-    event_title: "Pernikahan Slamet & Fatma",
-    url: "https://calaraya.vercel.app/slamet-fatma?id=QqHD9",
+    event_title: "The Wedding of Slamet & Fatma",
+    url: `${process.env.NEXT_PUBLIC_APP_URL_PROD!}/slamet-fatma?id=QqHD9`,
     rundowns: [
       {
-        title: "Akad Nikah",
-        event_date: "Minggu, 1 Juni 2025",
-        start_time: "10:00",
-        end_time: "13:00",
+        title: "Akad",
+        event_date: "Sabtu, 16 Februari 2025",
+        start_time: "10.00",
+        end_time: "12.00",
         time_zone: "WIB",
         location: "Gedung Serbaguna Jakarta",
         order_number: 1,
       },
       {
         title: "Resepsi",
-        event_date: "Minggu, 2 Juni 2025",
-        start_time: "09:00",
-        end_time: "11:00",
+        event_date: "Minggu, 17 Februari 2025",
+        start_time: "14.00",
+        end_time: "18.00",
         time_zone: "WIB",
         location: "Masjid Al-Falah",
         order_number: 2,
@@ -68,7 +68,7 @@ Yth. Bapak/Ibu/Saudara/i
 {guest_name}
 di Tempat
 
-Dengan segala kerendahan hati, kami mengundang Bapak/Ibu/Saudara/i dan teman-teman untuk menghadiri acara
+Dengan rahmat serta ridho Allah SWT dan tanpa mengurangi rasa hormat kami. Perkenan kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri dan memberikan doa restu pada acara kami: 
 
 {event_title}
 {event_rundowns}
@@ -76,10 +76,11 @@ Dengan segala kerendahan hati, kami mengundang Bapak/Ibu/Saudara/i dan teman-tem
 Undangan lengkap bisa diakses di link berikut:
 {url}
 
-Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir di acara kami
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir di acara kami.
 Mohon maaf perihal undangan hanya dibagikan melalui pesan ini.
 
-Terima kasih banyak atas perhatiannya💕`.trim(),
+Atas kehadiran dan doa restunya, kami ucapkan terima kasih.
+`.trim(),
 }) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [template, setTemplate] = useState<string>(initialTemplate);
@@ -109,9 +110,9 @@ Terima kasih banyak atas perhatiannya💕`.trim(),
       .map((rundown) => {
         return `
 ${rundown.title}:
-🗓️ Tanggal  : ${rundown.event_date}
-🕛 Pukul    : ${rundown.start_time} ${rundown.time_zone} s/d ${rundown.end_time} ${rundown.time_zone}
-📍 Lokasi   : ${rundown.location}`;
+🗓️ ${rundown.event_date}
+🕛 ${rundown.start_time} ${rundown.time_zone} - ${rundown.end_time} ${rundown.time_zone}
+📍 ${rundown.location}`;
       })
       .join("\n");
   };

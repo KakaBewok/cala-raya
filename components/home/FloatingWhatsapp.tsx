@@ -8,10 +8,10 @@ const FloatingWhatsapp = () => {
       )}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-all duration-300 group"
+      className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center shadow-lg shadow-green-600/20 hover:shadow-green-600/30 hover:scale-105 transition-all duration-200 group"
     >
       <svg
-        className="w-6 md:w-7 h-6 md:h-7 text-white"
+        className="w-5 h-5 text-white"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -19,12 +19,9 @@ const FloatingWhatsapp = () => {
       </svg>
 
       {/* Tooltip */}
-      <span className="absolute right-full mr-3 px-3 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-medium rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+      <span className="absolute right-full mr-3 px-3 py-1.5 bg-stone-800 text-white text-[12px] font-medium rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
         Chat via WhatsApp
       </span>
-
-      {/* Pulse Animation */}
-      <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></span>
     </a>
   );
 };

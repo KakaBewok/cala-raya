@@ -31,11 +31,11 @@ export async function generateMetadata({
     previewImageObj?.url ?? `${process.env.NEXT_PUBLIC_APP_URL_PROD!}/og-image.jpg`;
 
   return {
-    title: `${invitation.host_one_nickname} ❤️ ${invitation.host_two_nickname}`,
-    description: `${formatDate(invitation.event_date, true)}`,
+    title: `${invitation?.host_one_nickname} ❤️ ${invitation?.host_two_nickname}`,
+    description: `${formatDate(invitation?.rundowns[0].date, true)}`,
     openGraph: {
-      title: `${invitation.event_title}`,
-      description: `${formatDate(invitation.event_date, true)}`,
+      title: `${invitation?.event_title}`,
+      description: `${formatDate(invitation?.rundowns[0].date, true)}`,
       url: `${process.env.NEXT_PUBLIC_APP_URL_PROD!}/${slug}`,
       images: [
         {
@@ -45,6 +45,12 @@ export async function generateMetadata({
         },
       ],
     },
+    twitter: {
+    card: 'summary_large_image',
+    title: `${invitation?.event_title}`,
+    description: `${formatDate(invitation?.rundowns[0].date, true)}`,
+    images: [previewImage], 
+  },
   };
 }
 

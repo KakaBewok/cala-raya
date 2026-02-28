@@ -106,22 +106,27 @@ export const CellAction = ({ data }: { data: GuestColumn }) => {
   };
 
   const generateRundownText = (rundowns: Rundown[] = []) => {
+    const isSpecialCase = selectedInvitation?.slug === "gabriel-rilly";
+
     if (rundowns.length === 0) return "";
 
     return rundowns
       .sort((a, b) => a.order_number - b.order_number)
       .map((rundown) => {
-        const date = formatDate(rundown.date, true);
+        const date =
+          isSpecialCase
+            ? formatDate(rundown.date, true, "en-US")
+            : formatDate(rundown.date, true);
         const start = formatTime(rundown.start_time);
-        const end = rundown.end_time ? formatTime(rundown.end_time) : "Selesai";
+        const end = rundown.end_time ? formatTime(rundown.end_time) : "";
         const zone = rundown.time_zone;
         const location = rundown.location;
 
         return `
 ${rundown.title}:
-🗓️ Tanggal  : ${date}
-🕛 Pukul    : ${start} ${zone} s/d ${end === "Selesai" ? end : `${end} ${zone}`}
-📍 Lokasi   : ${location}`;
+🗓️ ${date}
+🕛 ${start} ${zone} ${end === "" ? "" : `- ${end} ${zone}`}
+📍 ${location}`;
       })
       .join("\n");
   };

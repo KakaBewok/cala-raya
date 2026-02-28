@@ -51,8 +51,8 @@ export default function OpeningScreen({
                   src={findImage(data, "initial")}
                   alt="Initial"
                   priority
-                  width={80}
-                  height={80}
+                  width={120}
+                  height={120}
                 />
               </motion.div>
             </div>

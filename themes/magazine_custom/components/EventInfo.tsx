@@ -97,16 +97,16 @@ const EventInfo = () => {
               <p
                 className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
               >
-                {formatDate(rundown.date, true)}
+                {formatDate(rundown.date, true, 'en-US')}
               </p>
               {rundown.start_time && (
                 <p
                   className={`${remineFares.className} text-md font-medium mb-2 text-neutral-700`}
                 >
-                  · {formatTime(rundown.start_time)} {rundown.time_zone} -{" "}
+                  · {formatTime(rundown.start_time)} {rundown.time_zone} {" "}
                   {rundown.end_time && rundown.start_time
                     ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
-                    : "selesai"}{" "}
+                    : ""}{" "}
                   ·
                 </p>
               )}

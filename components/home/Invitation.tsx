@@ -1,106 +1,115 @@
-import React from "react";
-import { Eye } from "lucide-react";
+import { Eye, MessageCircle } from "lucide-react";
 import { allThemes, CONTACT_PERSON } from "@/data/data";
 import Image from "next/image";
 
 function Invitation() {
   return (
-    <section id="themes" className="py-12 md:py-24 bg-white dark:bg-slate-900">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white mb-4 uppercase">
-            Tema Undangan
+    <section id="themes" className="py-20 md:py-28 bg-[#FDFBF7]">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-16">
+          <p className="text-[12px] md:text-[13px] font-medium tracking-[0.2em] uppercase text-stone-400 mb-3">
+            Koleksi Tema
+          </p>
+          <h2 className="text-2xl md:text-[2rem] font-semibold text-stone-900 tracking-tight mb-4">
+            Tema Undangan Digital
           </h2>
-          <p className="text-sm md:text-lg text-slate-900 dark:text-white font-bold">
-            Koleksi tema elegan untuk berbagai kebutuhan acara
+          <p className="text-[15px] text-stone-500 max-w-md mx-auto leading-relaxed">
+            Koleksi tema elegan yang dirancang khusus untuk berbagai kebutuhan
+            acara spesial Anda
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* Themes Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           {allThemes.map((theme, i) => (
             <div
               key={i}
-              className="group relative bg-slate-900 dark:bg-slate-950 border-4 border-slate-900 dark:border-white overflow-hidden"
+              className="group relative bg-white rounded-xl overflow-hidden border border-stone-100 hover:border-stone-200 shadow-sm hover:shadow-md transition-all duration-300"
             >
-              <div className="relative h-80">
+              {/* Image */}
+              <div className="relative aspect-[2/3] sm:aspect-[3/4] overflow-hidden">
                 <Image
                   fill
                   src={theme.image}
                   alt={theme.name}
                   loading="lazy"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                 />
 
-                {theme.name && (
-                  <div className="z-10 bg-yellow-400 border-3 border-slate-900 absolute top-0 left-0 text-slate-900 px-3 md:px-3 py-1.5 md:py-2.5 text-xs md:text-sm font-black uppercase">
-                    {theme.name}
-                  </div>
-                )}
+                {/* Subtle gradient at bottom for text readability */}
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+              </div>
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/80 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-2 md:p-4">
-                  <div className="flex gap-1 mb-1.5 md:mb-3 overflow-x-auto scrollbar-hide">
-                    {theme.features.map((f, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[8px] md:text-xs px-2 py-1 bg-yellow-400 text-slate-900 font-black border-2 border-slate-900 uppercase whitespace-nowrap"
-                      >
-                        {f}
-                      </span>
-                    ))}
+              {/* Card Footer — always visible */}
+              <div className="p-2.5 sm:p-3 md:p-4">
+                {/* Name + Price */}
+                <div className="flex items-start justify-between gap-1 mb-2">
+                  <div className="min-w-0">
+                    <h3 className="text-[12px] sm:text-[13px] md:text-[15px] font-semibold text-stone-800 truncate">
+                      {theme.name}
+                    </h3>
                   </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-[8px] md:text-[10px] text-stone-400">
+                      Mulai
+                    </p>
+                    <p className="text-[11px] sm:text-[12px] md:text-[15px] font-semibold text-stone-800">
+                      {theme.price}
+                    </p>
+                  </div>
+                </div>
 
-                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-1.5 md:gap-3">
-                    <div className="flex-shrink-0">
-                      <p className="text-white text-xs font-bold uppercase">Mulai dari</p>
-                      <p className="text-white font-black text-base md:text-lg">
-                        {theme.price}
-                      </p>
-                    </div>
-                    <div className="w-full md:w-fit flex gap-2">
-                      <a
-                        href={`https://wa.me/${CONTACT_PERSON}?text=${encodeURIComponent(
-                          `Halo admin Calaraya Project, aku tertarik untuk bikin ` +
-                            `${theme.type} ${theme.name}` +
-                            `. Boleh dibantu prosesnya?`
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cursor-pointer flex-1 md:px-2 md:py-2 bg-green-500 border-3 border-white font-black flex items-center justify-center gap-2 text-xs md:text-sm uppercase"
-                      >
-                        <svg
-                          className="w-3.5 md:w-5 h-3.5 md:h-5 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                        </svg>
-                        <span className="flex md:hidden text-white">Pesan</span>
-                      </a>
-                      <a
-                        href={theme.previewUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cursor-pointer px-2 py-2 border-3 border-white font-black"
-                      >
-                        <Eye className="w-3.5 md:w-5 h-3.5 md:h-5 text-white" />
-                      </a>
-                    </div>
-                  </div>
+                {/* Feature chips — horizontal scroll */}
+                <div className="flex gap-1 md:gap-1.5 overflow-x-auto scrollbar-hide pb-0.5 -mx-0.5 px-0.5 mb-2.5 sm:mb-3">
+                  {theme.features.map((f, idx) => (
+                    <span
+                      key={idx}
+                      className="flex-shrink-0 text-[8px] sm:text-[9px] md:text-[11px] px-1.5 md:px-2 py-0.5 bg-stone-50 text-stone-500 rounded font-medium border border-stone-100 whitespace-nowrap"
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Buttons — always visible */}
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <a
+                    href={`https://wa.me/${CONTACT_PERSON}?text=${encodeURIComponent(
+                      `Halo admin Calaraya Project, aku tertarik untuk bikin ` +
+                        `${theme.type} ${theme.name}` +
+                        `. Boleh dibantu prosesnya?`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-stone-900 text-white text-[10px] sm:text-[11px] md:text-[13px] font-medium rounded-lg hover:bg-stone-800 active:bg-stone-700 transition-colors"
+                  >
+                    <MessageCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                    Pesan
+                  </a>
+                  <a
+                    href={theme.previewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-stone-50 text-stone-600 text-[10px] sm:text-[11px] md:text-[13px] font-medium rounded-lg border border-stone-100 hover:bg-stone-100 active:bg-stone-200 transition-colors"
+                  >
+                    <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                    <span className="hidden sm:inline">Preview</span>
+                  </a>
                 </div>
               </div>
             </div>
           ))}
-
-          {allThemes.length === 0 && (
-            <div className="col-span-full text-center py-10">
-              <p className="text-slate-900 dark:text-white font-bold">
-                Belum ada tema undangan. Segera hadir!
-              </p>
-            </div>
-          )}
         </div>
+
+        {allThemes.length === 0 && (
+          <div className="text-center py-16">
+            <p className="text-stone-400 text-[15px]">
+              Tema undangan segera hadir.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

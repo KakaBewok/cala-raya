@@ -109,9 +109,9 @@ const HorizontalGallery = () => {
         }`}
       >
         <p
-          className={`-ml-[25vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`-ml-[25vw] md:-ml-[8vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_two_nickname.toLowerCase()}
+          {data?.host_one_nickname.toLowerCase()}
         </p>
       </div>
       {/* right */}
@@ -121,9 +121,9 @@ const HorizontalGallery = () => {
         }`}
       >
         <p
-          className={`-mr-[26vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
+          className={`-mr-[26vw] md:-mr-[9vw] ${remineFares.className} text-[11rem] font-light text-neutral-700 transform -rotate-90 whitespace-nowrap drop-shadow-2xl`}
         >
-          {data?.host_one_nickname.toLowerCase()}
+          {data?.host_two_nickname.toLowerCase()}
         </p>
       </div>
 
@@ -133,8 +133,8 @@ const HorizontalGallery = () => {
         onClick={toggleGallery}
         className={`cursor-pointer text-neutral-700 border rounded-none border-neutral-700 bg-transparent absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-3 flex items-center gap-2 font-medium ${
           isGalleryOpen
-            ? "bg-neutral-300 text-neutral-800 rounded-lg border-none"
-            : ""
+            ? "bg-neutral-300 hover:bg-neutral-300 text-neutral-800 rounded-lg border-none"
+            : "hover:bg-transparent"
         }`}
       >
         {isGalleryOpen ? (
@@ -158,8 +158,8 @@ const HorizontalGallery = () => {
         {layout.map((column, index) => {
           if (column.type === "first") {
             return (
-              <div key={index} className="flex-shrink-0 ">
-                <div className="h-screen w-screen flex items-center justify-center ">
+              <div key={index} className="flex-shrink-0">
+                <div className="h-screen w-screen md:max-w-md flex items-center justify-center ">
                   <div
                     className={`
                         absolute top-1/2 left-1/2 h-[1px] bg-neutral-700 z-10 rounded-full
@@ -216,7 +216,7 @@ const HorizontalGallery = () => {
             return (
               <div className="flex-shrink-0 w-screen h-screen" key={index}>
                 {/* 1 */}
-                <div className="flex flex-col w-full h-full items-center justify-center">
+                <div className="flex flex-col w-full md:max-w-md h-full items-center justify-center">
                   <div className="relative w-full h-full">
                     <Image
                       src={column.images[0].src}
@@ -235,8 +235,8 @@ const HorizontalGallery = () => {
                       <h1
                         className={`${remineFares.className} text-4xl font-medium text-white`}
                       >
-                        {data?.host_two_nickname.toLocaleLowerCase()} <br /> &{" "}
-                        {data?.host_one_nickname.toLocaleLowerCase()}
+                        {data?.host_one_nickname.toLocaleLowerCase()} <br /> &{" "}
+                        {data?.host_two_nickname.toLocaleLowerCase()}
                       </h1>
                     </div>
                   </div>
@@ -248,10 +248,10 @@ const HorizontalGallery = () => {
           return (
             <div key={index} className="flex-shrink-0">
               {column.type === "single" ? (
-                <div className="flex-shrink-0 w-screen h-screen">
+                <div className="flex-shrink-0 w-screen md:max-w-md h-screen">
                   {/* 1 */}
-                  <div className="flex flex-col w-full h-full p-6 items-center justify-center">
-                    <div className="relative w-full h-full">
+                  <div className="flex flex-col w-full md:max-w-md h-full p-6 items-center justify-center">
+                    <div className="relative w-full md:max-w-md h-full">
                       <Image
                         src={column.images[0].src}
                         alt={column.images[0].alt}
@@ -264,10 +264,10 @@ const HorizontalGallery = () => {
                   </div>
                 </div>
               ) : (
-                <div className="flex-shrink-0 w-screen h-screen flex flex-col">
+                <div className="flex-shrink-0 w-screen md:max-w-md h-screen flex flex-col">
                   {/* 1 */}
-                  <div className="flex flex-col w-full h-full p-12 items-center justify-center">
-                    <div className="relative w-full h-full">
+                  <div className="flex flex-col w-full md:max-w-md h-full p-12 items-center justify-center">
+                    <div className="relative md:max-w-md w-full h-full">
                       <Image
                         src={column.images[0].src}
                         alt={column.images[0].alt}
@@ -279,8 +279,8 @@ const HorizontalGallery = () => {
                     </div>
                   </div>
                   {/* 2 */}
-                  <div className="flex flex-col w-full h-full items-center justify-center">
-                    <div className="relative w-full h-full">
+                  <div className="flex flex-col w-full md:max-w-md h-full items-center justify-center">
+                    <div className="relative md:max-w-md w-full h-full">
                       <Image
                         src={column.images[1].src}
                         alt={column.images[1].alt}
