@@ -21,7 +21,7 @@ export async function GET() {
     }
 
     return NextResponse.json({ music });
-  } catch (err) {
+  } catch (err: unknown) {
     return NextResponse.json({ music: [] }, { status: 500 });
   }
 }

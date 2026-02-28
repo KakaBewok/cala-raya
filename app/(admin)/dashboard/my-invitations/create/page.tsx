@@ -1,10 +1,8 @@
 "use client";
 
 import { InvitationForm } from "../components/InvitationForm";
-import { useRouter } from "next/navigation";
 
 const CreateInvitationPage = () => {
-  const router = useRouter();
 
   return (
     <div className="container mx-auto py-6">

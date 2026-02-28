@@ -107,7 +107,7 @@ export default function AdditionalSection({ form, folder }: SectionProps) {
         
         {giftFields.length === 0 && (
           <div className="bg-slate-50 dark:bg-slate-900/50 p-8 rounded-xl border-2 border-dashed flex flex-col items-center justify-center text-slate-400">
-            <p>No gift information added. Guests won't see digital wallet info.</p>
+            <p>No gift information added. Guests wont see digital wallet info.</p>
           </div>
         )}
       </div>

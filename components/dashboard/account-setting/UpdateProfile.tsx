@@ -45,8 +45,8 @@ const UpdateProfile = ({ user }: { user: User | null }) => {
         setMessage(data.message || "Profile updated successfully");
         clearMessage(4000);
       }
-    } catch (error) {
-      setMessage("An unexpected error occurred");
+    } catch (error: unknown) {
+      setMessage(error instanceof Error ? error.message : "An unexpected error occurred");
       clearMessage(4000);
     } finally {
       setProcessing(false);

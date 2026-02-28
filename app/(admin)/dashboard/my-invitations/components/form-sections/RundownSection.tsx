@@ -11,7 +11,7 @@ interface SectionProps {
   folder: string;
 }
 
-export default function RundownSection({ form, folder }: SectionProps) {
+export default function RundownSection({ form }: SectionProps) {
   const { control, register, formState: { errors }, watch } = form;
 
   const {

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import InputError from "@/components/dashboard/InputError";
-import { Lock, ShieldCheck, Eye, EyeOff, Loader2, Save } from "lucide-react";
+import { Lock, ShieldCheck, Eye, EyeOff, Loader2} from "lucide-react";
 
 export default function PasswordPage() {
   const [currentPassword, setCurrentPassword] = useState<string>("");
@@ -71,7 +71,7 @@ export default function PasswordPage() {
           clearMessage(4000);
         }
       }
-    } catch (error) {
+    } catch (error: unknown) {
       setMessage("An unexpected error occurred");
       clearMessage(4000);
     } finally {

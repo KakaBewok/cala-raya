@@ -51,8 +51,8 @@ export async function GET(
       totalPages: Math.ceil(total / pageSize),
       pageSize,
     });
-  } catch (err: any) {
-    logger.error({ error_message: err.message }, "Error fetching paginated guests");
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  } catch (err: unknown) {
+    logger.error({ error_message: err instanceof Error ? err.message : "Internal Server Error" }, "Error fetching paginated guests");
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Internal Server Error" }, { status: 500 });
   }
 }

@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/configs/auth";
 import { invitationService } from "@/services/InvitationService";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
 
@@ -18,10 +18,10 @@ export async function GET(req: NextRequest) {
     const stats = await invitationService.getGlobalStatistics(isAdmin ? undefined : userId);
 
     return NextResponse.json(stats);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching dashboard statistics:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: error instanceof Error ? error.message : "Internal Server Error" },
       { status: 500 }
     );
   }

@@ -19,7 +19,7 @@ import {
   Users,
   Calendar
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { columns } from "./columns";
 import ChangeInvitationButton from "@/components/dashboard/ChangeInvitationButton";

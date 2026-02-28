@@ -12,7 +12,7 @@ export async function GET() {
     if (error) throw error;
 
     return NextResponse.json({ themes });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Internal Server Error" }, { status: 500 });
   }
 }
