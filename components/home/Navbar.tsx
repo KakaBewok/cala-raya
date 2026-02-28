@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { CONTACT_PERSON, navLinks } from "@/data/data";
 import Image from "next/image";
 
@@ -8,27 +8,71 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const closeSidebar = useCallback(() => setIsOpen(false), []);
+
+  // Scroll detection
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleLinkClick = () => setIsOpen(false);
+  // ESC key to close sidebar
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        closeSidebar();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, closeSidebar]);
 
+  // Lock body scroll when sidebar is open
   useEffect(() => {
     if (isOpen) {
+      // Save current scroll position and lock body
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+
+      return () => {
+        // Restore scroll position
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.overflow = "";
+        window.scrollTo(0, scrollY);
+      };
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
   }, [isOpen]);
+
+  const handleLinkClick = () => closeSidebar();
 
   return (
     <>
+      {/* Backdrop overlay — sits behind the nav (z-40 < z-50) */}
+      <div
+        className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ease-in-out ${
+          isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+        onClick={closeSidebar}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          closeSidebar();
+        }}
+        aria-hidden="true"
+      >
+        {/* Dark semi-transparent background */}
+        <div className="absolute inset-0 bg-black/25 backdrop-blur-[2px]" />
+      </div>
+
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled || isOpen
@@ -84,6 +128,7 @@ function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden relative w-10 h-10 flex items-center justify-center text-stone-700 z-10"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
             >
               <div className="w-5 h-4 relative flex flex-col justify-between">
                 {/* Top bar */}
@@ -166,18 +211,9 @@ function Navbar() {
           </div>
         </div>
       </nav>
-
-      {/* Backdrop overlay */}
-      <div
-        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
-          isOpen
-            ? "bg-black/20 pointer-events-auto opacity-100"
-            : "bg-transparent pointer-events-none opacity-0"
-        }`}
-        onClick={() => setIsOpen(false)}
-      />
     </>
   );
 }
 
 export default Navbar;
+
