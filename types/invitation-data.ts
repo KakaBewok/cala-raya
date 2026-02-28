@@ -1,5 +1,6 @@
 interface InvitationData {
   id: number;
+  user_id?: number;
   // grooms
   host_one_name: string;
   host_one_nickname: string;
@@ -62,6 +63,8 @@ export interface Music {
   title: string;
   artist: string;
   url: string;
+  public_id?: string;
+  resource_type?: string;
 }
 
 export interface Video {
@@ -71,6 +74,8 @@ export interface Video {
   description: string;
   url: string;
   thumbnail: string;
+  public_id?: string;
+  resource_type?: string;
   order_number: number;
 }
 
@@ -80,6 +85,8 @@ export interface Image {
   url: string;
   caption: string;
   type: string;
+  public_id?: string;
+  resource_type?: string;
   order_number: number;
 }
 
@@ -116,6 +123,8 @@ export interface Rundown {
   time_zone: string;
   description: string;
   image_url: string;
+  public_id?: string;
+  resource_type?: string;
   location_detail: string;
   order_number: number;
 }
@@ -126,6 +135,8 @@ export interface Story {
   title: string;
   content: string;
   image_url: string;
+  public_id?: string;
+  resource_type?: string;
   story_date: string;
   order_number: number;
 }

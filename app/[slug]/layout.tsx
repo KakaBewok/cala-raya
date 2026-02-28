@@ -1,4 +1,4 @@
-import db from "@/configs/db-config";
+import { publicInvitationService } from "@/services/PublicInvitationService";
 import { formatDate } from "@/utils/format-date";
 import { Metadata } from "next";
 
@@ -9,18 +9,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const slug = (await params).slug;
 
-  const { data, error } = await db
-    .from("invitations")
-    .select(
-      "host_one_nickname, host_two_nickname, event_title, slug, event_date, rundowns (*), images (*)"
-    )
-    .eq("slug", slug)
-    .limit(1);
+  const invitation = await publicInvitationService.getInvitationMetadata(slug);
 
-  const invitation = data?.[0];
-
-  if (!data || error) {
-    console.error("Error fetching invitation for metadata: ", error?.message);
+  if (!invitation) {
+    console.error("Invitation not found for slug:", slug);
     return {
       title: "Undangan tidak ditemukan",
       description: "Silakan periksa kembali link undangan Anda.",
@@ -32,7 +24,7 @@ export async function generateMetadata({
     };
   }
 
-  const previewImageObj = invitation?.images.find(
+  const previewImageObj = invitation.images.find(
     (image) => image.type === "preview"
   );
   const previewImage =

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -46,6 +46,10 @@ interface DataTableProps<TData extends DataWithId, TValue> {
   data: TData[];
   searchKey: string;
   onDelete: (ids: number[]) => void;
+  serverSidePagination?: boolean;
+  currentPage?: number;
+  totalPages?: number;
+  onPageChange?: (page: number) => void;
 }
 
 export function DataTable<TData extends DataWithId, TValue>({
@@ -53,6 +57,10 @@ export function DataTable<TData extends DataWithId, TValue>({
   data,
   searchKey,
   onDelete,
+  serverSidePagination = false,
+  currentPage = 1,
+  totalPages = 1,
+  onPageChange,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -60,6 +68,11 @@ export function DataTable<TData extends DataWithId, TValue>({
   const [rowSelection, setRowSelection] = useState({});
   const pageSizeOptions = ["5", "10", "20", "50"];
   const [pageSize, setPageSize] = useState<string>("10");
+
+  // Reset row selection when data changes (e.g., after delete, add, edit)
+  useEffect(() => {
+    setRowSelection({});
+  }, [data]);
 
   const handlePageSizeChange = (newSize: string) => {
     setPageSize(newSize);
@@ -77,11 +90,17 @@ export function DataTable<TData extends DataWithId, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    manualPagination: serverSidePagination,
+    pageCount: serverSidePagination ? totalPages : undefined,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
+      pagination: serverSidePagination ? {
+        pageIndex: currentPage - 1,
+        pageSize: Number(pageSize),
+      } : undefined,
     },
   });
 
@@ -93,9 +112,46 @@ export function DataTable<TData extends DataWithId, TValue>({
     onDelete(selectedIds);
   };
 
+  const curPage = serverSidePagination ? currentPage : table.getState().pagination.pageIndex + 1;
+  const totalPag = serverSidePagination ? totalPages : table.getPageCount();
+
+  const handleNextPage = () => {
+    if (serverSidePagination) {
+      onPageChange?.(currentPage + 1);
+    } else {
+      table.nextPage();
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (serverSidePagination) {
+      onPageChange?.(currentPage - 1);
+    } else {
+      table.previousPage();
+    }
+  };
+
+  const handleFirstPage = () => {
+    if (serverSidePagination) {
+      onPageChange?.(1);
+    } else {
+      table.setPageIndex(0);
+    }
+  };
+
+  const handleLastPage = () => {
+    if (serverSidePagination) {
+      onPageChange?.(totalPages);
+    } else {
+      table.setPageIndex(table.getPageCount() - 1);
+    }
+  };
+
+  const canPrevious = serverSidePagination ? currentPage > 1 : table.getCanPreviousPage();
+  const canNext = serverSidePagination ? currentPage < totalPages : table.getCanNextPage();
+
   return (
     <div className="cursor-pointer">
-      {/* search & visibility column*/}
       <div className="flex items-center gap-2 py-4">
         <Input
           placeholder="Search"
@@ -150,7 +206,6 @@ export function DataTable<TData extends DataWithId, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      {/* select all button */}
       <Button
         variant="outline"
         onClick={() =>
@@ -180,7 +235,6 @@ export function DataTable<TData extends DataWithId, TValue>({
       </Button>
       {selectedIds.length > 0 && (
         <div className="flex items-center justify-between w-full py-4">
-          {/* delete selected button */}
           <Button
             variant="destructive"
             className="flex items-center justify-between gap-2 dark:bg-red-500"
@@ -202,14 +256,12 @@ export function DataTable<TData extends DataWithId, TValue>({
             </svg>
             Delete selected
           </Button>
-          {/* number of selected rows */}
           <div className="text-sm text-muted-foreground">
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
         </div>
       )}
-      {/* main table */}
       <div className="border rounded-md">
         <Table className="border dark:border-slate-600 border-slate-300">
           <TableHeader>
@@ -270,34 +322,31 @@ export function DataTable<TData extends DataWithId, TValue>({
           </TableBody>
         </Table>
       </div>
-      {/* pagination */}
       <div className="flex items-center justify-between py-4">
-        {/* rows per page */}
-        <Select onValueChange={handlePageSizeChange} defaultValue={pageSize}>
-          <SelectTrigger className="w-[150px]">
-            <SelectValue placeholder="Rows per page" />
-          </SelectTrigger>
-          <SelectContent>
-            {pageSizeOptions.map((size) => (
-              <SelectItem key={size} value={size}>
-                Show {size} rows
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <div className="flex items-center justify-end gap-5">
-          {/* pages info */}
+        {!serverSidePagination && (
+          <Select onValueChange={handlePageSizeChange} defaultValue={pageSize}>
+            <SelectTrigger className="w-[150px]">
+              <SelectValue placeholder="Rows per page" />
+            </SelectTrigger>
+            <SelectContent>
+              {pageSizeOptions.map((size) => (
+                <SelectItem key={size} value={size}>
+                  Show {size} rows
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+        <div className="flex items-center justify-end gap-5 ml-auto">
           <span className="hidden text-sm font-medium md:block">
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount()}
+            Page {curPage} of {totalPag}
           </span>
-          {/* actions */}
           <div className="flex items-center justify-center gap-2">
             <Button
               variant="outline"
               size="sm"
-              onClick={() => table.setPageIndex(0)}
-              disabled={!table.getCanPreviousPage()}
+              onClick={handleFirstPage}
+              disabled={!canPrevious}
               className="px-1 dark:bg-slate-50 dark:text-slate-800"
             >
               <svg
@@ -318,8 +367,8 @@ export function DataTable<TData extends DataWithId, TValue>({
             <Button
               variant="outline"
               size="sm"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
+              onClick={handlePreviousPage}
+              disabled={!canPrevious}
               className="px-1 dark:bg-slate-50 dark:text-slate-800"
             >
               <svg
@@ -340,8 +389,8 @@ export function DataTable<TData extends DataWithId, TValue>({
             <Button
               variant="outline"
               size="sm"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
+              onClick={handleNextPage}
+              disabled={!canNext}
               className="px-1 dark:bg-slate-50 dark:text-slate-800"
             >
               <svg
@@ -362,8 +411,8 @@ export function DataTable<TData extends DataWithId, TValue>({
             <Button
               variant="outline"
               size="sm"
-              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-              disabled={!table.getCanNextPage()}
+              onClick={handleLastPage}
+              disabled={!canNext}
               className="px-1 dark:bg-slate-50 dark:text-slate-800"
             >
               <svg

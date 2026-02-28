@@ -135,7 +135,7 @@ export const GuestInputModal: React.FC<GuestInputModalProps> = ({
             onClick={handleSubmit}
             disabled={loading || guestList.length === 0}
           >
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </Button>
         </div>
       </div>
