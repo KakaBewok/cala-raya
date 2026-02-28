@@ -30,12 +30,17 @@ export async function generateMetadata({
   const previewImage =
     previewImageObj?.url ?? `${process.env.NEXT_PUBLIC_APP_URL_PROD!}/og-image.jpg`;
 
+  const firstRundownDate = invitation?.rundowns?.[0]?.date;
+  const formattedDate = firstRundownDate
+    ? (formatDate(firstRundownDate, true) ?? "Date not set")
+    : "Date not set";
+
   return {
     title: `${invitation?.host_one_nickname} ❤️ ${invitation?.host_two_nickname}`,
-    description: `${formatDate(invitation?.rundowns[0].date, true)}`,
+    description: formattedDate,
     openGraph: {
       title: `${invitation?.event_title}`,
-      description: `${formatDate(invitation?.rundowns[0].date, true)}`,
+      description: formattedDate,
       url: `${process.env.NEXT_PUBLIC_APP_URL_PROD!}/${slug}`,
       images: [
         {
@@ -48,7 +53,7 @@ export async function generateMetadata({
     twitter: {
     card: 'summary_large_image',
     title: `${invitation?.event_title}`,
-    description: `${formatDate(invitation?.rundowns[0].date, true)}`,
+    description: formattedDate,
     images: [previewImage], 
   },
   };
