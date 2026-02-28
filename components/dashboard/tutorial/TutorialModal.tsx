@@ -187,7 +187,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({ isOpen, onClose })
               <div className="mb-8 md:mb-10 animate-in fade-in slide-in-from-top-4 duration-500">
                 <div className="flex items-center justify-between mb-6 md:hidden">
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${steps[activeStep].gradient} flex items-center justify-center shadow-xl shadow-purple-500/20`}>
-                    {React.cloneElement(steps[activeStep].icon as React.ReactElement<any>, { 
+                   {React.cloneElement(steps[activeStep].icon as React.ReactElement<React.ComponentPropsWithoutRef<"svg">>, { 
                       className: "w-7 h-7 text-white" 
                     })}
                   </div>
@@ -197,7 +197,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({ isOpen, onClose })
                 </div>
 
                 <div className={`hidden md:flex w-16 h-16 rounded-2xl bg-gradient-to-br ${steps[activeStep].gradient} flex items-center justify-center mb-6 shadow-xl shadow-purple-500/20`}>
-                {React.cloneElement(steps[activeStep].icon as React.ReactElement<any>, { 
+                {React.cloneElement(steps[activeStep].icon as React.ReactElement<React.ComponentPropsWithoutRef<"svg">>, { 
                     className: "w-8 h-8 text-white" 
                 })}
                 </div>
