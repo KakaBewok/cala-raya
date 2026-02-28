@@ -72,7 +72,7 @@ export default function PasswordPage() {
         }
       }
     } catch (error: unknown) {
-      setMessage("An unexpected error occurred");
+      setMessage(error instanceof Error ? error.message : "An unexpected error occurred");
       clearMessage(4000);
     } finally {
       setProcessing(false);

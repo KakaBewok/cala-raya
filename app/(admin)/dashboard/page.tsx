@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { formatDate } from "@/utils/format-date";
-import InvitationData, { RSVP } from "@/types/invitation-data";
+import InvitationData from "@/types/invitation-data";
 
 // Helper function to format date time
 const formatDateTime = (date: Date | string): string => {
