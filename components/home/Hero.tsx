@@ -18,10 +18,10 @@ function Hero() {
           </p>
 
           {/* Headline */}
-          <h1 className="text-[2.25rem] md:text-[3.25rem] lg:text-[3.75rem] leading-[1.1] font-semibold text-stone-900 mb-6 tracking-tight">
-          Platform yang Dirancang
-            <br />
-            <span className="text-stone-400">untuk Tampil Beda.</span>
+          <h1 className="uppercase text-[2.25rem] md:text-[3.25rem] lg:text-[3.75rem] leading-[1.1] font-semibold text-stone-900 mb-6 tracking-tight">
+          Ekspresikan Cerita Kamu {" "}
+            {/* <br /> */}
+            <span className="text-stone-400">Lewat Sentuhan Digital</span>
           </h1>
 
           {/* Subheadline */}

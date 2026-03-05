@@ -19,7 +19,7 @@ const CONTACT_PERSON = process.env.NEXT_PUBLIC_CONTACT_PERSON!;
 const contact = {
   email: "calarayaproject@gmail.com",
   phone: CONTACT_PERSON,
-  address: "Tangerang Selatan, Indonesia",
+  address: "Tangerang Selatan & Bogor, Indonesia",
 };
 
 const socialMedia = [
@@ -40,8 +40,8 @@ const faqs = [
     a: "Bisa, kami menyediakan unlimited revisi untuk undangan digital dan menyesuaikan untuk revisi website hingga hasil sesuai keinginan.",
   },
   {
-    q: "Website pakai teknologi apa?",
-    a: "Kami menggunakan teknologi modern seperti Next.js, React, Laravel dan Tailwind CSS untuk website yang cepat dan responsive.",
+    q: "Apakah bisa custom tema undangan?",
+    a: "bisa banget, kami menyediakan custom tema undangan sesuai dengan keinginan.",
   },
   {
     q: "Bagaimana cara pembayaran?",
@@ -83,6 +83,15 @@ const portfolios = [
     url: "https://qatiarent.com/",
   },
   {
+    title: "Nadiah & Haris",
+    description: "",
+    product: "Undangan Digital",
+    type: "Monochrome",
+    image:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766313919/personal/web-porto/nadhar_rginzu.png",
+    url: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
+  },
+  {
     title: "Dinna & Hudha",
     description: "",
     product: "Undangan Digital",
@@ -91,14 +100,41 @@ const portfolios = [
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994579/personal/web-porto/stylishbold_armbt3.png",
     url: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
   },
-  {
-    title: "Reigiya & Amar",
+   {
+    title: "Bella & Syafik",
     description: "",
     product: "Undangan Digital",
-    type: "Maroon",
+    type: "Netflix",
     image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994308/personal/web-porto/maroon_aohj7a.png",
-    url: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1772735950/personal/web-porto/Screenshot_2026-03-06_013639_kiummn.png",
+    url: "https://calaraya.vercel.app/bella-syafik?id=JnfkdW",
+  },
+  {
+    title: "Ridho & Sasa",
+    description: "",
+    product: "Undangan Digital",
+    type: "Magazine",
+    image:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766314852/personal/web-porto/sasa_ridho_xqorpc.png",
+    url: "https://calaraya.vercel.app/ridho-sasa?id=6xCqNG",
+  },
+  {
+    title: "Naomi & Rayhan",
+    description: "",
+    product: "Undangan Digital",
+    type: "Magazine",
+    image:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766311068/personal/web-porto/magazine_naomi_xmtaes.png",
+    url: "https://calaraya.vercel.app/naomi-rayhan?id=k5HWZ",
+  },
+  {
+    title: "Shamil & Sarah",
+    description: "",
+    product: "Undangan Digital",
+    type: "Maroon Custom",
+    image:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766314647/personal/web-porto/shamilsarah_a6vjfd.png",
+    url: "https://calaraya.vercel.app/sarah-shamil?id=3otO5E",
   },
   {
     title: "Rahma & Jalal",
@@ -110,6 +146,15 @@ const portfolios = [
     url: "https://calaraya.vercel.app/rahma-jalal?id=Gku6G",
   },
   {
+    title: "Gabriel & Rilly",
+    description: "",
+    product: "Undangan Digital",
+    type: "Magazine",
+    image:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1772739077/personal/web-porto/repisi_lyqjbk.png",
+    url: "https://calaraya.vercel.app/gabriel-rilly?id=ENSWl4",
+  },
+  {
     title: "Ilham & Rosi",
     description: "",
     product: "Undangan Digital",
@@ -117,15 +162,6 @@ const portfolios = [
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992923/personal/web-porto/floral_lund0v.png",
     url: "https://calaraya.vercel.app/ilham-rosi?id=O9IPp",
-  },
-  {
-    title: "Bella & Syafik",
-    description: "",
-    product: "Undangan Digital",
-    type: "Netflix",
-    image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992495/personal/web-porto/netflix_jmoiic.png",
-    url: "https://calaraya.vercel.app/bella-syafik?id=OkfVBm",
   },
   {
     title: "Agung & Dessy",
@@ -155,13 +191,13 @@ const portfolios = [
     url: "https://calaraya.vercel.app/ferdy-irma?id=BMCXM",
   },
   {
-    title: "Naomi & Rayhan",
+    title: "Reigiya & Amar",
     description: "",
     product: "Undangan Digital",
-    type: "Magazine",
+    type: "Maroon",
     image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766311068/personal/web-porto/magazine_naomi_xmtaes.png",
-    url: "https://calaraya.vercel.app/naomi-rayhan?id=k5HWZ",
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1772739451/personal/web-porto/regiya_jamf7h.png",
+    url: "https://calaraya.vercel.app/reigiya-amar?id=1XsqW",
   },
   {
     title: "Choirul & Amanda",
@@ -191,15 +227,6 @@ const portfolios = [
     url: "https://calaraya.vercel.app/riko-shelly?id=lyhwL",
   },
   {
-    title: "Nadiah & Haris",
-    description: "",
-    product: "Undangan Digital",
-    type: "Monochrome",
-    image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766313919/personal/web-porto/nadhar_rginzu.png",
-    url: "https://calaraya.vercel.app/nadiah-haris?id=XyUaw",
-  },
-  {
     title: "Ikhsan & Tasya",
     description: "",
     product: "Undangan Digital",
@@ -207,24 +234,6 @@ const portfolios = [
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1766314384/personal/web-porto/ikhsan_tasya_vnqmcd.png",
     url: "https://calaraya.vercel.app/ihksan-tasya?id=n4cBkO",
-  },
-  {
-    title: "Shamil & Sarah",
-    description: "",
-    product: "Undangan Digital",
-    type: "Maroon Custom",
-    image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766314647/personal/web-porto/shamilsarah_a6vjfd.png",
-    url: "https://calaraya.vercel.app/sarah-shamil?id=3otO5E",
-  },
-  {
-    title: "Ridho & Sasa",
-    description: "",
-    product: "Undangan Digital",
-    type: "Magazine",
-    image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1766314852/personal/web-porto/sasa_ridho_xqorpc.png",
-    url: "https://calaraya.vercel.app/ridho-sasa?id=6xCqNG",
   },
 ];
 
@@ -319,6 +328,16 @@ const reviews = [
     reviewImage:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1767068847/personal/web-porto/testimonials/WhatsApp_Image_2025-12-30_at_11.24.16_AM_a8u0tu.jpg",
   },
+  {
+    name: "Gabriel & Rilly",
+    rating: 5,
+    product: "Undangan Digital",
+    type: "Magazine",
+    comment:
+      "Overall aku suka bgt sih kak, designya minimalist tapi bagus, terus aku juga happy karena bisa dicustom sesuai sama requestku....",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1772737520/personal/web-porto/testimonials/Screenshot_2026-03-06_020420_qwjcsx.png",
+  },
 ];
 
 const allThemes = [
@@ -328,8 +347,8 @@ const allThemes = [
     category: "Wedding",
     price: "Rp 100.000",
     image:
-      "https://res.cloudinary.com/dk16ng09n/image/upload/v1765992495/personal/web-porto/netflix_jmoiic.png",
-    previewUrl: "https://calaraya.vercel.app/bella-syafik?id=OkfVBm",
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1772735950/personal/web-porto/Screenshot_2026-03-06_013639_kiummn.png",
+    previewUrl: "https://calaraya.vercel.app/bella-syafik?id=JnfkdW",
     features: [
       "Auto Scroll",
       "RSVP",

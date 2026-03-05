@@ -82,7 +82,7 @@ export default function Thumbnail() {
                 Coming Soon
               </span>
               <p className="text-sm">
-                {formatDate(data?.event_date || null, true, "en-US")}
+                {formatDate(data?.rundowns?.[0]?.date || null, true, "en-US")}
               </p>
             </div>
           </div>

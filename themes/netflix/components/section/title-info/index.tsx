@@ -28,7 +28,9 @@ export default function TitleInfo() {
           SU
         </span>
         <span className="mr-2 text-white">
-          {data?.event_date.split("-")[0]}
+          {data?.rundowns?.[0]?.date
+            ? new Date(data.rundowns[0].date).getFullYear()
+            : "-"}
         </span>
         <span className="mr-2 text-white">1h 26m</span>
         <span>
@@ -49,7 +51,7 @@ export default function TitleInfo() {
         </span>
       </div>
       <div className="w-fit rounded bg-[#E50913] px-2 py-1 text-xs font-bold text-white">
-        Coming soon on {formatDate(data?.event_date || null, true, "en-US")}
+        Coming soon on {formatDate(data?.rundowns?.[0]?.date || null, true, "en-US")}
       </div>
       <div className="pt-2">
         <p className="mb-2 text-sm leading-[1.15rem] text-white">

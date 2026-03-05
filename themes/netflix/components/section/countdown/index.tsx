@@ -14,7 +14,7 @@ export default function Countdown() {
   const { invitationData: data } = useInvitation();
 
   const calculateTimeLeft = (): TimeLeft | null => {
-    const targetDateTime = `${data?.event_date}T00:00:00+07:00`; // WIB timezone
+    const targetDateTime = `${data?.rundowns?.[0]?.date}T00:00:00+07:00`; // WIB timezone
     const difference = +new Date(targetDateTime) - +new Date();
 
     if (difference > 0) {
