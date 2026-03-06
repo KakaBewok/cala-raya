@@ -26,7 +26,7 @@ function Hero() {
 
           {/* Subheadline */}
           <p className="text-[15px] md:text-lg text-stone-500 leading-relaxed max-w-lg mb-10">
-          Kustomisasi tanpa batas untuk menghadirkan tampilan digital yang benar-benar mewakili gaya kamu.
+          Kustomisasi tanpa batas untuk menghadirkan tampilan digital yang benar-benar mewakili gayamu.
           </p>
 
           {/* CTAs */}
