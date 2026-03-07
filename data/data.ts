@@ -75,7 +75,7 @@ const portfolios = [
   {
     title: "Qatia Rent",
     description:
-      "Admin Page - Order Form - Email Notification - Product Management - Dashboard",
+      "Admin Page - Order Form - Email Notification - Product Management - Dashboard - PWA",
     product: "Website", 
     type: "Rental Website",
     image:
