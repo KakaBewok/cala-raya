@@ -29,7 +29,8 @@ html {
   --color-line-stylishb: oklch(51.4% 0.222 16.935);
   --color-text-stylishb: oklch(41% 0.159 10.272); */
 
-  --color-primary-stylishb: #557949;
+  /* --color-primary-stylishb: #557949; */
+  --color-primary-stylishb: #4D5038;
   --color-line-stylishb: #557949;
   --color-text-stylishb: #557949;
   --color-secondary-stylishb: #D2CBB6;

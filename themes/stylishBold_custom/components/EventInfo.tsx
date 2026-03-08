@@ -99,6 +99,7 @@ const EventInfo = () => {
                 className={`${nyghtSerif.className} text-text-stylishb text-4xl font-medium`}
               >
                 <p>{rundown.title}</p>
+                <p className="text-xs font-light">{rundown.description}</p>
                 <div className="mt-2 w-14 h-[0.9px] bg-text-stylishb" />
               </div>
               <div
