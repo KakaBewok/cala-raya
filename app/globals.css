@@ -219,3 +219,21 @@ html {
 .swing-right-fast {
   animation: swingToRight 2.6s ease-in-out infinite;
 }
+@keyframes steamRise {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: translateY(-8px) scale(1.5); opacity: 0; }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-steam {
+  animation: steamRise 2s infinite ease-out;
+}
+
+.animate-float {
+  animation: floatGentle 3s infinite ease-in-out;
+}

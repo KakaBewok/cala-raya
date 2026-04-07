@@ -1,4 +1,5 @@
 import {
+  Comic_Neue,
   Geist,
   Geist_Mono,
   GFS_Didot,
@@ -10,6 +11,14 @@ import {
   Roboto,
 } from "next/font/google";
 import localFont from "next/font/local";
+
+// default font for the app
+export const comicSans = Comic_Neue({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-comic-sans",
+  display: "swap",
+});
 
 // default font for the app
 export const geistSans = Geist({
