@@ -269,14 +269,17 @@ const RSVP = () => {
             data-aos="fade-up"
           >
             <span
-              className={`text-white tracking-tight font-light italic text-sm ${nyghtSerif.className} leading-none`}
+              className={`text-white tracking-wide font-light italic text-sm ${nyghtSerif.className} leading-none`}
             >
-              kini berdua
+              #EAternity
             </span>
-            <span
+            {/* <span
               className={`${theSecret.className} text-[44px] font-normal text-line-stylishb leading-none`}
+            > */}
+            <span
+              className={`text-white tracking-wide font-light italic text-sm ${nyghtSerif.className} leading-none`}
             >
-              menuju serumah
+              #happilyEverAfter
             </span>
           </div>
         </div>
