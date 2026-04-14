@@ -124,6 +124,7 @@ const RSVP = () => {
                   onChange={handleChange}
                   className="font-light text-center w-full bg-transparent border-0 border-b-2 appearance-none focus:outline-none py-2 text-sm "
                 >
+                  <option value="" disabled>Pilih Kehadiran</option>
                   <option
                     className="hover:text-slate-800 text-slate-800"
                     value="1"
