@@ -100,7 +100,7 @@ const portfolios = [
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1765994579/personal/web-porto/stylishbold_armbt3.png",
     url: "https://calaraya.vercel.app/dinna-hudha?id=6yTQy",
   },
-   {
+  {
     title: "Bella & Syafik",
     description: "",
     product: "Undangan Digital",
@@ -235,6 +235,15 @@ const portfolios = [
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1766314384/personal/web-porto/ikhsan_tasya_vnqmcd.png",
     url: "https://calaraya.vercel.app/ihksan-tasya?id=n4cBkO",
   },
+  {
+    title: "Amry & Erinka",
+    description: "",
+    product: "Undangan Digital",
+    type: "Maroon Custom",
+    image:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1776399437/personal/web-porto/marooncustom_jxuweq.png",
+    url: "https://calaraya.vercel.app/amry-erinka?id=QQty2V",
+  },
 ];
 
 const reviews = [
@@ -337,6 +346,16 @@ const reviews = [
       "Overall aku suka bgt sih kak, designya minimalist tapi bagus, terus aku juga happy karena bisa dicustom sesuai sama requestku....",
     reviewImage:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1772737520/personal/web-porto/testimonials/Screenshot_2026-03-06_020420_qwjcsx.png",
+  },
+  {
+    name: "Amry & Erinka",
+    rating: 5,
+    product: "Undangan Digital",
+    type: "Maroon Custom",
+    comment:
+      "Pelayanannya bagus dari aku yang banyak mau dan banyak revisi...",
+    reviewImage:
+      "https://res.cloudinary.com/dk16ng09n/image/upload/v1776399591/personal/web-porto/testimonials/WhatsApp_Image_2026-04-16_at_4.03.20_PM_dmo9zm.jpg",
   },
 ];
 
