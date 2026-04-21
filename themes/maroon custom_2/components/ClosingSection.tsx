@@ -11,12 +11,12 @@ const ClosingSection = () => {
       {/* Watermark */}
       <div className="w-full h-60 overflow-hidden bg-rose-900 flex justify-center items-center">
         <div
-          className={`${amalfiCoast.className} flex flex-col justify-center items-center text-8xl font-light text-white transform -rotate-35 select-none`}
+          className={`${amalfiCoast.className} flex flex-col justify-center items-center text-8xl font-light text-white transform -rotate-25 select-none`}
         >
           <p className="tracking-tighter">
             {data?.host_two_nickname.toLocaleLowerCase()}
           </p>
-          <p className="tracking-tighter">
+          <p className="-mt-3 tracking-tighter">
             {data?.host_one_nickname.toLocaleLowerCase()}
           </p>
         </div>

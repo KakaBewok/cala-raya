@@ -10,36 +10,71 @@ import Image from "next/image";
 const EventInfo = () => {
   const { invitationData: data } = useInvitation();
 
+  // const generateGoogleCalendarUrl = (rundown: Rundown): string => {
+  //   const date = rundown.date;
+  //   const startTime = rundown.start_time;
+  //   const endTime = rundown.end_time || startTime;
+
+  //   const startDateTimeISO = `${date}T${startTime}`;
+  //   const endDateTimeISO = `${date}T${endTime}`;
+
+  //   const start = DateTime.fromISO(startDateTimeISO)
+  //     .toUTC()
+  //     .toFormat("yyyyLLdd'T'HHmmss'Z'");
+  //   const end = DateTime.fromISO(endDateTimeISO)
+  //     .toUTC()
+  //     .toFormat("yyyyLLdd'T'HHmmss'Z'");
+
+  //   const eventTitle = data?.event_title || "Wedding Event";
+  //   const location = rundown.location || "-";
+  //   const rundownTitle = `(${rundown.title})` || ``;
+  //   const description = `${eventTitle} will be held at ${location} ${rundownTitle}`;
+
+  //   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+  //     eventTitle
+  //   )}&dates=${start}/${end}&details=${encodeURIComponent(
+  //     description
+  //   )}&location=${encodeURIComponent(
+  //     rundown.location_url || ""
+  //   )}&ctz=Asia/Jakarta`;
+
+  //   return googleCalendarUrl;
+  // };
+
   const generateGoogleCalendarUrl = (rundown: Rundown): string => {
-    const date = rundown.date;
-    const startTime = rundown.start_time;
-    const endTime = rundown.end_time || startTime;
-
-    const startDateTimeISO = `${date}T${startTime}`;
-    const endDateTimeISO = `${date}T${endTime}`;
-
-    const start = DateTime.fromISO(startDateTimeISO)
-      .toUTC()
-      .toFormat("yyyyLLdd'T'HHmmss'Z'");
-    const end = DateTime.fromISO(endDateTimeISO)
-      .toUTC()
-      .toFormat("yyyyLLdd'T'HHmmss'Z'");
-
-    const eventTitle = data?.event_title || "Wedding Event";
-    const location = rundown.location || "-";
-    const rundownTitle = `(${rundown.title})` || ``;
-    const description = `${eventTitle} will be held at ${location} ${rundownTitle}`;
-
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-      eventTitle
-    )}&dates=${start}/${end}&details=${encodeURIComponent(
-      description
-    )}&location=${encodeURIComponent(
-      rundown.location_url || ""
-    )}&ctz=Asia/Jakarta`;
-
-    return googleCalendarUrl;
-  };
+      const dateObj = DateTime.fromJSDate(rundown.date as unknown as Date, { zone: 'Asia/Jakarta' });
+      const date = dateObj.toFormat('yyyy-LL-dd');
+  
+      const startTimeObj = DateTime.fromJSDate(rundown.start_time as unknown as Date, { zone: 'UTC' });
+      const endTimeObj = DateTime.fromJSDate((rundown.end_time || rundown.start_time) as unknown as Date, { zone: 'UTC' });
+  
+      const startTime = startTimeObj.toFormat('HH:mm:ss'); // "15:00:00" ✅
+      const endTime = endTimeObj.toFormat('HH:mm:ss');     // "16:00:00" ✅
+  
+      const start = DateTime.fromISO(`${date}T${startTime}`, { zone: 'Asia/Jakarta' })
+        .toUTC()
+        .toFormat("yyyyLLdd'T'HHmmss'Z'");
+  
+      const end = DateTime.fromISO(`${date}T${endTime}`, { zone: 'Asia/Jakarta' })
+        .toUTC()
+        .toFormat("yyyyLLdd'T'HHmmss'Z'");
+  
+      console.log('date:', date, '| startTime:', startTime, '| endTime:', endTime);
+      console.log('start formatted:', start);
+      console.log('end formatted:', end);
+  
+      const eventTitle = data?.event_title || "Wedding Event";
+      const location = rundown.location || "-";
+      const rundownTitle = rundown.title ? `(${rundown.title})` : '';
+      const description = `${eventTitle} will be held at ${location} ${rundownTitle}`;
+  
+      return `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+        `&text=${encodeURIComponent(eventTitle)}` +
+        `&dates=${start}/${end}` +
+        `&details=${encodeURIComponent(description)}` +
+        `&location=${encodeURIComponent(rundown.location_url || '')}` +
+        `&ctz=Asia/Jakarta`;
+    };
 
   return (
     <section className="relative w-full h-auto bg-white overflow-hidden">
@@ -51,53 +86,112 @@ const EventInfo = () => {
           ?.sort((a, b) => a.order_number - b.order_number)
           .map((rundown, index) => (
             <div
-              className="p-6 w-full gap-4 flex flex-col justify-center items-center"
+              className="p-8 w-full flex flex-col justify-center items-center"
               key={index}
             >
               <h1
                 className={`
-                px-5
-                pb-3
-                w-fit
-                border-b-1 border-rose-900
-                text-2xl font-light text-rose-900
-                mb-5
-            `}
+                  px-6
+                  pb-2
+                  w-fit
+                  border-b border-rose-800/60
+                  text-2xl font-light tracking-[0.2em] text-rose-900
+                  mb-6
+                `}
               >
                 {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
               </h1>
-              <p className={`text-md font-light text-rose-900`}>
-                {formatDate(rundown.date, true)?.toUpperCase()}
-              </p>
-              <p
-                className={`${gandhiSerif.className} text-sm font-light text-rose-900`}
-              >
-                {formatTime(rundown.start_time)} {rundown.time_zone}{" "}
-                <span>-</span>{" "}
-                {rundown.end_time
-                  ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
-                  : "selesai"}{" "}
-              </p>
+
+              {/* DATE & TIME GROUP */}
+              <div className="flex flex-col items-center gap-1 mb-4">
+                <p className="text-base font-medium tracking-widest text-rose-900">
+                  {formatDate(rundown.date, true)?.toUpperCase()}
+                </p>
+                <p className={`${gandhiSerif.className} text-sm font-light text-rose-900`}>
+                  {formatTime(rundown.start_time)} {rundown.time_zone}
+                  {" — "}
+                  {rundown.end_time
+                    ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
+                    : "Selesai"}
+                </p>
+              </div>
+
               <Link
                 href={generateGoogleCalendarUrl(rundown)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-xs font-medium underline text-rose-900`}
+                className="text-[10px] tracking-wider font-medium underline underline-offset-4 text-rose-900 hover:text-rose-800 transition-colors mb-8"
               >
                 Tambah ke Kalender
               </Link>
-              <p
-                className={`mt-4 text-xs font-light text-rose-900 text-center w-3/4`}
-              >
-                {rundown.location}
-              </p>
+
+              {/* LOCATION GROUP */}
+              <div className="flex flex-col items-center mb-6">
+                <h2 className="text-lg font-semibold text-rose-900 text-center leading-tight">
+                  {rundown.location}
+                </h2>
+                <p className="text-[11px] leading-relaxed font-light text-rose-800 text-center w-3/4 mt-1">
+                  {rundown.location_detail}
+                </p>
+              </div>
+
+              {/* ACTION BUTTON */}
               <Link
                 href={rundown?.location_url || "#"}
-                className="py-2 px-4 text-xs bg-rose-900 text-white cursor-pointer hover:bg-rose-950"
+                className="mt-2 py-3 px-8 text-[11px] tracking-[0.15em] bg-rose-900 text-white font-medium hover:bg-rose-950 transition-all shadow-sm"
               >
                 LIHAT LOKASI
               </Link>
             </div>
+            // <div
+            //   className="p-6 w-full gap-4 flex flex-col justify-center items-center"
+            //   key={index}
+            // >
+            //   <h1
+            //     className={`
+            //     px-5
+            //     pb-3
+            //     w-fit
+            //     border-b-1 border-rose-900
+            //     text-2xl font-light text-rose-900
+            //     mb-5
+            // `}
+            //   >
+            //     {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
+            //   </h1>
+            //   <p className={`text-sm font-light text-rose-900`}>
+            //     {formatDate(rundown.date, true)?.toUpperCase()}
+            //   </p>
+            //   <p
+            //     className={`${gandhiSerif.className} text-sm font-light text-rose-900`}
+            //   >
+            //     {formatTime(rundown.start_time)} {rundown.time_zone}{" "}
+            //     <span>-</span>{" "}
+            //     {rundown.end_time
+            //       ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
+            //       : "selesai"}{" "}
+            //   </p>
+            //   <Link
+            //     href={generateGoogleCalendarUrl(rundown)}
+            //     target="_blank"
+            //     rel="noopener noreferrer"
+            //     className={`text-sm font-medium underline text-rose-900`}
+            //   >
+            //     Tambah ke Kalender
+            //   </Link>
+            //   <h2
+            //     className={`leading-none mt-4 text-sm font-medium text-rose-800 text-center`}
+            //   >
+            //     {rundown.location}
+            //   </h2>
+            //   <p className={`text-[11px] font-light text-rose-800 text-center w-3/4`}>{rundown.location_detail}</p>
+            //   <Link
+            //     href={rundown?.location_url || "#"}
+            //     className="py-2 px-4 text-xs bg-rose-900 text-white cursor-pointer hover:bg-rose-950"
+            //   >
+            //     LIHAT LOKASI
+            //   </Link>
+            // </div>
           ))}
       </div>
       <Image

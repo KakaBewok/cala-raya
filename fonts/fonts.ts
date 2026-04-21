@@ -9,6 +9,7 @@ import {
   Poppins,
   Raleway,
   Roboto,
+  Spectral,
 } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -30,6 +31,12 @@ export const geistSans = Geist({
 export const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+export const spectral = Spectral({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-spectral",
 });
 
 export const roboto = Roboto({

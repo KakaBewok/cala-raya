@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import { useInvitation } from "@/hooks/use-invitation";
-import { amalfiCoast, ninfa } from "@/fonts/fonts";
+import { amalfiCoast, ninfa, spectral } from "@/fonts/fonts";
 import { Button } from "@/components/ui/button";
 import SwipeHandIcon from "./SwipeHandIcon";
 
@@ -22,7 +22,7 @@ interface LayoutColumn {
 const VerticalGallery = () => {
   const { invitationData: data } = useInvitation();
   const scrollRef = React.useRef<HTMLDivElement>(null);
-  const [isGalleryOpen, setIsGalleryOpen] = React.useState<boolean>(false);
+  const [isGalleryOpen, setIsGalleryOpen] = React.useState<boolean>(true);
   const [hasUserSwiped, setHasUserSwiped] = React.useState<boolean>(false);
 
   const eventDate = new Date(data?.event_date ?? "");
@@ -145,7 +145,7 @@ const VerticalGallery = () => {
         onClick={toggleGallery}
         className={`${
           ninfa.className
-        } transition-all duration-800 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-4 flex items-center gap-2 font-light ${
+        } hidden transition-all duration-800 ease-out cursor-pointer text-white absolute bottom-24 left-1/2 transform -translate-x-1/2 z-40 px-4 py-4 items-center gap-2 font-light ${
           isGalleryOpen
             ? "bg-neutral-400 text-white rounded-lg border-none"
             : "bg-rose-900 rounded-none"
@@ -197,7 +197,7 @@ const VerticalGallery = () => {
                     }`}
                   >
                     <div>{day}</div>
-                    <div>{month}</div>
+                    <div className={`${spectral.className} text-neutral-600 font-medium text-2xl`}>{month}</div>
                     <div>{year}</div>
                   </div>
                   <Image

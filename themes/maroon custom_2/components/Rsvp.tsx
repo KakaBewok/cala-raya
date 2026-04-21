@@ -18,12 +18,13 @@ const RSVP = () => {
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState({
+    guest_name: guest?.name,
     message: "",
     attending: "",
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement | HTMLInputElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -54,7 +55,7 @@ const RSVP = () => {
     } else {
       fetchData();
       toast.success("RSVP berhasil dikirim. Terima kasih!");
-      setForm({ message: "", attending: "" });
+      setForm({ guest_name: guest?.name, message: "", attending: "" });
     }
   };
 
@@ -86,6 +87,22 @@ const RSVP = () => {
         <div className="w-28 h-px bg-rose-900 mb-8" />
 
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6">
+          <div>
+            <label
+              className={`block text-xs tracking-wide text-rose-900 font-medium mb-2`}
+            >
+              NAMA
+            </label>
+            <input
+              type="text"
+              name="guest_name"
+              value={form.guest_name}
+              onChange={handleChange}
+              placeholder="Nama"
+              className="text-rose-900 text-xs w-full bg-white px-4 py-3 focus:outline-none focus:ring-1 focus:ring-neutral-400"
+              required
+            />
+          </div>
           {/* Message */}
           <div>
             <label
@@ -121,7 +138,7 @@ const RSVP = () => {
               <option value="">Pilih</option>
               <option value="1">1 Orang</option>
               <option value="2">2 Orang</option>
-              <option value="3">Lebih dari 2 orang</option>
+              {/* <option value="3">Lebih dari 2 orang</option> */}
               <option value="0">Tidak Hadir</option>
             </select>
           </div>
