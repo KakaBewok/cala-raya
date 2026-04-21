@@ -14,7 +14,7 @@ import GiftInfo from "./GiftInfo";
 import ClosingSection from "./ClosingSection";
 import Footer from "./Footer";
 import Greetings from "./Greetings";
-// import Gallery from "./Gallery";
+import Gallery from "./Gallery";
 
 export default function MainPage({
   isOpenInvitation,
@@ -37,7 +37,7 @@ export default function MainPage({
       <Brides />
       <Grooms />
       <EventInfo />
-      {/* <Gallery /> */}
+      <Gallery />
       <RSVP />
       <GiftInfo />
       <ClosingSection />

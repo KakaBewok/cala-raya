@@ -1,7 +1,7 @@
 import { gandhiSerif, ninfa } from "@/fonts/fonts";
 import { useInvitation } from "@/hooks/use-invitation";
 import { Rundown } from "@/types/invitation-data";
-// import { formatDate } from "@/utils/format-date";
+import { formatDate } from "@/utils/format-date";
 import { formatTime } from "@/utils/format-time";
 import { DateTime } from "luxon";
 import Link from "next/link";
@@ -60,15 +60,14 @@ const EventInfo = () => {
                 pb-3
                 w-fit
                 border-b-1 border-rose-900
-                text-2xl font-medium text-rose-900
+                text-2xl font-light text-rose-900
                 mb-5
             `}
               >
                 {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
               </h1>
               <p className={`text-md font-light text-rose-900`}>
-                AHAD, 16 NOVEMBER 2025
-                {/* {formatDate(rundown.date, true)?.toUpperCase()} */}
+                {formatDate(rundown.date, true)?.toUpperCase()}
               </p>
               <p
                 className={`${gandhiSerif.className} text-sm font-light text-rose-900`}
@@ -83,29 +82,21 @@ const EventInfo = () => {
                 href={generateGoogleCalendarUrl(rundown)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-xs font-light underline text-rose-900`}
+                className={`text-xs font-medium underline text-rose-900`}
               >
                 Tambah ke Kalender
               </Link>
               <p
-                className={`mt-4 text-md font-light text-rose-900 text-center w-3/4`}
+                className={`mt-4 text-xs font-light text-rose-900 text-center w-3/4`}
               >
                 {rundown.location}
               </p>
-              {rundown.location_detail && (
-                <p
-                  className={` mt-0 text-xs font-light text-rose-900 opacity-100 text-center w-3/4`}
-                >
-                  {rundown.location_detail}
-                </p>
-              )}
-
-              {/* <Link
+              <Link
                 href={rundown?.location_url || "#"}
                 className="py-2 px-4 text-xs bg-rose-900 text-white cursor-pointer hover:bg-rose-950"
               >
                 LIHAT LOKASI
-              </Link> */}
+              </Link>
             </div>
           ))}
       </div>
@@ -124,7 +115,7 @@ const EventInfo = () => {
         width={115}
         height={115}
         alt="Kanan"
-        className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-11 rotate-[40deg]"
+        className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-6 rotate-[40deg]"
       />
     </section>
   );

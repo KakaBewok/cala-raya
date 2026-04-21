@@ -37,13 +37,9 @@ const ClosingSection = () => {
           className={`${playfair.className} absolute right-0 top-0  text-neutral-200 p-6 text-right`}
           data-aos="fade-up"
         >
-          {data?.host_one_social_media ||
-            (data?.host_two_social_media && (
-              <p className="text-xs font-medium mb-3">
-                Bagikan hari bahagia di Instagram dan tag kami
-              </p>
-            ))}
-
+          <p className="text-xs font-medium mb-3">
+            Bagikan hari bahagia di Instagram dan tag kami
+          </p>
           <Link
             href={`https://www.instagram.com/explore/tags/${data?.host_one_nickname}${data?.host_two_nickname}`}
             className="text-lg tracking-wide font-medium underline"

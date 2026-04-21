@@ -12,7 +12,7 @@ const Bismillah = () => {
         data-aos="fade-up"
       />
       <p
-        className={`${ninfa.className} text-xs text-slate-700 font-light tracking-wider`}
+        className={`${ninfa.className} text-xs text-rose-900 font-light tracking-wider`}
         data-aos="fade-up"
         data-aos-offset="100"
       >

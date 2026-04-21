@@ -136,9 +136,9 @@ export default function OpeningScreen({
                 <h1
                   className={`leading-20 transform -rotate-[27deg] ${amalfiCoast.className} text-5xl text-rose-900 tracking-widest font-light italic`}
                 >
-                  {data?.host_one_nickname} <br />{" "}
+                  {data?.host_two_nickname} <br />{" "}
                   <span className="text-3xl">and</span>{" "}
-                  {data?.host_two_nickname}
+                  {data?.host_one_nickname}
                 </h1>
               </div>
             </div>
