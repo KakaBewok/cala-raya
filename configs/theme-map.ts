@@ -9,7 +9,7 @@ import { ThemeName } from "@/types/theme-name";
 import MaroonMonochromePage from "@/themes/maroon_monochrome/MaroonMonochromePage";
 import MagazinePageCustom from "@/themes/magazine_custom/MagazinePageCustom";
 import StylishBoldPageCustom from "@/themes/stylishBold_custom/StylishBoldPageCustom";
-import MaroonPageCustom2 from "@/themes/maroon_custom_2/MaroonPageCustom2";
+import MaroonPageCustom2 from "@/themes/maroon custom_2/MaroonPageCustom2";
 
 export const themeMap: Record<ThemeName, React.ComponentType> = {
   monochrome: MonochromePage,
