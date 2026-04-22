@@ -10,6 +10,7 @@ import {
   Raleway,
   Roboto,
   Spectral,
+  Cedarville_Cursive,
 } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -37,6 +38,12 @@ export const spectral = Spectral({
   subsets: ["latin"],
   weight: ["400", "600"],
   variable: "--font-spectral",
+});
+
+export const cursiveFont = Cedarville_Cursive({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-cursive",
 });
 
 export const roboto = Roboto({

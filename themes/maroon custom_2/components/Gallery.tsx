@@ -112,7 +112,7 @@ const VerticalGallery = () => {
   }, [images]);
 
   return (
-    <div className="relative w-full h-screen bg-[#f8f5ef] overflow-hidden">
+    <div className="relative w-full h-screen bg-[#FFF9F5] overflow-hidden">
       {/* Door Effect Top */}
       <div
         className={`absolute top-0 left-0 w-full h-1/2 z-30 transition-transform duration-2000 ease-in-out ${

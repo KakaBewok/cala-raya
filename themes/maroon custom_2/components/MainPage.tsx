@@ -15,6 +15,7 @@ import ClosingSection from "./ClosingSection";
 import Footer from "./Footer";
 import Greetings from "./Greetings";
 import Gallery from "./Gallery";
+import Couple from "./Couple";
 
 export default function MainPage({
   isOpenInvitation,
@@ -34,8 +35,7 @@ export default function MainPage({
       <Cover />
       <Greetings />
       <Bismillah />
-      <BridesCustom />
-      <GroomsCustom />
+      <Couple />
       <EventInfo />
       <Gallery />
       <RSVP />

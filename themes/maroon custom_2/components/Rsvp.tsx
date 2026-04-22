@@ -76,10 +76,11 @@ const RSVP = () => {
   }, []);
 
   return (
-    <div className="w-full" data-aos="zoom-in">
+    <div className="w-full bg-[#FFF9F5]">
       {/* form */}
       <section
-        className={`${ninfa.className} bg-[#f8f3ea] px-6 py-10 w-full flex flex-col items-center`}
+        className={`${ninfa.className} bg-[#FFF9F5] px-6 py-10 w-full flex flex-col items-center`}
+        data-aos="zoom-in"
       >
         <h2 className={`text-2xl font-light tracking-wide text-rose-900 mb-2`}>
           RSVP
@@ -154,7 +155,7 @@ const RSVP = () => {
       </section>
       {/* RSVP message */}
       <section
-        className={`relative w-full py-10 px-6 bg-[#f9f4ec] text-rose-900 overflow-x-hidden`}
+        className={`relative w-full py-10 px-6 bg-[#FFF9F5] text-rose-900 overflow-x-hidden`}
       >
         <Image
           src={`/assets/images/floral/11.webp`}

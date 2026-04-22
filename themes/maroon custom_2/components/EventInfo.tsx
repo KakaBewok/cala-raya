@@ -77,10 +77,9 @@ const EventInfo = () => {
     };
 
   return (
-    <section className="relative w-full h-auto bg-white overflow-hidden">
+    <section className="relative w-full h-auto bg-[#FFF9F5] overflow-hidden">
       <div
-        className={`${ninfa.className} z-20 h-auto bg-orange-50 flex flex-col justify-start items-center py-6`}
-        data-aos="fade-up"
+        className={`${ninfa.className} z-20 h-auto bg-[#FFF9F5] flex flex-col justify-start items-center py-2`}
       >
         {data?.rundowns
           ?.sort((a, b) => a.order_number - b.order_number)
@@ -88,6 +87,7 @@ const EventInfo = () => {
             <div
               className="p-8 w-full flex flex-col justify-center items-center"
               key={index}
+              data-aos="fade-up"
             >
               <h1
                 className={`
@@ -125,8 +125,7 @@ const EventInfo = () => {
                 Tambah ke Kalender
               </Link>
 
-              {/* LOCATION GROUP */}
-              <div className="flex flex-col items-center mb-6">
+              {/* <div className="flex flex-col items-center mb-6">
                 <h2 className="text-lg font-semibold text-rose-900 text-center leading-tight">
                   {rundown.location}
                 </h2>
@@ -135,65 +134,47 @@ const EventInfo = () => {
                 </p>
               </div>
 
-              {/* ACTION BUTTON */}
               <Link
                 href={rundown?.location_url || "#"}
                 className="mt-2 py-3 px-8 text-[11px] tracking-[0.15em] bg-rose-900 text-white font-medium hover:bg-rose-950 transition-all shadow-sm"
               >
                 LIHAT LOKASI
-              </Link>
+              </Link> */}
             </div>
-            // <div
-            //   className="p-6 w-full gap-4 flex flex-col justify-center items-center"
-            //   key={index}
-            // >
-            //   <h1
-            //     className={`
-            //     px-5
-            //     pb-3
-            //     w-fit
-            //     border-b-1 border-rose-900
-            //     text-2xl font-light text-rose-900
-            //     mb-5
-            // `}
-            //   >
-            //     {rundown.title.toUpperCase() || `RUNDOWN ${index + 1}`}
-            //   </h1>
-            //   <p className={`text-sm font-light text-rose-900`}>
-            //     {formatDate(rundown.date, true)?.toUpperCase()}
-            //   </p>
-            //   <p
-            //     className={`${gandhiSerif.className} text-sm font-light text-rose-900`}
-            //   >
-            //     {formatTime(rundown.start_time)} {rundown.time_zone}{" "}
-            //     <span>-</span>{" "}
-            //     {rundown.end_time
-            //       ? `${formatTime(rundown.end_time)} ${rundown.time_zone}`
-            //       : "selesai"}{" "}
-            //   </p>
-            //   <Link
-            //     href={generateGoogleCalendarUrl(rundown)}
-            //     target="_blank"
-            //     rel="noopener noreferrer"
-            //     className={`text-sm font-medium underline text-rose-900`}
-            //   >
-            //     Tambah ke Kalender
-            //   </Link>
-            //   <h2
-            //     className={`leading-none mt-4 text-sm font-medium text-rose-800 text-center`}
-            //   >
-            //     {rundown.location}
-            //   </h2>
-            //   <p className={`text-[11px] font-light text-rose-800 text-center w-3/4`}>{rundown.location_detail}</p>
-            //   <Link
-            //     href={rundown?.location_url || "#"}
-            //     className="py-2 px-4 text-xs bg-rose-900 text-white cursor-pointer hover:bg-rose-950"
-            //   >
-            //     LIHAT LOKASI
-            //   </Link>
-            // </div>
           ))}
       </div>
+
+      <div className={`${ninfa.className} bg-[#FFF9F5] w-full py-10 flex flex-col items-center`} 
+      data-aos="fade-up" >
+        <div className="flex flex-col items-center mb-2">
+           <h1
+                className={`
+                  px-6
+                  pb-2
+                  w-fit
+                  border-b border-rose-800/60
+                  text-2xl font-light tracking-[0.2em] text-rose-900
+                  mb-6
+                `}
+              >
+                LOKASI
+              </h1>
+          <h2 className="text-lg font-medium text-rose-900 text-center leading-tight">
+              {data?.rundowns?.[0].location}
+          </h2>
+          <p className="text-[11px] leading-relaxed font-light text-rose-800 text-center w-3/4 mt-1">
+            {data?.rundowns?.[0].location_detail}
+          </p>
+        </div>
+
+        <Link
+          href={data?.rundowns?.[0].location_url || "#"}
+          className="my-5 py-3 px-8 text-[11px] tracking-[0.15em] bg-rose-900 text-white font-medium hover:bg-rose-950 transition-all shadow-sm"
+        >
+          LIHAT LOKASI
+        </Link>
+      </div>
+
       <Image
         src={`/assets/images/floral/11.webp`}
         width={100}
@@ -209,7 +190,7 @@ const EventInfo = () => {
         width={115}
         height={115}
         alt="Kanan"
-        className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-6 rotate-[40deg]"
+        className="swing-left-slow absolute top-1/2 transform -translate-y-1/2 -left-11 rotate-[40deg]"
       />
     </section>
   );

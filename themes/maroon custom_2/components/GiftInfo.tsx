@@ -23,9 +23,11 @@ const GiftInfo = () => {
 
   return (
     <section
-      className={`${ninfa.className} text-center bg-[#f8f4ec] px-5 py-10`}
-      data-aos="zoom-in"
+      className={`${ninfa.className} text-center bg-[#FFF9F5] px-5 py-10`}
+      
     >
+      <div
+      data-aos="zoom-in">
       <h2 className={`text-rose-900 text-2xl font-light tracking-wide mb-2`}>
         TANDA KASIH
       </h2>
@@ -94,6 +96,7 @@ const GiftInfo = () => {
           )}
         </>
       )}
+      </div>
     </section>
   );
 };
