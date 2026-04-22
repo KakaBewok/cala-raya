@@ -239,7 +239,7 @@ const portfolios = [
     title: "Amry & Erinka",
     description: "",
     product: "Undangan Digital",
-    type: "Maroon Custom",
+    type: "Stylish Bold Custom",
     image:
       "https://res.cloudinary.com/dk16ng09n/image/upload/v1776399437/personal/web-porto/marooncustom_jxuweq.png",
     url: "https://calaraya.vercel.app/amry-erinka?id=QQty2V",
@@ -351,7 +351,7 @@ const reviews = [
     name: "Amry & Erinka",
     rating: 5,
     product: "Undangan Digital",
-    type: "Maroon Custom",
+    type: "Stylish Bold Custom",
     comment:
       "Pelayanannya bagus dari aku yang banyak mau dan banyak revisi...",
     reviewImage:
