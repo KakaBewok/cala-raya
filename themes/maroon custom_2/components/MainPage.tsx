@@ -4,10 +4,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Bismillah from "./Bismillah";
-import Brides from "./Brides";
+import BridesCustom from "./BridesCustom";
 import Cover from "./Cover";
 import EventInfo from "./EventInfo";
-import Grooms from "./Grooms";
+import GroomsCustom from "./GroomsCustom";
 import MusicButton from "./MusicButton";
 import RSVP from "./Rsvp";
 import GiftInfo from "./GiftInfo";
@@ -34,8 +34,8 @@ export default function MainPage({
       <Cover />
       <Greetings />
       <Bismillah />
-      <Brides />
-      <Grooms />
+      <BridesCustom />
+      <GroomsCustom />
       <EventInfo />
       <Gallery />
       <RSVP />
