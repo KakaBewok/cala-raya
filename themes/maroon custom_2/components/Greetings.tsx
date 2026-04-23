@@ -22,7 +22,7 @@ export default function Greetings() {
           {/* Polaroid frame */}
           <div className="w-full bg-white shadow-sm rotate-[2deg] flex flex-col p-4 pb-0 rounded-sm">
             {/* Photo */}
-            <div className="w-full h-[220px] overflow-hidden">
+            {/* <div className="w-full h-[220px] overflow-hidden">
                <Image
                         src={findImage(data, "greeting")}
                         alt="Cover photo"
@@ -31,6 +31,16 @@ export default function Greetings() {
                         className="w-full h-full object-cover object-center"
                         priority
                       />
+            </div> */}
+            <div className="w-full h-[220px] overflow-hidden relative">
+              <Image
+                src={findImage(data, "greeting")}
+                alt="Cover photo"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-center"
+                priority
+              />
             </div>
 
             {/* Polaroid caption */}
