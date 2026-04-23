@@ -155,7 +155,7 @@ const Couple = () => {
 
         {/* PROFIL LAKI-LAKI (BAWAH) */}
         <div className="flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="200">
-          <h2 className={`${amalfiCoast.className} font-medium text-3xl md:text-6xl text-rose-900 mb-2 capitalize`}>
+          <h2 className={`${amalfiCoast.className} font-medium text-2xl text-rose-900 mb-2 capitalize`}>
             {data?.host_one_name}
           </h2>
           <p className={`${playfair.className} text-xs md:text-sm font-light text-rose-800/70 mb-4 italic`}>
